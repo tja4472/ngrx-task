@@ -1,9 +1,9 @@
 {
-  "name": "ng-core-template",
+  "name": "ng-task",
   "version": "0.0.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tja4472/ng-core-template"
+    "url": "https://github.com/tja4472/ng-task"
   },
   "scripts": {
     "ng": "ng",
