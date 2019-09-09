@@ -116,5 +116,8 @@
       }
     }
   },
-  "defaultProject": "ng-task"
+  "defaultProject": "ng-task",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }
