@@ -1,4 +1,22 @@
-# NgCoreTemplate
+# NgrxTask
+
+## Configure Firebase
+
+Requires a file, `firebase-config.ts`
+
+```ts
+// This file should be added to .gitignore.
+export const firebaseConfig = {
+  apiKey: 'XXXXXX',
+  authDomain: 'XXXXXX',
+  databaseURL: 'XXXXXX',
+  projectId: 'XXXXXX',
+  storageBucket: 'XXXXXX',
+  messagingSenderId: 'XXXXXX',
+};
+
+export const firebaseProdConfig = firebaseConfig;
+```
 
 Replace `ng-core-template` with new repostory name.
 
