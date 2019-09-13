@@ -6,6 +6,10 @@ import { NotFoundPageComponent } from './core/containers';
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   {
+    path: 'tasks',
+    loadChildren: () => import('./tasks').then((mod) => mod.TasksModule),
+  },
+  {
     path: '**',
     component: NotFoundPageComponent,
     data: { title: 'Not found' },

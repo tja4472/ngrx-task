@@ -18,6 +18,38 @@ export const firebaseConfig = {
 export const firebaseProdConfig = firebaseConfig;
 ```
 
+```sh
+ng generate module Tasks --flat false --routing
+ng generate feature tasks/Task --module tasks/tasks.module.ts --group --spec false
+ng generate container tasks/containers/CurrentTasksPage --spec false --changeDetection OnPush
+ng generate container tasks/containers/CompletedTasksPage --spec false --changeDetection OnPush
+ng generate container tasks/containers/TaskListsPage --spec false --changeDetection OnPush
+```
+
+```sh
+ng generate module Tasks --flat false --routing
+# CREATE src/app/tasks/tasks-routing.module.ts (249 bytes)
+# CREATE src/app/tasks/tasks.module.ts (276 bytes)
+
+ng generate feature tasks/Task --module tasks/tasks.module.ts --group --spec false --creators
+# CREATE src/app/tasks/actions/task.actions.ts (242 bytes)
+# CREATE src/app/tasks/reducers/task.reducer.ts (382 bytes)
+# CREATE src/app/tasks/effects/task.effects.ts (573 bytes)
+# UPDATE src/app/tasks/tasks.module.ts (589 bytes)
+
+ng generate container tasks/containers/CurrentTasksPage --spec false --changeDetection OnPush
+# CREATE src/app/tasks/containers/current-tasks-page/current-tasks-page.component.html (33 bytes)
+# CREATE src/app/tasks/containers/current-tasks-page/current-tasks-page.component.ts (377 bytes)
+# CREATE src/app/tasks/containers/current-tasks-page/current-tasks-page.component.css (0 bytes)
+# UPDATE src/app/tasks/tasks.module.ts (720 bytes)
+
+ng generate container tasks/containers/CompletedTasksPage --spec false --changeDetection OnPush
+# CREATE src/app/tasks/containers/completed-tasks-page/completed-tasks-page.component.html (35 bytes)
+# CREATE src/app/tasks/containers/completed-tasks-page/completed-tasks-page.component.ts (461 bytes)
+# CREATE src/app/tasks/containers/completed-tasks-page/completed-tasks-page.component.css (0 bytes)
+# UPDATE src/app/tasks/tasks.module.ts (862 bytes)
+```
+
 Replace `ng-core-template` with new repostory name.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.1.
