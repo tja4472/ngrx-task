@@ -1,5 +1,8 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+
 import { Store } from '@ngrx/store';
+
+import { TaskActions } from '@app/tasks/actions';
 
 @Component({
   selector: 'app-task-lists-page',
@@ -10,5 +13,7 @@ import { Store } from '@ngrx/store';
 export class TaskListsPageComponent implements OnInit {
   constructor(private store: Store<any>) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.store.dispatch(TaskActions.enterTaskListsPage());
+  }
 }

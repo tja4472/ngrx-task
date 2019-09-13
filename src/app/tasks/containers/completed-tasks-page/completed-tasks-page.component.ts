@@ -2,6 +2,8 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 
+import { TaskActions } from '@app/tasks/actions';
+
 @Component({
   selector: 'app-completed-tasks-page',
   templateUrl: './completed-tasks-page.component.html',
@@ -11,5 +13,7 @@ import { Store } from '@ngrx/store';
 export class CompletedTasksPageComponent implements OnInit {
   constructor(private store: Store<any>) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.store.dispatch(TaskActions.enterCompletedTasksPage());
+  }
 }
