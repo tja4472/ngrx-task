@@ -46,7 +46,10 @@ export const toFirestoreDoc = (item: UserInfo): FirestoreDoc => {
 })
 export class UserInfoDataService {
   public get usersCollectionPath(): string {
-    return 'apps/' + this.environmentService.appCode + '/users';
+    // original
+    // return 'apps/' + this.environmentService.appCode + '/users';
+    // temp to conform to old example.
+    return 'users';
   }
 
   constructor(

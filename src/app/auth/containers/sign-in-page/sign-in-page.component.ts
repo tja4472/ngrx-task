@@ -15,7 +15,14 @@ export class SignInPageComponent implements OnInit {
 
   constructor(private authFacade: AuthFacade) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    // temp!!!!
+    this.authFacade.dispatch(
+      SignInPageActions.signIn({
+        credentials: { username: 'b.b@b.com', password: 'password' },
+      })
+    );
+  }
 
   onSubmitted(credentials: Credentials) {
     this.authFacade.dispatch(SignInPageActions.signIn({ credentials }));

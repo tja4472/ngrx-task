@@ -23,7 +23,9 @@ interface FirestoreDoc {
   isComplete: boolean;
 }
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class TodoDataService {
   //
   constructor(public readonly afs: AngularFirestore) {

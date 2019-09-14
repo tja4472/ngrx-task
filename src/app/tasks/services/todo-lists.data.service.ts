@@ -15,7 +15,9 @@ interface FirestoreDoc {
   name: string;
 }
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class TodoListsDataService {
   constructor(public readonly afs: AngularFirestore) {
     console.log('TodoDataService:constructor');

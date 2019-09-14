@@ -5,7 +5,9 @@ import { newTodo, newTodoCompleted, Todo, TodoCompleted } from '../models';
 import { TodoCompletedDataService } from './todo-completed.data.service';
 import { TodoDataService } from './todo.data.service';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class Fb1DataService {
   constructor(
     private todoCompletedDataService: TodoCompletedDataService,

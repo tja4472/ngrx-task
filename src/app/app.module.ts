@@ -15,6 +15,7 @@ import { AuthModule } from '@app/auth';
 import { CoreModule } from '@app/core';
 import { AppComponent } from '@app/core/containers';
 import { HomeModule } from '@app/home';
+import { TasksModule } from '@app/tasks';
 
 import { environment } from '../environments/environment';
 
@@ -26,11 +27,12 @@ import { metaReducers, ROOT_REDUCERS } from './reducers';
     BrowserModule,
     BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule.enablePersistence(),
+    // AngularFirestoreModule.enablePersistence(),
     AngularFireAuthModule,
     AngularFirestoreModule,
     AuthModule,
     HomeModule,
+    TasksModule,
     AppRoutingModule,
     StoreModule.forRoot(ROOT_REDUCERS, {
       metaReducers,
