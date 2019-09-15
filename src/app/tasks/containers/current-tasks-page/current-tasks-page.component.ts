@@ -1,8 +1,12 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
+
+import { Observable } from 'rxjs';
 
 import { TaskActions } from '@app/tasks/actions';
+import { Todo } from '@app/tasks/models';
+import { TaskSelectors } from '@app/tasks/selectors';
 
 @Component({
   selector: 'app-current-tasks-page',
@@ -11,7 +15,11 @@ import { TaskActions } from '@app/tasks/actions';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CurrentTasksPageComponent implements OnInit {
-  constructor(private store: Store<any>) {}
+  currentTasks$: Observable<Todo[]>;
+
+  constructor(private store: Store<any>) {
+    this.currentTasks$ = store.pipe(select(TaskSelectors.getAllCurrentTasks));
+  }
 
   ngOnInit() {
     this.store.dispatch(TaskActions.enterCurrentTasksPage());

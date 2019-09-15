@@ -1,8 +1,12 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
+
+import { Observable } from 'rxjs';
 
 import { TaskActions } from '@app/tasks/actions';
+import { TodoCompleted } from '@app/tasks/models';
+import { TaskSelectors } from '@app/tasks/selectors';
 
 @Component({
   selector: 'app-completed-tasks-page',
@@ -11,7 +15,13 @@ import { TaskActions } from '@app/tasks/actions';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CompletedTasksPageComponent implements OnInit {
-  constructor(private store: Store<any>) {}
+  completedTasks$: Observable<TodoCompleted[]>;
+
+  constructor(private store: Store<any>) {
+    this.completedTasks$ = store.pipe(
+      select(TaskSelectors.getAllCompletedTasks)
+    );
+  }
 
   ngOnInit() {
     this.store.dispatch(TaskActions.enterCompletedTasksPage());

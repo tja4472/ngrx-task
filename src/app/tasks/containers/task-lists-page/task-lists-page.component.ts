@@ -1,8 +1,12 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
+
+import { Observable } from 'rxjs';
 
 import { TaskActions } from '@app/tasks/actions';
+import { TodoListsItem } from '@app/tasks/models';
+import { TaskSelectors } from '@app/tasks/selectors';
 
 @Component({
   selector: 'app-task-lists-page',
@@ -11,7 +15,11 @@ import { TaskActions } from '@app/tasks/actions';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TaskListsPageComponent implements OnInit {
-  constructor(private store: Store<any>) {}
+  taskLists$: Observable<TodoListsItem[]>;
+
+  constructor(private store: Store<any>) {
+    this.taskLists$ = store.pipe(select(TaskSelectors.getAllTaskLists));
+  }
 
   ngOnInit() {
     this.store.dispatch(TaskActions.enterTaskListsPage());
