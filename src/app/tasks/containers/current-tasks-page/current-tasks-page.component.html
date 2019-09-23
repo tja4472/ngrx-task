@@ -1,4 +1,9 @@
-<p>current-tasks-page works!</p>
+<app-current-task-list
+  [currentTasks]="currentTasks$ | async"
+  (reorderItems)="reorderItems($event)"
+  (toDoChange)="onIncompleteToDo($event)"
+>
+</app-current-task-list>
 
 <pre>
 Current Tasks: {{ currentTasks$ | async | json }}

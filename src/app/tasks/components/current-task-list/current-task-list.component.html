@@ -1,0 +1,44 @@
+<mat-list>
+  <mat-list-item *ngFor="let task of currentTasks; last as last">
+    <mat-checkbox></mat-checkbox>
+    <h4 matLine>{{ task.name }}</h4>
+    <p matLine>{{ task.description }}</p>
+    <mat-divider *ngIf="!last"></mat-divider>
+    <mat-icon>more_vert</mat-icon>
+    <mat-icon cdkDragHandle>drag_handle</mat-icon>
+  </mat-list-item>
+</mat-list>
+<button mat-fab><mat-icon>favorite</mat-icon></button>
+<button mat-fab class="fab-bottom-right"><mat-icon>add</mat-icon></button>
+
+<p>current-task-list works!</p>
+
+<div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+  <div class="example-box" *ngFor="let task of currentTasks" cdkDrag>
+    <mat-checkbox></mat-checkbox>
+    <h4>{{ task.name }}</h4>
+    <p>{{ task.description }}</p>
+    <div class="example-handle" cdkDragHandle>
+      <svg width="24px" fill="currentColor" viewBox="0 0 24 24">
+        <path
+          d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"
+        ></path>
+        <path d="M0 0h24v24H0z" fill="none"></path>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<mat-list role="list">
+  <app-current-task-list-item
+    *ngFor="let task of currentTasks"
+    [currentTask]="task"
+    (completeChange)="onCompleteChange(task, $event)"
+  >
+  </app-current-task-list-item>
+</mat-list>
+
+<!--
+  (completeChange)="onCompleteChange(toDo, $event)
+  https://stackblitz.com/edit/angular-material-todo?file=src%2Fapp%2Fcomponents%2Ftodo%2Ftodo.component.html
+-->

@@ -4,7 +4,7 @@ import { select, Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
 
-import { TaskActions } from '@app/tasks/actions';
+import { TaskActions, TodoActions } from '@app/tasks/actions';
 import { Todo } from '@app/tasks/models';
 import { TaskSelectors } from '@app/tasks/selectors';
 
@@ -23,5 +23,13 @@ export class CurrentTasksPageComponent implements OnInit {
 
   ngOnInit() {
     this.store.dispatch(TaskActions.enterCurrentTasksPage());
+  }
+
+  reorderItems(ids: string[]) {
+    this.store.dispatch(new TodoActions.ReorderListA({ ids }));
+  }
+
+  onIncompleteToDo(toDo: Todo) {
+    // this.store.dispatch(new IncompleteToDo(toDo));
   }
 }

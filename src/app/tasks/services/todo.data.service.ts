@@ -62,6 +62,23 @@ export class TodoDataService {
     });
   }
 
+  public reorderItems(ids: string[], todoListId: string, userId: string): void {
+    const batch = this.afs.firestore.batch();
+
+    ids.forEach((id, i) => {
+      /*      
+      this.firestoreCollection(todoListId, userId)
+        .doc(id)
+        .update({ index: i });
+*/
+      batch.update(this.firestoreCollection(todoListId, userId).doc(id).ref, {
+        index: i,
+      });
+    });
+
+    batch.commit();
+  }
+
   public removeItem(id: string, todoListId: string, userId: string): void {
     this.firestoreCollection(todoListId, userId)
       .doc(id)

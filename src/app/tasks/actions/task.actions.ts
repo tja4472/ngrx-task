@@ -9,3 +9,8 @@ export const enterCompletedTasksPage = createAction(
 export const enterCurrentTasksPage = createAction('[Current Tasks Page] Enter');
 
 export const enterTaskListsPage = createAction('[Task Lists Page] Enter');
+
+export const enterCurrentTaskDetailsPage = createAction(
+  '[Current Task Details Page] Enter',
+  props<{ id: string }>()
+);

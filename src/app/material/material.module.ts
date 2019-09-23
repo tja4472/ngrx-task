@@ -1,7 +1,9 @@
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { NgModule } from '@angular/core';
 import {
   MatButtonModule,
   MatCardModule,
+  MatCheckboxModule,
   MatDialogModule,
   MatIconModule,
   MatInputModule,
@@ -13,8 +15,10 @@ import {
 
 @NgModule({
   imports: [
+    DragDropModule,
     MatInputModule,
     MatCardModule,
+    MatCheckboxModule,
     MatButtonModule,
     MatSidenavModule,
     MatListModule,
@@ -24,8 +28,10 @@ import {
     MatDialogModule,
   ],
   exports: [
+    DragDropModule,
     MatInputModule,
     MatCardModule,
+    MatCheckboxModule,
     MatButtonModule,
     MatSidenavModule,
     MatListModule,

@@ -3,11 +3,20 @@ import { RouterModule, Routes } from '@angular/router';
 
 import {
   CompletedTasksPageComponent,
+  CurrentTasksDetailPageComponent,
   CurrentTasksPageComponent,
   TaskListsPageComponent,
 } from './containers';
 
 const routes: Routes = [
+  {
+    path: '',
+    component: CurrentTasksPageComponent,
+  },
+  {
+    path: 'edit/:id',
+    component: CurrentTasksDetailPageComponent,
+  },
   {
     path: 'completed',
     component: CompletedTasksPageComponent,
@@ -15,10 +24,6 @@ const routes: Routes = [
   {
     path: 'lists',
     component: TaskListsPageComponent,
-  },
-  {
-    path: '',
-    component: CurrentTasksPageComponent,
   },
 ];
 

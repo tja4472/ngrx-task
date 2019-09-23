@@ -24,6 +24,8 @@ ng generate feature tasks/Task --module tasks/tasks.module.ts --group --spec fal
 ng generate container tasks/containers/CurrentTasksPage --spec false --changeDetection OnPush
 ng generate container tasks/containers/CompletedTasksPage --spec false --changeDetection OnPush
 ng generate container tasks/containers/TaskListsPage --spec false --changeDetection OnPush
+
+ng generate component tasks/components/CurrentTaskList --skipTests
 ```
 
 ```sh

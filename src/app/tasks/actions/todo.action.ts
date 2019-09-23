@@ -11,6 +11,8 @@ export enum TodoActionTypes {
   DELETE_ITEM = '[Todo] Delete Item',
   LoadSuccess = '[Todo] Load Success',
   ReorderList = '[Todo] Reorder List',
+
+  ReorderListA = '[Todo] Reorder ListA',
   UPSERT_ITEM = '[Todo] Upsert item',
 }
 
@@ -72,6 +74,16 @@ export class ReorderList implements Action {
   ) {}
 }
 
+export class ReorderListA implements Action {
+  readonly type = TodoActionTypes.ReorderListA;
+
+  constructor(
+    public payload: {
+      ids: string[];
+    }
+  ) {}
+}
+
 export class UpsertItem implements Action {
   readonly type = TodoActionTypes.UPSERT_ITEM;
 
@@ -91,4 +103,5 @@ export type TodoActions =
   | DeleteItem
   | LoadSuccess
   | ReorderList
+  | ReorderListA
   | UpsertItem;

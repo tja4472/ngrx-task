@@ -27,6 +27,11 @@ export const getAllCurrentTasks = createSelector(
   TodoSelectors.getAllTodo
 );
 
+export const getSelectedCurrentTask = createSelector(
+  getTaskState,
+  TodoSelectors.getSelectedItem
+);
+
 export const getAllTaskLists = createSelector(
   getTaskState,
   TodoListsSelectors.getAllTodoLists

@@ -16,6 +16,7 @@ import {
   DeleteItem,
   LoadSuccess,
   ReorderList,
+  ReorderListA,
   TodoActionTypes,
   UpsertItem,
 } from '../actions/todo.action';
@@ -110,6 +111,19 @@ export class TodoEffects {
         state[taskFeatureKey].todo.todos,
         action.payload.todoListId,
         action.payload.userId
+      );
+    })
+  );
+
+  @Effect({ dispatch: false })
+  reorderListA$ = this.actions$.pipe(
+    ofType<ReorderListA>(TodoActionTypes.ReorderListA),
+    withLatestFrom(this.storeAny.select(authQuery.selectAuthUser)),
+    tap(([action, user]) => {
+      this.dataService.reorderItems(
+        action.payload.ids,
+        user.todoListId,
+        user.id
       );
     })
   );
