@@ -54,8 +54,9 @@ export class CurrentTasksDetailPageComponent implements OnInit {
     this.location.back();
   }
 
-  remove(): void {
-    // this.location.back();
+  viewRemoved(todo: Todo): void {
+    this.store.dispatch(TaskActions.currentTaskDetailsPageRemoved({ todo }));
+    this.goBack();
   }
 
   viewSaved(todo: Todo) {

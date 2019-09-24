@@ -14,7 +14,7 @@ import { CurrentTaskDetailPresenter } from './current-task-detail.presenter';
 export class CurrentTaskDetailComponent implements OnInit {
   @Input() todo: Todo;
   @Output() cancel: EventEmitter<void> = new EventEmitter();
-  @Output() remove: EventEmitter<void> = new EventEmitter();
+  @Output() remove = new EventEmitter<Todo>();
   @Output() checkout = new EventEmitter<Todo>();
 
   get checkoutForm(): FormGroup {
@@ -26,6 +26,11 @@ export class CurrentTaskDetailComponent implements OnInit {
   ngOnInit() {
     console.log('ngOnInit>', this.todo);
     this.presenter.init(this.todo);
+  }
+
+  removeClick() {
+    console.log('removeClick>', this.todo);
+    this.remove.emit(this.todo);
   }
 
   onSubmit() {

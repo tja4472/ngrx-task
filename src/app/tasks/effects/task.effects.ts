@@ -23,6 +23,20 @@ export class TaskEffects {
   );
 
   @Effect({ dispatch: false })
+  removeCurrentTodo$ = this.actions$.pipe(
+    ofType(TaskActions.currentTaskDetailsPageRemoved),
+    withLatestFrom(this.store.select(authQuery.selectAuthUser)),
+    tap(([action, user]) => {
+      console.log('Effect:removeCurrentTodo$:A', {
+        action,
+        user,
+      });
+
+      this.todoDataService.removeItem(action.todo.id, user.todoListId, user.id);
+    })
+  );
+
+  @Effect({ dispatch: false })
   saveCurrentTodo$ = this.actions$.pipe(
     ofType(TaskActions.currentTaskDetailsPageSaved),
     withLatestFrom(this.store.select(authQuery.selectAuthUser)),

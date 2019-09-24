@@ -21,3 +21,8 @@ export const currentTaskDetailsPageSaved = createAction(
   '[Current Task Details Page] Saved',
   props<{ todo: Todo }>()
 );
+
+export const currentTaskDetailsPageRemoved = createAction(
+  '[Current Task Details Page] Removed',
+  props<{ todo: Todo }>()
+);
