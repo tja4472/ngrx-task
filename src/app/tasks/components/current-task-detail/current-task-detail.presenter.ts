@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 import { newTodo, Todo } from '@app/tasks/models';
 
@@ -26,8 +26,9 @@ export class CurrentTaskDetailPresenter {
     }
 
     this.form = this.formBuilder.group({
-      name: [this.initialData.name],
+      name: [this.initialData.name, Validators.required],
       description: [this.initialData.description],
+      isComplete: [this.initialData.isComplete],
     });
   }
 

@@ -1,14 +1,3 @@
-<h1>CurrentTasksDetailPageComponent</h1>
-id: {{ id }}
-
-<!--
-<app-current-task-list
-  [currentTasks]="currentTasks$ | async"
-  (reorderItems)="reorderItems($event)"
-  (toDoChange)="onIncompleteToDo($event)">
-</app-current-task-list>
--->
-
 <app-current-task-detail
   [todo]="task$ | async"
   (cancel)="goBack()"

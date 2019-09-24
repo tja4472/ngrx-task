@@ -1,27 +1,73 @@
-<form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
-  <div>
-    <label for="name">
-      Name
-    </label>
-
-    <input id="name" type="text" formControlName="name" />
-  </div>
-
-  <div>
-    <label for="description">
-      Description
-    </label>
-
-    <input id="description" type="text" formControlName="description" />
-  </div>
-
-  <button class="button" type="submit">
-    Save
-  </button>
-  <button class="button" type="button" (click)="cancel.emit()">
-    Cancel
-  </button>
-  <button class="button" type="button" (click)="removeClick()">
-    Remove
-  </button>
+<form [formGroup]="checkoutForm" novalidate (ngSubmit)="onSubmit()">
+  <mat-card class="shipping-card">
+    <mat-card-header>
+      <mat-card-title>Current Task</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col">
+          <mat-checkbox formControlName="isComplete">Is Complete</mat-checkbox>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input
+              matInput
+              id="name"
+              placeholder="Name"
+              formControlName="name"
+            />
+            <mat-error
+              *ngIf="checkoutForm.controls['name'].hasError('required')"
+            >
+              Name is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <textarea
+              matInput
+              id="description"
+              placeholder="Description"
+              formControlName="description"
+              cdkTextareaAutosize
+              #autosize="cdkTextareaAutosize"
+              cdkAutosizeMinRows="1"
+              cdkAutosizeMaxRows="5"
+            ></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="!(this.checkoutForm.dirty && this.checkoutForm.valid)"
+      >
+        Submit
+      </button>
+      <button
+        mat-raised-button
+        color="accent"
+        type="button"
+        (click)="cancel.emit()"
+      >
+        Cancel
+      </button>
+      <button
+        mat-raised-button
+        color="accent"
+        type="button"
+        (click)="removeClick()"
+      >
+        Remove
+      </button>
+    </mat-card-actions>
+  </mat-card>
 </form>
