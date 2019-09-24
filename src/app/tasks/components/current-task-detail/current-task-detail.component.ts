@@ -14,6 +14,7 @@ import { CurrentTaskDetailPresenter } from './current-task-detail.presenter';
 export class CurrentTaskDetailComponent implements OnInit {
   @Input() todo: Todo;
   @Output() cancel: EventEmitter<void> = new EventEmitter();
+  @Output() remove: EventEmitter<void> = new EventEmitter();
   @Output() checkout = new EventEmitter<Todo>();
 
   get checkoutForm(): FormGroup {

@@ -10,3 +10,8 @@ export const getAllTodoLists = createSelector(
   getTodoListsState,
   (state) => state.todoLists
 );
+
+export const getSelectedListId = createSelector(
+  getTodoListsState,
+  (state) => state.selectedListId
+);

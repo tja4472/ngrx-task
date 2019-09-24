@@ -1,11 +1,16 @@
 import { Injectable } from '@angular/core';
 
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, Effect, ofType } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
 
 import { EMPTY } from 'rxjs';
-import { concatMap } from 'rxjs/operators';
+import { concatMap, tap, withLatestFrom } from 'rxjs/operators';
+
+import { authQuery } from '@app/auth/selectors/auth.selectors';
 
 import * as TaskActions from '../actions/task.actions';
+import { TaskSelectors } from '../selectors';
+import { TodoDataService } from '../services/todo.data.service';
 
 @Injectable()
 export class TaskEffects {
@@ -17,5 +22,36 @@ export class TaskEffects {
     )
   );
 
-  constructor(private actions$: Actions) {}
+  @Effect({ dispatch: false })
+  saveCurrentTodo$ = this.actions$.pipe(
+    ofType(TaskActions.currentTaskDetailsPageSaved),
+    withLatestFrom(this.store.select(authQuery.selectAuthUser)),
+    tap(([action, user]) => {
+      console.log('Effect:saveCurrentTodo$:A', {
+        action,
+        user,
+      });
+
+      this.todoDataService.save(action.todo, user.todoListId, user.id);
+    })
+  );
+
+  /*
+  // tslint:disable-next-line:member-ordering
+  @Effect({ dispatch: false })
+  save$ = this.actions$.pipe(
+    ofType(TodoActionTypes.UPSERT_ITEM),
+    map((action: UpsertItem) => action.payload),
+    tap((payload) => {
+      console.log('Effect:save$:A', payload);
+      this.dataService.save(payload.item, payload.todoListId, payload.userId);
+    })
+  );  
+  */
+
+  constructor(
+    private actions$: Actions,
+    private todoDataService: TodoDataService,
+    private store: Store<any>
+  ) {}
 }

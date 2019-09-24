@@ -36,3 +36,10 @@ export const getAllTaskLists = createSelector(
   getTaskState,
   TodoListsSelectors.getAllTodoLists
 );
+
+/*
+export const getSelectedListId = createSelector(
+  getTaskState,
+  TodoListsSelectors.getSelectedListId
+);
+*/

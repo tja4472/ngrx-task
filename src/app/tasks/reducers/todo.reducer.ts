@@ -28,7 +28,7 @@ export function reducer(state = initialState, action: any): State {
       };
     }
 
-    case TaskActions.enterCurrentTaskDetailsPage.type: {
+    case TaskActions.currentTaskDetailsPageEnter.type: {
       console.log('aaaaaaaaaaaaa:', action.id);
       return { ...state, selectedId: action.id };
     }

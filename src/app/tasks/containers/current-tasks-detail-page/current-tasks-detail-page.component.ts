@@ -29,7 +29,7 @@ export class CurrentTasksDetailPageComponent implements OnInit {
     this.route.paramMap
       .pipe(
         map((params) =>
-          TaskActions.enterCurrentTaskDetailsPage({ id: params.get('id') })
+          TaskActions.currentTaskDetailsPageEnter({ id: params.get('id') })
         )
       )
       .subscribe(this.store);
@@ -51,12 +51,16 @@ export class CurrentTasksDetailPageComponent implements OnInit {
   }
 
   goBack(): void {
+    this.location.back();
+  }
+
+  remove(): void {
     // this.location.back();
   }
 
-  checkout(toDo: Todo) {
-    console.log('checkout');
-    // this.store.dispatch(new IncompleteToDo(toDo));
+  viewSaved(todo: Todo) {
+    console.log('viewSaved>', todo);
+    this.store.dispatch(TaskActions.currentTaskDetailsPageSaved({ todo }));
     this.goBack();
   }
 

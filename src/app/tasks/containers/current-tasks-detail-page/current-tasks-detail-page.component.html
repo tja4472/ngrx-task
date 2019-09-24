@@ -12,7 +12,8 @@ id: {{ id }}
 <app-current-task-detail
   [todo]="task$ | async"
   (cancel)="goBack()"
-  (checkout)="checkout($event)"
+  (remove)="remove()"
+  (checkout)="viewSaved($event)"
 >
 </app-current-task-detail>
 <pre>
