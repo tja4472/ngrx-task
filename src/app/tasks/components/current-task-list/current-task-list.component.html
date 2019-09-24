@@ -9,7 +9,9 @@
   </mat-list-item>
 </mat-list>
 <button mat-fab><mat-icon>favorite</mat-icon></button>
-<button mat-fab class="fab-bottom-right"><mat-icon>add</mat-icon></button>
+<button mat-fab class="fab-bottom-right" (click)="newCurrentTask.emit()">
+  <mat-icon>add</mat-icon>
+</button>
 
 <p>current-task-list works!</p>
 

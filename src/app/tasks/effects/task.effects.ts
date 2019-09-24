@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Actions, createEffect, Effect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
@@ -20,6 +21,17 @@ export class TaskEffects {
       /** An EMPTY observable only emits completion. Replace with your own observable API request */
       concatMap(() => EMPTY)
     )
+  );
+
+  @Effect({ dispatch: false })
+  newCurrentTask$ = this.actions$.pipe(
+    ofType(TaskActions.currentTasksPageNewCurrentTask),
+    // withLatestFrom(this.store.select(authQuery.selectAuthUser)),
+    tap(() => {
+      console.log('Effect:newCurrentTask');
+
+      this.router.navigate(['/edit', 'new']);
+    })
   );
 
   @Effect({ dispatch: false })
@@ -66,6 +78,7 @@ export class TaskEffects {
   constructor(
     private actions$: Actions,
     private todoDataService: TodoDataService,
-    private store: Store<any>
+    private store: Store<any>,
+    private router: Router
   ) {}
 }

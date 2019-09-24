@@ -8,7 +8,7 @@ import { map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 
 import { authQuery } from '@app/auth/selectors/auth.selectors';
 
-import { enterCurrentTasksPage } from '../actions/task.actions';
+import { currentTasksPageEnter } from '../actions/task.actions';
 import {
   ClearCompleted,
   DatabaseListenForDataStart,
@@ -57,7 +57,7 @@ export class TodoEffects {
   // tslint:disable-next-line:member-ordering
   @Effect()
   enterCurrentTasksPage$ = this.actions$.pipe(
-    ofType(enterCurrentTasksPage.type),
+    ofType(currentTasksPageEnter.type),
     withLatestFrom(this.storeAny.select(authQuery.selectAuthUser)),
     map(
       ([, user]) =>

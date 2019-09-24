@@ -14,7 +14,7 @@ export class CurrentTaskListComponent implements OnInit {
   currentTasks: Todo[];
 
   @Output() reorderItems = new EventEmitter<string[]>();
-  @Output() toDoChange = new EventEmitter<Todo>();
+  @Output() newCurrentTask = new EventEmitter<void>();
 
   constructor() {}
 
@@ -48,6 +48,7 @@ export class CurrentTaskListComponent implements OnInit {
     this.reorderItems.emit(bbb);
   }
 
+  /*
   onCompleteChange(toDo: Todo, change: MatCheckboxChange) {
     this.toDoChange.emit({
       ...toDo,
@@ -55,4 +56,5 @@ export class CurrentTaskListComponent implements OnInit {
       isComplete: change.checked,
     });
   }
+  */
 }

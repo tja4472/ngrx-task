@@ -22,14 +22,14 @@ export class CurrentTasksPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.store.dispatch(TaskActions.enterCurrentTasksPage());
+    this.store.dispatch(TaskActions.currentTasksPageEnter());
   }
 
   reorderItems(ids: string[]) {
     this.store.dispatch(new TodoActions.ReorderListA({ ids }));
   }
 
-  onIncompleteToDo(toDo: Todo) {
-    // this.store.dispatch(new IncompleteToDo(toDo));
+  viewNewCurrentTask() {
+    this.store.dispatch(TaskActions.currentTasksPageNewCurrentTask());
   }
 }

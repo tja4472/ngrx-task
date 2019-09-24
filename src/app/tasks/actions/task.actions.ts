@@ -8,8 +8,14 @@ export const enterCompletedTasksPage = createAction(
   '[Completed Tasks Page] Enter'
 );
 
-export const enterCurrentTasksPage = createAction('[Current Tasks Page] Enter');
+// currentTasksPage
+export const currentTasksPageEnter = createAction('[Current Tasks Page] Enter');
 
+export const currentTasksPageNewCurrentTask = createAction(
+  '[Current Tasks Page] New Current Task'
+);
+
+//
 export const enterTaskListsPage = createAction('[Task Lists Page] Enter');
 
 export const currentTaskDetailsPageEnter = createAction(

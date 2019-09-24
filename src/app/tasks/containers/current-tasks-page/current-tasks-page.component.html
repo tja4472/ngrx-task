@@ -1,7 +1,7 @@
 <app-current-task-list
   [currentTasks]="currentTasks$ | async"
   (reorderItems)="reorderItems($event)"
-  (toDoChange)="onIncompleteToDo($event)"
+  (newCurrentTask)="viewNewCurrentTask()"
 >
 </app-current-task-list>
 
