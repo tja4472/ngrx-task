@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { newTodo, Todo } from '@app/tasks/models';
 
@@ -11,19 +11,25 @@ export class CurrentTaskDetailPresenter {
     description: '',
   });
   */
-  form;
+  form: FormGroup;
 
   initialData: Todo;
+  isNew: boolean;
 
   constructor(private formBuilder: FormBuilder) {}
 
   init(todo: Todo) {
+    this.isNew = todo.id === '';
+
+    /*    
     if (!!!todo) {
       // todo undefined - new item.
       this.initialData = newTodo();
     } else {
       this.initialData = { ...todo };
     }
+*/
+    this.initialData = { ...todo };
 
     this.form = this.formBuilder.group({
       name: [this.initialData.name, Validators.required],

@@ -21,6 +21,10 @@ export class CurrentTaskDetailComponent implements OnInit {
     return this.presenter.form;
   }
 
+  get isNew(): boolean {
+    return this.presenter.isNew;
+  }
+
   constructor(private presenter: CurrentTaskDetailPresenter) {}
 
   ngOnInit() {

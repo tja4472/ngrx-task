@@ -43,7 +43,8 @@ export class CurrentTasksDetailPageComponent implements OnInit {
     this.task$ = 
 */
 
-    this.task$ = store.pipe(select(TaskSelectors.getSelectedCurrentTask));
+    // this.task$ = store.pipe(select(TaskSelectors.getSelectedCurrentTask));
+    this.task$ = store.pipe(select(TaskSelectors.getSelectedOrNewCurrentTask));
   }
 
   ngOnInit() {

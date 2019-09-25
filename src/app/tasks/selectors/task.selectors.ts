@@ -1,5 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
+import { newTodo } from '../models';
 import * as fromTask from '../reducers';
 
 import * as TodoCompletedSelectors from './todo-completed.selectors';
@@ -30,6 +31,18 @@ export const getAllCurrentTasks = createSelector(
 export const getSelectedCurrentTask = createSelector(
   getTaskState,
   TodoSelectors.getSelectedItem
+);
+
+export const getSelectedOrNewCurrentTask = createSelector(
+  getSelectedCurrentTask,
+  (task) => {
+    if (!!!task) {
+      // task undefined - new item.
+      return newTodo();
+    }
+
+    return task;
+  }
 );
 
 export const getAllTaskLists = createSelector(
