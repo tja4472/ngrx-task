@@ -18,6 +18,7 @@ import * as fromRoot from '@app/reducers';
   template: `
     <app-sidenav></app-sidenav>
   `,
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
   showSidenav$: Observable<boolean>;
