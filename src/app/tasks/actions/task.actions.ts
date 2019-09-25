@@ -15,6 +15,10 @@ export const currentTasksPageNewCurrentTask = createAction(
   '[Current Tasks Page] New Current Task'
 );
 
+export const currentTasksPageSaveItem = createAction(
+  '[Current Tasks Page] Save Item',
+  props<{ todo: Todo }>()
+);
 //
 export const enterTaskListsPage = createAction('[Task Lists Page] Enter');
 

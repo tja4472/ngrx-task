@@ -50,7 +50,10 @@ export class TaskEffects {
 
   @Effect({ dispatch: false })
   saveCurrentTodo$ = this.actions$.pipe(
-    ofType(TaskActions.currentTaskDetailsPageSaved),
+    ofType(
+      TaskActions.currentTaskDetailsPageSaved,
+      TaskActions.currentTasksPageSaveItem
+    ),
     withLatestFrom(this.store.select(authQuery.selectAuthUser)),
     tap(([action, user]) => {
       console.log('Effect:saveCurrentTodo$:A', {

@@ -15,6 +15,7 @@ export class CurrentTaskListComponent implements OnInit {
 
   @Output() reorderItems = new EventEmitter<string[]>();
   @Output() newCurrentTask = new EventEmitter<void>();
+  @Output() toggleCompleteItem = new EventEmitter<Todo>();
 
   constructor() {}
 

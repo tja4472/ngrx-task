@@ -68,6 +68,9 @@ mat-icon {
   padding-right: 10px;
 }
 
+.line-through {
+  text-decoration-line: line-through;
+}
 /*
 .c:active {
   background-color: blue;
@@ -83,7 +86,7 @@ a {
 
 .fab-bottom-right {
   position: fixed;
-  right: 16px;
+  right: 60px;
   bottom: 16px;
   z-index: 100;
 }
