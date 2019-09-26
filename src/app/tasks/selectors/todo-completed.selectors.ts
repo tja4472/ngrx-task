@@ -10,3 +10,16 @@ export const getAllTodoCompleted = createSelector(
   getTodoCompletedState,
   (state) => state.todoCompletedList
 );
+
+export const getSelectedId = createSelector(
+  getTodoCompletedState,
+  (state) => state.selectedId
+);
+
+export const getSelectedItem = createSelector(
+  getAllTodoCompleted,
+  getSelectedId,
+  (completedTodos, selectedId) => {
+    return completedTodos.filter((todo) => todo.id === selectedId)[0];
+  }
+);

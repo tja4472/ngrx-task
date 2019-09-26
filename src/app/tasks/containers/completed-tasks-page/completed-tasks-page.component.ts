@@ -26,4 +26,6 @@ export class CompletedTasksPageComponent implements OnInit {
   ngOnInit() {
     this.store.dispatch(TaskActions.enterCompletedTasksPage());
   }
+
+  toggleCompleteItem(a) {}
 }

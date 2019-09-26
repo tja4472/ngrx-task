@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import {
+  CompletedTasksDetailPageComponent,
   CompletedTasksPageComponent,
   CurrentTasksDetailPageComponent,
   CurrentTasksPageComponent,
@@ -20,6 +21,10 @@ const routes: Routes = [
   {
     path: 'completed',
     component: CompletedTasksPageComponent,
+  },
+  {
+    path: 'completed/edit/:id',
+    component: CompletedTasksDetailPageComponent,
   },
   {
     path: 'lists',
