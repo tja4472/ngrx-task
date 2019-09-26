@@ -48,7 +48,12 @@ mat-checkbox {
   padding-right: 10px;
 }
 
+/*
 mat-icon {
+  cursor: move;
+}
+*/
+.drag-icon {
   cursor: move;
 }
 
@@ -88,5 +93,12 @@ a {
   position: fixed;
   right: 60px;
   bottom: 16px;
+  z-index: 100;
+}
+
+.zzzzzzzz {
+  position: fixed;
+  right: 60px;
+  top: 0px;
   z-index: 100;
 }

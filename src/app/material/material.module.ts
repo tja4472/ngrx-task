@@ -12,6 +12,8 @@ import {
   MatSidenavModule,
   MatToolbarModule,
 } from '@angular/material';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   imports: [
@@ -20,8 +22,10 @@ import {
     MatCardModule,
     MatCheckboxModule,
     MatButtonModule,
+    MatSelectModule,
     MatSidenavModule,
     MatListModule,
+    MatMenuModule,
     MatIconModule,
     MatToolbarModule,
     MatProgressSpinnerModule,
@@ -33,8 +37,10 @@ import {
     MatCardModule,
     MatCheckboxModule,
     MatButtonModule,
+    MatSelectModule,
     MatSidenavModule,
     MatListModule,
+    MatMenuModule,
     MatIconModule,
     MatToolbarModule,
     MatProgressSpinnerModule,
