@@ -12,6 +12,8 @@ import { authQuery } from '@app/auth/selectors/auth.selectors';
 
 import { TodoActions, TodoCompletedActions } from '../actions';
 import * as TaskActions from '../actions/task.actions';
+import { TodoCompletedDataService } from '../services/todo-completed.data.service';
+import { TodoListsDataService } from '../services/todo-lists.data.service';
 import { TodoDataService } from '../services/todo.data.service';
 
 @Injectable()
@@ -24,6 +26,85 @@ export class TaskEffects {
     )
   );
 
+  //#region Completed Tasks
+  @Effect({ dispatch: false })
+  removeCompletedTask$ = this.actions$.pipe(
+    ofType(TaskActions.completedTaskDetailsPageRemoved),
+    withLatestFrom(this.store.select(authQuery.selectAuthUser)),
+    tap(([action, user]) => {
+      console.log('Effect:removeCompletedTask$', {
+        action,
+        user,
+      });
+
+      this.todoCompletedDataService.removeItem(
+        action.todoCompleted.id,
+        user.todoListId,
+        user.id
+      );
+    })
+  );
+
+  @Effect({ dispatch: false })
+  savecompletedTask$ = this.actions$.pipe(
+    ofType(TaskActions.completedTaskDetailsPageSaved),
+    withLatestFrom(this.store.select(authQuery.selectAuthUser)),
+    tap(([action, user]) => {
+      console.log('Effect:savecompletedTask', {
+        action,
+        user,
+      });
+
+      this.todoCompletedDataService.save(
+        action.todoCompleted,
+        user.todoListId,
+        user.id
+      );
+    })
+  );
+  //#endregion
+
+  //#region Task Lists
+  @Effect({ dispatch: false })
+  newTaskList$ = this.actions$.pipe(
+    ofType(TaskActions.TaskListPageNewTaskList),
+    // withLatestFrom(this.store.select(authQuery.selectAuthUser)),
+    tap(() => {
+      console.log('Effect:newCurrentTask');
+
+      this.router.navigate(['/lists/edit', 'new']);
+    })
+  );
+
+  @Effect({ dispatch: false })
+  removeTaskList$ = this.actions$.pipe(
+    ofType(TaskActions.taskListDetailPageRemoved),
+    withLatestFrom(this.store.select(authQuery.selectAuthUser)),
+    tap(([action, user]) => {
+      console.log('Effect:removeTaskList$', {
+        action,
+        user,
+      });
+
+      this.todoListsDataService.removeItem(action.todoCompleted.id, user.id);
+    })
+  );
+
+  @Effect({ dispatch: false })
+  saveTaskList$ = this.actions$.pipe(
+    ofType(TaskActions.taskListDetailPageSaved),
+    withLatestFrom(this.store.select(authQuery.selectAuthUser)),
+    tap(([action, user]) => {
+      console.log('Effect:saveTaskList$', {
+        action,
+        user,
+      });
+
+      this.todoListsDataService.save(action.todoCompleted, user.id);
+    })
+  );
+  //#endregion
+  //
   @Effect({ dispatch: false })
   newCurrentTask$ = this.actions$.pipe(
     ofType(TaskActions.currentTasksPageNewCurrentTask),
@@ -97,6 +178,8 @@ export class TaskEffects {
   constructor(
     private actions$: Actions,
     private todoDataService: TodoDataService,
+    private todoCompletedDataService: TodoCompletedDataService,
+    private todoListsDataService: TodoListsDataService,
     private store: Store<any>,
     private router: Router
   ) {}

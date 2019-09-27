@@ -39,7 +39,7 @@ export class TaskListDetailPageComponent implements OnInit {
     });
 */
 
-    this.task$ = store.pipe(select(TaskSelectors.getSelectedTaskList));
+    this.task$ = store.pipe(select(TaskSelectors.getSelectedOrNewTaskList));
   }
 
   ngOnInit() {

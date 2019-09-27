@@ -35,5 +35,9 @@ export class TaskListsPageComponent implements OnInit {
     this.store.dispatch(TaskActions.enterTaskListsPage());
   }
 
+  viewNewCurrentTask() {
+    this.store.dispatch(TaskActions.TaskListPageNewTaskList());
+  }
+
   toggleCompleteItem(a) {}
 }

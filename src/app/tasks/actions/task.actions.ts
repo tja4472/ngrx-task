@@ -69,3 +69,9 @@ export const taskListDetailPageRemoved = createAction(
   '[Task List Detail Page] Removed',
   props<{ todoCompleted: TodoListsItem }>()
 );
+
+//
+
+export const TaskListPageNewTaskList = createAction(
+  '[Task List Page] New Task List'
+);

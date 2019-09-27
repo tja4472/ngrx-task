@@ -13,6 +13,7 @@ export class TaskListListComponent implements OnInit {
   @Input()
   currentTasks: TodoListsItem[];
 
+  @Output() newCurrentTask = new EventEmitter<void>();
   @Output() toggleCompleteItem = new EventEmitter<TodoListsItem>();
 
   constructor() {}
