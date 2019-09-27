@@ -1,8 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { select, Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 import { TaskActions, TodoActions } from '@app/tasks/actions';
 import { Todo } from '@app/tasks/models';
@@ -16,12 +18,19 @@ import { TaskSelectors } from '@app/tasks/selectors';
 })
 export class CurrentTasksPageComponent implements OnInit {
   currentTasks$: Observable<Todo[]>;
+  selectedId: string;
 
-  constructor(private store: Store<any>) {
-    this.currentTasks$ = store.pipe(select(TaskSelectors.getAllCurrentTasks));
+  constructor(private route: ActivatedRoute, private store: Store<any>) {
+    // this.currentTasks$ = store.pipe(select(TaskSelectors.getAllCurrentTasks));
   }
 
   ngOnInit() {
+    this.currentTasks$ = this.route.paramMap.pipe(
+      switchMap((params) => {
+        this.selectedId = params.get('id');
+        return this.store.pipe(select(TaskSelectors.getAllCurrentTasks));
+      })
+    );
     this.store.dispatch(TaskActions.currentTasksPageEnter());
   }
 

@@ -13,7 +13,7 @@ import { CurrentTaskDetailPresenter } from './current-task-detail.presenter';
 })
 export class CurrentTaskDetailComponent implements OnInit {
   @Input() todo: Todo;
-  @Output() cancel: EventEmitter<void> = new EventEmitter();
+  @Output() cancel = new EventEmitter<Todo>();
   @Output() remove = new EventEmitter<Todo>();
   @Output() checkout = new EventEmitter<Todo>();
 
@@ -32,13 +32,15 @@ export class CurrentTaskDetailComponent implements OnInit {
     this.presenter.init(this.todo);
   }
 
+  cancelClick() {
+    this.cancel.emit(this.todo);
+  }
+
   removeClick() {
-    console.log('removeClick>', this.todo);
     this.remove.emit(this.todo);
   }
 
   onSubmit() {
-    console.log('onSubmit>', this.todo);
     const todoData = this.presenter.checkout();
     this.checkout.emit(todoData);
   }

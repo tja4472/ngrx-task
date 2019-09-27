@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { select, Store } from '@ngrx/store';
 
@@ -18,13 +18,12 @@ import { TaskSelectors } from '@app/tasks/selectors';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CurrentTasksDetailPageComponent implements OnInit {
-  id: string;
   task$: Observable<Todo>;
 
   constructor(
     private route: ActivatedRoute,
-    private store: Store<any>,
-    private location: Location
+    private router: Router,
+    private store: Store<any>
   ) {
     this.route.paramMap
       .pipe(
@@ -51,19 +50,23 @@ export class CurrentTasksDetailPageComponent implements OnInit {
     // this.store.dispatch(TaskActions.enterCurrentTasksPage());
   }
 
-  goBack(): void {
-    this.location.back();
+  private goBack(taskId: string): void {
+    this.router.navigate(['/tasks', { id: taskId }]);
+  }
+
+  viewCancelled(todo: Todo): void {
+    this.goBack(todo.id);
   }
 
   viewRemoved(todo: Todo): void {
     this.store.dispatch(TaskActions.currentTaskDetailsPageRemoved({ todo }));
-    this.goBack();
+    this.goBack(todo.id);
   }
 
   viewSaved(todo: Todo) {
     console.log('viewSaved>', todo);
     this.store.dispatch(TaskActions.currentTaskDetailsPageSaved({ todo }));
-    this.goBack();
+    this.goBack(todo.id);
   }
 
   reorderItems(ids: string[]) {

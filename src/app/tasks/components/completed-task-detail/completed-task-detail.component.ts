@@ -13,7 +13,7 @@ import { CompletedTaskDetailPresenter } from './completed-task-detail.presenter'
 })
 export class CompletedTaskDetailComponent implements OnInit {
   @Input() completedTask: TodoCompleted;
-  @Output() cancel: EventEmitter<void> = new EventEmitter();
+  @Output() cancel = new EventEmitter<TodoCompleted>();
   @Output() remove = new EventEmitter<TodoCompleted>();
   @Output() checkout = new EventEmitter<TodoCompleted>();
 
@@ -30,6 +30,10 @@ export class CompletedTaskDetailComponent implements OnInit {
   ngOnInit() {
     console.log('ngOnInit>', this.completedTask);
     this.presenter.init(this.completedTask);
+  }
+
+  cancelClick() {
+    this.cancel.emit(this.completedTask);
   }
 
   removeClick() {

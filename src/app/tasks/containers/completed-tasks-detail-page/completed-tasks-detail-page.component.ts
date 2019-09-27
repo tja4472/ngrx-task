@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { select, Store } from '@ngrx/store';
 
@@ -23,8 +23,8 @@ export class CompletedTasksDetailPageComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private store: Store<any>,
-    private location: Location
+    private router: Router,
+    private store: Store<any>
   ) {
     this.route.paramMap
       .pipe(
@@ -46,22 +46,26 @@ export class CompletedTasksDetailPageComponent implements OnInit {
     // this.store.dispatch(TaskActions.enterCurrentTasksPage());
   }
 
-  goBack(): void {
-    this.location.back();
+  private goBack(taskId: string): void {
+    this.router.navigate(['/completed', { id: taskId }]);
+  }
+
+  viewCancelled(todoCompleted: TodoCompleted): void {
+    this.goBack(todoCompleted.id);
   }
 
   viewRemoved(todoCompleted: TodoCompleted): void {
     this.store.dispatch(
       TaskActions.completedTaskDetailsPageRemoved({ todoCompleted })
     );
-    this.goBack();
+    this.goBack(todoCompleted.id);
   }
 
   viewSaved(todoCompleted: TodoCompleted) {
     this.store.dispatch(
       TaskActions.completedTaskDetailsPageSaved({ todoCompleted })
     );
-    this.goBack();
+    this.goBack(todoCompleted.id);
   }
 
   reorderItems(ids: string[]) {
