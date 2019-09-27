@@ -5,12 +5,13 @@ import { Actions, createEffect, Effect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 
 import { EMPTY } from 'rxjs';
-import { concatMap, tap, withLatestFrom } from 'rxjs/operators';
+import { concatMap, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 
+import { AuthApiActions } from '@app/auth/actions';
 import { authQuery } from '@app/auth/selectors/auth.selectors';
 
+import { TodoActions, TodoCompletedActions } from '../actions';
 import * as TaskActions from '../actions/task.actions';
-import { TaskSelectors } from '../selectors';
 import { TodoDataService } from '../services/todo.data.service';
 
 @Injectable()
@@ -63,6 +64,21 @@ export class TaskEffects {
 
       this.todoDataService.save(action.todo, user.todoListId, user.id);
     })
+  );
+
+  @Effect()
+  enterCurrentTasksPage$ = this.actions$.pipe(
+    ofType(AuthApiActions.autoSignInHaveUser),
+    switchMap((user) => [
+      new TodoActions.DatabaseListenForDataStart({
+        todoListId: user.user.todoListId,
+        userId: user.user.id,
+      }),
+      new TodoCompletedActions.DatabaseListenForDataStart({
+        todoListId: user.user.todoListId,
+        userId: user.user.id,
+      }),
+    ])
   );
 
   /*

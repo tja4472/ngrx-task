@@ -54,6 +54,7 @@ export class TodoEffects {
     })
   );
 
+  /*
   // tslint:disable-next-line:member-ordering
   @Effect()
   enterCurrentTasksPage$ = this.actions$.pipe(
@@ -67,6 +68,7 @@ export class TodoEffects {
         })
     )
   );
+  */
 
   // tslint:disable-next-line:member-ordering
   @Effect()

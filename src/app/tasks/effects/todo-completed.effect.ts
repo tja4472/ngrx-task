@@ -35,6 +35,7 @@ export class TodoCompletedEffects {
     private fb1DataService: Fb1DataService
   ) {}
 
+  /*
   // tslint:disable-next-line:member-ordering
   @Effect()
   enterCurrentTasksPage$ = this.actions$.pipe(
@@ -48,6 +49,7 @@ export class TodoCompletedEffects {
         })
     )
   );
+*/
 
   // tslint:disable-next-line:member-ordering
   @Effect()
