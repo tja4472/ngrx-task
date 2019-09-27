@@ -1,3 +1,16 @@
+export interface TodoListsItem {
+  readonly id: string;
+  readonly name: string;
+}
+
+export function newTodoListsItem(): TodoListsItem {
+  return {
+    id: '',
+    name: '',
+  };
+}
+
+/*
 export class TodoListsItem {
   id = '';
   name = '';
@@ -12,3 +25,4 @@ export class TodoListsItem {
     return this.id === '';
   }
 }
+*/

@@ -1,8 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { select, Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 import { TaskActions } from '@app/tasks/actions';
 import { TodoListsItem } from '@app/tasks/models';
@@ -17,11 +19,21 @@ import { TaskSelectors } from '@app/tasks/selectors';
 export class TaskListsPageComponent implements OnInit {
   taskLists$: Observable<TodoListsItem[]>;
 
-  constructor(private store: Store<any>) {
-    this.taskLists$ = store.pipe(select(TaskSelectors.getAllTaskLists));
+  selectedId: string;
+
+  constructor(private route: ActivatedRoute, private store: Store<any>) {
+    // this.taskLists$ = store.pipe(select(TaskSelectors.getAllTaskLists));
   }
 
   ngOnInit() {
+    this.taskLists$ = this.route.paramMap.pipe(
+      switchMap((params) => {
+        this.selectedId = params.get('id');
+        return this.store.pipe(select(TaskSelectors.getAllTaskLists));
+      })
+    );
     this.store.dispatch(TaskActions.enterTaskListsPage());
   }
+
+  toggleCompleteItem(a) {}
 }

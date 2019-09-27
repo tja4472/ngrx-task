@@ -11,6 +11,8 @@ import {
   CompletedTaskDetailComponent,
   CompletedTaskListComponent,
   CurrentTaskListComponent,
+  TaskListDetailComponent,
+  TaskListListComponent,
 } from './components';
 import { CurrentTaskDetailComponent } from './components/current-task-detail/current-task-detail.component';
 import { CurrentTaskListItemComponent } from './components/current-task-list-item/current-task-list-item.component';
@@ -18,6 +20,7 @@ import {
   CompletedTasksDetailPageComponent,
   CompletedTasksPageComponent,
   CurrentTasksPageComponent,
+  TaskListDetailPageComponent,
   TaskListsPageComponent,
 } from './containers';
 import { CurrentTasksDetailPageComponent } from './containers/current-tasks-detail-page/current-tasks-detail-page.component';
@@ -34,6 +37,8 @@ export const COMPONENTS = [
   CurrentTaskListComponent,
   CurrentTaskDetailComponent,
   CurrentTaskListItemComponent,
+  TaskListDetailComponent,
+  TaskListListComponent,
 ];
 
 export const CONTAINERS = [
@@ -41,6 +46,7 @@ export const CONTAINERS = [
   CurrentTasksDetailPageComponent,
   CurrentTasksPageComponent,
   CompletedTasksPageComponent,
+  TaskListDetailPageComponent,
   TaskListsPageComponent,
 ];
 

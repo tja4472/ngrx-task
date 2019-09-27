@@ -45,7 +45,7 @@ export class TodoListsDataService {
   public save(item: TodoListsItem, userId: string): void {
     const doc = this.toFirestoreDoc(item);
 
-    if (item.isNew()) {
+    if (item.id === '') {
       doc.id = this.afs.createId();
     }
 
@@ -76,10 +76,10 @@ export class TodoListsDataService {
 
   private fromFirestoreDoc(x: FirestoreDoc): TodoListsItem {
     //
-    const result: TodoListsItem = new TodoListsItem({
+    const result: TodoListsItem = {
       id: x.id,
       name: x.name,
-    });
+    };
 
     return result;
   }

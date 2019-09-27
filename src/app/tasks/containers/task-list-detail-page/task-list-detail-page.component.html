@@ -1,0 +1,10 @@
+<app-task-list-detail
+  [completedTask]="task$ | async"
+  (cancel)="viewCancelled($event)"
+  (remove)="viewRemoved($event)"
+  (checkout)="viewSaved($event)"
+>
+</app-task-list-detail>
+<pre>
+Selected Task List: {{ task$ | async | json }}
+</pre>

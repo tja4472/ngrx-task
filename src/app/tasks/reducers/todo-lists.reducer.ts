@@ -1,3 +1,5 @@
+import { TaskActions } from '@app/tasks/actions';
+
 import {
   TodoListsActions,
   TodoListsActionTypes,
@@ -7,6 +9,7 @@ import { TodoListsItem } from '../models';
 export const todoListsFeatureKey = 'todo-lists';
 
 export interface State {
+  selectedId: string;
   loaded: boolean;
   loading: boolean;
   selectedListId: string | null;
@@ -14,13 +17,14 @@ export interface State {
 }
 
 const initialState: State = {
+  selectedId: null,
   loaded: false,
   loading: false,
   selectedListId: null,
   todoLists: [],
 };
 
-export function reducer(state = initialState, action: TodoListsActions): State {
+export function reducer(state = initialState, action: any): State {
   switch (action.type) {
     case TodoListsActionTypes.ListenForData: {
       return {
@@ -29,13 +33,18 @@ export function reducer(state = initialState, action: TodoListsActions): State {
       };
     }
 
+    case TaskActions.taskListDetailPageEnter.type: {
+      return { ...state, selectedId: action.id };
+    }
+
     case TodoListsActionTypes.LoadSuccess: {
       const items: TodoListsItem[] = action.payload.items;
 
       return {
+        selectedId: null,
         loaded: true,
         loading: false,
-        selectedListId: 'default-list',
+        selectedListId: 'ZZZdefault-list',
         todoLists: items.map((book) => book),
       };
     }

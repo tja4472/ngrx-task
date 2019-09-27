@@ -6,6 +6,7 @@ import {
   CompletedTasksPageComponent,
   CurrentTasksDetailPageComponent,
   CurrentTasksPageComponent,
+  TaskListDetailPageComponent,
   TaskListsPageComponent,
 } from './containers';
 
@@ -29,6 +30,10 @@ const routes: Routes = [
   {
     path: 'lists',
     component: TaskListsPageComponent,
+  },
+  {
+    path: 'lists/edit/:id',
+    component: TaskListDetailPageComponent,
   },
 ];
 

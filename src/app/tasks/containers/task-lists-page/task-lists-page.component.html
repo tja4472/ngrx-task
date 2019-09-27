@@ -1,5 +1,10 @@
-<p>task-lists-page works!</p>
-
+<app-task-list-list
+  [currentTasks]="taskLists$ | async"
+  (toggleCompleteItem)="toggleCompleteItem($event)"
+>
+</app-task-list-list>
+<!---
 <pre>
 Task Lists: {{ taskLists$ | async | json }}
 </pre>
+-->

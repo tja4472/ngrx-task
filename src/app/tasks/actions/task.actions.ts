@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 
-import { Todo, TodoCompleted } from '@app/tasks/models';
+import { Todo, TodoCompleted, TodoListsItem } from '@app/tasks/models';
 
 export const loadTasks = createAction('[Task] Load Tasks');
 
@@ -52,4 +52,20 @@ export const currentTaskDetailsPageSaved = createAction(
 export const currentTaskDetailsPageRemoved = createAction(
   '[Current Task Details Page] Removed',
   props<{ todo: Todo }>()
+);
+
+// TaskListDetailPage
+export const taskListDetailPageEnter = createAction(
+  '[Task List Detail Page] Enter',
+  props<{ id: string }>()
+);
+
+export const taskListDetailPageSaved = createAction(
+  '[Task List Detail Page] Saved',
+  props<{ todoCompleted: TodoListsItem }>()
+);
+
+export const taskListDetailPageRemoved = createAction(
+  '[Task List Detail Page] Removed',
+  props<{ todoCompleted: TodoListsItem }>()
 );

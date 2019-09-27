@@ -61,3 +61,7 @@ export const getSelectedListId = createSelector(
   TodoListsSelectors.getSelectedListId
 );
 */
+export const getSelectedTaskList = createSelector(
+  getTaskState,
+  TodoListsSelectors.getSelectedItem
+);
