@@ -1,5 +1,32 @@
 <form [formGroup]="checkoutForm" novalidate (ngSubmit)="onSubmit()">
   <mat-card class="shipping-card">
+    <mat-card-actions>
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="!(this.checkoutForm.dirty && this.checkoutForm.valid)"
+      >
+        Submit
+      </button>
+      <button
+        mat-raised-button
+        color="accent"
+        type="button"
+        (click)="cancelClick()"
+      >
+        Cancel
+      </button>
+      <button
+        mat-raised-button
+        color="accent"
+        type="button"
+        [disabled]="this.isNew"
+        (click)="removeClick()"
+      >
+        Remove
+      </button>
+    </mat-card-actions>
     <mat-card-header>
       <mat-card-title>Current Task</mat-card-title>
     </mat-card-header>
@@ -43,32 +70,5 @@
         </div>
       </div>
     </mat-card-content>
-    <mat-card-actions>
-      <button
-        mat-raised-button
-        color="primary"
-        type="submit"
-        [disabled]="!(this.checkoutForm.dirty && this.checkoutForm.valid)"
-      >
-        Submit
-      </button>
-      <button
-        mat-raised-button
-        color="accent"
-        type="button"
-        (click)="cancelClick()"
-      >
-        Cancel
-      </button>
-      <button
-        mat-raised-button
-        color="accent"
-        type="button"
-        [disabled]="this.isNew"
-        (click)="removeClick()"
-      >
-        Remove
-      </button>
-    </mat-card-actions>
   </mat-card>
 </form>
