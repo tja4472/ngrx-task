@@ -37,6 +37,11 @@ export const signUpSuccess = createAction(
   props<{ user: UserModel }>()
 );
 
+export const setUserListId = createAction(
+  '[Auth/API] set User List Id',
+  props<{ listId: string }>()
+);
+
 const all = union({
   autoSignIn,
   autoSignInHaveUser,
@@ -47,6 +52,7 @@ const all = union({
   signOutComplete,
   signUpFailure,
   signUpSuccess,
+  setUserListId,
 });
 
 export type AuthApiActionsUnion = typeof all;

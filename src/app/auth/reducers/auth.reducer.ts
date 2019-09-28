@@ -28,6 +28,9 @@ export function authReducer(
     case AuthApiActions.signOut.type:
       return { ...initialState, hasChecked: true };
 
+    case AuthApiActions.setUserListId.type:
+      return { ...state, user: { ...state.user, todoListId: action.listId } };
+
     default:
       return state;
   }

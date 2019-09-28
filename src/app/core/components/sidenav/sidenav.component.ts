@@ -8,6 +8,7 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { filter, map, shareReplay, withLatestFrom } from 'rxjs/operators';
 
+import { AuthApiActions } from '@app/auth/actions';
 import { UserModel } from '@app/auth/models/user.model';
 import * as FromAuthSelector from '@app/auth/selectors/auth.selectors';
 import { TaskSelectors } from '@app/tasks/selectors';
@@ -35,7 +36,7 @@ export class SidenavComponent {
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private router: Router,
+    router: Router,
     private store: Store<any>
   ) {
     this.user$ = this.store.select(FromAuthSelector.authQuery.selectAuthUser);
@@ -51,7 +52,10 @@ export class SidenavComponent {
   }
 
   public viewtodoListsSelectChange(todoListId: any): void {
-    console.log('todoListId>', todoListId);
+    // console.log('todoListId>', todoListId.value);
     // this.userService.SetTodoListId(todoListId);
+    this.store.dispatch(
+      AuthApiActions.setUserListId({ listId: todoListId.value })
+    );
   }
 }

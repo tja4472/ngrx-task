@@ -2,9 +2,16 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
 
 import { defer, from, Observable, of } from 'rxjs';
-import { catchError, exhaustMap, map, tap } from 'rxjs/operators';
+import {
+  catchError,
+  exhaustMap,
+  map,
+  tap,
+  withLatestFrom,
+} from 'rxjs/operators';
 
 import {
   AuthApiActions,
@@ -13,6 +20,9 @@ import {
   SignUpPageActions,
 } from '@app/auth/actions';
 import { AuthService } from '@app/auth/services/auth.service';
+
+import { authQuery } from '../selectors/auth.selectors';
+import { UserInfoDataService } from '../services/user-info.data.service';
 // import { SignOutConfirmationAlertService } from '@app/auth/services/sign-out-confirmation-alert.service';
 
 @Injectable()
@@ -75,6 +85,30 @@ export class AuthEffects {
       } else {
         this.router.navigate([this.authService.redirectUrl]);
       }
+    })
+  );
+
+  /*  
+  @Effect({ dispatch: false })
+  setUserListId$ = this.actions$.pipe(
+    ofType(AuthApiActions.setUserListId),
+    withLatestFrom(this.store.select(authQuery.selectAuthUser)),
+    map(([action, user]) =>
+      tap(() => {
+        user.todoListId = action.listId;
+        this.userInfoDataService.save(user, user.id);
+      })
+    )
+  );
+*/
+  @Effect({ dispatch: false })
+  setUserListId$ = this.actions$.pipe(
+    ofType(AuthApiActions.setUserListId),
+    withLatestFrom(this.store.select(authQuery.selectAuthUser)),
+    tap(([action, user]) => {
+      const saveUser = { ...user, todoListId: action.listId };
+
+      this.userInfoDataService.save(saveUser, user.id);
     })
   );
 
@@ -191,7 +225,8 @@ export class AuthEffects {
       | SignOutConfirmationAlertActions.SignOutConfirmationAlertActionsUnion
     >,
     private authService: AuthService,
-    private router: Router
-  ) //   private signOutConfirmationAlertService: SignOutConfirmationAlertService
-  {}
+    private router: Router,
+    private userInfoDataService: UserInfoDataService,
+    private store: Store<any> //   private signOutConfirmationAlertService: SignOutConfirmationAlertService
+  ) {}
 }

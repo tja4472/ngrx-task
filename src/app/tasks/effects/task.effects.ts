@@ -192,7 +192,24 @@ export class TaskEffects {
   );
 
   @Effect()
-  enterCurrentTasksPage$ = this.actions$.pipe(
+  enterLoadData$ = this.actions$.pipe(
+    ofType(AuthApiActions.autoSignInHaveUser, AuthApiActions.setUserListId),
+    withLatestFrom(this.store.select(authQuery.selectAuthUser)),
+    switchMap(([action, user]) => [
+      new TodoActions.DatabaseListenForDataStart({
+        todoListId: user.todoListId,
+        userId: user.id,
+      }),
+      new TodoCompletedActions.DatabaseListenForDataStart({
+        todoListId: user.todoListId,
+        userId: user.id,
+      }),
+    ])
+  );
+
+  /*
+  @Effect()
+  enterLoadData$ = this.actions$.pipe(
     ofType(AuthApiActions.autoSignInHaveUser),
     switchMap((user) => [
       new TodoActions.DatabaseListenForDataStart({
@@ -205,6 +222,7 @@ export class TaskEffects {
       }),
     ])
   );
+*/
 
   /*
   // tslint:disable-next-line:member-ordering
