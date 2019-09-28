@@ -11,6 +11,10 @@ export const enterCompletedTasksPage = createAction(
 // currentTasksPage
 export const currentTasksPageEnter = createAction('[Current Tasks Page] Enter');
 
+export const currentTasksPageClearCompleted = createAction(
+  '[Current Tasks Page] Clear Completed'
+);
+
 export const currentTasksPageNewCurrentTask = createAction(
   '[Current Tasks Page] New Current Task'
 );

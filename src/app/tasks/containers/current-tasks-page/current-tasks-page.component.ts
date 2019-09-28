@@ -38,6 +38,10 @@ export class CurrentTasksPageComponent implements OnInit {
     this.store.dispatch(new TodoActions.ReorderListA({ ids }));
   }
 
+  viewClearCompleted() {
+    this.store.dispatch(TaskActions.currentTasksPageClearCompleted());
+  }
+
   viewNewCurrentTask() {
     this.store.dispatch(TaskActions.currentTasksPageNewCurrentTask());
   }

@@ -9,9 +9,11 @@ import { concatMap, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 
 import { AuthApiActions } from '@app/auth/actions';
 import { authQuery } from '@app/auth/selectors/auth.selectors';
+import { TaskSelectors } from '@app/tasks/selectors';
 
 import { TodoActions, TodoCompletedActions } from '../actions';
 import * as TaskActions from '../actions/task.actions';
+import { Fb1DataService } from '../services/fb1.data.service';
 import { TodoCompletedDataService } from '../services/todo-completed.data.service';
 import { TodoListsDataService } from '../services/todo-lists.data.service';
 import { TodoDataService } from '../services/todo.data.service';
@@ -106,6 +108,30 @@ export class TaskEffects {
   //#endregion
   //
   @Effect({ dispatch: false })
+  clearCompleted$ = this.actions$.pipe(
+    ofType(TaskActions.currentTasksPageClearCompleted),
+    withLatestFrom(
+      this.store.select(authQuery.selectAuthUser),
+      this.store.select(TaskSelectors.getAllCurrentTasks)
+    ),
+    tap(([action, user, tasks]) => {
+      const completedTasks = tasks.filter((t) => t.isComplete);
+
+      console.log('Effect:clearCompleted$:A', {
+        action,
+        user,
+        completedTasks,
+      });
+
+      this.fb1DataService.clearCompletedTodos(
+        completedTasks,
+        user.todoListId,
+        user.id
+      );
+    })
+  );
+
+  @Effect({ dispatch: false })
   newCurrentTask$ = this.actions$.pipe(
     ofType(TaskActions.currentTasksPageNewCurrentTask),
     // withLatestFrom(this.store.select(authQuery.selectAuthUser)),
@@ -177,6 +203,7 @@ export class TaskEffects {
 
   constructor(
     private actions$: Actions,
+    private fb1DataService: Fb1DataService,
     private todoDataService: TodoDataService,
     private todoCompletedDataService: TodoCompletedDataService,
     private todoListsDataService: TodoListsDataService,
