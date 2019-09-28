@@ -32,6 +32,11 @@ export const completedTaskDetailsPageEnter = createAction(
   props<{ id: string }>()
 );
 
+export const completedTaskDetailsItemToggled = createAction(
+  '[Completed Task Details Page] Item Toggled',
+  props<{ todoCompleted: TodoCompleted }>()
+);
+
 export const completedTaskDetailsPageSaved = createAction(
   '[Completed Task Details Page] Saved',
   props<{ todoCompleted: TodoCompleted }>()

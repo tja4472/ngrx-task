@@ -36,5 +36,9 @@ export class CompletedTasksPageComponent implements OnInit {
     this.store.dispatch(TaskActions.enterCompletedTasksPage());
   }
 
-  toggleCompleteItem(a) {}
+  toggleCompleteItem(item: TodoCompleted) {
+    this.store.dispatch(
+      TaskActions.completedTaskDetailsItemToggled({ todoCompleted: item })
+    );
+  }
 }

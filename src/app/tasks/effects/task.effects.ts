@@ -132,6 +132,24 @@ export class TaskEffects {
   );
 
   @Effect({ dispatch: false })
+  completedTaskToggled$ = this.actions$.pipe(
+    ofType(TaskActions.completedTaskDetailsItemToggled),
+    withLatestFrom(this.store.select(authQuery.selectAuthUser)),
+    tap(([action, user]) => {
+      console.log('Effect:completedTaskToggled$:A', {
+        action,
+        user,
+      });
+
+      this.fb1DataService.moveToCurrent(
+        action.todoCompleted,
+        user.todoListId,
+        user.id
+      );
+    })
+  );
+
+  @Effect({ dispatch: false })
   newCurrentTask$ = this.actions$.pipe(
     ofType(TaskActions.currentTasksPageNewCurrentTask),
     // withLatestFrom(this.store.select(authQuery.selectAuthUser)),
