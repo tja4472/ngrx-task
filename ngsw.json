@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1569850185408,
+  "timestamp": 1569851326147,
   "index": "/ngrx-task/index.html",
   "assetGroups": [
     {
@@ -21,7 +21,9 @@
         "/ngrx-task/runtime-es5.ec8bf5476afceeffe5ed.js",
         "/ngrx-task/styles.413a8e90a51ca1e3558f.css"
       ],
-      "patterns": []
+      "patterns": [
+        "https:\\/\\/fonts\\.googleapis\\.com\\/.*"
+      ]
     },
     {
       "name": "assets",
