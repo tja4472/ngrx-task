@@ -21,6 +21,7 @@ import { environment } from '../environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { metaReducers, ROOT_REDUCERS } from './reducers';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   imports: [
@@ -53,6 +54,9 @@ import { metaReducers, ROOT_REDUCERS } from './reducers';
     }),
     EffectsModule.forRoot([]),
     CoreModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],
