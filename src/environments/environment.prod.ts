@@ -1,4 +1,4 @@
-import { firebaseProdConfig } from '@app/firebase-config';
+import { firebaseProdConfig } from '@app/firebase/firebase-config';
 
 export const environment = {
   appCode: 'ngrx-auth-module',
