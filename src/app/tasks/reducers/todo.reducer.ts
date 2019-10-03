@@ -1,6 +1,6 @@
-import { TaskActions } from '@app/tasks/actions';
+import { createReducer, on } from '@ngrx/store';
 
-import { TodoActions, TodoActionTypes } from '../actions/todo.action';
+import { TaskActions, TodoActions } from '../actions';
 import { Todo } from '../models';
 
 export const todoFeatureKey = 'todo';
@@ -19,9 +19,31 @@ const initialState: State = {
   todos: [],
 };
 
-export function reducer(state = initialState, action: any): State {
+export const reducer = createReducer(
+  initialState,
+  on(TaskActions.currentTaskDetailsPageEnter, (state, { id }) => ({
+    ...state,
+    selectedId: id,
+  })),
+  on(TodoActions.databaseListenForDataStart, (state) => ({
+    ...state,
+    loading: true,
+  })),
+  on(TodoActions.databaseListenForDataStop, () => ({
+    ...initialState,
+  })),
+  on(TodoActions.loadSuccess, (_, { currentTasks }) => ({
+    selectedId: null,
+    loaded: true,
+    loading: false,
+    todos: currentTasks,
+  }))
+);
+
+/*
+export function reducer(state = initialState, action: Action): State {
   switch (action.type) {
-    case TodoActionTypes.DATABASE_LISTEN_FOR_DATA_START: {
+    case TodoActions.databaseListenForDataStart.type: {
       return {
         ...state,
         loading: true,
@@ -32,13 +54,13 @@ export function reducer(state = initialState, action: any): State {
       return { ...state, selectedId: action.id };
     }
 
-    case TodoActionTypes.DATABASE_LISTEN_FOR_DATA_STOP: {
+    case TodoActions.databaseListenForDataStop.type: {
       return {
         ...initialState,
       };
     }
 
-    case TodoActionTypes.LoadSuccess: {
+    case TodoActions.loadSuccess.type: {
       const items: Todo[] = action.payload;
 
       return {
@@ -54,6 +76,7 @@ export function reducer(state = initialState, action: any): State {
     }
   }
 }
+*/
 
 // =========
 // Selectors

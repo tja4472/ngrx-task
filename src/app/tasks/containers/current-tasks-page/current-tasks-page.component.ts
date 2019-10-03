@@ -35,7 +35,7 @@ export class CurrentTasksPageComponent implements OnInit {
   }
 
   reorderItems(ids: string[]) {
-    this.store.dispatch(new TodoActions.ReorderListA({ ids }));
+    this.store.dispatch(TodoActions.reorderList({ ids }));
   }
 
   viewClearCompleted() {

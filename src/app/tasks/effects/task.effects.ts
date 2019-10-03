@@ -195,7 +195,7 @@ export class TaskEffects {
     ofType(AuthApiActions.autoSignInHaveUser, AuthApiActions.setUserListId),
     withLatestFrom(this.store.select(authQuery.selectAuthUser)),
     switchMap(([action, user]) => [
-      new TodoActions.DatabaseListenForDataStart({
+      TodoActions.databaseListenForDataStart({
         todoListId: user.todoListId,
         userId: user.id,
       }),

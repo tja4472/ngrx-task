@@ -7,7 +7,7 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { TaskActions, TodoActions } from '@app/tasks/actions';
+import { TaskActions } from '@app/tasks/actions';
 import { Todo } from '@app/tasks/models';
 import { TaskSelectors } from '@app/tasks/selectors';
 
@@ -67,10 +67,6 @@ export class CurrentTasksDetailPageComponent implements OnInit {
     console.log('viewSaved>', todo);
     this.store.dispatch(TaskActions.currentTaskDetailsPageSaved({ todo }));
     this.goBack(todo.id);
-  }
-
-  reorderItems(ids: string[]) {
-    this.store.dispatch(new TodoActions.ReorderListA({ ids }));
   }
 
   onIncompleteToDo(toDo: Todo) {

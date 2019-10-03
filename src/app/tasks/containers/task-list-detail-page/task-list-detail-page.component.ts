@@ -7,7 +7,7 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { TaskActions, TodoActions } from '@app/tasks/actions';
+import { TaskActions } from '@app/tasks/actions';
 import { TodoListsItem } from '@app/tasks/models';
 import { TaskSelectors } from '@app/tasks/selectors';
 
@@ -64,13 +64,5 @@ export class TaskListDetailPageComponent implements OnInit {
   viewSaved(todoCompleted: TodoListsItem) {
     this.store.dispatch(TaskActions.taskListDetailPageSaved({ todoCompleted }));
     this.goBack(todoCompleted.id);
-  }
-
-  reorderItems(ids: string[]) {
-    this.store.dispatch(new TodoActions.ReorderListA({ ids }));
-  }
-
-  onIncompleteToDo(toDo: TodoListsItem) {
-    // this.store.dispatch(new IncompleteToDo(toDo));
   }
 }

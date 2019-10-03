@@ -67,12 +67,4 @@ export class CompletedTasksDetailPageComponent implements OnInit {
     );
     this.goBack(todoCompleted.id);
   }
-
-  reorderItems(ids: string[]) {
-    this.store.dispatch(new TodoActions.ReorderListA({ ids }));
-  }
-
-  onIncompleteToDo(toDo: TodoCompleted) {
-    // this.store.dispatch(new IncompleteToDo(toDo));
-  }
 }
