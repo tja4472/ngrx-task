@@ -11,8 +11,7 @@ import { AuthApiActions } from '@app/auth/actions';
 import { authQuery } from '@app/auth/selectors/auth.selectors';
 import { TaskSelectors } from '@app/tasks/selectors';
 
-import { TodoActions, TodoCompletedActions } from '../actions';
-import * as TaskActions from '../actions/task.actions';
+import { TaskActions, TodoActions, TodoCompletedActions } from '../actions';
 import { Fb1DataService } from '../services/fb1.data.service';
 import { TodoCompletedDataService } from '../services/todo-completed.data.service';
 import { TodoListsDataService } from '../services/todo-lists.data.service';
