@@ -1,9 +1,6 @@
-import { TaskActions } from '@app/tasks/actions';
+import { createReducer, on } from '@ngrx/store';
 
-import {
-  TodoListsActions,
-  TodoListsActionTypes,
-} from '../actions/todo-lists.action';
+import { TaskActions, TodoListsActions } from '../actions';
 import { TodoListsItem } from '../models';
 
 export const todoListsFeatureKey = 'todo-lists';
@@ -24,6 +21,29 @@ const initialState: State = {
   todoLists: [],
 };
 
+export const reducer = createReducer(
+  initialState,
+  on(TaskActions.taskListDetailPageEnter, (state, { id }) => ({
+    ...state,
+    selectedId: id,
+  })),
+  on(TodoListsActions.listenForData, (state) => ({
+    ...state,
+    loading: true,
+  })),
+  on(TodoListsActions.unlistenForData, () => ({
+    ...initialState,
+  })),
+  on(TodoListsActions.loadSuccess, (_, { items }) => ({
+    selectedId: null,
+    loaded: true,
+    loading: false,
+    selectedListId: 'ZZZdefault-list',
+    todoLists: items,
+  }))
+);
+
+/*
 export function reducer(state = initialState, action: any): State {
   switch (action.type) {
     case TodoListsActionTypes.ListenForData: {
@@ -61,6 +81,7 @@ export function reducer(state = initialState, action: any): State {
     }
   }
 }
+*/
 
 // =========
 // Selectors
