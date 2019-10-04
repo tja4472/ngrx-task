@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 
-import { EMPTY } from 'rxjs';
-import { map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
+import { EMPTY, of } from 'rxjs';
+import { concatMap, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 
 import { authQuery } from '@app/auth/selectors/auth.selectors';
 
@@ -46,7 +46,11 @@ export class TodoEffects {
   @Effect({ dispatch: false })
   reorderList$ = this.actions$.pipe(
     ofType(TodoActions.reorderList),
-    withLatestFrom(this.store.select(authQuery.selectAuthUser)),
+    concatMap((action) =>
+      of(action).pipe(
+        withLatestFrom(this.store.select(authQuery.selectAuthUser))
+      )
+    ),
     tap(([action, user]) => {
       this.dataService.reorderItems(action.ids, user.todoListId, user.id);
     })

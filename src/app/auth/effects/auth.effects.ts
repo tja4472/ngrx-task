@@ -7,6 +7,7 @@ import { Store } from '@ngrx/store';
 import { defer, from, Observable, of } from 'rxjs';
 import {
   catchError,
+  concatMap,
   exhaustMap,
   map,
   tap,
@@ -104,7 +105,11 @@ export class AuthEffects {
   @Effect({ dispatch: false })
   setUserListId$ = this.actions$.pipe(
     ofType(AuthApiActions.setUserListId),
-    withLatestFrom(this.store.select(authQuery.selectAuthUser)),
+    concatMap((action) =>
+      of(action).pipe(
+        withLatestFrom(this.store.select(authQuery.selectAuthUser))
+      )
+    ),
     tap(([action, user]) => {
       const saveUser = { ...user, todoListId: action.listId };
 
