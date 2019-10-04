@@ -1,9 +1,6 @@
-import { TaskActions } from '@app/tasks/actions';
+import { createReducer, on } from '@ngrx/store';
 
-import {
-  TodoCompletedActions,
-  TodoCompletedActionTypes,
-} from '../actions/todo-completed.action';
+import { TaskActions, TodoCompletedActions } from '../actions';
 import { TodoCompleted } from '../models';
 
 export const todoCompletedFeatureKey = 'todo-completed';
@@ -22,9 +19,31 @@ const initialState: State = {
   todoCompletedList: [],
 };
 
+export const reducer = createReducer(
+  initialState,
+  on(TaskActions.completedTaskDetailsPageEnter, (state, { id }) => ({
+    ...state,
+    selectedId: id,
+  })),
+  on(TodoCompletedActions.databaseListenForDataStart, (state) => ({
+    ...state,
+    loading: true,
+  })),
+  on(TodoCompletedActions.databaseListenForDataStop, () => ({
+    ...initialState,
+  })),
+  on(TodoCompletedActions.loadSuccess, (_, { completedTasks }) => ({
+    selectedId: null,
+    loaded: true,
+    loading: false,
+    todoCompletedList: completedTasks,
+  }))
+);
+
+/*
 export function reducer(state = initialState, action: any): State {
   switch (action.type) {
-    case TodoCompletedActionTypes.DATABASE_LISTEN_FOR_DATA_START: {
+    case TodoCompletedActionTypes.AAADATABASE_LISTEN_FOR_DATA_START: {
       return {
         ...state,
         loading: true,
@@ -35,7 +54,7 @@ export function reducer(state = initialState, action: any): State {
       return { ...state, selectedId: action.id };
     }
 
-    case TodoCompletedActionTypes.LoadSuccess: {
+    case TodoCompletedActionTypes.AAALoadSuccess: {
       const items: TodoCompleted[] = action.payload;
 
       return {
@@ -51,6 +70,7 @@ export function reducer(state = initialState, action: any): State {
     }
   }
 }
+*/
 
 // =========
 // Selectors

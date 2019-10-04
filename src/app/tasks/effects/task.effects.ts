@@ -199,7 +199,7 @@ export class TaskEffects {
         todoListId: user.todoListId,
         userId: user.id,
       }),
-      new TodoCompletedActions.DatabaseListenForDataStart({
+      TodoCompletedActions.databaseListenForDataStart({
         todoListId: user.todoListId,
         userId: user.id,
       }),
