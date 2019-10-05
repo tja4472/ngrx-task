@@ -32,8 +32,9 @@ export const reducer = createReducer(
   on(TodoActions.databaseListenForDataStop, () => ({
     ...initialState,
   })),
-  on(TodoActions.loadSuccess, (_, { currentTasks }) => ({
-    selectedId: null,
+  on(TodoActions.loadSuccess, (state, { currentTasks }) => ({
+    // selectedId: null,
+    ...state,
     loaded: true,
     loading: false,
     todos: currentTasks,

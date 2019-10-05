@@ -11,7 +11,12 @@ import { AuthApiActions } from '@app/auth/actions';
 import { authQuery } from '@app/auth/selectors/auth.selectors';
 import { TaskSelectors } from '@app/tasks/selectors';
 
-import { TaskActions, TodoActions, TodoCompletedActions } from '../actions';
+import {
+  CurrentTaskNewItemPageActions,
+  TaskActions,
+  TodoActions,
+  TodoCompletedActions,
+} from '../actions';
 import { Fb1DataService } from '../services/fb1.data.service';
 import { TodoCompletedDataService } from '../services/todo-completed.data.service';
 import { TodoListsDataService } from '../services/todo-lists.data.service';
@@ -143,7 +148,7 @@ export class TaskEffects {
   newCurrentTask$ = this.actions$.pipe(
     ofType(TaskActions.currentTasksPageNewCurrentTask),
     tap(() => {
-      this.router.navigate(['/edit', 'new']);
+      this.router.navigate(['/new']);
     })
   );
 
@@ -165,6 +170,7 @@ export class TaskEffects {
   @Effect({ dispatch: false })
   saveCurrentTodo$ = this.actions$.pipe(
     ofType(
+      CurrentTaskNewItemPageActions.Saved,
       TaskActions.currentTaskDetailsPageSaved,
       TaskActions.currentTasksPageSaveItem
     ),

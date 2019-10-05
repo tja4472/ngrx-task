@@ -41,6 +41,7 @@ export const getSelectedCurrentTask = createSelector(
 export const getSelectedOrNewCurrentTask = createSelector(
   getSelectedCurrentTask,
   (task) => {
+    console.log('#### getSelectedOrNewCurrentTask ####', task);
     if (!!!task) {
       // task undefined - new item.
       return newTodo();

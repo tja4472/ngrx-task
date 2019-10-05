@@ -5,6 +5,7 @@ import {
   CompletedTasksDetailPageComponent,
   CompletedTasksPageComponent,
   CurrentTasksDetailPageComponent,
+  CurrentTasksNewItemPageComponent,
   CurrentTasksPageComponent,
   TaskListDetailPageComponent,
   TaskListsPageComponent,
@@ -18,6 +19,10 @@ const routes: Routes = [
   {
     path: 'edit/:id',
     component: CurrentTasksDetailPageComponent,
+  },
+  {
+    path: 'new',
+    component: CurrentTasksNewItemPageComponent,
   },
   {
     path: 'completed',
