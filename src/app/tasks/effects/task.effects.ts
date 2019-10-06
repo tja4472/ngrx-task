@@ -148,7 +148,7 @@ export class TaskEffects {
   newCurrentTask$ = this.actions$.pipe(
     ofType(TaskActions.currentTasksPageNewCurrentTask),
     tap(() => {
-      this.router.navigate(['/new']);
+      this.router.navigate(['/tasks/current/new']);
     })
   );
 

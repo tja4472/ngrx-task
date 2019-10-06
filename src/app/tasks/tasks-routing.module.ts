@@ -15,7 +15,11 @@ import { CurrentTaskGuardService } from './services/current-task-guard.service';
 
 const routes: Routes = [
   {
-    path: 'edit/:id',
+    path: 'current',
+    component: CurrentTasksPageComponent,
+  },
+  {
+    path: 'current/edit/:id',
     component: CurrentTasksDetailPageComponent,
     canActivate: [CurrentTaskGuardService],
     /*    
@@ -25,7 +29,7 @@ const routes: Routes = [
 */
   },
   {
-    path: 'new',
+    path: 'current/new',
     component: CurrentTasksNewItemPageComponent,
   },
   {
@@ -36,6 +40,7 @@ const routes: Routes = [
     path: 'completed/edit/:id',
     component: CompletedTasksDetailPageComponent,
   },
+
   {
     path: 'lists',
     component: TaskListsPageComponent,
@@ -44,10 +49,12 @@ const routes: Routes = [
     path: 'lists/edit/:id',
     component: TaskListDetailPageComponent,
   },
+  /*  
   {
     path: '',
     component: CurrentTasksPageComponent,
   },
+*/
 ];
 
 @NgModule({

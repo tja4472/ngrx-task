@@ -25,7 +25,7 @@ export class CurrentTasksDetailPageComponent implements OnInit {
   ngOnInit() {}
 
   private goBack(taskId: string): void {
-    this.router.navigate(['/tasks', { id: taskId }]);
+    this.router.navigate(['/tasks/current', { id: taskId }]);
   }
 
   viewCancelled(todo: Todo): void {

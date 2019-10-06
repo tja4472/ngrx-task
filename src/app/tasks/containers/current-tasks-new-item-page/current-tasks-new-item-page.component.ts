@@ -22,7 +22,7 @@ export class CurrentTasksNewItemPageComponent implements OnInit {
   }
 
   private goBack(): void {
-    this.router.navigate(['/tasks']);
+    this.router.navigate(['/tasks/current']);
   }
 
   viewCancelled(todo: Todo): void {
