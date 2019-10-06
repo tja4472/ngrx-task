@@ -1,0 +1,87 @@
+import { Injectable } from '@angular/core';
+import {
+  ActivatedRouteSnapshot,
+  Resolve,
+  Router,
+  RouterStateSnapshot,
+} from '@angular/router';
+
+import { select, Store } from '@ngrx/store';
+
+import { EMPTY, Observable, of } from 'rxjs';
+import { concatMap, filter, map, switchMap, take } from 'rxjs/operators';
+
+import { TaskSelectors } from '@app/tasks/selectors';
+
+import { newTodo, Todo } from '../models';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class AaaResolverService implements Resolve<Todo> {
+  constructor(private router: Router, private store: Store<any>) {}
+
+  waitForCurrentTasksToLoad(): Observable<boolean> {
+    return this.store.pipe(
+      select(TaskSelectors.getCurrentTasksLoaded),
+      filter((loaded) => loaded),
+      take(1)
+    );
+  }
+
+  getCurrentTask(id: string): Observable<Todo> {
+    return this.store.pipe(
+      select(TaskSelectors.getAllCurrentTasks),
+      // map(entities => !!entities[id]),
+      // filter(todos => todos.id === id),
+      map((todos) => todos.filter((a) => a.id === id)[0]),
+      take(1)
+    );
+  }
+
+  /*
+  hasBookInStore(id: string): Observable<boolean> {
+    return this.store.pipe(
+      select(fromBooks.getBookEntities),
+      map(entities => !!entities[id]),
+      take(1)
+    );
+  }
+  */
+
+  resolve(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Observable<Todo> | Observable<never> {
+    const id = route.paramMap.get('id');
+
+    //   return this.store.pipe(
+    //     select(TaskSelectors.getSelectedCurrentTask),);
+
+    console.log('#### resolve ####');
+    console.log('id>', id);
+
+    // return of(newTodo());
+    return this.waitForCurrentTasksToLoad().pipe(
+      switchMap(() => this.getCurrentTask(id)),
+      concatMap((a) => {
+        if (a) {
+          return of(a);
+        } else {
+          // this.router.navigate(['/404'], { skipLocationChange: true });
+          return EMPTY;
+        }
+      })
+    );
+
+    /*
+    return this.store.pipe(
+      select(TaskSelectors.getAAALoaded),
+      filter((loaded) => loaded),
+      take(1),
+      switchMap(() => select(TaskSelectors.getSelectedCurrentTask)),
+      take(1)
+    );
+*/
+  }
+}

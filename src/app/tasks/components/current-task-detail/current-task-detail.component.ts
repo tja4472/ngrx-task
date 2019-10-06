@@ -1,12 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-  OnChanges,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 import { Todo } from '@app/tasks/models';
@@ -19,14 +11,13 @@ import { CurrentTaskDetailPresenter } from './current-task-detail.presenter';
   styleUrls: ['./current-task-detail.component.css'],
   viewProviders: [CurrentTaskDetailPresenter],
 })
-export class CurrentTaskDetailComponent implements OnChanges, OnInit {
+export class CurrentTaskDetailComponent implements OnInit {
   // tslint:disable-next-line: variable-name
   private _todo = null;
 
   @Input()
   set todo(todo: Todo) {
     this._todo = todo;
-    console.log('#### set>', todo);
     this.presenter.init(todo);
   }
   get todo(): Todo {
@@ -43,24 +34,11 @@ export class CurrentTaskDetailComponent implements OnChanges, OnInit {
     return this.presenter.form;
   }
 
-  get isNew(): boolean {
-    return this.presenter.isNew;
-  }
-
   constructor(private presenter: CurrentTaskDetailPresenter) {}
 
   ngOnInit() {
-    console.log('ngOnInit>', this.todo);
+    // console.log('ngOnInit>', this.todo);
     // this.presenter.init(this.todo);
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    /*
-    console.log('ngOnChanges>', changes);
-    const x:Todo = changes.todo.currentValue;
-    console.log('ngOnChanges:x>', x);
-    this.presenter.init(x);
-    */
   }
 
   cancelClick() {

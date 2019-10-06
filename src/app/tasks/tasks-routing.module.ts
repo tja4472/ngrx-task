@@ -10,15 +10,19 @@ import {
   TaskListDetailPageComponent,
   TaskListsPageComponent,
 } from './containers';
+import { AaaResolverService } from './services/aaa-resolver.service';
+import { CurrentTaskGuardService } from './services/current-task-guard.service';
 
 const routes: Routes = [
   {
-    path: '',
-    component: CurrentTasksPageComponent,
-  },
-  {
     path: 'edit/:id',
     component: CurrentTasksDetailPageComponent,
+    canActivate: [CurrentTaskGuardService],
+    /*    
+    resolve: {
+      crisis: AaaResolverService
+    }
+*/
   },
   {
     path: 'new',
@@ -39,6 +43,10 @@ const routes: Routes = [
   {
     path: 'lists/edit/:id',
     component: TaskListDetailPageComponent,
+  },
+  {
+    path: '',
+    component: CurrentTasksPageComponent,
   },
 ];
 

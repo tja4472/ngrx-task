@@ -41,3 +41,20 @@ export function logger(reducer: ActionReducer<State>): ActionReducer<State> {
 export const metaReducers: MetaReducer<State>[] = !environment.production
   ? [logger]
   : [];
+
+export const selectRouter = createFeatureSelector<
+  State,
+  fromRouter.RouterReducerState<any>
+>(fromRouter.DEFAULT_ROUTER_FEATURENAME);
+
+export const {
+  selectQueryParams, // select the current route query params
+  selectQueryParam, // factory function to select a query param
+  selectRouteParams, // select the current route params
+  selectRouteParam, // factory function to select a route param
+  selectRouteData, // select the current route data
+  selectUrl, // select the current url
+} = fromRouter.getSelectors(selectRouter);
+
+export const selectRouteId = selectRouteParam('id');
+export const selectStatus = selectQueryParam('status');

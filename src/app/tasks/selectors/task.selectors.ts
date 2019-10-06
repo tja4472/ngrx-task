@@ -1,5 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
+import { selectRouteId } from '@app/reducers';
+
 import { newTodo, newTodoListsItem } from '../models';
 import * as fromTask from '../reducers';
 
@@ -36,6 +38,19 @@ export const getSelectedCompletedTask = createSelector(
 export const getSelectedCurrentTask = createSelector(
   getTaskState,
   TodoSelectors.getSelectedItem
+);
+
+export const getCurrentTasksLoaded = createSelector(
+  getTaskState,
+  TodoSelectors.getLoaded
+);
+
+export const getCurrentTaskFromRoute = createSelector(
+  getAllCurrentTasks,
+  selectRouteId,
+  (tasks, id) => {
+    return tasks.find((a) => a.id === id);
+  }
 );
 
 export const getSelectedOrNewCurrentTask = createSelector(

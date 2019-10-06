@@ -11,6 +11,11 @@ export const getAllTodo = createSelector(
   (state) => state.todos
 );
 
+export const getLoaded = createSelector(
+  getTodoState,
+  (state) => state.loaded
+);
+
 export const getSelectedId = createSelector(
   getTodoState,
   (state) => state.selectedId

@@ -1,11 +1,9 @@
-import { Location } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 import { select, Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 import { TaskActions } from '@app/tasks/actions';
 import { Todo } from '@app/tasks/models';
@@ -20,35 +18,11 @@ import { TaskSelectors } from '@app/tasks/selectors';
 export class CurrentTasksDetailPageComponent implements OnInit {
   task$: Observable<Todo>;
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private store: Store<any>
-  ) {
-    this.route.paramMap
-      .pipe(
-        map((params) =>
-          TaskActions.currentTaskDetailsPageEnter({ id: params.get('id') })
-        )
-      )
-      .subscribe(this.store);
-    /*    
-    this.route.paramMap.subscribe((params) => {
-      this.id = params.get('id');
-    });
-*/
-
-    /*
-    this.task$ = 
-*/
-
-    // this.task$ = store.pipe(select(TaskSelectors.getSelectedCurrentTask));
-    this.task$ = store.pipe(select(TaskSelectors.getSelectedOrNewCurrentTask));
+  constructor(private router: Router, private store: Store<any>) {
+    this.task$ = store.pipe(select(TaskSelectors.getCurrentTaskFromRoute));
   }
 
-  ngOnInit() {
-    // this.store.dispatch(TaskActions.enterCurrentTasksPage());
-  }
+  ngOnInit() {}
 
   private goBack(taskId: string): void {
     this.router.navigate(['/tasks', { id: taskId }]);
@@ -64,12 +38,7 @@ export class CurrentTasksDetailPageComponent implements OnInit {
   }
 
   viewSaved(todo: Todo) {
-    console.log('viewSaved>', todo);
     this.store.dispatch(TaskActions.currentTaskDetailsPageSaved({ todo }));
     this.goBack(todo.id);
-  }
-
-  onIncompleteToDo(toDo: Todo) {
-    // this.store.dispatch(new IncompleteToDo(toDo));
   }
 }
