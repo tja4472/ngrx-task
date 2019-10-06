@@ -50,11 +50,6 @@ export const completedTaskDetailsPageRemoved = createAction(
 //
 
 // currentTaskDetails
-export const currentTaskDetailsPageEnter = createAction(
-  '[Current Task Details Page] Enter',
-  props<{ id: string }>()
-);
-
 export const currentTaskDetailsPageSaved = createAction(
   '[Current Task Details Page] Saved',
   props<{ todo: Todo }>()

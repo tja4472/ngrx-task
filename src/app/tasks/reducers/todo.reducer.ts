@@ -21,10 +21,6 @@ const initialState: State = {
 
 export const reducer = createReducer(
   initialState,
-  on(TaskActions.currentTaskDetailsPageEnter, (state, { id }) => ({
-    ...state,
-    selectedId: id,
-  })),
   on(TodoActions.databaseListenForDataStart, (state) => ({
     ...state,
     loading: true,
