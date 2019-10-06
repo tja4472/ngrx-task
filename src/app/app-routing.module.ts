@@ -4,11 +4,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { NotFoundPageComponent } from './core/containers';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
   {
     path: 'tasks',
     loadChildren: () => import('./tasks').then((mod) => mod.TasksModule),
   },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   {
     path: '**',
     component: NotFoundPageComponent,
