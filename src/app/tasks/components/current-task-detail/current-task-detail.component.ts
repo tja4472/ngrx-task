@@ -13,19 +13,21 @@ import { CurrentTaskDetailPresenter } from './current-task-detail.presenter';
 })
 export class CurrentTaskDetailComponent implements OnInit {
   // tslint:disable-next-line: variable-name
+
+  /*
   private _todo = null;
 
   @Input()
   set todo(todo: Todo) {
+    console.log('##########CurrentTaskDetailComponent');
     this._todo = todo;
     this.presenter.init(todo);
   }
   get todo(): Todo {
     return this._todo;
   }
-
-  // @Input() todo: Todo;
-
+  */
+  @Input() todo: Todo;
   @Output() cancel = new EventEmitter<Todo>();
   @Output() remove = new EventEmitter<Todo>();
   @Output() checkout = new EventEmitter<Todo>();
@@ -37,8 +39,7 @@ export class CurrentTaskDetailComponent implements OnInit {
   constructor(private presenter: CurrentTaskDetailPresenter) {}
 
   ngOnInit() {
-    // console.log('ngOnInit>', this.todo);
-    // this.presenter.init(this.todo);
+    this.presenter.init(this.todo);
   }
 
   cancelClick() {

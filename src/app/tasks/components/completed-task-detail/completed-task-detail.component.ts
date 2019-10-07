@@ -21,14 +21,9 @@ export class CompletedTaskDetailComponent implements OnInit {
     return this.presenter.form;
   }
 
-  get isNew(): boolean {
-    return this.presenter.isNew;
-  }
-
   constructor(private presenter: CompletedTaskDetailPresenter) {}
 
   ngOnInit() {
-    console.log('ngOnInit>', this.completedTask);
     this.presenter.init(this.completedTask);
   }
 
@@ -37,12 +32,10 @@ export class CompletedTaskDetailComponent implements OnInit {
   }
 
   removeClick() {
-    console.log('removeClick>', this.completedTask);
     this.remove.emit(this.completedTask);
   }
 
   onSubmit() {
-    console.log('onSubmit>', this.completedTask);
     const todoData = this.presenter.checkout();
     this.checkout.emit(todoData);
   }

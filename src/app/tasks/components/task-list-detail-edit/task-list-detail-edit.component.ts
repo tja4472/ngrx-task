@@ -3,15 +3,15 @@ import { FormGroup } from '@angular/forms';
 
 import { TodoListsItem } from '@app/tasks/models';
 
-import { TaskListDetailPresenter } from './task-list-detail.presenter';
+import { TaskListDetailPresenter } from './task-list-detail-edit.presenter';
 
 @Component({
-  selector: 'app-task-list-detail',
-  templateUrl: './task-list-detail.component.html',
-  styleUrls: ['./task-list-detail.component.css'],
+  selector: 'app-task-list-detail-edit',
+  templateUrl: './task-list-detail-edit.component.html',
+  styleUrls: ['./task-list-detail-edit.component.css'],
   viewProviders: [TaskListDetailPresenter],
 })
-export class TaskListDetailComponent implements OnInit {
+export class TaskListDetailEditComponent implements OnInit {
   @Input() completedTask: TodoListsItem;
   @Output() cancel = new EventEmitter<TodoListsItem>();
   @Output() remove = new EventEmitter<TodoListsItem>();

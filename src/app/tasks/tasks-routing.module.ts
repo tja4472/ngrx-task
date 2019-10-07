@@ -7,54 +7,65 @@ import {
   CurrentTasksDetailPageComponent,
   CurrentTasksNewItemPageComponent,
   CurrentTasksPageComponent,
-  TaskListDetailPageComponent,
+  TaskListDetailEditPageComponent,
   TaskListsPageComponent,
 } from './containers';
-import { AaaResolverService } from './services/aaa-resolver.service';
+import { CompletedTaskGuardService } from './services/completed-task-guard.service';
 import { CurrentTaskGuardService } from './services/current-task-guard.service';
+import { TaskListsGuardService } from './services/task-lists-guard.service';
 
 const routes: Routes = [
   {
-    path: 'current',
-    component: CurrentTasksPageComponent,
+    path: 'tasks',
+    children: [
+      {
+        path: 'current',
+        children: [
+          {
+            path: '',
+            component: CurrentTasksPageComponent,
+          },
+          {
+            path: 'edit/:id',
+            component: CurrentTasksDetailPageComponent,
+            canActivate: [CurrentTaskGuardService],
+          },
+          {
+            path: 'new',
+            component: CurrentTasksNewItemPageComponent,
+          },
+        ],
+      },
+      {
+        path: 'completed',
+        children: [
+          {
+            path: '',
+            component: CompletedTasksPageComponent,
+          },
+          {
+            path: 'edit/:id',
+            component: CompletedTasksDetailPageComponent,
+            canActivate: [CompletedTaskGuardService],
+          },
+        ],
+      },
+      {
+        path: 'lists',
+        children: [
+          {
+            path: '',
+            component: TaskListsPageComponent,
+          },
+          {
+            path: 'edit/:id',
+            component: TaskListDetailEditPageComponent,
+            canActivate: [TaskListsGuardService],
+          },
+        ],
+      },
+    ],
   },
-  {
-    path: 'current/edit/:id',
-    component: CurrentTasksDetailPageComponent,
-    canActivate: [CurrentTaskGuardService],
-    /*    
-    resolve: {
-      crisis: AaaResolverService
-    }
-*/
-  },
-  {
-    path: 'current/new',
-    component: CurrentTasksNewItemPageComponent,
-  },
-  {
-    path: 'completed',
-    component: CompletedTasksPageComponent,
-  },
-  {
-    path: 'completed/edit/:id',
-    component: CompletedTasksDetailPageComponent,
-  },
-
-  {
-    path: 'lists',
-    component: TaskListsPageComponent,
-  },
-  {
-    path: 'lists/edit/:id',
-    component: TaskListDetailPageComponent,
-  },
-  /*  
-  {
-    path: '',
-    component: CurrentTasksPageComponent,
-  },
-*/
 ];
 
 @NgModule({

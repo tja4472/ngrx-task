@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, Router } from '@angular/router';
 
 import { select, Store } from '@ngrx/store';
 
@@ -11,26 +11,26 @@ import { TaskSelectors } from '@app/tasks/selectors';
 @Injectable({
   providedIn: 'root',
 })
-export class CurrentTaskGuardService implements CanActivate {
+export class TaskListsGuardService implements CanActivate {
   constructor(private store: Store<any>) {}
 
   canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {
-    return this.waitForCurrentTasksToLoad().pipe(
-      switchMap(() => this.hasCurrentTask())
+    return this.waitForTaskListsToLoad().pipe(
+      switchMap(() => this.hasTaskList())
     );
   }
 
-  private hasCurrentTask(): Observable<boolean> {
+  private hasTaskList(): Observable<boolean> {
     return this.store.pipe(
-      select(TaskSelectors.selectCurrentTaskFromRoute),
+      select(TaskSelectors.selectTaskListFromRoute),
       map((todo) => todo !== undefined),
       take(1)
     );
   }
 
-  private waitForCurrentTasksToLoad(): Observable<boolean> {
+  private waitForTaskListsToLoad(): Observable<boolean> {
     return this.store.pipe(
-      select(TaskSelectors.getCurrentTasksLoaded),
+      select(TaskSelectors.getTaskListsLoaded),
       filter((loaded) => loaded),
       take(1)
     );

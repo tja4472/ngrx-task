@@ -12,12 +12,12 @@ import { TodoListsItem } from '@app/tasks/models';
 import { TaskSelectors } from '@app/tasks/selectors';
 
 @Component({
-  selector: 'app-task-list-detail-page',
-  templateUrl: './task-list-detail-page.component.html',
-  styleUrls: ['./task-list-detail-page.component.css'],
+  selector: 'app-task-list-detail-edit-page',
+  templateUrl: './task-list-detail-edit-page.component.html',
+  styleUrls: ['./task-list-detail-edit-page.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TaskListDetailPageComponent implements OnInit {
+export class TaskListDetailEditPageComponent implements OnInit {
   id: string;
   task$: Observable<TodoListsItem>;
 
@@ -47,7 +47,7 @@ export class TaskListDetailPageComponent implements OnInit {
   }
 
   private goBack(taskId: string): void {
-    this.router.navigate(['/lists', { id: taskId }]);
+    this.router.navigate(['tasks/lists', { id: taskId }]);
   }
 
   viewCancelled(todoCompleted: TodoListsItem): void {

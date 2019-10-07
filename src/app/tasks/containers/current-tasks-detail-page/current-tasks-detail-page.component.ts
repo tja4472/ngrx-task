@@ -19,7 +19,7 @@ export class CurrentTasksDetailPageComponent implements OnInit {
   task$: Observable<Todo>;
 
   constructor(private router: Router, private store: Store<any>) {
-    this.task$ = store.pipe(select(TaskSelectors.getCurrentTaskFromRoute));
+    this.task$ = store.pipe(select(TaskSelectors.selectCurrentTaskFromRoute));
   }
 
   ngOnInit() {}

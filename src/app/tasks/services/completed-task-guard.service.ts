@@ -11,26 +11,26 @@ import { TaskSelectors } from '@app/tasks/selectors';
 @Injectable({
   providedIn: 'root',
 })
-export class CurrentTaskGuardService implements CanActivate {
+export class CompletedTaskGuardService implements CanActivate {
   constructor(private store: Store<any>) {}
 
   canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {
-    return this.waitForCurrentTasksToLoad().pipe(
-      switchMap(() => this.hasCurrentTask())
+    return this.waitForCompletedTasksToLoad().pipe(
+      switchMap(() => this.hasCompletedTask())
     );
   }
 
-  private hasCurrentTask(): Observable<boolean> {
+  private hasCompletedTask(): Observable<boolean> {
     return this.store.pipe(
-      select(TaskSelectors.selectCurrentTaskFromRoute),
+      select(TaskSelectors.selectCompletedTaskFromRoute),
       map((todo) => todo !== undefined),
       take(1)
     );
   }
 
-  private waitForCurrentTasksToLoad(): Observable<boolean> {
+  private waitForCompletedTasksToLoad(): Observable<boolean> {
     return this.store.pipe(
-      select(TaskSelectors.getCurrentTasksLoaded),
+      select(TaskSelectors.getCompletedTasksLoaded),
       filter((loaded) => loaded),
       take(1)
     );

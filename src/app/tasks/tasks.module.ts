@@ -12,7 +12,7 @@ import {
   CompletedTaskListComponent,
   CurrentTaskListComponent,
   CurrentTaskNewItemComponent,
-  TaskListDetailComponent,
+  TaskListDetailEditComponent,
   TaskListListComponent,
 } from './components';
 import { CurrentTaskDetailComponent } from './components/current-task-detail/current-task-detail.component';
@@ -22,7 +22,7 @@ import {
   CompletedTasksPageComponent,
   CurrentTasksNewItemPageComponent,
   CurrentTasksPageComponent,
-  TaskListDetailPageComponent,
+  TaskListDetailEditPageComponent,
   TaskListsPageComponent,
 } from './containers';
 import { CurrentTasksDetailPageComponent } from './containers/current-tasks-detail-page/current-tasks-detail-page.component';
@@ -40,7 +40,7 @@ export const COMPONENTS = [
   CurrentTaskNewItemComponent,
   CurrentTaskDetailComponent,
   CurrentTaskListItemComponent,
-  TaskListDetailComponent,
+  TaskListDetailEditComponent,
   TaskListListComponent,
 ];
 
@@ -50,7 +50,7 @@ export const CONTAINERS = [
   CurrentTasksNewItemPageComponent,
   CurrentTasksPageComponent,
   CompletedTasksPageComponent,
-  TaskListDetailPageComponent,
+  TaskListDetailEditPageComponent,
   TaskListsPageComponent,
 ];
 

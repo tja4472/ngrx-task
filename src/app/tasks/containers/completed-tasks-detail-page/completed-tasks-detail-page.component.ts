@@ -1,11 +1,9 @@
-import { Location } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 import { select, Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 import { TaskActions, TodoActions } from '@app/tasks/actions';
 import { TodoCompleted } from '@app/tasks/models';
@@ -18,36 +16,16 @@ import { TaskSelectors } from '@app/tasks/selectors';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CompletedTasksDetailPageComponent implements OnInit {
-  id: string;
   task$: Observable<TodoCompleted>;
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private store: Store<any>
-  ) {
-    this.route.paramMap
-      .pipe(
-        map((params) =>
-          TaskActions.completedTaskDetailsPageEnter({ id: params.get('id') })
-        )
-      )
-      .subscribe(this.store);
-    /*    
-    this.route.paramMap.subscribe((params) => {
-      this.id = params.get('id');
-    });
-*/
-
-    this.task$ = store.pipe(select(TaskSelectors.getSelectedCompletedTask));
+  constructor(private router: Router, private store: Store<any>) {
+    this.task$ = store.pipe(select(TaskSelectors.selectCompletedTaskFromRoute));
   }
 
-  ngOnInit() {
-    // this.store.dispatch(TaskActions.enterCurrentTasksPage());
-  }
+  ngOnInit() {}
 
   private goBack(taskId: string): void {
-    this.router.navigate(['/completed', { id: taskId }]);
+    this.router.navigate(['/tasks/completed', { id: taskId }]);
   }
 
   viewCancelled(todoCompleted: TodoCompleted): void {
