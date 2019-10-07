@@ -347,6 +347,9 @@ Apache-2.0
 @ngrx/effects
 MIT
 
+@ngrx/entity
+MIT
+
 @ngrx/router-store
 MIT
 
