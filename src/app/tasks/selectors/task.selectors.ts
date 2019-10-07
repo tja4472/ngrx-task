@@ -35,34 +35,21 @@ export const getSelectedCompletedTask = createSelector(
   TodoCompletedSelectors.getSelectedItem
 );
 
-export const getSelectedCurrentTask = createSelector(
-  getTaskState,
-  TodoSelectors.getSelectedItem
-);
-
 export const getCurrentTasksLoaded = createSelector(
   getTaskState,
   TodoSelectors.getLoaded
 );
 
-export const getCurrentTaskFromRoute = createSelector(
-  getAllCurrentTasks,
-  selectRouteId,
-  (tasks, id) => {
-    return tasks.find((a) => a.id === id);
-  }
+export const getCurrentTasksEntities = createSelector(
+  getTaskState,
+  TodoSelectors.getEntities
 );
 
-export const getSelectedOrNewCurrentTask = createSelector(
-  getSelectedCurrentTask,
-  (task) => {
-    console.log('#### getSelectedOrNewCurrentTask ####', task);
-    if (!!!task) {
-      // task undefined - new item.
-      return newTodo();
-    }
-
-    return task;
+export const getCurrentTaskFromRoute = createSelector(
+  getCurrentTasksEntities,
+  selectRouteId,
+  (tasks, id) => {
+    return tasks[id];
   }
 );
 
@@ -71,12 +58,6 @@ export const getAllTaskLists = createSelector(
   TodoListsSelectors.getAllTodoLists
 );
 
-/*
-export const getSelectedListId = createSelector(
-  getTaskState,
-  TodoListsSelectors.getSelectedListId
-);
-*/
 export const getSelectedTaskList = createSelector(
   getTaskState,
   TodoListsSelectors.getSelectedItem

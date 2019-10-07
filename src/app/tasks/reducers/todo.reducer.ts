@@ -1,25 +1,25 @@
-import { createReducer, on } from '@ngrx/store';
+import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
+import { Action, createReducer, on } from '@ngrx/store';
 
-import { TaskActions, TodoActions } from '../actions';
+import { TodoActions } from '../actions';
 import { Todo } from '../models';
 
 export const todoFeatureKey = 'todo';
 
-export interface State {
-  selectedId: string;
+export interface State extends EntityState<Todo> {
   loaded: boolean;
   loading: boolean;
-  todos: Todo[];
 }
 
-const initialState: State = {
-  selectedId: null,
+export const adapter: EntityAdapter<Todo> = createEntityAdapter<Todo>();
+
+export const initialState: State = adapter.getInitialState({
+  // additional entity state properties
   loaded: false,
   loading: false,
-  todos: [],
-};
+});
 
-export const reducer = createReducer(
+const currentTaskReducer = createReducer(
   initialState,
   on(TodoActions.databaseListenForDataStart, (state) => ({
     ...state,
@@ -28,56 +28,24 @@ export const reducer = createReducer(
   on(TodoActions.databaseListenForDataStop, () => ({
     ...initialState,
   })),
-  on(TodoActions.loadSuccess, (state, { currentTasks }) => ({
-    // selectedId: null,
-    ...state,
-    loaded: true,
-    loading: false,
-    todos: currentTasks,
-  }))
+  on(TodoActions.loadSuccess, (state, { currentTasks }) =>
+    adapter.addAll(currentTasks, { ...state, loaded: true, loading: false })
+  )
 );
 
-/*
-export function reducer(state = initialState, action: Action): State {
-  switch (action.type) {
-    case TodoActions.databaseListenForDataStart.type: {
-      return {
-        ...state,
-        loading: true,
-      };
-    }
-
-    case TaskActions.currentTaskDetailsPageEnter.type: {
-      return { ...state, selectedId: action.id };
-    }
-
-    case TodoActions.databaseListenForDataStop.type: {
-      return {
-        ...initialState,
-      };
-    }
-
-    case TodoActions.loadSuccess.type: {
-      const items: Todo[] = action.payload;
-
-      return {
-        selectedId: null,
-        loaded: true,
-        loading: false,
-        todos: items.map((book) => book),
-      };
-    }
-
-    default: {
-      return state;
-    }
-  }
+export function reducer(state: State | undefined, action: Action) {
+  return currentTaskReducer(state, action);
 }
-*/
+
+export const {
+  selectIds,
+  selectEntities,
+  selectAll,
+  selectTotal,
+} = adapter.getSelectors();
 
 // =========
 // Selectors
 // =========
 export const getLoaded = (state: State) => state.loaded;
 export const getLoading = (state: State) => state.loading;
-export const getTodos = (state: State) => state.todos;

@@ -8,23 +8,15 @@ const getTodoState = createFeatureSelector<fromTodo.State>(
 
 export const getAllTodo = createSelector(
   getTodoState,
-  (state) => state.todos
+  fromTodo.selectAll
+);
+
+export const getEntities = createSelector(
+  getTodoState,
+  fromTodo.selectEntities
 );
 
 export const getLoaded = createSelector(
   getTodoState,
   (state) => state.loaded
-);
-
-export const getSelectedId = createSelector(
-  getTodoState,
-  (state) => state.selectedId
-);
-
-export const getSelectedItem = createSelector(
-  getAllTodo,
-  getSelectedId,
-  (todos, selectedId) => {
-    return todos.filter((todo) => todo.id === selectedId)[0];
-  }
 );

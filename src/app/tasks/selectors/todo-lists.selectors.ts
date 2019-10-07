@@ -8,7 +8,17 @@ const getTodoListsState = createFeatureSelector<fromTodoLists.State>(
 
 export const getAllTodoLists = createSelector(
   getTodoListsState,
-  (state) => state.todoLists
+  fromTodoLists.selectAll
+);
+
+export const getEntities = createSelector(
+  getTodoListsState,
+  fromTodoLists.selectEntities
+);
+
+export const getLoaded = createSelector(
+  getTodoListsState,
+  (state) => state.loaded
 );
 
 export const getSelectedListId = createSelector(
