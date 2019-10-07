@@ -62,7 +62,9 @@ export class TaskListDetailEditPageComponent implements OnInit {
   }
 
   viewSaved(todoCompleted: TodoListsItem) {
-    this.store.dispatch(TaskActions.taskListDetailPageSaved({ todoCompleted }));
+    this.store.dispatch(
+      TaskActions.taskListDetailEditPageSaved({ todoCompleted })
+    );
     this.goBack(todoCompleted.id);
   }
 }

@@ -73,7 +73,7 @@ export class TaskEffects {
   newTaskList$ = this.actions$.pipe(
     ofType(TaskActions.TaskListPageNewTaskList),
     tap(() => {
-      this.router.navigate(['/lists/edit', 'new']);
+      this.router.navigate(['/tasks/lists/new']);
     })
   );
 
@@ -92,7 +92,10 @@ export class TaskEffects {
 
   @Effect({ dispatch: false })
   saveTaskList$ = this.actions$.pipe(
-    ofType(TaskActions.taskListDetailPageSaved),
+    ofType(
+      TaskActions.taskListDetailEditPageSaved,
+      TaskActions.taskListDetailNewPageSaved
+    ),
     concatMap((action) =>
       of(action).pipe(
         withLatestFrom(this.store.select(authQuery.selectAuthUser))

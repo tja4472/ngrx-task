@@ -8,6 +8,7 @@ import {
   CurrentTasksNewItemPageComponent,
   CurrentTasksPageComponent,
   TaskListDetailEditPageComponent,
+  TaskListDetailNewPageComponent,
   TaskListsPageComponent,
 } from './containers';
 import { CompletedTaskGuardService } from './services/completed-task-guard.service';
@@ -61,6 +62,10 @@ const routes: Routes = [
             path: 'edit/:id',
             component: TaskListDetailEditPageComponent,
             canActivate: [TaskListsGuardService],
+          },
+          {
+            path: 'new',
+            component: TaskListDetailNewPageComponent,
           },
         ],
       },

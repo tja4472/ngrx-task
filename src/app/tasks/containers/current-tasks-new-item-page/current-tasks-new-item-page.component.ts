@@ -17,9 +17,7 @@ export class CurrentTasksNewItemPageComponent implements OnInit {
 
   constructor(private router: Router, private store: Store<any>) {}
 
-  ngOnInit() {
-    // this.store.dispatch(TaskActions.enterCurrentTasksPage());
-  }
+  ngOnInit() {}
 
   private goBack(): void {
     this.router.navigate(['/tasks/current']);

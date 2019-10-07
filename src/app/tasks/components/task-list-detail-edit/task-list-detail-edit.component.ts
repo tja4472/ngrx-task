@@ -3,13 +3,13 @@ import { FormGroup } from '@angular/forms';
 
 import { TodoListsItem } from '@app/tasks/models';
 
-import { TaskListDetailPresenter } from './task-list-detail-edit.presenter';
+import { TaskListDetailEditPresenter } from './task-list-detail-edit.presenter';
 
 @Component({
   selector: 'app-task-list-detail-edit',
   templateUrl: './task-list-detail-edit.component.html',
   styleUrls: ['./task-list-detail-edit.component.css'],
-  viewProviders: [TaskListDetailPresenter],
+  viewProviders: [TaskListDetailEditPresenter],
 })
 export class TaskListDetailEditComponent implements OnInit {
   @Input() completedTask: TodoListsItem;
@@ -25,7 +25,7 @@ export class TaskListDetailEditComponent implements OnInit {
     return this.presenter.isNew;
   }
 
-  constructor(private presenter: TaskListDetailPresenter) {}
+  constructor(private presenter: TaskListDetailEditPresenter) {}
 
   ngOnInit() {
     console.log('ngOnInit>', this.completedTask);
