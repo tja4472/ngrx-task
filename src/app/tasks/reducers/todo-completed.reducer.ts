@@ -7,7 +7,6 @@ import { TodoCompleted } from '../models';
 export const todoCompletedFeatureKey = 'todo-completed';
 
 export interface State extends EntityState<TodoCompleted> {
-  selectedId: string;
   loaded: boolean;
   loading: boolean;
 }
@@ -18,7 +17,6 @@ export const adapter: EntityAdapter<TodoCompleted> = createEntityAdapter<
 
 export const initialState: State = adapter.getInitialState({
   // additional entity state properties
-  selectedId: null,
   loaded: false,
   loading: false,
 });
@@ -39,7 +37,6 @@ const completedTaskReducer = createReducer(
   on(TodoCompletedActions.loadSuccess, (state, { completedTasks }) =>
     adapter.addAll(completedTasks, {
       ...state,
-      selectedId: null,
       loaded: true,
       loading: false,
     })
@@ -49,16 +46,3 @@ const completedTaskReducer = createReducer(
 export function reducer(state: State | undefined, action: Action) {
   return completedTaskReducer(state, action);
 }
-
-export const {
-  selectIds,
-  selectEntities,
-  selectAll,
-  selectTotal,
-} = adapter.getSelectors();
-
-// =========
-// Selectors
-// =========
-export const getLoaded = (state: State) => state.loaded;
-export const getLoading = (state: State) => state.loading;

@@ -6,30 +6,19 @@ const getTodoCompletedState = createFeatureSelector<fromTodoCompleted.State>(
   fromTodoCompleted.todoCompletedFeatureKey
 );
 
+const { selectEntities, selectAll } = fromTodoCompleted.adapter.getSelectors();
+
 export const getAllTodoCompleted = createSelector(
   getTodoCompletedState,
-  fromTodoCompleted.selectAll
+  selectAll
 );
 
 export const getEntities = createSelector(
   getTodoCompletedState,
-  fromTodoCompleted.selectEntities
+  selectEntities
 );
 
 export const getLoaded = createSelector(
   getTodoCompletedState,
   (state) => state.loaded
-);
-
-export const getSelectedId = createSelector(
-  getTodoCompletedState,
-  (state) => state.selectedId
-);
-
-export const getSelectedItem = createSelector(
-  getAllTodoCompleted,
-  getSelectedId,
-  (completedTodos, selectedId) => {
-    return completedTodos.filter((todo) => todo.id === selectedId)[0];
-  }
 );
