@@ -5,7 +5,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { CurrentTask, ReorderArrayIndexes } from '../models';
+import { CurrentTask } from '../models';
 
 const DATA_COLLECTION = 'current-todos';
 const USERS_COLLECTION = 'users';
@@ -43,21 +43,6 @@ export class TodoDataService {
           })
         )
       );
-  }
-
-  public reorderItemsAndUpdate(
-    indexes: ReorderArrayIndexes,
-    todos: CurrentTask[],
-    todoListId: string,
-    userId: string
-  ): void {
-    const itemsToSave = [...todos];
-    // reorderArray(itemsToSave, indexes);
-    itemsToSave.forEach((t, i) => {
-      this.firestoreCollection(todoListId, userId)
-        .doc(t.id)
-        .update({ index: i });
-    });
   }
 
   public reorderItems(ids: string[], todoListId: string, userId: string): void {
