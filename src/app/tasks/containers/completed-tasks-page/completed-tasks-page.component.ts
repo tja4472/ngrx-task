@@ -30,7 +30,7 @@ export class CompletedTasksPageComponent implements OnInit {
     this.completedTasks$ = this.route.paramMap.pipe(
       switchMap((params) => {
         this.selectedId = params.get('id');
-        return this.store.pipe(select(TaskSelectors.getAllCompletedTasks));
+        return this.store.pipe(select(TaskSelectors.selectCompletedTasksAll));
       })
     );
     this.store.dispatch(TaskActions.enterCompletedTasksPage());

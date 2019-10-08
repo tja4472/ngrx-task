@@ -29,7 +29,7 @@ export class TaskListsPageComponent implements OnInit {
     this.taskLists$ = this.route.paramMap.pipe(
       switchMap((params) => {
         this.selectedId = params.get('id');
-        return this.store.pipe(select(TaskSelectors.getAllTaskLists));
+        return this.store.pipe(select(TaskSelectors.selectTaskListsAll));
       })
     );
     this.store.dispatch(TaskActions.enterTaskListsPage());

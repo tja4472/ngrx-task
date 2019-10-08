@@ -13,68 +13,67 @@ const getTaskState = createFeatureSelector<fromTask.TaskState>(
   fromTask.taskFeatureKey
 );
 
-export const getAllCompletedTasks = createSelector(
+// #region CompletedTasks
+export const selectCompletedTasksAll = createSelector(
   getTaskState,
   TodoCompletedSelectors.getAllTodoCompleted
 );
 
-/*
-export const getAllCurrentTasks = createSelector(
-  getTaskState,
-  (state) => state.todo.todos
-);
-*/
-
-export const getAllCurrentTasks = createSelector(
-  getTaskState,
-  TodoSelectors.getAllTodo
-);
-
-export const getSelectedCompletedTask = createSelector(
-  getTaskState,
-  TodoCompletedSelectors.getSelectedItem
-);
-
-export const getCurrentTasksLoaded = createSelector(
-  getTaskState,
-  TodoSelectors.getLoaded
-);
-
-export const getCompletedTasksLoaded = createSelector(
-  getTaskState,
-  TodoCompletedSelectors.getLoaded
-);
-
-export const getTaskListsLoaded = createSelector(
-  getTaskState,
-  TodoListsSelectors.getLoaded
-);
-
-export const getCurrentTasksEntities = createSelector(
-  getTaskState,
-  TodoSelectors.getEntities
-);
-
-export const getCompletedTasksEntities = createSelector(
+export const selectCompletedTasksEntities = createSelector(
   getTaskState,
   TodoCompletedSelectors.getEntities
 );
 
-export const getTaskListsEntities = createSelector(
+export const selectCompletedTasksLoaded = createSelector(
+  getTaskState,
+  TodoCompletedSelectors.getLoaded
+);
+// #endregion
+
+// #region CurrentTasks
+export const selectCurrentTasksAll = createSelector(
+  getTaskState,
+  TodoSelectors.getAllTodo
+);
+
+export const selectCurrentTasksEntities = createSelector(
+  getTaskState,
+  TodoSelectors.getEntities
+);
+
+export const selectCurrentTasksLoaded = createSelector(
+  getTaskState,
+  TodoSelectors.getLoaded
+);
+// #endregion
+
+// #region TaskLists
+export const selectTaskListsAll = createSelector(
+  getTaskState,
+  TodoListsSelectors.getAllTodoLists
+);
+
+export const selectTaskListsEntities = createSelector(
   getTaskState,
   TodoListsSelectors.getEntities
 );
 
-export const selectCurrentTaskFromRoute = createSelector(
-  getCurrentTasksEntities,
+export const selectTaskListsLoaded = createSelector(
+  getTaskState,
+  TodoListsSelectors.getLoaded
+);
+// #endregion
+
+export const selectCompletedTaskFromRoute = createSelector(
+  selectCompletedTasksEntities,
   selectRouteId,
   (tasks, id) => {
     return tasks[id];
   }
 );
 
-export const selectCompletedTaskFromRoute = createSelector(
-  getCompletedTasksEntities,
+export const selectCurrentTaskFromRoute = createSelector(
+  selectCurrentTasksEntities,
   selectRouteId,
   (tasks, id) => {
     return tasks[id];
@@ -82,16 +81,11 @@ export const selectCompletedTaskFromRoute = createSelector(
 );
 
 export const selectTaskListFromRoute = createSelector(
-  getTaskListsEntities,
+  selectTaskListsEntities,
   selectRouteId,
   (taskLists, id) => {
     return taskLists[id];
   }
-);
-
-export const getAllTaskLists = createSelector(
-  getTaskState,
-  TodoListsSelectors.getAllTodoLists
 );
 
 export const getSelectedTaskList = createSelector(

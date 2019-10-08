@@ -30,7 +30,7 @@ export class CurrentTaskGuardService implements CanActivate {
 
   private waitForCurrentTasksToLoad(): Observable<boolean> {
     return this.store.pipe(
-      select(TaskSelectors.getCurrentTasksLoaded),
+      select(TaskSelectors.selectCurrentTasksLoaded),
       filter((loaded) => loaded),
       take(1)
     );

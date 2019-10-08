@@ -114,7 +114,7 @@ export class TaskEffects {
       of(action).pipe(
         withLatestFrom(
           this.store.select(authQuery.selectAuthUser),
-          this.store.select(TaskSelectors.getAllCurrentTasks)
+          this.store.select(TaskSelectors.selectCurrentTasksAll)
         )
       )
     ),

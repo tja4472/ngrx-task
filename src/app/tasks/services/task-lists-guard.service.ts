@@ -30,7 +30,7 @@ export class TaskListsGuardService implements CanActivate {
 
   private waitForTaskListsToLoad(): Observable<boolean> {
     return this.store.pipe(
-      select(TaskSelectors.getTaskListsLoaded),
+      select(TaskSelectors.selectTaskListsLoaded),
       filter((loaded) => loaded),
       take(1)
     );

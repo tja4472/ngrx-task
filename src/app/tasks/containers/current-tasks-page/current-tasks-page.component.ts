@@ -28,7 +28,7 @@ export class CurrentTasksPageComponent implements OnInit {
     this.currentTasks$ = this.route.paramMap.pipe(
       switchMap((params) => {
         this.selectedId = params.get('id');
-        return this.store.pipe(select(TaskSelectors.getAllCurrentTasks));
+        return this.store.pipe(select(TaskSelectors.selectCurrentTasksAll));
       })
     );
     this.store.dispatch(TaskActions.currentTasksPageEnter());

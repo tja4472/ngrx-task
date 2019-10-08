@@ -40,7 +40,7 @@ export class SidenavComponent {
     private store: Store<any>
   ) {
     this.user$ = this.store.select(FromAuthSelector.authQuery.selectAuthUser);
-    this.taskLists$ = store.pipe(select(TaskSelectors.getAllTaskLists));
+    this.taskLists$ = store.pipe(select(TaskSelectors.selectTaskListsAll));
 
     // Close sidenav on a handset device after route click.
     router.events

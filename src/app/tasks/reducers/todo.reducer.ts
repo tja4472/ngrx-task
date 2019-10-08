@@ -43,9 +43,3 @@ export const {
   selectAll,
   selectTotal,
 } = adapter.getSelectors();
-
-// =========
-// Selectors
-// =========
-export const getLoaded = (state: State) => state.loaded;
-export const getLoading = (state: State) => state.loading;

@@ -30,7 +30,7 @@ export class CompletedTaskGuardService implements CanActivate {
 
   private waitForCompletedTasksToLoad(): Observable<boolean> {
     return this.store.pipe(
-      select(TaskSelectors.getCompletedTasksLoaded),
+      select(TaskSelectors.selectCompletedTasksLoaded),
       filter((loaded) => loaded),
       take(1)
     );

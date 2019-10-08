@@ -23,7 +23,7 @@ export class AaaResolverService implements Resolve<Todo> {
 
   waitForCurrentTasksToLoad(): Observable<boolean> {
     return this.store.pipe(
-      select(TaskSelectors.getCurrentTasksLoaded),
+      select(TaskSelectors.selectCurrentTasksLoaded),
       filter((loaded) => loaded),
       take(1)
     );
@@ -31,7 +31,7 @@ export class AaaResolverService implements Resolve<Todo> {
 
   getCurrentTask(id: string): Observable<Todo> {
     return this.store.pipe(
-      select(TaskSelectors.getAllCurrentTasks),
+      select(TaskSelectors.selectCurrentTasksAll),
       // map(entities => !!entities[id]),
       // filter(todos => todos.id === id),
       map((todos) => todos.filter((a) => a.id === id)[0]),
