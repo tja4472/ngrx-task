@@ -7,14 +7,14 @@ import { map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 
 import { TodoCompletedActions } from '../actions';
 import { CompletedTask } from '../models';
-import { TodoCompletedDataService } from '../services/todo-completed.data.service';
+import { CompletedTaskDataService } from '../services/completed-task.data.service';
 
 @Injectable()
 export class TodoCompletedEffects {
   //
   constructor(
     private actions$: Actions,
-    private dataService: TodoCompletedDataService
+    private dataService: CompletedTaskDataService
   ) {}
 
   @Effect()

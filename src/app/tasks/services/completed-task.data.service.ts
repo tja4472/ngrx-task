@@ -20,18 +20,16 @@ interface FirestoreDoc {
 @Injectable({
   providedIn: 'root',
 })
-export class TodoCompletedDataService {
+export class CompletedTaskDataService {
   //
-  constructor(public readonly afs: AngularFirestore) {
-    console.log('TodoCompletedDataService:constructor');
-  }
+  constructor(public readonly afs: AngularFirestore) {}
 
   public getData(
-    todoListId: string,
+    taskListId: string,
     userId: string
   ): Observable<CompletedTask[]> {
     //
-    return this.firestoreCollection(todoListId, userId)
+    return this.firestoreCollection(taskListId, userId)
       .valueChanges()
       .pipe(
         map((items) =>
@@ -42,31 +40,31 @@ export class TodoCompletedDataService {
       );
   }
 
-  public removeItem(id: string, todoListId: string, userId: string): void {
-    this.firestoreCollection(todoListId, userId)
+  public removeItem(id: string, taskListId: string, userId: string): void {
+    this.firestoreCollection(taskListId, userId)
       .doc(id)
       .delete();
   }
 
-  public save(item: CompletedTask, todoListId: string, userId: string): void {
+  public save(item: CompletedTask, taskListId: string, userId: string): void {
     const doc = this.toFirestoreDoc(item);
 
     if (item.id === '') {
       doc.id = this.afs.createId();
     }
 
-    this.firestoreCollection(todoListId, userId)
+    this.firestoreCollection(taskListId, userId)
       .doc(doc.id)
       .set(doc);
   }
 
-  private firestoreCollection(todoListId: string, userId: string) {
+  private firestoreCollection(taskListId: string, userId: string) {
     //
     return this.afs
       .collection(USERS_COLLECTION)
       .doc(userId)
       .collection('todo-lists')
-      .doc(todoListId)
+      .doc(taskListId)
       .collection<FirestoreDoc>(DATA_COLLECTION);
   }
 

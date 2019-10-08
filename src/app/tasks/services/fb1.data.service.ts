@@ -7,15 +7,15 @@ import {
   newCurrentTask,
 } from '../models';
 
+import { CompletedTaskDataService } from './completed-task.data.service';
 import { CurrentTaskDataService } from './current-task.data.service';
-import { TodoCompletedDataService } from './todo-completed.data.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class Fb1DataService {
   constructor(
-    private todoCompletedDataService: TodoCompletedDataService,
+    private todoCompletedDataService: CompletedTaskDataService,
     private todoDataService: CurrentTaskDataService
   ) {}
 
