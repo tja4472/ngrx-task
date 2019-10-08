@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 
 import {
+  CompletedTask,
   CurrentTask,
+  newCompletedTask,
   newCurrentTask,
-  newTodoCompleted,
-  TodoCompleted,
 } from '../models';
 
 import { TodoCompletedDataService } from './todo-completed.data.service';
@@ -27,7 +27,7 @@ export class Fb1DataService {
     //
     items.map((x: CurrentTask) => {
       const todoCompleted = {
-        ...newTodoCompleted(),
+        ...newCompletedTask(),
         description: x.description,
         name: x.name,
       };
@@ -38,7 +38,7 @@ export class Fb1DataService {
   }
 
   public moveToCurrent(
-    item: TodoCompleted,
+    item: CompletedTask,
     todoListId: string,
     userId: string
   ): void {

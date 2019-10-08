@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 
-import { TodoCompleted } from '../models';
+import { CompletedTask } from '../models';
 
 export const databaseListenForDataStart = createAction(
   '[TodoCompleted] (Database) Listen For Data - Start',
@@ -17,6 +17,6 @@ export const databaseListenForDataStop = createAction(
 export const loadSuccess = createAction(
   '[TodoCompleted] Load Success',
   props<{
-    completedTasks: TodoCompleted[];
+    completedTasks: CompletedTask[];
   }>()
 );

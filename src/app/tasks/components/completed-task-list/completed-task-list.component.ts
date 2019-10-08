@@ -2,7 +2,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 
-import { TodoCompleted } from '@app/tasks/models';
+import { CompletedTask } from '@app/tasks/models';
 
 @Component({
   selector: 'app-completed-task-list',
@@ -11,9 +11,9 @@ import { TodoCompleted } from '@app/tasks/models';
 })
 export class CompletedTaskListComponent implements OnInit {
   @Input()
-  currentTasks: TodoCompleted[];
+  currentTasks: CompletedTask[];
 
-  @Output() toggleCompleteItem = new EventEmitter<TodoCompleted>();
+  @Output() toggleCompleteItem = new EventEmitter<CompletedTask>();
 
   constructor() {}
 

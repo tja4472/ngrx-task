@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
-import { TodoCompleted } from '@app/tasks/models';
+import { CompletedTask } from '@app/tasks/models';
 
 import { CompletedTaskDetailPresenter } from './completed-task-detail.presenter';
 
@@ -12,10 +12,10 @@ import { CompletedTaskDetailPresenter } from './completed-task-detail.presenter'
   viewProviders: [CompletedTaskDetailPresenter],
 })
 export class CompletedTaskDetailComponent implements OnInit {
-  @Input() completedTask: TodoCompleted;
-  @Output() cancel = new EventEmitter<TodoCompleted>();
-  @Output() remove = new EventEmitter<TodoCompleted>();
-  @Output() checkout = new EventEmitter<TodoCompleted>();
+  @Input() completedTask: CompletedTask;
+  @Output() cancel = new EventEmitter<CompletedTask>();
+  @Output() remove = new EventEmitter<CompletedTask>();
+  @Output() checkout = new EventEmitter<CompletedTask>();
 
   get checkoutForm(): FormGroup {
     return this.presenter.form;

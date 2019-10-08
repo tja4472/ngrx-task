@@ -1,11 +1,11 @@
-export interface TodoCompleted {
+export interface CompletedTask {
   readonly id: string;
   readonly description?: string;
   readonly isComplete: boolean;
   readonly name: string;
 }
 
-export function newTodoCompleted(): TodoCompleted {
+export function newCompletedTask(): CompletedTask {
   return {
     description: '',
     id: '',

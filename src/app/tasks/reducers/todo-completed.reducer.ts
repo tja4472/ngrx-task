@@ -2,17 +2,17 @@ import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { Action, createReducer, on } from '@ngrx/store';
 
 import { TaskActions, TodoCompletedActions } from '../actions';
-import { TodoCompleted } from '../models';
+import { CompletedTask } from '../models';
 
 export const todoCompletedFeatureKey = 'todo-completed';
 
-export interface State extends EntityState<TodoCompleted> {
+export interface State extends EntityState<CompletedTask> {
   loaded: boolean;
   loading: boolean;
 }
 
-export const adapter: EntityAdapter<TodoCompleted> = createEntityAdapter<
-  TodoCompleted
+export const adapter: EntityAdapter<CompletedTask> = createEntityAdapter<
+  CompletedTask
 >();
 
 export const initialState: State = adapter.getInitialState({

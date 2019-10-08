@@ -6,7 +6,7 @@ import { EMPTY } from 'rxjs';
 import { map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 
 import { TodoCompletedActions } from '../actions';
-import { TodoCompleted } from '../models';
+import { CompletedTask } from '../models';
 import { TodoCompletedDataService } from '../services/todo-completed.data.service';
 
 @Injectable()
@@ -31,7 +31,7 @@ export class TodoCompletedEffects {
         return this.dataService
           .getData(action.todoListId, action.userId)
           .pipe(
-            map((items: TodoCompleted[]) =>
+            map((items: CompletedTask[]) =>
               TodoCompletedActions.loadSuccess({ completedTasks: items })
             )
           );

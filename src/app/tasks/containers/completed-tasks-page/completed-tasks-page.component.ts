@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 import { TaskActions } from '@app/tasks/actions';
-import { TodoCompleted } from '@app/tasks/models';
+import { CompletedTask } from '@app/tasks/models';
 import { TaskSelectors } from '@app/tasks/selectors';
 
 @Component({
@@ -17,7 +17,7 @@ import { TaskSelectors } from '@app/tasks/selectors';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CompletedTasksPageComponent implements OnInit {
-  completedTasks$: Observable<TodoCompleted[]>;
+  completedTasks$: Observable<CompletedTask[]>;
   selectedId: string;
 
   constructor(private route: ActivatedRoute, private store: Store<any>) {
@@ -36,7 +36,7 @@ export class CompletedTasksPageComponent implements OnInit {
     this.store.dispatch(TaskActions.enterCompletedTasksPage());
   }
 
-  toggleCompleteItem(item: TodoCompleted) {
+  toggleCompleteItem(item: CompletedTask) {
     this.store.dispatch(
       TaskActions.completedTaskDetailsItemToggled({ todoCompleted: item })
     );

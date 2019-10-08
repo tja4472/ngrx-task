@@ -5,7 +5,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { newTodoCompleted, TodoCompleted } from '../models';
+import { CompletedTask, newCompletedTask } from '../models';
 
 const DATA_COLLECTION = 'completed-todos';
 const USERS_COLLECTION = 'users';
@@ -29,7 +29,7 @@ export class TodoCompletedDataService {
   public getData(
     todoListId: string,
     userId: string
-  ): Observable<TodoCompleted[]> {
+  ): Observable<CompletedTask[]> {
     //
     return this.firestoreCollection(todoListId, userId)
       .valueChanges()
@@ -48,7 +48,7 @@ export class TodoCompletedDataService {
       .delete();
   }
 
-  public save(item: TodoCompleted, todoListId: string, userId: string): void {
+  public save(item: CompletedTask, todoListId: string, userId: string): void {
     const doc = this.toFirestoreDoc(item);
 
     if (item.id === '') {
@@ -70,7 +70,7 @@ export class TodoCompletedDataService {
       .collection<FirestoreDoc>(DATA_COLLECTION);
   }
 
-  private toFirestoreDoc(item: TodoCompleted): FirestoreDoc {
+  private toFirestoreDoc(item: CompletedTask): FirestoreDoc {
     //
     const result: FirestoreDoc = {
       description: item.description,
@@ -82,10 +82,10 @@ export class TodoCompletedDataService {
     return result;
   }
 
-  private fromFirestoreDoc(x: FirestoreDoc): TodoCompleted {
+  private fromFirestoreDoc(x: FirestoreDoc): CompletedTask {
     //
-    const result: TodoCompleted = {
-      ...newTodoCompleted(),
+    const result: CompletedTask = {
+      ...newCompletedTask(),
       description: x.description,
       id: x.id,
       name: x.name,
