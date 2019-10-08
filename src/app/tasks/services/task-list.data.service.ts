@@ -18,10 +18,8 @@ interface FirestoreDoc {
 @Injectable({
   providedIn: 'root',
 })
-export class TodoListsDataService {
-  constructor(public readonly afs: AngularFirestore) {
-    console.log('TodoDataService:constructor');
-  }
+export class TaskListDataService {
+  constructor(public readonly afs: AngularFirestore) {}
 
   public getData(userId: string): Observable<TaskListListItem[]> {
     //

@@ -8,13 +8,13 @@ import { map, switchMap, tap } from 'rxjs/operators';
 import { AuthApiActions } from '@app/auth/actions';
 
 import { TodoListsActions } from '../actions';
-import { TodoListsDataService } from '../services/todo-lists.data.service';
+import { TaskListDataService } from '../services/task-list.data.service';
 
 @Injectable()
 export class TodoListsEffects {
   constructor(
     private actions$: Actions<AuthApiActions.AuthApiActionsUnion>,
-    private dataService: TodoListsDataService
+    private dataService: TaskListDataService
   ) {}
 
   @Effect()
