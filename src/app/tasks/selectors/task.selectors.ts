@@ -87,20 +87,3 @@ export const selectTaskListFromRoute = createSelector(
     return taskLists[id];
   }
 );
-
-export const getSelectedTaskList = createSelector(
-  getTaskState,
-  TodoListsSelectors.getSelectedItem
-);
-
-export const getSelectedOrNewTaskList = createSelector(
-  getSelectedTaskList,
-  (task) => {
-    if (!!!task) {
-      // task undefined - new item.
-      return newTodoListsItem();
-    }
-
-    return task;
-  }
-);

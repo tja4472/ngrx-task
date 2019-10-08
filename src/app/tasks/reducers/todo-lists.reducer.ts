@@ -9,8 +9,6 @@ export const todoListsFeatureKey = 'todo-lists';
 export interface State extends EntityState<TodoListsItem> {
   loaded: boolean;
   loading: boolean;
-  selectedId: string;
-  selectedListId: string | null;
 }
 
 export const adapter: EntityAdapter<TodoListsItem> = createEntityAdapter<
@@ -21,8 +19,6 @@ export const initialState: State = adapter.getInitialState({
   // additional entity state properties
   loaded: false,
   loading: false,
-  selectedId: null,
-  selectedListId: null,
 });
 
 const TaskListsReducer = createReducer(
@@ -43,8 +39,6 @@ const TaskListsReducer = createReducer(
       ...state,
       loaded: true,
       loading: false,
-      selectedId: null,
-      selectedListId: 'ZZZdefault-list',
     })
   )
 );
@@ -53,16 +47,11 @@ export function reducer(state: State | undefined, action: Action) {
   return TaskListsReducer(state, action);
 }
 
+/*
 export const {
   selectIds,
   selectEntities,
   selectAll,
   selectTotal,
 } = adapter.getSelectors();
-
-// =========
-// Selectors
-// =========
-export const getLoaded = (state: State) => state.loaded;
-export const getLoading = (state: State) => state.loading;
-export const getSelectedListId = (state: State) => state.selectedListId;
+*/

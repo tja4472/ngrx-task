@@ -18,33 +18,13 @@ import { TaskSelectors } from '@app/tasks/selectors';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TaskListDetailEditPageComponent implements OnInit {
-  id: string;
   task$: Observable<TodoListsItem>;
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private store: Store<any>
-  ) {
-    this.route.paramMap
-      .pipe(
-        map((params) =>
-          TaskActions.taskListDetailPageEnter({ id: params.get('id') })
-        )
-      )
-      .subscribe(this.store);
-    /*    
-    this.route.paramMap.subscribe((params) => {
-      this.id = params.get('id');
-    });
-*/
-
-    this.task$ = store.pipe(select(TaskSelectors.getSelectedOrNewTaskList));
+  constructor(private router: Router, private store: Store<any>) {
+    this.task$ = store.pipe(select(TaskSelectors.selectTaskListFromRoute));
   }
 
-  ngOnInit() {
-    // this.store.dispatch(TaskActions.enterCurrentTasksPage());
-  }
+  ngOnInit() {}
 
   private goBack(taskId: string): void {
     this.router.navigate(['tasks/lists', { id: taskId }]);
