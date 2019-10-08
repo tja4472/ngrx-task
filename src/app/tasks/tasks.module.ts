@@ -8,7 +8,7 @@ import { StoreModule } from '@ngrx/store';
 import { MaterialModule } from '@app/material';
 
 import {
-  CompletedTaskDetailComponent,
+  CompletedTaskDetailEditComponent,
   CompletedTaskListComponent,
   CurrentTaskListComponent,
   CurrentTaskNewItemComponent,
@@ -36,7 +36,7 @@ import * as fromTask from './reducers';
 import { TasksRoutingModule } from './tasks-routing.module';
 
 export const COMPONENTS = [
-  CompletedTaskDetailComponent,
+  CompletedTaskDetailEditComponent,
   CompletedTaskListComponent,
   CurrentTaskListComponent,
   CurrentTaskNewItemComponent,

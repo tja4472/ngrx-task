@@ -3,15 +3,15 @@ import { FormGroup } from '@angular/forms';
 
 import { CompletedTask } from '@app/tasks/models';
 
-import { CompletedTaskDetailPresenter } from './completed-task-detail.presenter';
+import { CompletedTaskDetailEditPresenter } from './completed-task-detail-edit.presenter';
 
 @Component({
-  selector: 'app-completed-task-detail',
-  templateUrl: './completed-task-detail.component.html',
-  styleUrls: ['./completed-task-detail.component.css'],
-  viewProviders: [CompletedTaskDetailPresenter],
+  selector: 'app-completed-task-detail-edit',
+  templateUrl: './completed-task-detail-edit.component.html',
+  styleUrls: ['./completed-task-detail-edit.component.css'],
+  viewProviders: [CompletedTaskDetailEditPresenter],
 })
-export class CompletedTaskDetailComponent implements OnInit {
+export class CompletedTaskDetailEditComponent implements OnInit {
   @Input() completedTask: CompletedTask;
   @Output() cancel = new EventEmitter<CompletedTask>();
   @Output() remove = new EventEmitter<CompletedTask>();
@@ -21,7 +21,7 @@ export class CompletedTaskDetailComponent implements OnInit {
     return this.presenter.form;
   }
 
-  constructor(private presenter: CompletedTaskDetailPresenter) {}
+  constructor(private presenter: CompletedTaskDetailEditPresenter) {}
 
   ngOnInit() {
     this.presenter.init(this.completedTask);
