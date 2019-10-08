@@ -13,7 +13,7 @@ import {
 } from './containers';
 import { CompletedTaskGuardService } from './services/completed-task-guard.service';
 import { CurrentTaskGuardService } from './services/current-task-guard.service';
-import { TaskListsGuardService } from './services/task-lists-guard.service';
+import { TaskListGuardService } from './services/task-list-guard.service';
 
 const routes: Routes = [
   {
@@ -61,7 +61,7 @@ const routes: Routes = [
           {
             path: 'edit/:id',
             component: TaskListDetailEditPageComponent,
-            canActivate: [TaskListsGuardService],
+            canActivate: [TaskListGuardService],
           },
           {
             path: 'new',

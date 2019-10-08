@@ -11,7 +11,7 @@ import { TaskSelectors } from '@app/tasks/selectors';
 @Injectable({
   providedIn: 'root',
 })
-export class TaskListsGuardService implements CanActivate {
+export class TaskListGuardService implements CanActivate {
   constructor(private store: Store<any>) {}
 
   canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {
