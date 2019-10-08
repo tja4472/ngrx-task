@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
-import { Todo } from '@app/tasks/models';
+import { CurrentTask } from '@app/tasks/models';
 
 import { CurrentTaskNewItemPresenter } from './current-task-new-item.presenter';
 
@@ -12,10 +12,10 @@ import { CurrentTaskNewItemPresenter } from './current-task-new-item.presenter';
   viewProviders: [CurrentTaskNewItemPresenter],
 })
 export class CurrentTaskNewItemComponent implements OnInit {
-  @Input() todo: Todo;
+  @Input() todo: CurrentTask;
 
-  @Output() cancel = new EventEmitter<Todo>();
-  @Output() checkout = new EventEmitter<Todo>();
+  @Output() cancel = new EventEmitter<CurrentTask>();
+  @Output() checkout = new EventEmitter<CurrentTask>();
 
   get checkoutForm(): FormGroup {
     return this.presenter.form;

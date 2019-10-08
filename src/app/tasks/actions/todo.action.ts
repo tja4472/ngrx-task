@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 
-import { Todo } from '@app/tasks/models';
+import { CurrentTask } from '@app/tasks/models';
 
 export const databaseListenForDataStart = createAction(
   '[Todo] (Database) Listen For Data - Start',
@@ -17,7 +17,7 @@ export const databaseListenForDataStop = createAction(
 export const loadSuccess = createAction(
   '[Todo] Load Success',
   props<{
-    currentTasks: Todo[];
+    currentTasks: CurrentTask[];
   }>()
 );
 

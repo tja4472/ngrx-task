@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 
-import { Todo } from '@app/tasks/models';
+import { CurrentTask } from '@app/tasks/models';
 
 @Component({
   selector: 'app-current-task-list-item',
@@ -9,7 +9,7 @@ import { Todo } from '@app/tasks/models';
   styleUrls: ['./current-task-list-item.component.css'],
 })
 export class CurrentTaskListItemComponent implements OnInit {
-  @Input() currentTask: Todo;
+  @Input() currentTask: CurrentTask;
 
   @Output() completeChange = new EventEmitter<MatCheckboxChange>();
 

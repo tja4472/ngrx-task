@@ -1,4 +1,4 @@
-export interface Todo {
+export interface CurrentTask {
   readonly description?: string;
   readonly id: string;
   readonly index: number;
@@ -6,7 +6,7 @@ export interface Todo {
   readonly name: string;
 }
 
-export function newTodo(): Todo {
+export function newCurrentTask(): CurrentTask {
   return {
     description: '',
     id: '',

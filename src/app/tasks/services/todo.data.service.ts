@@ -5,12 +5,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { ReorderArrayIndexes, Todo } from '../models';
-
-// Use Deep imports here for smallest bunlde size
-// import { map } from 'rxjs/operators/map';
-
-// import { reorderArray } from 'ionic-angular';
+import { CurrentTask, ReorderArrayIndexes } from '../models';
 
 const DATA_COLLECTION = 'current-todos';
 const USERS_COLLECTION = 'users';
@@ -32,7 +27,10 @@ export class TodoDataService {
     console.log('TodoDataService:constructor');
   }
 
-  public getData$(todoListId: string, userId: string): Observable<Todo[]> {
+  public getData$(
+    todoListId: string,
+    userId: string
+  ): Observable<CurrentTask[]> {
     //
     console.log('######getData>', userId);
 
@@ -49,7 +47,7 @@ export class TodoDataService {
 
   public reorderItemsAndUpdate(
     indexes: ReorderArrayIndexes,
-    todos: Todo[],
+    todos: CurrentTask[],
     todoListId: string,
     userId: string
   ): void {
@@ -85,7 +83,7 @@ export class TodoDataService {
       .delete();
   }
 
-  public save(item: Todo, todoListId: string, userId: string): void {
+  public save(item: CurrentTask, todoListId: string, userId: string): void {
     const doc = this.toFirestoreDoc(item);
 
     if (item.id === '') {
@@ -109,7 +107,7 @@ export class TodoDataService {
       );
   }
 
-  private toFirestoreDoc(item: Todo): FirestoreDoc {
+  private toFirestoreDoc(item: CurrentTask): FirestoreDoc {
     //
     const result: FirestoreDoc = {
       description: item.description,
@@ -122,9 +120,9 @@ export class TodoDataService {
     return result;
   }
 
-  private fromFirestoreDoc(x: FirestoreDoc): Todo {
+  private fromFirestoreDoc(x: FirestoreDoc): CurrentTask {
     //
-    const result: Todo = {
+    const result: CurrentTask = {
       description: x.description,
       id: x.id,
       index: x.index,

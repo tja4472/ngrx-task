@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 import { TaskActions, TodoActions } from '@app/tasks/actions';
-import { Todo } from '@app/tasks/models';
+import { CurrentTask } from '@app/tasks/models';
 import { TaskSelectors } from '@app/tasks/selectors';
 
 @Component({
@@ -17,7 +17,7 @@ import { TaskSelectors } from '@app/tasks/selectors';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CurrentTasksPageComponent implements OnInit {
-  currentTasks$: Observable<Todo[]>;
+  currentTasks$: Observable<CurrentTask[]>;
   selectedId: string;
 
   constructor(private route: ActivatedRoute, private store: Store<any>) {
@@ -46,8 +46,8 @@ export class CurrentTasksPageComponent implements OnInit {
     this.store.dispatch(TaskActions.currentTasksPageNewCurrentTask());
   }
 
-  toggleCompleteItem(item: Todo) {
-    const newItem: Todo = { ...item, isComplete: !item.isComplete };
+  toggleCompleteItem(item: CurrentTask) {
+    const newItem: CurrentTask = { ...item, isComplete: !item.isComplete };
     this.store.dispatch(
       TaskActions.currentTasksPageSaveItem({ todo: newItem })
     );

@@ -9,7 +9,7 @@ import { concatMap, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { authQuery } from '@app/auth/selectors/auth.selectors';
 
 import { TodoActions } from '../actions';
-import { Todo } from '../models';
+import { CurrentTask } from '../models';
 import { TodoDataService } from '../services/todo.data.service';
 
 @Injectable()
@@ -35,7 +35,7 @@ export class TodoEffects {
         return this.dataService
           .getData$(action.todoListId, action.userId)
           .pipe(
-            map((items: Todo[]) =>
+            map((items: CurrentTask[]) =>
               TodoActions.loadSuccess({ currentTasks: items })
             )
           );

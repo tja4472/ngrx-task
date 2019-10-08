@@ -2,16 +2,18 @@ import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { Action, createReducer, on } from '@ngrx/store';
 
 import { TodoActions } from '../actions';
-import { Todo } from '../models';
+import { CurrentTask } from '../models';
 
 export const todoFeatureKey = 'todo';
 
-export interface State extends EntityState<Todo> {
+export interface State extends EntityState<CurrentTask> {
   loaded: boolean;
   loading: boolean;
 }
 
-export const adapter: EntityAdapter<Todo> = createEntityAdapter<Todo>();
+export const adapter: EntityAdapter<CurrentTask> = createEntityAdapter<
+  CurrentTask
+>();
 
 export const initialState: State = adapter.getInitialState({
   // additional entity state properties

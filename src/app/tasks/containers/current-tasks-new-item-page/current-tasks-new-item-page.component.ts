@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { CurrentTaskNewItemPageActions } from '@app/tasks/actions';
-import { newTodo, Todo } from '@app/tasks/models';
+import { CurrentTask, newCurrentTask } from '@app/tasks/models';
 
 @Component({
   selector: 'app-current-tasks-new-item-page',
@@ -13,7 +13,7 @@ import { newTodo, Todo } from '@app/tasks/models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CurrentTasksNewItemPageComponent implements OnInit {
-  task = newTodo();
+  task = newCurrentTask();
 
   constructor(private router: Router, private store: Store<any>) {}
 
@@ -23,11 +23,11 @@ export class CurrentTasksNewItemPageComponent implements OnInit {
     this.router.navigate(['/tasks/current']);
   }
 
-  viewCancelled(todo: Todo): void {
+  viewCancelled(todo: CurrentTask): void {
     this.goBack();
   }
 
-  viewSaved(todo: Todo) {
+  viewSaved(todo: CurrentTask) {
     this.store.dispatch(CurrentTaskNewItemPageActions.Saved({ todo }));
     this.goBack();
   }

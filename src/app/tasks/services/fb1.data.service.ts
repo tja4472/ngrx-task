@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
 
-import { newTodo, newTodoCompleted, Todo, TodoCompleted } from '../models';
+import {
+  CurrentTask,
+  newCurrentTask,
+  newTodoCompleted,
+  TodoCompleted,
+} from '../models';
 
 import { TodoCompletedDataService } from './todo-completed.data.service';
 import { TodoDataService } from './todo.data.service';
@@ -14,9 +19,13 @@ export class Fb1DataService {
     private todoDataService: TodoDataService
   ) {}
 
-  clearCompletedTodos(items: Todo[], todoListId: string, userId: string) {
+  clearCompletedTodos(
+    items: CurrentTask[],
+    todoListId: string,
+    userId: string
+  ) {
     //
-    items.map((x: Todo) => {
+    items.map((x: CurrentTask) => {
       const todoCompleted = {
         ...newTodoCompleted(),
         description: x.description,
@@ -35,8 +44,8 @@ export class Fb1DataService {
   ): void {
     console.log('moveToCurrent>', item);
 
-    const todo: Todo = {
-      ...newTodo(),
+    const todo: CurrentTask = {
+      ...newCurrentTask(),
       description: item.description,
       // tslint:disable-next-line: no-non-null-assertion
       id: item.id!,

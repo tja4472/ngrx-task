@@ -13,12 +13,12 @@ import { concatMap, filter, map, switchMap, take } from 'rxjs/operators';
 
 import { TaskSelectors } from '@app/tasks/selectors';
 
-import { newTodo, Todo } from '../models';
+import { CurrentTask } from '../models';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AaaResolverService implements Resolve<Todo> {
+export class AaaResolverService implements Resolve<CurrentTask> {
   constructor(private router: Router, private store: Store<any>) {}
 
   waitForCurrentTasksToLoad(): Observable<boolean> {
@@ -29,7 +29,7 @@ export class AaaResolverService implements Resolve<Todo> {
     );
   }
 
-  getCurrentTask(id: string): Observable<Todo> {
+  getCurrentTask(id: string): Observable<CurrentTask> {
     return this.store.pipe(
       select(TaskSelectors.selectCurrentTasksAll),
       // map(entities => !!entities[id]),
@@ -52,7 +52,7 @@ export class AaaResolverService implements Resolve<Todo> {
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): Observable<Todo> | Observable<never> {
+  ): Observable<CurrentTask> | Observable<never> {
     const id = route.paramMap.get('id');
 
     //   return this.store.pipe(
