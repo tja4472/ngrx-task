@@ -2,17 +2,17 @@ import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { Action, createReducer, on } from '@ngrx/store';
 
 import { TaskActions, TodoListsActions } from '../actions';
-import { TodoListsItem } from '../models';
+import { TaskListListItem } from '../models';
 
 export const todoListsFeatureKey = 'todo-lists';
 
-export interface State extends EntityState<TodoListsItem> {
+export interface State extends EntityState<TaskListListItem> {
   loaded: boolean;
   loading: boolean;
 }
 
-export const adapter: EntityAdapter<TodoListsItem> = createEntityAdapter<
-  TodoListsItem
+export const adapter: EntityAdapter<TaskListListItem> = createEntityAdapter<
+  TaskListListItem
 >();
 
 export const initialState: State = adapter.getInitialState({

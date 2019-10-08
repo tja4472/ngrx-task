@@ -2,7 +2,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 
-import { TodoListsItem } from '@app/tasks/models';
+import { TaskListListItem } from '@app/tasks/models';
 
 @Component({
   selector: 'app-task-list-list',
@@ -11,10 +11,10 @@ import { TodoListsItem } from '@app/tasks/models';
 })
 export class TaskListListComponent implements OnInit {
   @Input()
-  currentTasks: TodoListsItem[];
+  currentTasks: TaskListListItem[];
 
   @Output() newCurrentTask = new EventEmitter<void>();
-  @Output() toggleCompleteItem = new EventEmitter<TodoListsItem>();
+  @Output() toggleCompleteItem = new EventEmitter<TaskListListItem>();
 
   constructor() {}
 
@@ -26,7 +26,7 @@ export class TaskListListComponent implements OnInit {
   }
   */
 
-  drop(event: CdkDragDrop<TodoListsItem[]>) {
+  drop(event: CdkDragDrop<TaskListListItem[]>) {
     // console.log({ event });
     console.log('currentIndex', event.currentIndex);
     console.log('previousIndex', event.previousIndex);

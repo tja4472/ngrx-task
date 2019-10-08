@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { TodoListsItem } from '@app/tasks/models';
+import { TaskListListItem } from '@app/tasks/models';
 
 @Injectable()
 export class TaskListDetailEditPresenter {
   form: FormGroup;
 
-  initialData: TodoListsItem;
+  initialData: TaskListListItem;
   isNew: boolean;
 
   constructor(private formBuilder: FormBuilder) {}
 
-  init(todo: TodoListsItem) {
+  init(todo: TaskListListItem) {
     this.isNew = todo.id === '';
 
     this.initialData = { ...todo };
@@ -22,8 +22,11 @@ export class TaskListDetailEditPresenter {
     });
   }
 
-  checkout(): TodoListsItem {
-    const todoData: TodoListsItem = { ...this.initialData, ...this.form.value };
+  checkout(): TaskListListItem {
+    const todoData: TaskListListItem = {
+      ...this.initialData,
+      ...this.form.value,
+    };
     this.form.reset();
     //    console.log('initialData>', this.initialData);
     //    console.log('todoData>', todoData);

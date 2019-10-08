@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { TaskActions } from '@app/tasks/actions';
-import { newTodoListsItem, TodoListsItem } from '@app/tasks/models';
+import { newTaskListListItem, TaskListListItem } from '@app/tasks/models';
 
 @Component({
   selector: 'app-task-list-detail-new-page',
@@ -13,7 +13,7 @@ import { newTodoListsItem, TodoListsItem } from '@app/tasks/models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TaskListDetailNewPageComponent implements OnInit {
-  task$ = newTodoListsItem();
+  task$ = newTaskListListItem();
 
   constructor(private router: Router, private store: Store<any>) {}
 
@@ -23,11 +23,11 @@ export class TaskListDetailNewPageComponent implements OnInit {
     this.router.navigate(['/tasks/lists']);
   }
 
-  viewCancelled(todoCompleted: TodoListsItem): void {
+  viewCancelled(todoCompleted: TaskListListItem): void {
     this.goBack();
   }
 
-  viewSaved(todoCompleted: TodoListsItem) {
+  viewSaved(todoCompleted: TaskListListItem) {
     this.store.dispatch(
       TaskActions.taskListDetailNewPageSaved({ todoCompleted })
     );

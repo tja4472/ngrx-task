@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { TaskActions } from '@app/tasks/actions';
-import { TodoListsItem } from '@app/tasks/models';
+import { TaskListListItem } from '@app/tasks/models';
 import { TaskSelectors } from '@app/tasks/selectors';
 
 @Component({
@@ -18,7 +18,7 @@ import { TaskSelectors } from '@app/tasks/selectors';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TaskListDetailEditPageComponent implements OnInit {
-  task$: Observable<TodoListsItem>;
+  task$: Observable<TaskListListItem>;
 
   constructor(private router: Router, private store: Store<any>) {
     this.task$ = store.pipe(select(TaskSelectors.selectTaskListFromRoute));
@@ -30,18 +30,18 @@ export class TaskListDetailEditPageComponent implements OnInit {
     this.router.navigate(['tasks/lists', { id: taskId }]);
   }
 
-  viewCancelled(todoCompleted: TodoListsItem): void {
+  viewCancelled(todoCompleted: TaskListListItem): void {
     this.goBack(todoCompleted.id);
   }
 
-  viewRemoved(todoCompleted: TodoListsItem): void {
+  viewRemoved(todoCompleted: TaskListListItem): void {
     this.store.dispatch(
       TaskActions.taskListDetailPageRemoved({ todoCompleted })
     );
     this.goBack(todoCompleted.id);
   }
 
-  viewSaved(todoCompleted: TodoListsItem) {
+  viewSaved(todoCompleted: TaskListListItem) {
     this.store.dispatch(
       TaskActions.taskListDetailEditPageSaved({ todoCompleted })
     );

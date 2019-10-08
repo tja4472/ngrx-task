@@ -2,7 +2,7 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 import { selectRouteId } from '@app/reducers';
 
-import { newCurrentTask, newTodoListsItem } from '../models';
+import { newCurrentTask, newTaskListListItem } from '../models';
 import * as fromTask from '../reducers';
 
 import * as TodoCompletedSelectors from './todo-completed.selectors';

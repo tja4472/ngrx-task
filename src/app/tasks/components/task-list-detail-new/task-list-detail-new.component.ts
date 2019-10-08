@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
-import { TodoListsItem } from '@app/tasks/models';
+import { TaskListListItem } from '@app/tasks/models';
 
 import { TaskListDetailNewPresenter } from './task-list-detail-new.presenter';
 
@@ -12,9 +12,9 @@ import { TaskListDetailNewPresenter } from './task-list-detail-new.presenter';
   viewProviders: [TaskListDetailNewPresenter],
 })
 export class TaskListDetailNewComponent implements OnInit {
-  @Input() completedTask: TodoListsItem;
-  @Output() cancel = new EventEmitter<TodoListsItem>();
-  @Output() checkout = new EventEmitter<TodoListsItem>();
+  @Input() completedTask: TaskListListItem;
+  @Output() cancel = new EventEmitter<TaskListListItem>();
+  @Output() checkout = new EventEmitter<TaskListListItem>();
 
   get checkoutForm(): FormGroup {
     return this.presenter.form;

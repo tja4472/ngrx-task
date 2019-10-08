@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 
-import { TodoListsItem } from '../models';
+import { TaskListListItem } from '../models';
 
 export const listenForData = createAction(
   '[TodoListsActions] Listen For Data',
@@ -12,7 +12,7 @@ export const listenForData = createAction(
 export const loadSuccess = createAction(
   '[TodoListsActions] Load Success',
   props<{
-    items: TodoListsItem[];
+    items: TaskListListItem[];
     userId: string;
   }>()
 );

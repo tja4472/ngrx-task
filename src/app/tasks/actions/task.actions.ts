@@ -1,6 +1,10 @@
 import { createAction, props } from '@ngrx/store';
 
-import { CompletedTask, CurrentTask, TodoListsItem } from '@app/tasks/models';
+import {
+  CompletedTask,
+  CurrentTask,
+  TaskListListItem,
+} from '@app/tasks/models';
 
 export const loadTasks = createAction('[Task] Load Tasks');
 
@@ -68,17 +72,17 @@ export const taskListDetailPageEnter = createAction(
 
 export const taskListDetailEditPageSaved = createAction(
   '[Task List Detail Edit Page] Saved',
-  props<{ todoCompleted: TodoListsItem }>()
+  props<{ todoCompleted: TaskListListItem }>()
 );
 
 export const taskListDetailNewPageSaved = createAction(
   '[Task List Detail New Page] Saved',
-  props<{ todoCompleted: TodoListsItem }>()
+  props<{ todoCompleted: TaskListListItem }>()
 );
 
 export const taskListDetailPageRemoved = createAction(
   '[Task List Detail Page] Removed',
-  props<{ todoCompleted: TodoListsItem }>()
+  props<{ todoCompleted: TaskListListItem }>()
 );
 
 //

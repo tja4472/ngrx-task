@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 import { TaskActions } from '@app/tasks/actions';
-import { TodoListsItem } from '@app/tasks/models';
+import { TaskListListItem } from '@app/tasks/models';
 import { TaskSelectors } from '@app/tasks/selectors';
 
 @Component({
@@ -17,7 +17,7 @@ import { TaskSelectors } from '@app/tasks/selectors';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TaskListsPageComponent implements OnInit {
-  taskLists$: Observable<TodoListsItem[]>;
+  taskLists$: Observable<TaskListListItem[]>;
 
   selectedId: string;
 

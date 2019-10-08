@@ -5,7 +5,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { TodoListsItem } from '../models';
+import { TaskListListItem } from '../models';
 
 const DATA_COLLECTION = 'todo-lists';
 const USERS_COLLECTION = 'users';
@@ -23,7 +23,7 @@ export class TodoListsDataService {
     console.log('TodoDataService:constructor');
   }
 
-  public getData(userId: string): Observable<TodoListsItem[]> {
+  public getData(userId: string): Observable<TaskListListItem[]> {
     //
     return this.firestoreCollection(userId)
       .valueChanges()
@@ -42,7 +42,7 @@ export class TodoListsDataService {
       .delete();
   }
 
-  public save(item: TodoListsItem, userId: string): void {
+  public save(item: TaskListListItem, userId: string): void {
     const doc = this.toFirestoreDoc(item);
 
     if (item.id === '') {
@@ -64,7 +64,7 @@ export class TodoListsDataService {
       );
   }
 
-  private toFirestoreDoc(item: TodoListsItem): FirestoreDoc {
+  private toFirestoreDoc(item: TaskListListItem): FirestoreDoc {
     //
     const result: FirestoreDoc = {
       id: item.id,
@@ -74,9 +74,9 @@ export class TodoListsDataService {
     return result;
   }
 
-  private fromFirestoreDoc(x: FirestoreDoc): TodoListsItem {
+  private fromFirestoreDoc(x: FirestoreDoc): TaskListListItem {
     //
-    const result: TodoListsItem = {
+    const result: TaskListListItem = {
       id: x.id,
       name: x.name,
     };
