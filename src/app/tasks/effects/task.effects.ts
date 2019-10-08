@@ -17,10 +17,10 @@ import {
   TodoActions,
   TodoCompletedActions,
 } from '../actions';
+import { CurrentTaskDataService } from '../services/current-task.data.service';
 import { Fb1DataService } from '../services/fb1.data.service';
 import { TodoCompletedDataService } from '../services/todo-completed.data.service';
 import { TodoListsDataService } from '../services/todo-lists.data.service';
-import { TodoDataService } from '../services/todo.data.service';
 
 @Injectable()
 export class TaskEffects {
@@ -211,7 +211,7 @@ export class TaskEffects {
   constructor(
     private actions$: Actions,
     private fb1DataService: Fb1DataService,
-    private todoDataService: TodoDataService,
+    private todoDataService: CurrentTaskDataService,
     private todoCompletedDataService: TodoCompletedDataService,
     private todoListsDataService: TodoListsDataService,
     private store: Store<any>,

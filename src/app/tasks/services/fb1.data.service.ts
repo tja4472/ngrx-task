@@ -7,8 +7,8 @@ import {
   newCurrentTask,
 } from '../models';
 
+import { CurrentTaskDataService } from './current-task.data.service';
 import { TodoCompletedDataService } from './todo-completed.data.service';
-import { TodoDataService } from './todo.data.service';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +16,7 @@ import { TodoDataService } from './todo.data.service';
 export class Fb1DataService {
   constructor(
     private todoCompletedDataService: TodoCompletedDataService,
-    private todoDataService: TodoDataService
+    private todoDataService: CurrentTaskDataService
   ) {}
 
   clearCompletedTodos(

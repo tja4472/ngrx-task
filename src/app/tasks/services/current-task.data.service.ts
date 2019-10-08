@@ -21,20 +21,17 @@ interface FirestoreDoc {
 @Injectable({
   providedIn: 'root',
 })
-export class TodoDataService {
+export class CurrentTaskDataService {
   //
-  constructor(public readonly afs: AngularFirestore) {
-    console.log('TodoDataService:constructor');
-  }
+  constructor(public readonly afs: AngularFirestore) {}
 
   public getData$(
-    todoListId: string,
+    taskListId: string,
     userId: string
   ): Observable<CurrentTask[]> {
     //
-    console.log('######getData>', userId);
 
-    return this.firestoreCollection(todoListId, userId)
+    return this.firestoreCollection(taskListId, userId)
       .valueChanges()
       .pipe(
         map((items) =>
@@ -45,7 +42,7 @@ export class TodoDataService {
       );
   }
 
-  public reorderItems(ids: string[], todoListId: string, userId: string): void {
+  public reorderItems(ids: string[], taskListId: string, userId: string): void {
     const batch = this.afs.firestore.batch();
 
     ids.forEach((id, i) => {
@@ -54,7 +51,7 @@ export class TodoDataService {
         .doc(id)
         .update({ index: i });
 */
-      batch.update(this.firestoreCollection(todoListId, userId).doc(id).ref, {
+      batch.update(this.firestoreCollection(taskListId, userId).doc(id).ref, {
         index: i,
       });
     });
@@ -62,31 +59,31 @@ export class TodoDataService {
     batch.commit();
   }
 
-  public removeItem(id: string, todoListId: string, userId: string): void {
-    this.firestoreCollection(todoListId, userId)
+  public removeItem(id: string, taskListId: string, userId: string): void {
+    this.firestoreCollection(taskListId, userId)
       .doc(id)
       .delete();
   }
 
-  public save(item: CurrentTask, todoListId: string, userId: string): void {
+  public save(item: CurrentTask, taskListId: string, userId: string): void {
     const doc = this.toFirestoreDoc(item);
 
     if (item.id === '') {
       doc.id = this.afs.createId();
     }
 
-    this.firestoreCollection(todoListId, userId)
+    this.firestoreCollection(taskListId, userId)
       .doc(doc.id)
       .set(doc);
   }
 
-  private firestoreCollection(todoListId: string, userId: string) {
+  private firestoreCollection(taskListId: string, userId: string) {
     //
     return this.afs
       .collection(USERS_COLLECTION)
       .doc(userId)
       .collection('todo-lists')
-      .doc(todoListId)
+      .doc(taskListId)
       .collection<FirestoreDoc>(DATA_COLLECTION, (ref) =>
         ref.orderBy('index', 'asc')
       );

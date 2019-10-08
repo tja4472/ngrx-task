@@ -10,7 +10,7 @@ import { authQuery } from '@app/auth/selectors/auth.selectors';
 
 import { TodoActions } from '../actions';
 import { CurrentTask } from '../models';
-import { TodoDataService } from '../services/todo.data.service';
+import { CurrentTaskDataService } from '../services/current-task.data.service';
 
 @Injectable()
 export class TodoEffects {
@@ -18,7 +18,7 @@ export class TodoEffects {
   constructor(
     private actions$: Actions,
     private store: Store<any>,
-    private dataService: TodoDataService
+    private dataService: CurrentTaskDataService
   ) {}
 
   @Effect()
