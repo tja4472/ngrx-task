@@ -3,15 +3,15 @@ import { FormGroup } from '@angular/forms';
 
 import { CurrentTask } from '@app/tasks/models';
 
-import { CurrentTaskNewItemPresenter } from './current-task-new-item.presenter';
+import { CurrentTaskDetailNewPresenter } from './current-task-detail-new.presenter';
 
 @Component({
-  selector: 'app-current-task-new-item',
-  templateUrl: './current-task-new-item.component.html',
-  styleUrls: ['./current-task-new-item.component.css'],
-  viewProviders: [CurrentTaskNewItemPresenter],
+  selector: 'app-current-task-detail-new',
+  templateUrl: './current-task-detail-new.component.html',
+  styleUrls: ['./current-task-detail-new.component.css'],
+  viewProviders: [CurrentTaskDetailNewPresenter],
 })
-export class CurrentTaskNewItemComponent implements OnInit {
+export class CurrentTaskDetailNewComponent implements OnInit {
   @Input() todo: CurrentTask;
 
   @Output() cancel = new EventEmitter<CurrentTask>();
@@ -21,7 +21,7 @@ export class CurrentTaskNewItemComponent implements OnInit {
     return this.presenter.form;
   }
 
-  constructor(private presenter: CurrentTaskNewItemPresenter) {}
+  constructor(private presenter: CurrentTaskDetailNewPresenter) {}
 
   ngOnInit() {
     this.presenter.init(this.todo);

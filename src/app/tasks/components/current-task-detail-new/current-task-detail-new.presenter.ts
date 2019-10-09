@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CurrentTask } from '@app/tasks/models';
 
 @Injectable()
-export class CurrentTaskNewItemPresenter {
+export class CurrentTaskDetailNewPresenter {
   form: FormGroup;
 
   initialData: CurrentTask;
