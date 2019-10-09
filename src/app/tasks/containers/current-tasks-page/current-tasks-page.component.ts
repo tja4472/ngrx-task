@@ -49,7 +49,7 @@ export class CurrentTasksPageComponent implements OnInit {
   toggleCompleteItem(item: CurrentTask) {
     const newItem: CurrentTask = { ...item, isComplete: !item.isComplete };
     this.store.dispatch(
-      TaskActions.currentTasksPageSaveItem({ todo: newItem })
+      TaskActions.currentTasksPageSaveItem({ currentTask: newItem })
     );
     // this.todoService.upsertItem(newItem);
   }

@@ -25,7 +25,7 @@ export const currentTasksPageNewCurrentTask = createAction(
 
 export const currentTasksPageSaveItem = createAction(
   '[Current Tasks Page] Save Item',
-  props<{ todo: CurrentTask }>()
+  props<{ currentTask: CurrentTask }>()
 );
 //
 export const enterTaskListsPage = createAction('[Task Lists Page] Enter');
@@ -52,17 +52,6 @@ export const completedTaskDetailsPageRemoved = createAction(
 );
 
 //
-
-// currentTaskDetails
-export const currentTaskDetailsPageSaved = createAction(
-  '[Current Task Details Page] Saved',
-  props<{ todo: CurrentTask }>()
-);
-
-export const currentTaskDetailsPageRemoved = createAction(
-  '[Current Task Details Page] Removed',
-  props<{ todo: CurrentTask }>()
-);
 
 // TaskListDetailPage
 export const taskListDetailPageEnter = createAction(

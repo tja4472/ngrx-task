@@ -5,7 +5,7 @@ import { select, Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
 
-import { TaskActions } from '@app/tasks/actions';
+import { CurrentTaskDetailsPageActions } from '@app/tasks/actions';
 import { CurrentTask } from '@app/tasks/models';
 import { TaskSelectors } from '@app/tasks/selectors';
 
@@ -33,12 +33,14 @@ export class CurrentTasksDetailPageComponent implements OnInit {
   }
 
   viewRemoved(todo: CurrentTask): void {
-    this.store.dispatch(TaskActions.currentTaskDetailsPageRemoved({ todo }));
+    this.store.dispatch(CurrentTaskDetailsPageActions.Removed({ todo }));
     this.goBack(todo.id);
   }
 
   viewSaved(todo: CurrentTask) {
-    this.store.dispatch(TaskActions.currentTaskDetailsPageSaved({ todo }));
+    this.store.dispatch(
+      CurrentTaskDetailsPageActions.Saved({ currentTask: todo })
+    );
     this.goBack(todo.id);
   }
 }
