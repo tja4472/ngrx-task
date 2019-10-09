@@ -6,7 +6,11 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
-import { TaskActions, TodoActions } from '@app/tasks/actions';
+import {
+  CurrentTasksPageActions,
+  TaskActions,
+  TodoActions,
+} from '@app/tasks/actions';
 import { CurrentTask } from '@app/tasks/models';
 import { TaskSelectors } from '@app/tasks/selectors';
 
@@ -31,7 +35,7 @@ export class CurrentTasksPageComponent implements OnInit {
         return this.store.pipe(select(TaskSelectors.selectCurrentTasksAll));
       })
     );
-    this.store.dispatch(TaskActions.currentTasksPageEnter());
+    this.store.dispatch(CurrentTasksPageActions.enter());
   }
 
   reorderItems(ids: string[]) {
@@ -39,18 +43,17 @@ export class CurrentTasksPageComponent implements OnInit {
   }
 
   viewClearCompleted() {
-    this.store.dispatch(TaskActions.currentTasksPageClearCompleted());
+    this.store.dispatch(CurrentTasksPageActions.clearCompleted());
   }
 
   viewNewCurrentTask() {
-    this.store.dispatch(TaskActions.currentTasksPageNewCurrentTask());
+    this.store.dispatch(CurrentTasksPageActions.newCurrentTask());
   }
 
   toggleCompleteItem(item: CurrentTask) {
     const newItem: CurrentTask = { ...item, isComplete: !item.isComplete };
     this.store.dispatch(
-      TaskActions.currentTasksPageSaveItem({ currentTask: newItem })
+      CurrentTasksPageActions.saveItem({ currentTask: newItem })
     );
-    // this.todoService.upsertItem(newItem);
   }
 }

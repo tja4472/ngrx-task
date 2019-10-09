@@ -12,21 +12,6 @@ export const enterCompletedTasksPage = createAction(
   '[Completed Tasks Page] Enter'
 );
 
-// currentTasksPage
-export const currentTasksPageEnter = createAction('[Current Tasks Page] Enter');
-
-export const currentTasksPageClearCompleted = createAction(
-  '[Current Tasks Page] Clear Completed'
-);
-
-export const currentTasksPageNewCurrentTask = createAction(
-  '[Current Tasks Page] New Current Task'
-);
-
-export const currentTasksPageSaveItem = createAction(
-  '[Current Tasks Page] Save Item',
-  props<{ currentTask: CurrentTask }>()
-);
 //
 export const enterTaskListsPage = createAction('[Task Lists Page] Enter');
 

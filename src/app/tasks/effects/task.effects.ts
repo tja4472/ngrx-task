@@ -14,6 +14,7 @@ import { TaskSelectors } from '@app/tasks/selectors';
 import {
   CurrentTaskDetailsPageActions,
   CurrentTaskNewItemPageActions,
+  CurrentTasksPageActions,
   TaskActions,
   TodoActions,
   TodoCompletedActions,
@@ -110,7 +111,7 @@ export class TaskEffects {
   //
   @Effect({ dispatch: false })
   clearCompleted$ = this.actions$.pipe(
-    ofType(TaskActions.currentTasksPageClearCompleted),
+    ofType(CurrentTasksPageActions.clearCompleted),
     concatMap((action) =>
       of(action).pipe(
         withLatestFrom(
@@ -150,7 +151,7 @@ export class TaskEffects {
 
   @Effect({ dispatch: false })
   newCurrentTask$ = this.actions$.pipe(
-    ofType(TaskActions.currentTasksPageNewCurrentTask),
+    ofType(CurrentTasksPageActions.newCurrentTask),
     tap(() => {
       this.router.navigate(['/tasks/current/new']);
     })
@@ -176,7 +177,7 @@ export class TaskEffects {
     ofType(
       CurrentTaskNewItemPageActions.Saved,
       CurrentTaskDetailsPageActions.Saved,
-      TaskActions.currentTasksPageSaveItem
+      CurrentTasksPageActions.saveItem
     ),
 
     concatMap((action) =>
