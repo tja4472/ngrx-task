@@ -1,10 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 
-import {
-  CompletedTask,
-  CurrentTask,
-  TaskListListItem,
-} from '@app/tasks/models';
+import { CompletedTask, TaskListListItem } from '@app/tasks/models';
 
 export const loadTasks = createAction('[Task] Load Tasks');
 

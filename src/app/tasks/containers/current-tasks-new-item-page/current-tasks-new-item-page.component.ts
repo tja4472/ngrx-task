@@ -29,7 +29,7 @@ export class CurrentTasksNewItemPageComponent implements OnInit {
 
   viewSaved(todo: CurrentTask) {
     this.store.dispatch(
-      CurrentTaskNewItemPageActions.Saved({ currentTask: todo })
+      CurrentTaskNewItemPageActions.saved({ currentTask: todo })
     );
     this.goBack();
   }

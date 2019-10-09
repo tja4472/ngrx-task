@@ -159,7 +159,7 @@ export class TaskEffects {
 
   @Effect({ dispatch: false })
   removeCurrentTodo$ = this.actions$.pipe(
-    ofType(CurrentTaskDetailsPageActions.Removed),
+    ofType(CurrentTaskDetailsPageActions.removed),
 
     concatMap((action) =>
       of(action).pipe(
@@ -175,8 +175,8 @@ export class TaskEffects {
   @Effect({ dispatch: false })
   saveCurrentTodo$ = this.actions$.pipe(
     ofType(
-      CurrentTaskNewItemPageActions.Saved,
-      CurrentTaskDetailsPageActions.Saved,
+      CurrentTaskNewItemPageActions.saved,
+      CurrentTaskDetailsPageActions.saved,
       CurrentTasksPageActions.saveItem
     ),
 

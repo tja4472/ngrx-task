@@ -4,12 +4,12 @@ import { CurrentTask } from '@app/tasks/models';
 
 const title = 'Current Tasks Detail Page';
 
-export const Saved = createAction(
+export const saved = createAction(
   `[${title}] Saved`,
   props<{ currentTask: CurrentTask }>()
 );
 
-export const Removed = createAction(
+export const removed = createAction(
   `[${title}] Removed`,
   props<{ todo: CurrentTask }>()
 );

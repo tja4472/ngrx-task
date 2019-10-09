@@ -4,7 +4,7 @@ import { CurrentTask } from '@app/tasks/models';
 
 const title = 'Current Tasks New Item Page';
 
-export const Saved = createAction(
+export const saved = createAction(
   `[${title}] Saved`,
   props<{ currentTask: CurrentTask }>()
 );

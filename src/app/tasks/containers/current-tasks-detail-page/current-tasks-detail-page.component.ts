@@ -33,13 +33,13 @@ export class CurrentTasksDetailPageComponent implements OnInit {
   }
 
   viewRemoved(todo: CurrentTask): void {
-    this.store.dispatch(CurrentTaskDetailsPageActions.Removed({ todo }));
+    this.store.dispatch(CurrentTaskDetailsPageActions.removed({ todo }));
     this.goBack(todo.id);
   }
 
   viewSaved(todo: CurrentTask) {
     this.store.dispatch(
-      CurrentTaskDetailsPageActions.Saved({ currentTask: todo })
+      CurrentTaskDetailsPageActions.saved({ currentTask: todo })
     );
     this.goBack(todo.id);
   }
