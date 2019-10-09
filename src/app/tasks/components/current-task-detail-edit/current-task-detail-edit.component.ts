@@ -3,15 +3,15 @@ import { FormGroup } from '@angular/forms';
 
 import { CurrentTask } from '@app/tasks/models';
 
-import { CurrentTaskDetailPresenter } from './current-task-detail.presenter';
+import { CurrentTaskDetailEditPresenter } from './current-task-detail-edit.presenter';
 
 @Component({
-  selector: 'app-current-task-detail',
-  templateUrl: './current-task-detail.component.html',
-  styleUrls: ['./current-task-detail.component.css'],
-  viewProviders: [CurrentTaskDetailPresenter],
+  selector: 'app-current-task-detail-edit',
+  templateUrl: './current-task-detail-edit.component.html',
+  styleUrls: ['./current-task-detail-edit.component.css'],
+  viewProviders: [CurrentTaskDetailEditPresenter],
 })
-export class CurrentTaskDetailComponent implements OnInit {
+export class CurrentTaskDetailEditComponent implements OnInit {
   // tslint:disable-next-line: variable-name
 
   /*
@@ -36,7 +36,7 @@ export class CurrentTaskDetailComponent implements OnInit {
     return this.presenter.form;
   }
 
-  constructor(private presenter: CurrentTaskDetailPresenter) {}
+  constructor(private presenter: CurrentTaskDetailEditPresenter) {}
 
   ngOnInit() {
     this.presenter.init(this.todo);

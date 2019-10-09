@@ -10,24 +10,24 @@ import { MaterialModule } from '@app/material';
 import {
   CompletedTaskDetailEditComponent,
   CompletedTaskListComponent,
+  CurrentTaskDetailEditComponent,
   CurrentTaskListComponent,
+  CurrentTaskListItemComponent,
   CurrentTaskNewItemComponent,
   TaskListDetailEditComponent,
   TaskListDetailNewComponent,
   TaskListListComponent,
 } from './components';
-import { CurrentTaskDetailComponent } from './components/current-task-detail/current-task-detail.component';
-import { CurrentTaskListItemComponent } from './components/current-task-list-item/current-task-list-item.component';
 import {
   CompletedTasksDetailPageComponent,
   CompletedTasksPageComponent,
+  CurrentTasksDetailPageComponent,
   CurrentTasksNewItemPageComponent,
   CurrentTasksPageComponent,
   TaskListDetailEditPageComponent,
   TaskListDetailNewPageComponent,
   TaskListsPageComponent,
 } from './containers';
-import { CurrentTasksDetailPageComponent } from './containers/current-tasks-detail-page/current-tasks-detail-page.component';
 import { TaskEffects } from './effects/task.effects';
 import { TodoCompletedEffects } from './effects/todo-completed.effect';
 import { TodoListsEffects } from './effects/todo-lists.effect';
@@ -40,7 +40,7 @@ export const COMPONENTS = [
   CompletedTaskListComponent,
   CurrentTaskListComponent,
   CurrentTaskNewItemComponent,
-  CurrentTaskDetailComponent,
+  CurrentTaskDetailEditComponent,
   CurrentTaskListItemComponent,
   TaskListDetailEditComponent,
   TaskListDetailNewComponent,

@@ -6,3 +6,4 @@ export * from './current-tasks-new-item-page/current-tasks-new-item-page.compone
 export * from './task-list-detail-edit-page/task-list-detail-edit-page.component';
 export * from './task-list-detail-new-page/task-list-detail-new-page.component';
 export * from './task-lists-page/task-lists-page.component';
+export * from './current-tasks-detail-page/current-tasks-detail-page.component';
