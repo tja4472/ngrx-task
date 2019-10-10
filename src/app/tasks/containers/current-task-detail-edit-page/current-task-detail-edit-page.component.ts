@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 import { select, Store } from '@ngrx/store';
 
@@ -18,29 +17,27 @@ import { TaskSelectors } from '@app/tasks/selectors';
 export class CurrentTaskDetailEditPageComponent implements OnInit {
   task$: Observable<CurrentTask>;
 
-  constructor(private router: Router, private store: Store<any>) {
+  constructor(private store: Store<any>) {
     this.task$ = store.pipe(select(TaskSelectors.selectCurrentTaskFromRoute));
   }
 
   ngOnInit() {}
 
-  private goBack(taskId: string): void {
-    this.router.navigate(['/tasks/current', { id: taskId }]);
-  }
-
   viewCancelled(todo: CurrentTask): void {
-    this.goBack(todo.id);
+    this.store.dispatch(
+      CurrentTaskDetailEditPageActions.cancelled({ currentTask: todo })
+    );
   }
 
   viewRemoved(todo: CurrentTask): void {
-    this.store.dispatch(CurrentTaskDetailEditPageActions.removed({ todo }));
-    this.goBack(todo.id);
+    this.store.dispatch(
+      CurrentTaskDetailEditPageActions.removed({ currentTask: todo })
+    );
   }
 
   viewSaved(todo: CurrentTask) {
     this.store.dispatch(
       CurrentTaskDetailEditPageActions.saved({ currentTask: todo })
     );
-    this.goBack(todo.id);
   }
 }

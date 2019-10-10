@@ -158,6 +158,18 @@ export class TaskEffects {
   );
 
   @Effect({ dispatch: false })
+  currentTaskDetailEditPageComponent$ = this.actions$.pipe(
+    ofType(
+      CurrentTaskDetailEditPageActions.cancelled,
+      CurrentTaskDetailEditPageActions.removed,
+      CurrentTaskDetailEditPageActions.saved
+    ),
+    tap(({ currentTask }) => {
+      this.router.navigate(['/tasks/current', { id: currentTask.id }]);
+    })
+  );
+
+  @Effect({ dispatch: false })
   removeCurrentTodo$ = this.actions$.pipe(
     ofType(CurrentTaskDetailEditPageActions.removed),
 
@@ -168,7 +180,11 @@ export class TaskEffects {
     ),
 
     tap(([action, user]) => {
-      this.todoDataService.removeItem(action.todo.id, user.todoListId, user.id);
+      this.todoDataService.removeItem(
+        action.currentTask.id,
+        user.todoListId,
+        user.id
+      );
     })
   );
 
