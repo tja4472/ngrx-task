@@ -6,7 +6,7 @@ import { select, Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
 
-import { TaskActions } from '@app/tasks/actions';
+import { TaskListDetailEditPageActions } from '@app/tasks/actions';
 import { TaskListListItem } from '@app/tasks/models';
 import { TaskSelectors } from '@app/tasks/selectors';
 
@@ -35,14 +35,14 @@ export class TaskListDetailEditPageComponent implements OnInit {
 
   viewRemoved(todoCompleted: TaskListListItem): void {
     this.store.dispatch(
-      TaskActions.taskListDetailPageRemoved({ todoCompleted })
+      TaskListDetailEditPageActions.removed({ taskList: todoCompleted })
     );
     this.goBack(todoCompleted.id);
   }
 
   viewSaved(todoCompleted: TaskListListItem) {
     this.store.dispatch(
-      TaskActions.taskListDetailEditPageSaved({ todoCompleted })
+      TaskListDetailEditPageActions.saved({ taskList: todoCompleted })
     );
     this.goBack(todoCompleted.id);
   }

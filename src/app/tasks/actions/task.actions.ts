@@ -21,18 +21,8 @@ export const taskListDetailPageEnter = createAction(
   props<{ id: string }>()
 );
 
-export const taskListDetailEditPageSaved = createAction(
-  '[Task List Detail Edit Page] Saved',
-  props<{ todoCompleted: TaskListListItem }>()
-);
-
 export const taskListDetailNewPageSaved = createAction(
   '[Task List Detail New Page] Saved',
-  props<{ todoCompleted: TaskListListItem }>()
-);
-
-export const taskListDetailPageRemoved = createAction(
-  '[Task List Detail Page] Removed',
   props<{ todoCompleted: TaskListListItem }>()
 );
 

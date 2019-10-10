@@ -18,6 +18,7 @@ import {
   CurrentTaskDetailNewPageActions,
   CurrentTasksPageActions,
   TaskActions,
+  TaskListDetailEditPageActions,
   TodoActions,
   TodoCompletedActions,
 } from '../actions';
@@ -83,23 +84,20 @@ export class TaskEffects {
 
   @Effect({ dispatch: false })
   removeTaskList$ = this.actions$.pipe(
-    ofType(TaskActions.taskListDetailPageRemoved),
+    ofType(TaskListDetailEditPageActions.removed),
     concatMap((action) =>
       of(action).pipe(
         withLatestFrom(this.store.select(authQuery.selectAuthUser))
       )
     ),
     tap(([action, user]) => {
-      this.todoListsDataService.removeItem(action.todoCompleted.id, user.id);
+      this.todoListsDataService.removeItem(action.taskList.id, user.id);
     })
   );
 
   @Effect({ dispatch: false })
   saveTaskList$ = this.actions$.pipe(
-    ofType(
-      TaskActions.taskListDetailEditPageSaved,
-      TaskActions.taskListDetailNewPageSaved
-    ),
+    ofType(TaskActions.taskListDetailNewPageSaved),
     concatMap((action) =>
       of(action).pipe(
         withLatestFrom(this.store.select(authQuery.selectAuthUser))
@@ -107,6 +105,19 @@ export class TaskEffects {
     ),
     tap(([action, user]) => {
       this.todoListsDataService.save(action.todoCompleted, user.id);
+    })
+  );
+
+  @Effect({ dispatch: false })
+  taskListDetailEditPageActionsSaved$ = this.actions$.pipe(
+    ofType(TaskListDetailEditPageActions.saved),
+    concatMap((action) =>
+      of(action).pipe(
+        withLatestFrom(this.store.select(authQuery.selectAuthUser))
+      )
+    ),
+    tap(([action, user]) => {
+      this.todoListsDataService.save(action.taskList, user.id);
     })
   );
   //#endregion
