@@ -5,7 +5,7 @@ import {
   CompletedTasksDetailPageComponent,
   CompletedTasksPageComponent,
   CurrentTaskDetailEditPageComponent,
-  CurrentTasksNewItemPageComponent,
+  CurrentTaskDetailNewPageComponent,
   CurrentTasksPageComponent,
   TaskListDetailEditPageComponent,
   TaskListDetailNewPageComponent,
@@ -33,7 +33,7 @@ const routes: Routes = [
           },
           {
             path: 'new',
-            component: CurrentTasksNewItemPageComponent,
+            component: CurrentTaskDetailNewPageComponent,
           },
         ],
       },

@@ -21,7 +21,7 @@ import {
   CompletedTasksDetailPageComponent,
   CompletedTasksPageComponent,
   CurrentTaskDetailEditPageComponent,
-  CurrentTasksNewItemPageComponent,
+  CurrentTaskDetailNewPageComponent,
   CurrentTasksPageComponent,
   TaskListDetailEditPageComponent,
   TaskListDetailNewPageComponent,
@@ -48,7 +48,7 @@ export const COMPONENTS = [
 export const CONTAINERS = [
   CompletedTasksDetailPageComponent,
   CurrentTaskDetailEditPageComponent,
-  CurrentTasksNewItemPageComponent,
+  CurrentTaskDetailNewPageComponent,
   CurrentTasksPageComponent,
   CompletedTasksPageComponent,
   TaskListDetailEditPageComponent,

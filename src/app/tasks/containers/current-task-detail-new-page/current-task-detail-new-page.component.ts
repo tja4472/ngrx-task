@@ -3,16 +3,16 @@ import { Router } from '@angular/router';
 
 import { Store } from '@ngrx/store';
 
-import { CurrentTaskNewItemPageActions } from '@app/tasks/actions';
+import { CurrentTaskDetailNewPageActions } from '@app/tasks/actions';
 import { CurrentTask, newCurrentTask } from '@app/tasks/models';
 
 @Component({
-  selector: 'app-current-tasks-new-item-page',
-  templateUrl: './current-tasks-new-item-page.component.html',
-  styleUrls: ['./current-tasks-new-item-page.component.css'],
+  selector: 'app-current-task-detail-new-page',
+  templateUrl: './current-task-detail-new-page.component.html',
+  styleUrls: ['./current-task-detail-new-page.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CurrentTasksNewItemPageComponent implements OnInit {
+export class CurrentTaskDetailNewPageComponent implements OnInit {
   task = newCurrentTask();
 
   constructor(private router: Router, private store: Store<any>) {}
@@ -29,7 +29,7 @@ export class CurrentTasksNewItemPageComponent implements OnInit {
 
   viewSaved(todo: CurrentTask) {
     this.store.dispatch(
-      CurrentTaskNewItemPageActions.saved({ currentTask: todo })
+      CurrentTaskDetailNewPageActions.saved({ currentTask: todo })
     );
     this.goBack();
   }

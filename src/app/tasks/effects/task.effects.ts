@@ -13,7 +13,7 @@ import { TaskSelectors } from '@app/tasks/selectors';
 
 import {
   CurrentTaskDetailEditPageActions,
-  CurrentTaskNewItemPageActions,
+  CurrentTaskDetailNewPageActions,
   CurrentTasksPageActions,
   TaskActions,
   TodoActions,
@@ -191,7 +191,7 @@ export class TaskEffects {
   @Effect({ dispatch: false })
   saveCurrentTodo$ = this.actions$.pipe(
     ofType(
-      CurrentTaskNewItemPageActions.saved,
+      CurrentTaskDetailNewPageActions.saved,
       CurrentTaskDetailEditPageActions.saved,
       CurrentTasksPageActions.saveItem
     ),
