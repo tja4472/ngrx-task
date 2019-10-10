@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 import { Store } from '@ngrx/store';
 
@@ -15,22 +14,17 @@ import { CurrentTask, newCurrentTask } from '@app/tasks/models';
 export class CurrentTaskDetailNewPageComponent implements OnInit {
   task = newCurrentTask();
 
-  constructor(private router: Router, private store: Store<any>) {}
+  constructor(private store: Store<any>) {}
 
   ngOnInit() {}
 
-  private goBack(): void {
-    this.router.navigate(['/tasks/current']);
-  }
-
   viewCancelled(todo: CurrentTask): void {
-    this.goBack();
+    this.store.dispatch(CurrentTaskDetailNewPageActions.cancelled());
   }
 
   viewSaved(todo: CurrentTask) {
     this.store.dispatch(
       CurrentTaskDetailNewPageActions.saved({ currentTask: todo })
     );
-    this.goBack();
   }
 }

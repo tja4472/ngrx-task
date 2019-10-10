@@ -170,6 +170,17 @@ export class TaskEffects {
   );
 
   @Effect({ dispatch: false })
+  currentTaskDetailNewPageComponent$ = this.actions$.pipe(
+    ofType(
+      CurrentTaskDetailNewPageActions.cancelled,
+      CurrentTaskDetailNewPageActions.saved
+    ),
+    tap(() => {
+      this.router.navigate(['/tasks/current']);
+    })
+  );
+
+  @Effect({ dispatch: false })
   removeCurrentTodo$ = this.actions$.pipe(
     ofType(CurrentTaskDetailEditPageActions.removed),
 
