@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {
   CompletedTasksDetailPageComponent,
   CompletedTasksPageComponent,
-  CurrentTasksDetailPageComponent,
+  CurrentTaskDetailEditPageComponent,
   CurrentTasksNewItemPageComponent,
   CurrentTasksPageComponent,
   TaskListDetailEditPageComponent,
@@ -28,7 +28,7 @@ const routes: Routes = [
           },
           {
             path: 'edit/:id',
-            component: CurrentTasksDetailPageComponent,
+            component: CurrentTaskDetailEditPageComponent,
             canActivate: [CurrentTaskGuardService],
           },
           {

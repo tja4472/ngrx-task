@@ -5,17 +5,17 @@ import { select, Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
 
-import { CurrentTaskDetailsPageActions } from '@app/tasks/actions';
+import { CurrentTaskDetailEditPageActions } from '@app/tasks/actions';
 import { CurrentTask } from '@app/tasks/models';
 import { TaskSelectors } from '@app/tasks/selectors';
 
 @Component({
-  selector: 'app-current-tasks-detail-page',
-  templateUrl: './current-tasks-detail-page.component.html',
-  styleUrls: ['./current-tasks-detail-page.component.css'],
+  selector: 'app-current-task-detail-edit-page',
+  templateUrl: './current-task-detail-edit-page.component.html',
+  styleUrls: ['./current-task-detail-edit-page.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CurrentTasksDetailPageComponent implements OnInit {
+export class CurrentTaskDetailEditPageComponent implements OnInit {
   task$: Observable<CurrentTask>;
 
   constructor(private router: Router, private store: Store<any>) {
@@ -33,13 +33,13 @@ export class CurrentTasksDetailPageComponent implements OnInit {
   }
 
   viewRemoved(todo: CurrentTask): void {
-    this.store.dispatch(CurrentTaskDetailsPageActions.removed({ todo }));
+    this.store.dispatch(CurrentTaskDetailEditPageActions.removed({ todo }));
     this.goBack(todo.id);
   }
 
   viewSaved(todo: CurrentTask) {
     this.store.dispatch(
-      CurrentTaskDetailsPageActions.saved({ currentTask: todo })
+      CurrentTaskDetailEditPageActions.saved({ currentTask: todo })
     );
     this.goBack(todo.id);
   }

@@ -12,7 +12,7 @@ import { authQuery } from '@app/auth/selectors/auth.selectors';
 import { TaskSelectors } from '@app/tasks/selectors';
 
 import {
-  CurrentTaskDetailsPageActions,
+  CurrentTaskDetailEditPageActions,
   CurrentTaskNewItemPageActions,
   CurrentTasksPageActions,
   TaskActions,
@@ -159,7 +159,7 @@ export class TaskEffects {
 
   @Effect({ dispatch: false })
   removeCurrentTodo$ = this.actions$.pipe(
-    ofType(CurrentTaskDetailsPageActions.removed),
+    ofType(CurrentTaskDetailEditPageActions.removed),
 
     concatMap((action) =>
       of(action).pipe(
@@ -176,7 +176,7 @@ export class TaskEffects {
   saveCurrentTodo$ = this.actions$.pipe(
     ofType(
       CurrentTaskNewItemPageActions.saved,
-      CurrentTaskDetailsPageActions.saved,
+      CurrentTaskDetailEditPageActions.saved,
       CurrentTasksPageActions.saveItem
     ),
 
