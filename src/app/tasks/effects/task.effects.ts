@@ -13,6 +13,7 @@ import { TaskSelectors } from '@app/tasks/selectors';
 
 import {
   CompletedTaskDetailEditPageActions,
+  CompletedTasksPageActions,
   CurrentTaskDetailEditPageActions,
   CurrentTaskDetailNewPageActions,
   CurrentTasksPageActions,
@@ -135,7 +136,7 @@ export class TaskEffects {
 
   @Effect({ dispatch: false })
   completedTaskToggled$ = this.actions$.pipe(
-    ofType(TaskActions.completedTaskDetailsItemToggled),
+    ofType(CompletedTasksPageActions.itemToggled),
     concatMap((action) =>
       of(action).pipe(
         withLatestFrom(this.store.select(authQuery.selectAuthUser))

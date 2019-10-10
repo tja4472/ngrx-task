@@ -4,10 +4,6 @@ import { CompletedTask, TaskListListItem } from '@app/tasks/models';
 
 export const loadTasks = createAction('[Task] Load Tasks');
 
-export const enterCompletedTasksPage = createAction(
-  '[Completed Tasks Page] Enter'
-);
-
 //
 export const enterTaskListsPage = createAction('[Task Lists Page] Enter');
 
@@ -15,11 +11,6 @@ export const enterTaskListsPage = createAction('[Task Lists Page] Enter');
 export const completedTaskDetailsPageEnter = createAction(
   '[Completed Task Details Page] Enter',
   props<{ id: string }>()
-);
-
-export const completedTaskDetailsItemToggled = createAction(
-  '[Completed Task Details Page] Item Toggled',
-  props<{ todoCompleted: CompletedTask }>()
 );
 
 //

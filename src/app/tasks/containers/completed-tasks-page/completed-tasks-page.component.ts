@@ -4,7 +4,7 @@ import { select, Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
 
-import { TaskActions } from '@app/tasks/actions';
+import { CompletedTasksPageActions } from '@app/tasks/actions';
 import { CompletedTask } from '@app/tasks/models';
 import { TaskSelectors } from '@app/tasks/selectors';
 
@@ -24,12 +24,12 @@ export class CompletedTasksPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.store.dispatch(TaskActions.enterCompletedTasksPage());
+    this.store.dispatch(CompletedTasksPageActions.enter());
   }
 
   toggleCompleteItem(item: CompletedTask) {
     this.store.dispatch(
-      TaskActions.completedTaskDetailsItemToggled({ todoCompleted: item })
+      CompletedTasksPageActions.itemToggled({ todoCompleted: item })
     );
   }
 }
