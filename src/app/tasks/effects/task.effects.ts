@@ -151,6 +151,18 @@ export class TaskEffects {
   );
 
   @Effect({ dispatch: false })
+  completedTaskDetailEditPageComponent$ = this.actions$.pipe(
+    ofType(
+      CompletedTaskDetailEditPageActions.cancelled,
+      CompletedTaskDetailEditPageActions.removed,
+      CompletedTaskDetailEditPageActions.saved
+    ),
+    tap(({ completedTask }) => {
+      this.router.navigate(['/tasks/completed', { id: completedTask.id }]);
+    })
+  );
+
+  @Effect({ dispatch: false })
   newCurrentTask$ = this.actions$.pipe(
     ofType(CurrentTasksPageActions.newCurrentTask),
     tap(() => {

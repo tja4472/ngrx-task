@@ -4,6 +4,11 @@ import { CompletedTask } from '@app/tasks/models';
 
 const title = 'Completed Task Detail Edit Page';
 
+export const cancelled = createAction(
+  `[${title}] Cancelled`,
+  props<{ completedTask: CompletedTask }>()
+);
+
 export const removed = createAction(
   `[${title}] Removed`,
   props<{ completedTask: CompletedTask }>()
