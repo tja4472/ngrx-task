@@ -1,11 +1,10 @@
 import { Location } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 import { select, Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 import { TaskActions } from '@app/tasks/actions';
 import { TaskListListItem } from '@app/tasks/models';
