@@ -12,6 +12,7 @@ import { authQuery } from '@app/auth/selectors/auth.selectors';
 import { TaskSelectors } from '@app/tasks/selectors';
 
 import {
+  CompletedTaskDetailEditPageActions,
   CurrentTaskDetailEditPageActions,
   CurrentTaskDetailNewPageActions,
   CurrentTasksPageActions,
@@ -37,7 +38,7 @@ export class TaskEffects {
   //#region Completed Tasks
   @Effect({ dispatch: false })
   removeCompletedTask$ = this.actions$.pipe(
-    ofType(TaskActions.completedTaskDetailsPageRemoved),
+    ofType(CompletedTaskDetailEditPageActions.removed),
     concatMap((action) =>
       of(action).pipe(
         withLatestFrom(this.store.select(authQuery.selectAuthUser))
@@ -45,7 +46,7 @@ export class TaskEffects {
     ),
     tap(([action, user]) => {
       this.todoCompletedDataService.removeItem(
-        action.todoCompleted.id,
+        action.completedTask.id,
         user.todoListId,
         user.id
       );
@@ -54,7 +55,7 @@ export class TaskEffects {
 
   @Effect({ dispatch: false })
   savecompletedTask$ = this.actions$.pipe(
-    ofType(TaskActions.completedTaskDetailsPageSaved),
+    ofType(CompletedTaskDetailEditPageActions.saved),
     concatMap((action) =>
       of(action).pipe(
         withLatestFrom(this.store.select(authQuery.selectAuthUser))
@@ -62,7 +63,7 @@ export class TaskEffects {
     ),
     tap(([action, user]) => {
       this.todoCompletedDataService.save(
-        action.todoCompleted,
+        action.completedTask,
         user.todoListId,
         user.id
       );

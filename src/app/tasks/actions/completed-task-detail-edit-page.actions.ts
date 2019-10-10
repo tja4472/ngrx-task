@@ -1,0 +1,15 @@
+import { createAction, props } from '@ngrx/store';
+
+import { CompletedTask } from '@app/tasks/models';
+
+const title = 'Completed Task Detail Edit Page';
+
+export const removed = createAction(
+  `[${title}] Removed`,
+  props<{ completedTask: CompletedTask }>()
+);
+
+export const saved = createAction(
+  `[${title}] Saved`,
+  props<{ completedTask: CompletedTask }>()
+);

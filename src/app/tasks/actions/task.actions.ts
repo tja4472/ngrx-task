@@ -22,16 +22,6 @@ export const completedTaskDetailsItemToggled = createAction(
   props<{ todoCompleted: CompletedTask }>()
 );
 
-export const completedTaskDetailsPageSaved = createAction(
-  '[Completed Task Details Page] Saved',
-  props<{ todoCompleted: CompletedTask }>()
-);
-
-export const completedTaskDetailsPageRemoved = createAction(
-  '[Completed Task Details Page] Removed',
-  props<{ todoCompleted: CompletedTask }>()
-);
-
 //
 
 // TaskListDetailPage
