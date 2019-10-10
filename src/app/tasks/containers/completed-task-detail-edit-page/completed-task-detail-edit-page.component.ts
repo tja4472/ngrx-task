@@ -10,12 +10,12 @@ import { CompletedTask } from '@app/tasks/models';
 import { TaskSelectors } from '@app/tasks/selectors';
 
 @Component({
-  selector: 'app-completed-tasks-detail-page',
-  templateUrl: './completed-tasks-detail-page.component.html',
-  styleUrls: ['./completed-tasks-detail-page.component.css'],
+  selector: 'app-completed-task-detail-edit-page',
+  templateUrl: './completed-task-detail-edit-page.component.html',
+  styleUrls: ['./completed-task-detail-edit-page.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CompletedTasksDetailPageComponent implements OnInit {
+export class CompletedTaskDetailEditPageComponent implements OnInit {
   task$: Observable<CompletedTask>;
 
   constructor(private router: Router, private store: Store<any>) {

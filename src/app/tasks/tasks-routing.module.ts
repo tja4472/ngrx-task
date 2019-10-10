@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import {
-  CompletedTasksDetailPageComponent,
+  CompletedTaskDetailEditPageComponent,
   CompletedTasksPageComponent,
   CurrentTaskDetailEditPageComponent,
   CurrentTaskDetailNewPageComponent,
@@ -46,7 +46,7 @@ const routes: Routes = [
           },
           {
             path: 'edit/:id',
-            component: CompletedTasksDetailPageComponent,
+            component: CompletedTaskDetailEditPageComponent,
             canActivate: [CompletedTaskGuardService],
           },
         ],

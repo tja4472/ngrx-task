@@ -18,7 +18,7 @@ import {
   TaskListListComponent,
 } from './components';
 import {
-  CompletedTasksDetailPageComponent,
+  CompletedTaskDetailEditPageComponent,
   CompletedTasksPageComponent,
   CurrentTaskDetailEditPageComponent,
   CurrentTaskDetailNewPageComponent,
@@ -46,7 +46,7 @@ export const COMPONENTS = [
 ];
 
 export const CONTAINERS = [
-  CompletedTasksDetailPageComponent,
+  CompletedTaskDetailEditPageComponent,
   CurrentTaskDetailEditPageComponent,
   CurrentTaskDetailNewPageComponent,
   CurrentTasksPageComponent,

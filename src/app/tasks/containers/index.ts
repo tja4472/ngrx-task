@@ -1,4 +1,4 @@
-export * from './completed-tasks-detail-page/completed-tasks-detail-page.component';
+export * from './completed-task-detail-edit-page/completed-task-detail-edit-page.component';
 export * from './completed-tasks-page/completed-tasks-page.component';
 export * from './current-task-detail-edit-page/current-task-detail-edit-page.component';
 export * from './current-tasks-page/current-tasks-page.component';
