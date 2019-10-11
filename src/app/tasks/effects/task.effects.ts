@@ -19,6 +19,7 @@ import {
   CurrentTasksPageActions,
   TaskActions,
   TaskListDetailEditPageActions,
+  TaskListDetailNewPageActions,
   TodoActions,
   TodoCompletedActions,
 } from '../actions';
@@ -97,14 +98,14 @@ export class TaskEffects {
 
   @Effect({ dispatch: false })
   saveTaskList$ = this.actions$.pipe(
-    ofType(TaskActions.taskListDetailNewPageSaved),
+    ofType(TaskListDetailNewPageActions.saved),
     concatMap((action) =>
       of(action).pipe(
         withLatestFrom(this.store.select(authQuery.selectAuthUser))
       )
     ),
     tap(([action, user]) => {
-      this.todoListsDataService.save(action.todoCompleted, user.id);
+      this.todoListsDataService.save(action.taskList, user.id);
     })
   );
 

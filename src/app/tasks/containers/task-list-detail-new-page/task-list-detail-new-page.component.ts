@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 import { Store } from '@ngrx/store';
 
-import { TaskActions } from '@app/tasks/actions';
+import { TaskListDetailNewPageActions } from '@app/tasks/actions';
 import { newTaskListListItem, TaskListListItem } from '@app/tasks/models';
 
 @Component({
@@ -29,7 +29,7 @@ export class TaskListDetailNewPageComponent implements OnInit {
 
   viewSaved(todoCompleted: TaskListListItem) {
     this.store.dispatch(
-      TaskActions.taskListDetailNewPageSaved({ todoCompleted })
+      TaskListDetailNewPageActions.saved({ taskList: todoCompleted })
     );
     this.goBack();
   }
