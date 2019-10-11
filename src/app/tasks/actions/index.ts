@@ -5,6 +5,7 @@ import * as CurrentTaskDetailNewPageActions from './current-task-detail-new-page
 import * as CurrentTasksPageActions from './current-tasks-page.actions';
 import * as TaskListDetailEditPageActions from './task-list-detail-edit-page.actions';
 import * as TaskListDetailNewPageActions from './task-list-detail-new-page.actions';
+import * as TaskListsPageActions from './task-lists-page.actions';
 import * as TaskActions from './task.actions';
 import * as TodoCompletedActions from './todo-completed.action';
 import * as TodoListsActions from './todo-lists.action';
@@ -19,6 +20,7 @@ export {
   TaskActions,
   TaskListDetailEditPageActions,
   TaskListDetailNewPageActions,
+  TaskListsPageActions,
   TodoActions,
   TodoCompletedActions,
   TodoListsActions,

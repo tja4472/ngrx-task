@@ -20,6 +20,7 @@ import {
   TaskActions,
   TaskListDetailEditPageActions,
   TaskListDetailNewPageActions,
+  TaskListsPageActions,
   TodoActions,
   TodoCompletedActions,
 } from '../actions';
@@ -77,7 +78,7 @@ export class TaskEffects {
   //#region Task Lists
   @Effect({ dispatch: false })
   newTaskList$ = this.actions$.pipe(
-    ofType(TaskActions.TaskListPageNewTaskList),
+    ofType(TaskListsPageActions.newTaskList),
     tap(() => {
       this.router.navigate(['/tasks/lists/new']);
     })

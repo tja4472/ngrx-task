@@ -4,7 +4,7 @@ import { select, Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
 
-import { TaskActions } from '@app/tasks/actions';
+import { TaskListsPageActions } from '@app/tasks/actions';
 import { TaskListListItem } from '@app/tasks/models';
 import { TaskSelectors } from '@app/tasks/selectors';
 
@@ -22,10 +22,10 @@ export class TaskListsPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.store.dispatch(TaskActions.enterTaskListsPage());
+    this.store.dispatch(TaskListsPageActions.enter());
   }
 
   viewNewCurrentTask() {
-    this.store.dispatch(TaskActions.TaskListPageNewTaskList());
+    this.store.dispatch(TaskListsPageActions.newTaskList());
   }
 }
