@@ -262,6 +262,18 @@ export class TaskEffects {
     ])
   );
 
+  @Effect({ dispatch: false })
+  taskListDetailEditPageComponent$ = this.actions$.pipe(
+    ofType(
+      TaskListDetailEditPageActions.cancelled,
+      TaskListDetailEditPageActions.removed,
+      TaskListDetailEditPageActions.saved
+    ),
+    tap(({ taskList }) => {
+      this.router.navigate(['tasks/lists', { id: taskList.id }]);
+    })
+  );
+
   constructor(
     private actions$: Actions,
     private fb1DataService: Fb1DataService,

@@ -1,6 +1,4 @@
-import { Location } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 import { select, Store } from '@ngrx/store';
 
@@ -19,31 +17,21 @@ import { TaskSelectors } from '@app/tasks/selectors';
 export class TaskListDetailEditPageComponent implements OnInit {
   task$: Observable<TaskListListItem>;
 
-  constructor(private router: Router, private store: Store<any>) {
+  constructor(private store: Store<any>) {
     this.task$ = store.pipe(select(TaskSelectors.selectTaskListFromRoute));
   }
 
   ngOnInit() {}
 
-  private goBack(taskId: string): void {
-    this.router.navigate(['tasks/lists', { id: taskId }]);
+  viewCancelled(taskList: TaskListListItem): void {
+    this.store.dispatch(TaskListDetailEditPageActions.cancelled({ taskList }));
   }
 
-  viewCancelled(todoCompleted: TaskListListItem): void {
-    this.goBack(todoCompleted.id);
+  viewRemoved(taskList: TaskListListItem): void {
+    this.store.dispatch(TaskListDetailEditPageActions.removed({ taskList }));
   }
 
-  viewRemoved(todoCompleted: TaskListListItem): void {
-    this.store.dispatch(
-      TaskListDetailEditPageActions.removed({ taskList: todoCompleted })
-    );
-    this.goBack(todoCompleted.id);
-  }
-
-  viewSaved(todoCompleted: TaskListListItem) {
-    this.store.dispatch(
-      TaskListDetailEditPageActions.saved({ taskList: todoCompleted })
-    );
-    this.goBack(todoCompleted.id);
+  viewSaved(taskList: TaskListListItem) {
+    this.store.dispatch(TaskListDetailEditPageActions.saved({ taskList }));
   }
 }
