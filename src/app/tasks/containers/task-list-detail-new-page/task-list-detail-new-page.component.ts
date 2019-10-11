@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 import { Store } from '@ngrx/store';
 
@@ -15,22 +14,17 @@ import { newTaskListListItem, TaskListListItem } from '@app/tasks/models';
 export class TaskListDetailNewPageComponent implements OnInit {
   task$ = newTaskListListItem();
 
-  constructor(private router: Router, private store: Store<any>) {}
+  constructor(private store: Store<any>) {}
 
   ngOnInit() {}
 
-  private goBack(): void {
-    this.router.navigate(['/tasks/lists']);
-  }
-
   viewCancelled(todoCompleted: TaskListListItem): void {
-    this.goBack();
+    this.store.dispatch(TaskListDetailNewPageActions.cancelled());
   }
 
   viewSaved(todoCompleted: TaskListListItem) {
     this.store.dispatch(
       TaskListDetailNewPageActions.saved({ taskList: todoCompleted })
     );
-    this.goBack();
   }
 }
