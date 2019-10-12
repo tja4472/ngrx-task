@@ -21,6 +21,7 @@ import { TasksModule } from '@app/tasks';
 import { environment } from '../environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
+import { CompletedTasksModule } from './completed-tasks/completed-tasks.module';
 import { metaReducers, ROOT_REDUCERS } from './reducers';
 
 @NgModule({
@@ -34,7 +35,9 @@ import { metaReducers, ROOT_REDUCERS } from './reducers';
     AuthModule,
     HomeModule,
     TasksModule,
+    CompletedTasksModule,
     AppRoutingModule,
+
     StoreModule.forRoot(ROOT_REDUCERS, {
       metaReducers,
       runtimeChecks: {

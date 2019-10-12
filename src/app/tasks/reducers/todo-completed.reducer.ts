@@ -1,7 +1,11 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { Action, createReducer, on } from '@ngrx/store';
 
-import { TaskActions, TodoCompletedActions } from '../actions';
+import {
+  CompletedTasksRootActions,
+  TaskActions,
+  TodoCompletedActions,
+} from '../actions';
 import { CompletedTask } from '../models';
 
 export const todoCompletedFeatureKey = 'todo-completed';
@@ -31,9 +35,13 @@ const completedTaskReducer = createReducer(
     ...state,
     loading: true,
   })),
-  on(TodoCompletedActions.databaseListenForDataStop, () => ({
-    ...initialState,
-  })),
+  on(
+    TodoCompletedActions.databaseListenForDataStop,
+    CompletedTasksRootActions.destroyed,
+    () => ({
+      ...initialState,
+    })
+  ),
   on(TodoCompletedActions.loadSuccess, (state, { completedTasks }) =>
     adapter.addAll(completedTasks, {
       ...state,

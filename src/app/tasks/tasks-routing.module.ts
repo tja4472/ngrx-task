@@ -37,6 +37,7 @@ const routes: Routes = [
           },
         ],
       },
+      /*      
       {
         path: 'completed',
         children: [
@@ -51,6 +52,8 @@ const routes: Routes = [
           },
         ],
       },
+*/
+
       {
         path: 'lists',
         children: [

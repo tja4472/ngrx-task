@@ -33,13 +33,13 @@ export class TodoListsEffects {
   listenForData$ = this.actions$.pipe(
     ofType(TodoListsActions.listenForData, TodoListsActions.unlistenForData),
     tap((x) => {
-      console.log('Effect:listenForData$:A', x);
+      // console.log('Effect:listenForData$:A', x);
     }),
     switchMap((action) => {
-      console.log('Effect:listenForData$:action>', action);
+      // console.log('Effect:listenForData$:action>', action);
 
       if (action.type === TodoListsActions.unlistenForData.type) {
-        console.log('TodoAction.UNLISTEN_FOR_DATA');
+        // console.log('TodoAction.UNLISTEN_FOR_DATA');
         return EMPTY;
       } else {
         return this.dataService
@@ -52,7 +52,7 @@ export class TodoListsEffects {
       }
     }),
     tap((x) => {
-      console.log('xxxxxEffect:listenForData$:B', x);
+      // console.log('xxxxxEffect:listenForData$:B', x);
     })
   );
 }

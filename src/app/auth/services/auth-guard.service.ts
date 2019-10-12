@@ -44,7 +44,7 @@ export class AuthGuardService implements CanActivate {
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     //
     const url: string = state.url;
-    console.log('url>', url);
+    // console.log('url>', url);
     this.authService.redirectUrl = url;
 
     return this.checkStoreAuthentication().pipe(
