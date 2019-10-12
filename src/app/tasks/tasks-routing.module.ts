@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import {
-  CompletedTaskDetailEditPageComponent,
-  CompletedTasksPageComponent,
   CurrentTaskDetailEditPageComponent,
   CurrentTaskDetailNewPageComponent,
   CurrentTasksPageComponent,
@@ -11,7 +9,6 @@ import {
   TaskListDetailNewPageComponent,
   TaskListsPageComponent,
 } from './containers';
-import { CompletedTaskGuardService } from './services/completed-task-guard.service';
 import { CurrentTaskGuardService } from './services/current-task-guard.service';
 import { TaskListGuardService } from './services/task-list-guard.service';
 
@@ -37,23 +34,6 @@ const routes: Routes = [
           },
         ],
       },
-      /*      
-      {
-        path: 'completed',
-        children: [
-          {
-            path: '',
-            component: CompletedTasksPageComponent,
-          },
-          {
-            path: 'edit/:id',
-            component: CompletedTaskDetailEditPageComponent,
-            canActivate: [CompletedTaskGuardService],
-          },
-        ],
-      },
-*/
-
       {
         path: 'lists',
         children: [

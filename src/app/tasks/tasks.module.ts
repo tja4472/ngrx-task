@@ -8,8 +8,6 @@ import { StoreModule } from '@ngrx/store';
 import { MaterialModule } from '@app/material';
 
 import {
-  CompletedTaskDetailEditComponent,
-  CompletedTaskListComponent,
   CurrentTaskDetailEditComponent,
   CurrentTaskDetailNewComponent,
   CurrentTaskListComponent,
@@ -18,8 +16,6 @@ import {
   TaskListListComponent,
 } from './components';
 import {
-  CompletedTaskDetailEditPageComponent,
-  CompletedTasksPageComponent,
   CurrentTaskDetailEditPageComponent,
   CurrentTaskDetailNewPageComponent,
   CurrentTasksPageComponent,
@@ -35,8 +31,6 @@ import * as fromTask from './reducers';
 import { TasksRoutingModule } from './tasks-routing.module';
 
 export const COMPONENTS = [
-  CompletedTaskDetailEditComponent,
-  CompletedTaskListComponent,
   CurrentTaskListComponent,
   CurrentTaskDetailNewComponent,
   CurrentTaskDetailEditComponent,
@@ -46,11 +40,9 @@ export const COMPONENTS = [
 ];
 
 export const CONTAINERS = [
-  CompletedTaskDetailEditPageComponent,
   CurrentTaskDetailEditPageComponent,
   CurrentTaskDetailNewPageComponent,
   CurrentTasksPageComponent,
-  CompletedTasksPageComponent,
   TaskListDetailEditPageComponent,
   TaskListDetailNewPageComponent,
   TaskListsPageComponent,
