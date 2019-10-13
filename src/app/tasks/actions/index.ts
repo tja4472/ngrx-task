@@ -5,6 +5,8 @@ import * as CompletedTasksRootActions from './completed-tasks-root.actions';
 import * as CurrentTaskDetailEditPageActions from './current-task-detail-edit-page.actions';
 import * as CurrentTaskDetailNewPageActions from './current-task-detail-new-page.actions';
 import * as CurrentTasksPageActions from './current-tasks-page.actions';
+import * as CurrentTasksRootGuardServiceActions from './current-tasks-root-guard-service.actions';
+import * as CurrentTasksRootActions from './current-tasks-root.actions';
 import * as TaskListDetailEditPageActions from './task-list-detail-edit-page.actions';
 import * as TaskListDetailNewPageActions from './task-list-detail-new-page.actions';
 import * as TaskListsPageActions from './task-lists-page.actions';
@@ -21,6 +23,8 @@ export {
   CurrentTaskDetailEditPageActions,
   CurrentTaskDetailNewPageActions,
   CurrentTasksPageActions,
+  CurrentTasksRootActions,
+  CurrentTasksRootGuardServiceActions,
   TaskActions,
   TaskListDetailEditPageActions,
   TaskListDetailNewPageActions,

@@ -10,6 +10,11 @@ const routes: Routes = [
       import('./completed-tasks').then((mod) => mod.CompletedTasksModule),
   },
   {
+    path: 'tasks/current',
+    loadChildren: () =>
+      import('./current-tasks').then((mod) => mod.CurrentTasksModule),
+  },
+  {
     path: 'tasks',
     loadChildren: () => import('./tasks').then((mod) => mod.TasksModule),
   },

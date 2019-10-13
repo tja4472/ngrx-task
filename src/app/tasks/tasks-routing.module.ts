@@ -15,7 +15,9 @@ import { TaskListGuardService } from './services/task-list-guard.service';
 const routes: Routes = [
   {
     path: 'tasks',
+
     children: [
+      /*      
       {
         path: 'current',
         children: [
@@ -34,6 +36,8 @@ const routes: Routes = [
           },
         ],
       },
+*/
+
       {
         path: 'lists',
         children: [

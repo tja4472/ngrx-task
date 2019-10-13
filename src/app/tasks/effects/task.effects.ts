@@ -244,6 +244,7 @@ export class TaskEffects {
     })
   );
 
+  /*
   @Effect()
   enterLoadData$ = this.actions$.pipe(
     ofType(
@@ -267,6 +268,7 @@ export class TaskEffects {
       }),
     ])
   );
+*/
 
   @Effect({ dispatch: false })
   taskListDetailEditPageComponent$ = this.actions$.pipe(

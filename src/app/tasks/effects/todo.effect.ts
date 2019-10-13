@@ -17,7 +17,11 @@ import {
 import { AuthApiActions } from '@app/auth/actions';
 import { authQuery } from '@app/auth/selectors/auth.selectors';
 
-import { TodoActions } from '../actions';
+import {
+  CurrentTasksRootActions,
+  CurrentTasksRootGuardServiceActions,
+  TodoActions,
+} from '../actions';
 import { CurrentTask } from '../models';
 import { CurrentTaskDataService } from '../services/current-task.data.service';
 
@@ -54,7 +58,7 @@ export class TodoEffects {
 */
   @Effect()
   listenForData$ = this.actions$.pipe(
-    ofType(TodoActions.databaseListenForDataStart),
+    ofType(CurrentTasksRootGuardServiceActions.loadData),
     concatMap((action) =>
       of(action).pipe(
         withLatestFrom(this.store.select(authQuery.selectAuthUser))
@@ -66,7 +70,9 @@ export class TodoEffects {
       this.dataService
         .getData$(user.todoListId, user.id)
         .pipe(
-          takeUntil(this.actions$.pipe(ofType(AuthApiActions.signOutComplete)))
+          takeUntil(
+            this.actions$.pipe(ofType(CurrentTasksRootActions.destroyed))
+          )
         )
     ),
     map((items: CurrentTask[]) =>
