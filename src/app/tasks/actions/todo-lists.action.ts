@@ -13,7 +13,7 @@ export const loadSuccess = createAction(
   '[TodoListsActions] Load Success',
   props<{
     items: TaskListListItem[];
-    userId: string;
+    // userId: string;
   }>()
 );
 

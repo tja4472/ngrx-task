@@ -3,9 +3,18 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 
-import { EMPTY, of } from 'rxjs';
-import { concatMap, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
+import { of } from 'rxjs';
+import {
+  concatMap,
+  filter,
+  map,
+  switchMap,
+  takeUntil,
+  tap,
+  withLatestFrom,
+} from 'rxjs/operators';
 
+import { AuthApiActions } from '@app/auth/actions';
 import { authQuery } from '@app/auth/selectors/auth.selectors';
 
 import { TodoActions } from '../actions';
@@ -20,7 +29,7 @@ export class TodoEffects {
     private store: Store<any>,
     private dataService: CurrentTaskDataService
   ) {}
-
+  /*
   @Effect()
   listenForData$ = this.actions$.pipe(
     ofType(
@@ -41,6 +50,28 @@ export class TodoEffects {
           );
       }
     })
+  );
+*/
+  @Effect()
+  listenForData$ = this.actions$.pipe(
+    ofType(TodoActions.databaseListenForDataStart),
+    concatMap((action) =>
+      of(action).pipe(
+        withLatestFrom(this.store.select(authQuery.selectAuthUser))
+      )
+    ),
+    // tap(([action, user]) => console.log('}}}}}}}}}}', user)),
+    filter(([action, user]) => user !== null),
+    switchMap(([action, user]) =>
+      this.dataService
+        .getData$(user.todoListId, user.id)
+        .pipe(
+          takeUntil(this.actions$.pipe(ofType(AuthApiActions.signOutComplete)))
+        )
+    ),
+    map((items: CurrentTask[]) =>
+      TodoActions.loadSuccess({ currentTasks: items })
+    )
   );
 
   @Effect({ dispatch: false })

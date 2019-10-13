@@ -12,7 +12,7 @@ import {
 
 const routes: Routes = [
   {
-    path: 'tasks/completed',
+    path: '',
     component: CompletedTasksRootComponent,
     canActivate: [AuthGuardService, CompletedTasksRootGuardService],
     children: [

@@ -81,6 +81,10 @@ export class AuthEffects {
       AuthApiActions.signUpSuccess.type
     ),
     tap(() => {
+      console.log(
+        'this.authService.redirectUrl>',
+        this.authService.redirectUrl
+      );
       if (this.authService.redirectUrl === '') {
         this.router.navigate(['/']);
       } else {

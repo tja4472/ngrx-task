@@ -246,7 +246,11 @@ export class TaskEffects {
 
   @Effect()
   enterLoadData$ = this.actions$.pipe(
-    ofType(AuthApiActions.autoSignInHaveUser, AuthApiActions.setUserListId),
+    ofType(
+      AuthApiActions.autoSignInHaveUser,
+      AuthApiActions.setUserListId,
+      AuthApiActions.signInSuccess
+    ),
     concatMap((action) =>
       of(action).pipe(
         withLatestFrom(this.store.select(authQuery.selectAuthUser))

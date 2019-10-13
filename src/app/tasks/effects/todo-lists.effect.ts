@@ -1,11 +1,21 @@
 import { Injectable } from '@angular/core';
 
 import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
 
-import { EMPTY } from 'rxjs';
-import { map, switchMap, tap } from 'rxjs/operators';
+import { EMPTY, of } from 'rxjs';
+import {
+  concatMap,
+  filter,
+  map,
+  switchMap,
+  takeUntil,
+  tap,
+  withLatestFrom,
+} from 'rxjs/operators';
 
 import { AuthApiActions } from '@app/auth/actions';
+import { authQuery } from '@app/auth/selectors/auth.selectors';
 
 import { TodoListsActions } from '../actions';
 import { TaskListDataService } from '../services/task-list.data.service';
@@ -14,12 +24,16 @@ import { TaskListDataService } from '../services/task-list.data.service';
 export class TodoListsEffects {
   constructor(
     private actions$: Actions<AuthApiActions.AuthApiActionsUnion>,
-    private dataService: TaskListDataService
+    private dataService: TaskListDataService,
+    private store: Store<any>
   ) {}
 
   @Effect()
   authListenForAuthSuccess$ = this.actions$.pipe(
-    ofType(AuthApiActions.autoSignInHaveUser.type),
+    ofType(
+      AuthApiActions.autoSignInHaveUser.type,
+      AuthApiActions.signInSuccess.type
+    ),
     map((action) => TodoListsActions.listenForData({ userId: action.user.id }))
   );
 
@@ -29,8 +43,9 @@ export class TodoListsEffects {
     map(() => TodoListsActions.unlistenForData())
   );
 
+  /*
   @Effect()
-  listenForData$ = this.actions$.pipe(
+  listenForDataOrig$ = this.actions$.pipe(
     ofType(TodoListsActions.listenForData, TodoListsActions.unlistenForData),
     tap((x) => {
       // console.log('Effect:listenForData$:A', x);
@@ -46,7 +61,7 @@ export class TodoListsEffects {
           .getData(action.userId)
           .pipe(
             map((items) =>
-              TodoListsActions.loadSuccess({ items, userId: action.userId })
+              TodoListsActions.loadSuccess({ items })
             )
           );
       }
@@ -54,5 +69,25 @@ export class TodoListsEffects {
     tap((x) => {
       // console.log('xxxxxEffect:listenForData$:B', x);
     })
+  );
+*/
+  @Effect()
+  listenForData$ = this.actions$.pipe(
+    ofType(TodoListsActions.listenForData),
+    concatMap((action) =>
+      of(action).pipe(
+        withLatestFrom(this.store.select(authQuery.selectAuthUser))
+      )
+    ),
+    // tap(([action, user]) => console.log('}}}}}}}}}}', user)),
+    filter(([action, user]) => user !== null),
+    switchMap(([action, user]) =>
+      this.dataService
+        .getData(user.id)
+        .pipe(
+          takeUntil(this.actions$.pipe(ofType(AuthApiActions.signOutComplete)))
+        )
+    ),
+    map((items) => TodoListsActions.loadSuccess({ items }))
   );
 }

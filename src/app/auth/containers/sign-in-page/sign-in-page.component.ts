@@ -15,7 +15,9 @@ export class SignInPageComponent implements OnInit {
 
   constructor(private authFacade: AuthFacade) {}
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  viewSignInClicked() {
     // temp!!!!
     this.authFacade.dispatch(
       SignInPageActions.signIn({

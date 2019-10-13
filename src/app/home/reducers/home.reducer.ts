@@ -1,8 +1,10 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import * as HomeActions from '../actions/home.actions';
+
+import * as HomeActions from '../actions/home-page.actions';
 
 export const homeFeatureKey = 'home';
 
+// tslint:disable-next-line: no-empty-interface
 export interface State {}
 
 export const initialState: State = {};
