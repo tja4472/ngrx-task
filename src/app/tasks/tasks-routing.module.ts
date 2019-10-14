@@ -9,6 +9,7 @@ import {
 import { TaskListGuardService } from './services/task-list-guard.service';
 
 const routes: Routes = [
+  /*
   {
     path: 'tasks',
 
@@ -33,6 +34,7 @@ const routes: Routes = [
       },
     ],
   },
+*/
 ];
 
 @NgModule({

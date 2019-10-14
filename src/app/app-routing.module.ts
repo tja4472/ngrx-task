@@ -15,9 +15,17 @@ const routes: Routes = [
       import('./current-tasks').then((mod) => mod.CurrentTasksModule),
   },
   {
+    path: 'tasks/lists',
+    loadChildren: () =>
+      import('./task-lists').then((mod) => mod.TaskListsModule),
+  },
+  /*  
+  {
     path: 'tasks',
     loadChildren: () => import('./tasks').then((mod) => mod.TasksModule),
   },
+*/
+
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   {
     path: '**',
