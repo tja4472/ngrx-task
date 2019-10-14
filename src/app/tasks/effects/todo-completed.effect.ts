@@ -36,6 +36,23 @@ export class TodoCompletedEffects {
   @Effect()
   listenForData$ = this.actions$.pipe(
     ofType(CompletedTasksRootGuardServiceActions.loadData),
+    switchMap(() =>
+      this.store.select(authQuery.selectAuthUser).pipe(
+        switchMap((user) => this.dataService.getData(user.todoListId, user.id)),
+        takeUntil(
+          this.actions$.pipe(ofType(CompletedTasksRootActions.destroyed))
+        )
+      )
+    ),
+    map((items: CompletedTask[]) =>
+      TodoCompletedActions.loadSuccess({ completedTasks: items })
+    )
+  );
+
+  /*
+  @Effect()
+  listenForData$ = this.actions$.pipe(
+    ofType(CompletedTasksRootGuardServiceActions.loadData),
     concatMap((action) =>
       of(action).pipe(
         withLatestFrom(this.store.select(authQuery.selectAuthUser))
@@ -56,7 +73,7 @@ export class TodoCompletedEffects {
       TodoCompletedActions.loadSuccess({ completedTasks: items })
     )
   );
-
+  */
   /*
   @Effect()
   listenForData$ = this.actions$.pipe(

@@ -6,7 +6,6 @@ import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 import {
   concatMap,
-  filter,
   map,
   switchMap,
   takeUntil,
@@ -14,7 +13,6 @@ import {
   withLatestFrom,
 } from 'rxjs/operators';
 
-import { AuthApiActions } from '@app/auth/actions';
 import { authQuery } from '@app/auth/selectors/auth.selectors';
 
 import {
@@ -56,12 +54,18 @@ export class TodoEffects {
     })
   );
 */
+  // this needs to allow for the todoListId changing
+  // whilst active.
+  // Also should not getData if the todoListId changes
+  // and the current tasks are not being shown.
+  /*  
   @Effect()
   listenForData$ = this.actions$.pipe(
     ofType(CurrentTasksRootGuardServiceActions.loadData),
     concatMap((action) =>
       of(action).pipe(
-        withLatestFrom(this.store.select(authQuery.selectAuthUser))
+        withLatestFrom(this.store.select(authQuery.selectAuthUser)),
+        tap(() => console.log('##'))
       )
     ),
     // tap(([action, user]) => console.log('}}}}}}}}}}', user)),
@@ -74,6 +78,24 @@ export class TodoEffects {
             this.actions$.pipe(ofType(CurrentTasksRootActions.destroyed))
           )
         )
+    ),
+    map((items: CurrentTask[]) =>
+      TodoActions.loadSuccess({ currentTasks: items })
+    )
+    // takeUntil(this.actions$.pipe(ofType(CurrentTasksRootActions.destroyed)))
+  );
+*/
+
+  @Effect()
+  listenForData$ = this.actions$.pipe(
+    ofType(CurrentTasksRootGuardServiceActions.loadData),
+    switchMap(() =>
+      this.store.select(authQuery.selectAuthUser).pipe(
+        switchMap((user) =>
+          this.dataService.getData$(user.todoListId, user.id)
+        ),
+        takeUntil(this.actions$.pipe(ofType(CurrentTasksRootActions.destroyed)))
+      )
     ),
     map((items: CurrentTask[]) =>
       TodoActions.loadSuccess({ currentTasks: items })
