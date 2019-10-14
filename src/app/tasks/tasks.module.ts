@@ -7,16 +7,6 @@ import { StoreModule } from '@ngrx/store';
 
 import { MaterialModule } from '@app/material';
 
-import {
-  TaskListDetailEditComponent,
-  TaskListDetailNewComponent,
-  TaskListListComponent,
-} from './components';
-import {
-  TaskListDetailEditPageComponent,
-  TaskListDetailNewPageComponent,
-  TaskListsPageComponent,
-} from './containers';
 import { TaskEffects } from './effects/task.effects';
 import { TodoCompletedEffects } from './effects/todo-completed.effect';
 import { TodoListsEffects } from './effects/todo-lists.effect';
@@ -24,17 +14,9 @@ import { TodoEffects } from './effects/todo.effect';
 import * as fromTask from './reducers';
 import { TasksRoutingModule } from './tasks-routing.module';
 
-export const COMPONENTS = [
-  TaskListDetailEditComponent,
-  TaskListDetailNewComponent,
-  TaskListListComponent,
-];
+export const COMPONENTS = [];
 
-export const CONTAINERS = [
-  TaskListDetailEditPageComponent,
-  TaskListDetailNewPageComponent,
-  TaskListsPageComponent,
-];
+export const CONTAINERS = [];
 
 @NgModule({
   declarations: [COMPONENTS, CONTAINERS],

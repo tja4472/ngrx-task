@@ -19,12 +19,6 @@ const routes: Routes = [
     loadChildren: () =>
       import('./task-lists').then((mod) => mod.TaskListsModule),
   },
-  /*  
-  {
-    path: 'tasks',
-    loadChildren: () => import('./tasks').then((mod) => mod.TasksModule),
-  },
-*/
 
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   {
