@@ -1,20 +1,20 @@
 import { createAction, props } from '@ngrx/store';
 
-import { CurrentTask } from '@app/tasks/models';
+import { CompletedTask } from '@app/root-store/tasks-store/models';
 
-const title = 'Current Task Detail Edit Page';
+const title = 'Completed Task Detail Edit Page';
 
 export const cancelled = createAction(
   `[${title}] Cancelled`,
-  props<{ currentTask: CurrentTask }>()
+  props<{ completedTask: CompletedTask }>()
 );
 
 export const removed = createAction(
   `[${title}] Removed`,
-  props<{ currentTask: CurrentTask }>()
+  props<{ completedTask: CompletedTask }>()
 );
 
 export const saved = createAction(
   `[${title}] Saved`,
-  props<{ currentTask: CurrentTask }>()
+  props<{ completedTask: CompletedTask }>()
 );

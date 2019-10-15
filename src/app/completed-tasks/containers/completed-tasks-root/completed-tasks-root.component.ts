@@ -7,7 +7,7 @@ import {
 
 import { Store } from '@ngrx/store';
 
-import { CompletedTasksRootActions } from '@app/tasks/actions';
+import { CompletedTasksRootActions } from '@app/root-store/tasks-store/actions';
 
 @Component({
   selector: 'app-completed-tasks-root',

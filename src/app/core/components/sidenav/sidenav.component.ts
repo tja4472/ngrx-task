@@ -11,7 +11,7 @@ import { filter, map, shareReplay, withLatestFrom } from 'rxjs/operators';
 import { AuthApiActions } from '@app/auth/actions';
 import { UserModel } from '@app/auth/models/user.model';
 import * as FromAuthSelector from '@app/auth/selectors/auth.selectors';
-import { TaskSelectors } from '@app/tasks/selectors';
+import { TaskSelectors } from '@app/root-store/tasks-store/selectors';
 
 // import { TodoListsItem } from '@app/tasks/models';
 

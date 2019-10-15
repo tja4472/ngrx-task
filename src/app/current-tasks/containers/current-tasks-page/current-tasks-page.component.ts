@@ -4,9 +4,12 @@ import { select, Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
 
-import { CurrentTasksPageActions, TodoActions } from '@app/tasks/actions';
-import { CurrentTask } from '@app/tasks/models';
-import { TaskSelectors } from '@app/tasks/selectors';
+import {
+  CurrentTasksPageActions,
+  TodoActions,
+} from '@app/root-store/tasks-store/actions';
+import { CurrentTask } from '@app/root-store/tasks-store/models';
+import { TaskSelectors } from '@app/root-store/tasks-store/selectors';
 
 @Component({
   selector: 'app-current-tasks-page',

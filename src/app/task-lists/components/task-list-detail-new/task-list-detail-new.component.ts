@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
-import { TaskListListItem } from '@app/tasks/models';
+import { TaskListListItem } from '@app/root-store/tasks-store/models';
 
 import { TaskListDetailNewPresenter } from './task-list-detail-new.presenter';
 

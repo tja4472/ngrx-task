@@ -6,7 +6,7 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { filter, map, switchMap, take } from 'rxjs/operators';
 
-import { TaskSelectors } from '@app/tasks/selectors';
+import { TaskSelectors } from '@app/root-store/tasks-store/selectors';
 
 @Injectable({
   providedIn: 'root',

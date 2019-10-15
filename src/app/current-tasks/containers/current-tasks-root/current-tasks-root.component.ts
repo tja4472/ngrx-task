@@ -7,7 +7,7 @@ import {
 
 import { Store } from '@ngrx/store';
 
-import { CurrentTasksRootActions } from '@app/tasks/actions';
+import { CurrentTasksRootActions } from '@app/root-store/tasks-store/actions';
 
 @Component({
   selector: 'app-current-tasks-root',

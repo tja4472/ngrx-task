@@ -7,10 +7,12 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { metaReducers, ROOT_REDUCERS } from '@app/root-store/reducers';
+import { TasksStoreModule } from '@app/root-store/tasks-store';
 
 @NgModule({
   imports: [
     CommonModule,
+    TasksStoreModule,
     StoreModule.forRoot(ROOT_REDUCERS, {
       metaReducers,
       runtimeChecks: {

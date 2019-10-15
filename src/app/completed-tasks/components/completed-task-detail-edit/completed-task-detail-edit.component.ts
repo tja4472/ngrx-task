@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
-import { CompletedTask } from '@app/tasks/models';
+import { CompletedTask } from '@app/root-store/tasks-store/models';
 
 import { CompletedTaskDetailEditPresenter } from './completed-task-detail-edit.presenter';
 

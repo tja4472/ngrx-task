@@ -2,7 +2,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 
-import { CurrentTask } from '@app/tasks/models';
+import { CurrentTask } from '@app/root-store/tasks-store/models';
 
 @Component({
   selector: 'app-current-task-list',

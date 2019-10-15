@@ -11,7 +11,7 @@ import { select, Store } from '@ngrx/store';
 import { EMPTY, Observable, of } from 'rxjs';
 import { concatMap, filter, map, switchMap, take } from 'rxjs/operators';
 
-import { TaskSelectors } from '@app/tasks/selectors';
+import { TaskSelectors } from '@app/root-store/tasks-store/selectors';
 
 import { CurrentTask } from '../models';
 

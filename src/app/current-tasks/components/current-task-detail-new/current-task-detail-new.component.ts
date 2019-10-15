@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
-import { CurrentTask } from '@app/tasks/models';
+import { CurrentTask } from '@app/root-store/tasks-store/models';
 
 import { CurrentTaskDetailNewPresenter } from './current-task-detail-new.presenter';
 

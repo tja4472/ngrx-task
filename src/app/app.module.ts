@@ -11,7 +11,6 @@ import { AuthModule } from '@app/auth';
 import { CoreModule } from '@app/core';
 import { AppComponent } from '@app/core/containers';
 import { HomeModule } from '@app/home';
-import { TasksModule } from '@app/tasks';
 
 import { environment } from '../environments/environment';
 
@@ -28,7 +27,6 @@ import { RootStoreModule } from './root-store';
     AngularFirestoreModule,
     AuthModule,
     HomeModule,
-    TasksModule,
     AppRoutingModule,
     RootStoreModule,
     CoreModule,

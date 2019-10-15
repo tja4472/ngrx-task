@@ -9,7 +9,7 @@ import { concatMap, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 
 import { AuthApiActions } from '@app/auth/actions';
 import { authQuery } from '@app/auth/selectors/auth.selectors';
-import { TaskSelectors } from '@app/tasks/selectors';
+import { TaskSelectors } from '@app/root-store/tasks-store/selectors';
 
 import {
   CompletedTaskDetailEditPageActions,

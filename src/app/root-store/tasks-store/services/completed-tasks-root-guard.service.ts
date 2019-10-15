@@ -7,7 +7,7 @@ import { Observable, of } from 'rxjs';
 import { filter, first, switchMap, take, tap } from 'rxjs/operators';
 
 import { authQuery } from '@app/auth/selectors/auth.selectors';
-import { TaskSelectors } from '@app/tasks/selectors';
+import { TaskSelectors } from '@app/root-store/tasks-store/selectors';
 
 import { CompletedTasksRootGuardServiceActions } from '../actions';
 

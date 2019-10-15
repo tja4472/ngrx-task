@@ -4,9 +4,9 @@ import { select, Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
 
-import { TaskListDetailEditPageActions } from '@app/tasks/actions';
-import { TaskListListItem } from '@app/tasks/models';
-import { TaskSelectors } from '@app/tasks/selectors';
+import { TaskListDetailEditPageActions } from '@app/root-store/tasks-store/actions';
+import { TaskListListItem } from '@app/root-store/tasks-store/models';
+import { TaskSelectors } from '@app/root-store/tasks-store/selectors';
 
 @Component({
   selector: 'app-task-list-detail-edit-page',

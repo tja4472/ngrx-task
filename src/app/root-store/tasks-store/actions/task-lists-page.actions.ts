@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 
-import { TaskListListItem } from '@app/tasks/models';
+import { TaskListListItem } from '@app/root-store/tasks-store/models';
 
 const title = 'Task Lists Page';
 

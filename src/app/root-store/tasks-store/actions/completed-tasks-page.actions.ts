@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 
-import { CompletedTask } from '@app/tasks/models';
+import { CompletedTask } from '@app/root-store/tasks-store/models';
 
 const title = 'Completed Tasks Page';
 
