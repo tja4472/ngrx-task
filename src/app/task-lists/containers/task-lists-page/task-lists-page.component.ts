@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 
 import { TaskListsPageActions } from '@app/root-store/tasks-store/actions';
 import { TaskListListItem } from '@app/root-store/tasks-store/models';
-import { TaskSelectors } from '@app/root-store/tasks-store/selectors';
+import { TaskListSelectors } from '@app/root-store/tasks-store/selectors';
 
 @Component({
   selector: 'app-task-lists-page',
@@ -18,7 +18,7 @@ export class TaskListsPageComponent implements OnInit {
   taskLists$: Observable<TaskListListItem[]>;
 
   constructor(private store: Store<any>) {
-    this.taskLists$ = store.pipe(select(TaskSelectors.selectTaskListsAll));
+    this.taskLists$ = store.pipe(select(TaskListSelectors.selectAll));
   }
 
   ngOnInit() {

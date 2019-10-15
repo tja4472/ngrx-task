@@ -4,9 +4,11 @@ import { selectRouteId } from '@app/root-store/reducers';
 
 import { newCurrentTask, newTaskListListItem } from '../models';
 import * as fromTask from '../reducers';
+// import * as TodoListsSelectors from '../task-list-store/selectors';
+import { TaskListSelectors } from '../task-list-store';
 
+import { selectEntities } from './task-list';
 import * as TodoCompletedSelectors from './todo-completed.selectors';
-import * as TodoListsSelectors from './todo-lists.selectors';
 import * as TodoSelectors from './todo.selectors';
 
 const getTaskState = createFeatureSelector<fromTask.TaskState>(
@@ -47,23 +49,6 @@ export const selectCurrentTasksLoaded = createSelector(
 );
 // #endregion
 
-// #region TaskLists
-export const selectTaskListsAll = createSelector(
-  getTaskState,
-  TodoListsSelectors.getAllTodoLists
-);
-
-export const selectTaskListsEntities = createSelector(
-  getTaskState,
-  TodoListsSelectors.getEntities
-);
-
-export const selectTaskListsLoaded = createSelector(
-  getTaskState,
-  TodoListsSelectors.getLoaded
-);
-// #endregion
-
 export const selectCompletedTaskFromRoute = createSelector(
   selectCompletedTasksEntities,
   selectRouteId,
@@ -81,7 +66,7 @@ export const selectCurrentTaskFromRoute = createSelector(
 );
 
 export const selectTaskListFromRoute = createSelector(
-  selectTaskListsEntities,
+  selectEntities,
   selectRouteId,
   (taskLists, id) => {
     return taskLists[id];

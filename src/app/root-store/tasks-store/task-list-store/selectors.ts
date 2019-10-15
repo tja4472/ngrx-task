@@ -1,12 +1,11 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
-import * as fromTodoLists from '../reducers/todo-lists.reducer';
+import { todoListsFeatureKey } from './reducer';
+import { featureAdapter, State } from './state';
 
-const getTodoListsState = createFeatureSelector<fromTodoLists.State>(
-  fromTodoLists.todoListsFeatureKey
-);
+const getTodoListsState = createFeatureSelector<State>(todoListsFeatureKey);
 
-const { selectEntities, selectAll } = fromTodoLists.adapter.getSelectors();
+const { selectEntities, selectAll } = featureAdapter.getSelectors();
 
 export const getAllTodoLists = createSelector(
   getTodoListsState,

@@ -1,9 +1,11 @@
-import { Action, combineReducers, createReducer, on } from '@ngrx/store';
+import { Action, combineReducers } from '@ngrx/store';
 
 import * as fromRoot from '@app/root-store/reducers';
 
+import * as fromTodoLists from '../task-list-store/reducer';
+import * as fromTodoListsState from '../task-list-store/state';
+
 import * as fromTodoCompleted from './todo-completed.reducer';
-import * as fromTodoLists from './todo-lists.reducer';
 import * as fromTodo from './todo.reducer';
 
 export const taskFeatureKey = 'task';
@@ -11,7 +13,7 @@ export const taskFeatureKey = 'task';
 export interface TaskState {
   [fromTodo.todoFeatureKey]: fromTodo.State;
   [fromTodoCompleted.todoCompletedFeatureKey]: fromTodoCompleted.State;
-  [fromTodoLists.todoListsFeatureKey]: fromTodoLists.State;
+  [fromTodoLists.todoListsFeatureKey]: fromTodoListsState.State;
 }
 
 // export const initialState: TaskState = {};

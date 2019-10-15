@@ -6,7 +6,10 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { filter, map, switchMap, take } from 'rxjs/operators';
 
-import { TaskSelectors } from '@app/root-store/tasks-store/selectors';
+import {
+  TaskListSelectors,
+  TaskSelectors,
+} from '@app/root-store/tasks-store/selectors';
 
 @Injectable({
   providedIn: 'root',
@@ -30,7 +33,7 @@ export class TaskListGuardService implements CanActivate {
 
   private waitForTaskListsToLoad(): Observable<boolean> {
     return this.store.pipe(
-      select(TaskSelectors.selectTaskListsLoaded),
+      select(TaskListSelectors.selectLoaded),
       filter((loaded) => loaded),
       take(1)
     );

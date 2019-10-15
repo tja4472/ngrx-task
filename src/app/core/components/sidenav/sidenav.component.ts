@@ -11,7 +11,7 @@ import { filter, map, shareReplay, withLatestFrom } from 'rxjs/operators';
 import { AuthApiActions } from '@app/auth/actions';
 import { UserModel } from '@app/auth/models/user.model';
 import * as FromAuthSelector from '@app/auth/selectors/auth.selectors';
-import { TaskSelectors } from '@app/root-store/tasks-store/selectors';
+import { TaskListSelectors } from '@app/root-store/tasks-store/selectors';
 
 // import { TodoListsItem } from '@app/tasks/models';
 
@@ -40,7 +40,7 @@ export class SidenavComponent {
     private store: Store<any>
   ) {
     this.user$ = this.store.select(FromAuthSelector.authQuery.selectAuthUser);
-    this.taskLists$ = store.pipe(select(TaskSelectors.selectTaskListsAll));
+    this.taskLists$ = store.pipe(select(TaskListSelectors.selectAll));
 
     // Close sidenav on a handset device after route click.
     router.events
