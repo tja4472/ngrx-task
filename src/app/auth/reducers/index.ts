@@ -7,7 +7,7 @@ import {
 import * as fromAuth from '@app/auth/reducers/auth.reducer';
 import * as fromSignInPage from '@app/auth/reducers/sign-in-page.reducer';
 import * as fromSignUpPage from '@app/auth/reducers/sign-up-page.reducer';
-import * as fromRoot from '@app/reducers';
+import * as fromRoot from '@app/root-store/reducers';
 
 export interface AuthFeatureState {
   auth: fromAuth.AuthState;

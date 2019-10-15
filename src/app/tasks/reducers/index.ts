@@ -1,6 +1,6 @@
 import { Action, combineReducers, createReducer, on } from '@ngrx/store';
 
-import * as fromRoot from '@app/reducers';
+import * as fromRoot from '@app/root-store/reducers';
 
 import * as fromTodoCompleted from './todo-completed.reducer';
 import * as fromTodoLists from './todo-lists.reducer';

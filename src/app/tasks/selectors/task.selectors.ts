@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
-import { selectRouteId } from '@app/reducers';
+import { selectRouteId } from '@app/root-store/reducers';
 
 import { newCurrentTask, newTaskListListItem } from '../models';
 import * as fromTask from '../reducers';

@@ -5,7 +5,7 @@ import { select, Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
 
-import * as fromRoot from '@app/reducers';
+import * as fromRoot from '@app/root-store/reducers';
 
 /*
 import { AuthActions } from '@example-app/auth/actions';
