@@ -11,6 +11,10 @@ import { AuthApiActions } from '@app/auth/actions';
 import { authQuery } from '@app/auth/selectors/auth.selectors';
 import { TaskSelectors } from '@app/root-store/tasks-store/selectors';
 
+import { CompletedTaskDataService } from '../../../services/completed-task.data.service';
+import { CurrentTaskDataService } from '../../../services/current-task.data.service';
+import { Fb1DataService } from '../../../services/fb1.data.service';
+import { TaskListDataService } from '../../../services/task-list.data.service';
 import {
   CompletedTaskDetailEditPageActions,
   CompletedTasksPageActions,
@@ -24,10 +28,6 @@ import {
   TodoActions,
   TodoCompletedActions,
 } from '../actions';
-import { CompletedTaskDataService } from '../services/completed-task.data.service';
-import { CurrentTaskDataService } from '../services/current-task.data.service';
-import { Fb1DataService } from '../services/fb1.data.service';
-import { TaskListDataService } from '../services/task-list.data.service';
 
 @Injectable()
 export class TaskEffects {

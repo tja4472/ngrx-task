@@ -13,7 +13,7 @@ import { concatMap, filter, map, switchMap, take } from 'rxjs/operators';
 
 import { TaskSelectors } from '@app/root-store/tasks-store/selectors';
 
-import { CurrentTask } from '../models';
+import { CurrentTask } from '../root-store/tasks-store/models';
 
 @Injectable({
   providedIn: 'root',

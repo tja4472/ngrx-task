@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AuthGuardService } from '@app/auth/services/auth-guard.service';
-import { CurrentTasksRootGuardService } from '@app/root-store/tasks-store/services/current-tasks-root-guard.service';
+import { CurrentTasksRootGuardService } from '@app/services/current-tasks-root-guard.service';
 
 import {
   CurrentTaskDetailEditPageComponent,

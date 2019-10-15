@@ -16,13 +16,13 @@ import {
 
 import { authQuery } from '@app/auth/selectors/auth.selectors';
 
+import { CompletedTaskDataService } from '../../../services/completed-task.data.service';
 import {
   CompletedTasksRootActions,
   CompletedTasksRootGuardServiceActions,
   TodoCompletedActions,
 } from '../actions';
 import { CompletedTask } from '../models';
-import { CompletedTaskDataService } from '../services/completed-task.data.service';
 
 @Injectable()
 export class TodoCompletedEffects {

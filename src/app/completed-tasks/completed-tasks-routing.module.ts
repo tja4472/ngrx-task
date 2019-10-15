@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AuthGuardService } from '@app/auth/services/auth-guard.service';
-import { CompletedTasksRootGuardService } from '@app/root-store/tasks-store/services/completed-tasks-root-guard.service';
+import { CompletedTasksRootGuardService } from '@app/services/completed-tasks-root-guard.service';
 
 import {
   CompletedTaskDetailEditPageComponent,

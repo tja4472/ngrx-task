@@ -17,8 +17,8 @@ import {
 import { AuthApiActions } from '@app/auth/actions';
 import { authQuery } from '@app/auth/selectors/auth.selectors';
 
+import { TaskListDataService } from '../../../services/task-list.data.service';
 import { TodoListsActions } from '../actions';
-import { TaskListDataService } from '../services/task-list.data.service';
 
 @Injectable()
 export class TodoListsEffects {

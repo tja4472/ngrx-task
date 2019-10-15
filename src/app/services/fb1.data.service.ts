@@ -5,7 +5,7 @@ import {
   CurrentTask,
   newCompletedTask,
   newCurrentTask,
-} from '../models';
+} from '../root-store/tasks-store/models';
 
 import { CompletedTaskDataService } from './completed-task.data.service';
 import { CurrentTaskDataService } from './current-task.data.service';

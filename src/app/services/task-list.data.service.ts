@@ -5,7 +5,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { TaskListListItem } from '../models';
+import { TaskListListItem } from '../root-store/tasks-store/models';
 
 const DATA_COLLECTION = 'todo-lists';
 const USERS_COLLECTION = 'users';

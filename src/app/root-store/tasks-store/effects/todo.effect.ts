@@ -15,13 +15,13 @@ import {
 
 import { authQuery } from '@app/auth/selectors/auth.selectors';
 
+import { CurrentTaskDataService } from '../../../services/current-task.data.service';
 import {
   CurrentTasksRootActions,
   CurrentTasksRootGuardServiceActions,
   TodoActions,
 } from '../actions';
 import { CurrentTask } from '../models';
-import { CurrentTaskDataService } from '../services/current-task.data.service';
 
 @Injectable()
 export class TodoEffects {

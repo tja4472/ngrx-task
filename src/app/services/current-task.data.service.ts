@@ -5,7 +5,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { CurrentTask } from '../models';
+import { CurrentTask } from '../root-store/tasks-store/models';
 
 const DATA_COLLECTION = 'current-todos';
 const USERS_COLLECTION = 'users';

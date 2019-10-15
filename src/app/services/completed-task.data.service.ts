@@ -5,7 +5,10 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { CompletedTask, newCompletedTask } from '../models';
+import {
+  CompletedTask,
+  newCompletedTask,
+} from '../root-store/tasks-store/models';
 
 const DATA_COLLECTION = 'completed-todos';
 const USERS_COLLECTION = 'users';
