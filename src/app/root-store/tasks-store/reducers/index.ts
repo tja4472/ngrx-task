@@ -13,7 +13,7 @@ export const taskFeatureKey = 'task';
 export interface TaskState {
   [fromTodo.todoFeatureKey]: fromTodo.State;
   [fromTodoCompleted.todoCompletedFeatureKey]: fromTodoCompleted.State;
-  [fromTodoLists.todoListsFeatureKey]: fromTodoListsState.State;
+  [fromTodoLists.featureKey]: fromTodoListsState.State;
 }
 
 // export const initialState: TaskState = {};
@@ -27,6 +27,6 @@ export function reducers(state: TaskState | undefined, action: Action) {
   return combineReducers({
     [fromTodo.todoFeatureKey]: fromTodo.reducer,
     [fromTodoCompleted.todoCompletedFeatureKey]: fromTodoCompleted.reducer,
-    [fromTodoLists.todoListsFeatureKey]: fromTodoLists.reducer,
+    [fromTodoLists.featureKey]: fromTodoLists.reducer,
   })(state, action);
 }

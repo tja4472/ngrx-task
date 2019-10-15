@@ -4,7 +4,7 @@ import { TaskActions, TodoListsActions } from '../actions';
 
 import { featureAdapter, initialState, State } from './state';
 
-export const todoListsFeatureKey = 'todo-lists';
+export const featureKey = 'taskLists';
 
 const featureReducer = createReducer(
   initialState,
