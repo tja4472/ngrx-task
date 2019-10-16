@@ -6,9 +6,9 @@ import { StoreModule } from '@ngrx/store';
 
 import { TaskEffects } from './effects/task.effects';
 import { TodoCompletedEffects } from './effects/todo-completed.effect';
-import { TodoListsEffects } from './effects/todo-lists.effect';
 import { TodoEffects } from './effects/todo.effect';
 import * as fromTask from './reducers';
+import { TaskListEffects } from './task-list-store/effects';
 
 @NgModule({
   imports: [
@@ -16,11 +16,11 @@ import * as fromTask from './reducers';
     StoreModule.forFeature(fromTask.taskFeatureKey, fromTask.reducers),
     EffectsModule.forFeature([
       TaskEffects,
-      TodoListsEffects,
+      TaskListEffects,
       TodoEffects,
       TodoCompletedEffects,
     ]),
   ],
-  providers: [TaskEffects, TodoListsEffects, TodoEffects, TodoCompletedEffects],
+  providers: [TaskEffects, TaskListEffects, TodoEffects, TodoCompletedEffects],
 })
 export class TasksStoreModule {}

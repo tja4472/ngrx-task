@@ -14,11 +14,3 @@ export const completedTaskDetailsPageEnter = createAction(
 );
 
 //
-
-// TaskListDetailPage
-export const taskListDetailPageEnter = createAction(
-  '[Task List Detail Page] Enter',
-  props<{ id: string }>()
-);
-
-//

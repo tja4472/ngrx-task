@@ -1,6 +1,7 @@
+import * as TaskListActions from './actions';
 import * as TaskListSelectors from './selectors';
 
-export { TaskListSelectors };
+export { TaskListActions, TaskListSelectors };
 
 /*
 import * as JokeStoreActions from './actions';

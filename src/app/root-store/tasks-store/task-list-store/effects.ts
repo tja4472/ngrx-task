@@ -3,25 +3,24 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 
-import { EMPTY, of } from 'rxjs';
+import { of } from 'rxjs';
 import {
   concatMap,
   filter,
   map,
   switchMap,
   takeUntil,
-  tap,
   withLatestFrom,
 } from 'rxjs/operators';
 
 import { AuthApiActions } from '@app/auth/actions';
 import { authQuery } from '@app/auth/selectors/auth.selectors';
+import { TaskListDataService } from '@app/services/task-list.data.service';
 
-import { TaskListDataService } from '../../../services/task-list.data.service';
-import { TodoListsActions } from '../actions';
+import * as featureActions from './actions';
 
 @Injectable()
-export class TodoListsEffects {
+export class TaskListEffects {
   constructor(
     private actions$: Actions<AuthApiActions.AuthApiActionsUnion>,
     private dataService: TaskListDataService,
@@ -30,17 +29,8 @@ export class TodoListsEffects {
 
   @Effect()
   authListenForAuthSuccess$ = this.actions$.pipe(
-    ofType(
-      AuthApiActions.autoSignInHaveUser.type,
-      AuthApiActions.signInSuccess.type
-    ),
-    map((action) => TodoListsActions.listenForData({ userId: action.user.id }))
-  );
-
-  @Effect()
-  authListenForAuthNoUser$ = this.actions$.pipe(
-    ofType(AuthApiActions.autoSignInNoUser.type),
-    map(() => TodoListsActions.unlistenForData())
+    ofType(AuthApiActions.autoSignInHaveUser, AuthApiActions.signInSuccess),
+    map((action) => featureActions.listenForData({ userId: action.user.id }))
   );
 
   /*
@@ -73,21 +63,21 @@ export class TodoListsEffects {
 */
   @Effect()
   listenForData$ = this.actions$.pipe(
-    ofType(TodoListsActions.listenForData),
+    ofType(featureActions.listenForData),
     concatMap((action) =>
       of(action).pipe(
         withLatestFrom(this.store.select(authQuery.selectAuthUser))
       )
     ),
-    // tap(([action, user]) => console.log('}}}}}}}}}}', user)),
-    filter(([action, user]) => user !== null),
-    switchMap(([action, user]) =>
+    map(([_, user]) => user),
+    filter((user) => user !== null),
+    switchMap((user) =>
       this.dataService
         .getData(user.id)
         .pipe(
           takeUntil(this.actions$.pipe(ofType(AuthApiActions.signOutComplete)))
         )
     ),
-    map((items) => TodoListsActions.loadSuccess({ items }))
+    map((items) => featureActions.loadSuccess({ items }))
   );
 }

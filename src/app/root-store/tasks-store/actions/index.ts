@@ -13,7 +13,6 @@ import * as TaskListsPageActions from './task-lists-page.actions';
 import * as TaskListsRootActions from './task-lists-root.actions';
 import * as TaskActions from './task.actions';
 import * as TodoCompletedActions from './todo-completed.action';
-import * as TodoListsActions from './todo-lists.action';
 import * as TodoActions from './todo.action';
 
 export {
@@ -33,5 +32,4 @@ export {
   TaskListsRootActions,
   TodoActions,
   TodoCompletedActions,
-  TodoListsActions,
 };
