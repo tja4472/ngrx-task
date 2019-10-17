@@ -87,6 +87,31 @@ export class AuthEffects {
     })
   );
 
+  @Effect({ dispatch: false })
+  signOut$ = this.actions$.pipe(
+    ofType(AuthApiActions.signOut),
+    tap(() =>
+      this.afAuth.auth.signOut().then(() => {
+        this.router.navigate(['/sign-in']);
+        this.store.dispatch(AuthApiActions.signOutComplete());
+      })
+    )
+  );
+
+  /*
+  @Effect()
+  signOut$ = this.actions$.pipe(
+    ofType(AuthApiActions.signOut.type),
+    exhaustMap(() =>
+      this.authService.signOut().pipe(
+        tap(() => this.router.navigate(['/sign-in'])),
+        map(() => AuthApiActions.signOutComplete())
+        // catchError(() => of(new SignOutComplete()))
+      )
+    )
+  );
+*/
+
   /*
   @Effect()
   signIn$ = this.actions$.pipe(
@@ -217,12 +242,13 @@ export class AuthEffects {
     )
   );
 */
+  /*
   @Effect()
   bb2$ = this.actions$.pipe(
     ofType(AuthApiActions.signOut),
     map(() => UserStoreActions.clearUser())
   );
-
+*/
   // ======================================
   /*
   @Effect()
@@ -377,7 +403,7 @@ export class AuthEffects {
       ),
     );
   */
-
+  /*
   @Effect()
   signOut$ = this.actions$.pipe(
     ofType(AuthApiActions.signOut.type),
@@ -389,6 +415,7 @@ export class AuthEffects {
       )
     )
   );
+*/
 
   // ==
   // SignOutConfirmationAlert

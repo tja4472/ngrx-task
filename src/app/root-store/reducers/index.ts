@@ -10,6 +10,9 @@ import {
   MetaReducer,
 } from '@ngrx/store';
 
+import { AuthApiActions } from '@app/auth/actions';
+import * as fromAuth from '@app/auth/reducers';
+
 import { environment } from '../../../environments/environment';
 
 export interface State {
@@ -38,9 +41,23 @@ export function logger(reducer: ActionReducer<State>): ActionReducer<State> {
   };
 }
 
+// reset whole state except for authFeature and router
+function flush(reducer) {
+  // tslint:disable-next-line: only-arrow-functions
+  return function(state: fromAuth.State | undefined, action: Action) {
+    if (action.type === AuthApiActions.signOutComplete.type) {
+      return reducer(
+        { authFeature: state.authFeature, router: state.router },
+        action
+      );
+    }
+    return reducer(state, action);
+  };
+}
+
 export const metaReducers: MetaReducer<State>[] = !environment.production
-  ? [logger]
-  : [];
+  ? [logger, flush]
+  : [flush];
 
 export const selectRouter = createFeatureSelector<
   State,
