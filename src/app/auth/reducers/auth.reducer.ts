@@ -1,15 +1,11 @@
 import { AuthApiActions } from '@app/auth/actions';
-import { UserModel } from '@app/auth/models/user.model';
 
-export interface AuthState
-  extends Readonly<{
-    hasChecked: boolean;
-    user: UserModel | null;
-  }> {}
+export interface AuthState {
+  hasChecked: boolean;
+}
 
 export const initialState: AuthState = {
   hasChecked: false,
-  user: null,
 };
 
 export function authReducer(
@@ -24,7 +20,7 @@ export function authReducer(
     case AuthApiActions.signInSuccess.type:
     case AuthApiActions.autoSignInHaveUser.type:
     case AuthApiActions.signUpSuccess.type:
-      return { ...state, hasChecked: true, user: action.user };
+      return { ...state, hasChecked: true };
 
     case AuthApiActions.signOut.type:
       return { ...initialState, hasChecked: true };

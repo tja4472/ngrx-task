@@ -8,17 +8,12 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { filter, map, shareReplay, withLatestFrom } from 'rxjs/operators';
 
-import { AuthApiActions } from '@app/auth/actions';
-import { UserModel } from '@app/auth/models/user.model';
-import * as FromAuthSelector from '@app/auth/selectors/auth.selectors';
 import { User } from '@app/models';
 import { TaskListSelectors } from '@app/root-store/tasks-store/selectors';
 import {
   UserStoreActions,
   UserStoreSelectors,
 } from '@app/root-store/user-store';
-
-// import { TodoListsItem } from '@app/tasks/models';
 
 @Component({
   selector: 'app-sidenav',

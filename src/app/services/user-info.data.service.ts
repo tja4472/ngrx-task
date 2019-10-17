@@ -6,8 +6,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { from, Observable, of } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 
-import { newUserInfo, UserInfo } from '@app/auth/models/user-info.model';
 import { EnvironmentService } from '@app/core/environment.service';
+import { newUserInfo, UserInfo } from '@app/models/user-info.model';
 
 /*
 const APP_KEY = 'apps/' + environment.appCode;

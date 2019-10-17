@@ -31,8 +31,6 @@ import {
 } from '@app/root-store/user-store';
 
 import { UserInfoDataService } from '../../services/user-info.data.service';
-import { qqqHaveFirebaseUser } from '../actions/auth-api.actions';
-import { authQuery } from '../selectors/auth.selectors';
 
 // import { SignOutConfirmationAlertService } from '@app/auth/services/sign-out-confirmation-alert.service';
 
@@ -275,6 +273,7 @@ export class AuthEffects {
     })
   );
 
+  /*
   @Effect()
   signUp$ = this.actions$.pipe(
     ofType(SignUpPageActions.signUp.type),
@@ -285,7 +284,7 @@ export class AuthEffects {
       )
     )
   );
-
+*/
   @Effect({ dispatch: false })
   authSignInSuccess$ = this.actions$.pipe(
     ofType(

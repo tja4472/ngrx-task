@@ -1,3 +1,4 @@
+// Not the correct location for this file.
 export interface UserInfo {
   readonly todoListId: string;
 }
