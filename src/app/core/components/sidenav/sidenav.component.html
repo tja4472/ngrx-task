@@ -18,7 +18,7 @@
 
       <mat-select
         (selectionChange)="viewtodoListsSelectChange($event)"
-        [value]="signedInUser.todoListId"
+        [value]="signedInUser.taskListId"
       >
         <mat-option *ngFor="let item of taskLists$ | async" [value]="item.id"
           >{{ item.name }}

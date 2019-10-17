@@ -4,13 +4,13 @@ import { inject, TestBed } from '@angular/core/testing';
 import { AngularFirestore } from '@angular/fire/firestore';
 
 import { newUserInfo, UserInfo } from '@app/auth/models/user-info.model';
+import { EnvironmentService } from '@app/core/environment.service';
 import {
   FirestoreDoc,
   fromFirestoreDoc,
   toFirestoreDoc,
   UserInfoDataService,
-} from '@app/auth/services/user-info.data.service';
-import { EnvironmentService } from '@app/core/environment.service';
+} from '@app/services/user-info.data.service';
 
 describe('Conversion functions', () => {
   it('#fromFirestoreDoc should return null', () => {

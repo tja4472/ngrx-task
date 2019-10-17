@@ -1,5 +1,7 @@
 import { Action, createReducer, on } from '@ngrx/store';
 
+import { User } from '@app/models';
+
 import * as featureActions from './actions';
 import { initialState, State } from './state';
 
@@ -17,6 +19,11 @@ const featureReducer = createReducer(
     return values;
   }),
   on(featureActions.setUser, (state, { user }) => {
+    const values: State = { ...state, user };
+    return values;
+  }),
+  on(featureActions.setTaskListId, (state, { taskListId }) => {
+    const user: User = { ...state.user, taskListId };
     const values: State = { ...state, user };
     return values;
   })

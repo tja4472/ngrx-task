@@ -15,7 +15,7 @@ import {
 
 import { Credentials } from '@app/auth/models/credentials.model';
 import { UserModel } from '@app/auth/models/user.model';
-import { UserInfoDataService } from '@app/auth/services/user-info.data.service';
+import { UserInfoDataService } from '@app/services/user-info.data.service';
 
 @Injectable({
   providedIn: 'root',

@@ -11,9 +11,12 @@ import { filter, map, shareReplay, withLatestFrom } from 'rxjs/operators';
 import { AuthApiActions } from '@app/auth/actions';
 import { UserModel } from '@app/auth/models/user.model';
 import * as FromAuthSelector from '@app/auth/selectors/auth.selectors';
-import { TaskListSelectors } from '@app/root-store/tasks-store/selectors';
-import { UserStoreSelectors } from '@app/root-store/user-store';
 import { User } from '@app/models';
+import { TaskListSelectors } from '@app/root-store/tasks-store/selectors';
+import {
+  UserStoreActions,
+  UserStoreSelectors,
+} from '@app/root-store/user-store';
 
 // import { TodoListsItem } from '@app/tasks/models';
 
@@ -57,7 +60,7 @@ export class SidenavComponent {
     // console.log('todoListId>', todoListId.value);
     // this.userService.SetTodoListId(todoListId);
     this.store.dispatch(
-      AuthApiActions.setUserListId({ listId: todoListId.value })
+      UserStoreActions.setTaskListId({ taskListId: todoListId.value })
     );
   }
 }

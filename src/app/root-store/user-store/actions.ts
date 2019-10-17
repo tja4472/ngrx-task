@@ -12,3 +12,8 @@ export const setUser = createAction(
     user: User;
   }>()
 );
+
+export const setTaskListId = createAction(
+  `[${title}] Set Task List Id`,
+  props<{ taskListId: string }>()
+);

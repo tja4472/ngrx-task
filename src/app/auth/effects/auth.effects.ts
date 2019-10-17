@@ -30,9 +30,9 @@ import {
   UserStoreSelectors,
 } from '@app/root-store/user-store';
 
+import { UserInfoDataService } from '../../services/user-info.data.service';
 import { qqqHaveFirebaseUser } from '../actions/auth-api.actions';
 import { authQuery } from '../selectors/auth.selectors';
-import { UserInfoDataService } from '../services/user-info.data.service';
 
 // import { SignOutConfirmationAlertService } from '@app/auth/services/sign-out-confirmation-alert.service';
 
@@ -318,20 +318,6 @@ export class AuthEffects {
     )
   );
 */
-  @Effect({ dispatch: false })
-  setUserListId$ = this.actions$.pipe(
-    ofType(AuthApiActions.setUserListId),
-    concatMap((action) =>
-      of(action).pipe(
-        withLatestFrom(this.store.select(UserStoreSelectors.selectUser))
-      )
-    ),
-    tap(([action, user]) => {
-      const saveUser = { ...user, todoListId: action.listId };
-
-      this.userInfoDataService.save(saveUser, user.id);
-    })
-  );
 
   /*
   @Effect({ dispatch: false })

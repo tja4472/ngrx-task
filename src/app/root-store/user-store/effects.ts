@@ -10,12 +10,35 @@ import {
   map,
   switchMap,
   takeUntil,
+  tap,
   withLatestFrom,
 } from 'rxjs/operators';
 
+import { UserInfoDataService } from '@app/services/user-info.data.service';
+
 import * as featureActions from './actions';
+import * as featureSelectors from './selectors';
 
 @Injectable()
 export class UserStoreEffects {
-  constructor(private actions$: Actions, private store: Store<any>) {}
+  @Effect({ dispatch: false })
+  setUserListId$ = this.actions$.pipe(
+    ofType(featureActions.setTaskListId),
+    concatMap((action) =>
+      of(action).pipe(
+        withLatestFrom(this.store.select(featureSelectors.selectUser))
+      )
+    ),
+    tap(([action, user]) => {
+      const saveUser = { ...user, todoListId: action.taskListId };
+
+      this.userInfoDataService.save(saveUser, user.id);
+    })
+  );
+
+  constructor(
+    private actions$: Actions,
+    private store: Store<any>,
+    private userInfoDataService: UserInfoDataService
+  ) {}
 }
