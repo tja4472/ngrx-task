@@ -8,6 +8,7 @@ import { filter, first, switchMap, take, tap } from 'rxjs/operators';
 
 import { authQuery } from '@app/auth/selectors/auth.selectors';
 import { TaskSelectors } from '@app/root-store/tasks-store/selectors';
+import { UserStoreSelectors } from '@app/root-store/user-store';
 
 import { CurrentTasksRootGuardServiceActions } from '../root-store/tasks-store/actions';
 
@@ -31,7 +32,7 @@ export class CurrentTasksRootGuardService implements CanActivate {
 
   private waitForAuth() {
     return this.store.pipe(
-      select(authQuery.selectAuthUser),
+      select(UserStoreSelectors.selectUser),
       filter((user) => !!user),
       first()
     );

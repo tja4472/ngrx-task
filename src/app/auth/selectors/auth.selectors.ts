@@ -39,6 +39,6 @@ export const selectIsLoggedInChecked = createSelector(
 
 export const authQuery = {
   selectHasChecked,
-  selectAuthUser,
-  selectIsLoggedIn,
+  // selectAuthUser,
+  // selectIsLoggedIn,
 };

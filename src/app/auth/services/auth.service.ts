@@ -31,8 +31,9 @@ export class AuthService {
     private readonly afAuth: AngularFireAuth,
     private readonly userDataService: UserInfoDataService
   ) {
+    /*
     const firebaseAuth$ = this.afAuth.authState.pipe(
-      // tap(() => console.log('***SIDE EFFECT***')),
+      tap(() => console.log('***SIDE EFFECT***')),
       share()
     );
 
@@ -61,13 +62,15 @@ export class AuthService {
     );
 
     this.signedInSignedOut$ = merge(this.signedIn$, this.signedOut$);
+*/
   }
 
+  /*
   public autoSignIn(): Observable<UserModel> {
     //
     return this.signedInSignedOut$.pipe(take(1));
   }
-
+*/
   public login(auth: Credentials): Observable<UserModel> {
     //
     const result$ = from(

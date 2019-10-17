@@ -14,6 +14,7 @@ import {
 } from 'rxjs/operators';
 
 import { authQuery } from '@app/auth/selectors/auth.selectors';
+import { UserStoreSelectors } from '@app/root-store/user-store';
 
 import { CurrentTaskDataService } from '../../../services/current-task.data.service';
 import {
@@ -90,9 +91,9 @@ export class TodoEffects {
   listenForData$ = this.actions$.pipe(
     ofType(CurrentTasksRootGuardServiceActions.loadData),
     switchMap(() =>
-      this.store.select(authQuery.selectAuthUser).pipe(
+      this.store.select(UserStoreSelectors.selectUser).pipe(
         switchMap((user) =>
-          this.dataService.getData$(user.todoListId, user.id)
+          this.dataService.getData$(user.taskListId, user.id)
         ),
         takeUntil(this.actions$.pipe(ofType(CurrentTasksRootActions.destroyed)))
       )
@@ -107,11 +108,11 @@ export class TodoEffects {
     ofType(TodoActions.reorderList),
     concatMap((action) =>
       of(action).pipe(
-        withLatestFrom(this.store.select(authQuery.selectAuthUser))
+        withLatestFrom(this.store.select(UserStoreSelectors.selectUser))
       )
     ),
     tap(([action, user]) => {
-      this.dataService.reorderItems(action.ids, user.todoListId, user.id);
+      this.dataService.reorderItems(action.ids, user.taskListId, user.id);
     })
   );
 }

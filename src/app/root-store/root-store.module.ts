@@ -9,10 +9,13 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { metaReducers, ROOT_REDUCERS } from '@app/root-store/reducers';
 import { TasksStoreModule } from '@app/root-store/tasks-store';
 
+import { UserStoreModule } from './user-store';
+
 @NgModule({
   imports: [
     CommonModule,
     TasksStoreModule,
+    UserStoreModule,
     StoreModule.forRoot(ROOT_REDUCERS, {
       metaReducers,
       runtimeChecks: {

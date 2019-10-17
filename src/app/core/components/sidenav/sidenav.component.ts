@@ -12,6 +12,8 @@ import { AuthApiActions } from '@app/auth/actions';
 import { UserModel } from '@app/auth/models/user.model';
 import * as FromAuthSelector from '@app/auth/selectors/auth.selectors';
 import { TaskListSelectors } from '@app/root-store/tasks-store/selectors';
+import { UserStoreSelectors } from '@app/root-store/user-store';
+import { User } from '@app/models';
 
 // import { TodoListsItem } from '@app/tasks/models';
 
@@ -30,7 +32,7 @@ export class SidenavComponent {
       shareReplay()
     );
 
-  user$: Observable<UserModel>;
+  user$: Observable<User>;
   selected = 'Cn7vwq2PCR6uj2u5nw3d';
   taskLists$;
 
@@ -39,7 +41,7 @@ export class SidenavComponent {
     router: Router,
     private store: Store<any>
   ) {
-    this.user$ = this.store.select(FromAuthSelector.authQuery.selectAuthUser);
+    this.user$ = this.store.select(UserStoreSelectors.selectUser);
     this.taskLists$ = store.pipe(select(TaskListSelectors.selectAll));
 
     // Close sidenav on a handset device after route click.

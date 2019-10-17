@@ -16,6 +16,7 @@ import { catchError, exhaustMap, filter, map, take, tap } from 'rxjs/operators';
 import * as fromAuth from '@app/auth/reducers';
 import { authQuery } from '@app/auth/selectors/auth.selectors';
 import { AuthService } from '@app/auth/services/auth.service';
+import { UserStoreSelectors } from '@app/root-store/user-store';
 
 @Injectable({
   providedIn: 'root',
@@ -70,7 +71,7 @@ export class AuthGuardService implements CanActivate {
       filter((hasChecked) => hasChecked),
       exhaustMap(() =>
         this.store.pipe(
-          select(authQuery.selectIsLoggedIn),
+          select(UserStoreSelectors.selectIsLoggedIn),
           take(1)
         )
       )

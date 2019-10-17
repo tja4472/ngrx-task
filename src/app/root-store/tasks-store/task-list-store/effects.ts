@@ -15,6 +15,7 @@ import {
 
 import { AuthApiActions } from '@app/auth/actions';
 import { authQuery } from '@app/auth/selectors/auth.selectors';
+import { UserStoreSelectors } from '@app/root-store/user-store';
 import { TaskListDataService } from '@app/services/task-list.data.service';
 
 import * as featureActions from './actions';
@@ -29,10 +30,17 @@ export class TaskListEffects {
 
   @Effect()
   authListenForAuthSuccess$ = this.actions$.pipe(
-    ofType(AuthApiActions.autoSignInHaveUser, AuthApiActions.signInSuccess),
+    ofType(AuthApiActions.qqqautoSignInHaveUser),
     map((action) => featureActions.listenForData({ userId: action.user.id }))
   );
 
+  /*
+    @Effect()
+  authListenForAuthSuccess$ = this.actions$.pipe(
+    ofType(AuthApiActions.autoSignInHaveUser, AuthApiActions.signInSuccess),
+    map((action) => featureActions.listenForData({ userId: action.user.id }))
+  );
+  */
   /*
   @Effect()
   listenForDataOrig$ = this.actions$.pipe(
@@ -66,7 +74,7 @@ export class TaskListEffects {
     ofType(featureActions.listenForData),
     concatMap((action) =>
       of(action).pipe(
-        withLatestFrom(this.store.select(authQuery.selectAuthUser))
+        withLatestFrom(this.store.select(UserStoreSelectors.selectUser))
       )
     ),
     map(([_, user]) => user),

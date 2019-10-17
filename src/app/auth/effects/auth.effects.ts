@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { AngularFireAuth } from '@angular/fire/auth';
+
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 
@@ -9,7 +11,9 @@ import {
   catchError,
   concatMap,
   exhaustMap,
+  filter,
   map,
+  switchMap,
   tap,
   withLatestFrom,
 } from 'rxjs/operators';
@@ -21,13 +25,206 @@ import {
   SignUpPageActions,
 } from '@app/auth/actions';
 import { AuthService } from '@app/auth/services/auth.service';
+import {
+  UserStoreActions,
+  UserStoreSelectors,
+} from '@app/root-store/user-store';
 
+import { qqqHaveFirebaseUser } from '../actions/auth-api.actions';
 import { authQuery } from '../selectors/auth.selectors';
 import { UserInfoDataService } from '../services/user-info.data.service';
+
 // import { SignOutConfirmationAlertService } from '@app/auth/services/sign-out-confirmation-alert.service';
 
 @Injectable()
 export class AuthEffects {
+  // @Effect({ dispatch: false })
+  @Effect()
+  qqqautoSignIn$ = this.actions$.pipe(
+    ofType(AuthApiActions.autoSignIn),
+    switchMap(() =>
+      this.afAuth.authState.pipe(
+        tap((firebaseUser) =>
+          console.log('BBBBBB-firebaseUser>', firebaseUser)
+        ),
+        map((firebaseUser) => {
+          if (firebaseUser === null) {
+            return AuthApiActions.autoSignInNoUser();
+          } else {
+            console.log('lll>', firebaseUser.uid);
+
+            return AuthApiActions.qqqHaveFirebaseUser({
+              uid: firebaseUser.uid,
+              email: firebaseUser.email,
+              displayName: firebaseUser.displayName,
+            });
+          }
+        })
+      )
+    )
+  );
+
+  @Effect({ dispatch: false })
+  // @Effect()
+  signIn$ = this.actions$.pipe(
+    ofType(SignInPageActions.signIn),
+    tap((action) => {
+      // const password = 'aaaaa';
+      const password = action.credentials.password;
+
+      this.afAuth.auth
+        .signInWithEmailAndPassword(action.credentials.username, password)
+        .catch((error) =>
+          this.store.dispatch(
+            AuthApiActions.signInFailure({
+              error: {
+                code: error.code,
+                message: error.message,
+              },
+            })
+          )
+        );
+    })
+  );
+
+  /*
+  @Effect()
+  signIn$ = this.actions$.pipe(
+    ofType(SignInPageActions.signIn.type),
+    exhaustMap((action) =>
+      this.authService.login(action.credentials).pipe(
+        map((user) => AuthApiActions.signInSuccess({ user })),
+        catchError((error) => of(AuthApiActions.signInFailure({ error })))
+      )
+    )
+  );
+*/
+
+  /*
+  @Effect()
+  authaaaaaa$ = this.actions$.pipe(
+    ofType(AuthApiActions.autoSignIn),
+    switchMap(() =>
+      this.afAuth.authState.pipe(
+        tap((firebaseUser) =>
+          console.log('AAAAAA-firebaseUser>', firebaseUser)
+        ),
+        filter((firebaseUser) => firebaseUser !== null),
+
+        map(({ uid, email, displayName }) =>
+          AuthApiActions.qqqHaveFirebaseUser({ uid, email, displayName })
+        )
+      )
+    )
+  );
+  */
+
+  /*
+        concatMap(() =>
+          of().pipe(
+            withLatestFrom(this.store.select(authQuery.selectHasChecked))
+          )
+        ),
+        map(([_, hasChecked]) => hasChecked),
+        tap((hasChecked) =>
+          console.log('AAAAAA-hasChecked>', hasChecked)
+        ),        
+        filter((hasChecked) => !hasChecked),
+
+        map(() => AuthApiActions.qqqautoSignInNoUser())
+      )  
+  */
+
+  // maybe not fire because already used?
+  cc$ = this.actions$.pipe(
+    ofType(AuthApiActions.autoSignIn),
+    tap(() => console.log('AAAAAAA')),
+    switchMap(() =>
+      this.afAuth.authState.pipe(
+        filter((firebaseUser) => firebaseUser === null),
+        tap((firebaseUser) =>
+          console.log('AAAAAA-firebaseUser>', firebaseUser)
+        ),
+        map(({ uid, email, displayName }) =>
+          AuthApiActions.qqqHaveFirebaseUser({ uid, email, displayName })
+        )
+      )
+    )
+  );
+
+  @Effect()
+  bb$ = this.actions$.pipe(
+    ofType(AuthApiActions.qqqHaveFirebaseUser),
+    tap(() => console.log('Get User Data')),
+    concatMap((firebaseUser) =>
+      from(this.userInfoDataService.getUserData(firebaseUser.uid)).pipe(
+        tap((x) => console.log('Get User Data aaa>', x, firebaseUser.uid)),
+        map(
+          (user) =>
+            UserStoreActions.setUser({
+              user: {
+                id: firebaseUser.uid,
+                email: firebaseUser.email,
+                name: firebaseUser.displayName,
+                taskListId: user.todoListId,
+              },
+            })
+          /*        
+          AuthApiActions.qqqautoSignInHaveUser({
+            user: {
+              id: firebaseUser.uid,
+              email: firebaseUser.email,
+              name: firebaseUser.displayName,
+              todoListId: user.todoListId,
+            },
+          })
+*/
+        )
+      )
+    )
+  );
+
+  @Effect()
+  bb1$ = this.actions$.pipe(
+    ofType(UserStoreActions.setUser),
+    map(({ user }) => user),
+    map((user) =>
+      AuthApiActions.qqqautoSignInHaveUser({
+        user: {
+          id: user.id,
+          email: user.email,
+          name: user.name,
+          todoListId: user.taskListId,
+        },
+      })
+    )
+  );
+
+  /*
+  @Effect()
+  bb1$ = this.actions$.pipe(
+    ofType(AuthApiActions.qqqautoSignInHaveUser),
+    map(({ user }) => user),
+    map((userModel) =>
+      UserStoreActions.setUser({
+        user: {
+          id: userModel.id,
+          name: userModel.name,
+          email: userModel.email,
+          taskListId: userModel.todoListId,
+        },
+      })
+    )
+  );
+*/
+  @Effect()
+  bb2$ = this.actions$.pipe(
+    ofType(AuthApiActions.signOut),
+    map(() => UserStoreActions.clearUser())
+  );
+
+  // ======================================
+  /*
   @Effect()
   autoSignIn$ = this.actions$.pipe(
     ofType(AuthApiActions.autoSignIn.type),
@@ -43,24 +240,13 @@ export class AuthEffects {
       )
     )
   );
-
+*/
   @Effect({ dispatch: false })
   doSignUp$ = this.actions$.pipe(
     ofType(SignInPageActions.showSignUpPage.type),
     tap(() => {
       this.router.navigate(['/sign-up']);
     })
-  );
-
-  @Effect()
-  signIn$ = this.actions$.pipe(
-    ofType(SignInPageActions.signIn.type),
-    exhaustMap((action) =>
-      this.authService.login(action.credentials).pipe(
-        map((user) => AuthApiActions.signInSuccess({ user })),
-        catchError((error) => of(AuthApiActions.signInFailure({ error })))
-      )
-    )
   );
 
   @Effect()
@@ -111,7 +297,7 @@ export class AuthEffects {
     ofType(AuthApiActions.setUserListId),
     concatMap((action) =>
       of(action).pipe(
-        withLatestFrom(this.store.select(authQuery.selectAuthUser))
+        withLatestFrom(this.store.select(UserStoreSelectors.selectUser))
       )
     ),
     tap(([action, user]) => {
@@ -234,6 +420,7 @@ export class AuthEffects {
       | SignOutConfirmationAlertActions.SignOutConfirmationAlertActionsUnion
     >,
     private authService: AuthService,
+    private afAuth: AngularFireAuth,
     private router: Router,
     private userInfoDataService: UserInfoDataService,
     private store: Store<any> //   private signOutConfirmationAlertService: SignOutConfirmationAlertService

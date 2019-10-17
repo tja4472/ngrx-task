@@ -2,6 +2,18 @@ import { createAction, props, union } from '@ngrx/store';
 
 import { UserModel } from '@app/auth/models/user.model';
 
+export const qqqHaveFirebaseUser = createAction(
+  '[qqq] Have Firebase User',
+  props<{ uid: string; email: string; displayName: string }>()
+);
+
+export const qqqautoSignInHaveUser = createAction(
+  '[qqq] Auto Sign In - Have User',
+  props<{ user: UserModel }>()
+);
+
+export const qqqautoSignInNoUser = createAction('[qqq] Auto Sign In - No User');
+
 export const autoSignIn = createAction('[Auth/API] Auto Sign In');
 
 export const autoSignInHaveUser = createAction(
@@ -43,6 +55,7 @@ export const setUserListId = createAction(
 );
 
 const all = union({
+  qqqautoSignInHaveUser,
   autoSignIn,
   autoSignInHaveUser,
   autoSignInNoUser,

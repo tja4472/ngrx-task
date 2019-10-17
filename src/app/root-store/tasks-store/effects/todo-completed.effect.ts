@@ -15,6 +15,7 @@ import {
 } from 'rxjs/operators';
 
 import { authQuery } from '@app/auth/selectors/auth.selectors';
+import { UserStoreSelectors } from '@app/root-store/user-store';
 
 import { CompletedTaskDataService } from '../../../services/completed-task.data.service';
 import {
@@ -37,8 +38,8 @@ export class TodoCompletedEffects {
   listenForData$ = this.actions$.pipe(
     ofType(CompletedTasksRootGuardServiceActions.loadData),
     switchMap(() =>
-      this.store.select(authQuery.selectAuthUser).pipe(
-        switchMap((user) => this.dataService.getData(user.todoListId, user.id)),
+      this.store.select(UserStoreSelectors.selectUser).pipe(
+        switchMap((user) => this.dataService.getData(user.taskListId, user.id)),
         takeUntil(
           this.actions$.pipe(ofType(CompletedTasksRootActions.destroyed))
         )

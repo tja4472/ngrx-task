@@ -10,6 +10,7 @@ import { concatMap, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { AuthApiActions } from '@app/auth/actions';
 import { authQuery } from '@app/auth/selectors/auth.selectors';
 import { TaskSelectors } from '@app/root-store/tasks-store/selectors';
+import { UserStoreSelectors } from '@app/root-store/user-store';
 
 import { CompletedTaskDataService } from '../../../services/completed-task.data.service';
 import { CurrentTaskDataService } from '../../../services/current-task.data.service';
@@ -45,13 +46,13 @@ export class TaskEffects {
     ofType(CompletedTaskDetailEditPageActions.removed),
     concatMap((action) =>
       of(action).pipe(
-        withLatestFrom(this.store.select(authQuery.selectAuthUser))
+        withLatestFrom(this.store.select(UserStoreSelectors.selectUser))
       )
     ),
     tap(([action, user]) => {
       this.todoCompletedDataService.removeItem(
         action.completedTask.id,
-        user.todoListId,
+        user.taskListId,
         user.id
       );
     })
@@ -62,13 +63,13 @@ export class TaskEffects {
     ofType(CompletedTaskDetailEditPageActions.saved),
     concatMap((action) =>
       of(action).pipe(
-        withLatestFrom(this.store.select(authQuery.selectAuthUser))
+        withLatestFrom(this.store.select(UserStoreSelectors.selectUser))
       )
     ),
     tap(([action, user]) => {
       this.todoCompletedDataService.save(
         action.completedTask,
-        user.todoListId,
+        user.taskListId,
         user.id
       );
     })
@@ -89,7 +90,7 @@ export class TaskEffects {
     ofType(TaskListDetailEditPageActions.removed),
     concatMap((action) =>
       of(action).pipe(
-        withLatestFrom(this.store.select(authQuery.selectAuthUser))
+        withLatestFrom(this.store.select(UserStoreSelectors.selectUser))
       )
     ),
     tap(([action, user]) => {
@@ -102,7 +103,7 @@ export class TaskEffects {
     ofType(TaskListDetailNewPageActions.saved),
     concatMap((action) =>
       of(action).pipe(
-        withLatestFrom(this.store.select(authQuery.selectAuthUser))
+        withLatestFrom(this.store.select(UserStoreSelectors.selectUser))
       )
     ),
     tap(([action, user]) => {
@@ -115,7 +116,7 @@ export class TaskEffects {
     ofType(TaskListDetailEditPageActions.saved),
     concatMap((action) =>
       of(action).pipe(
-        withLatestFrom(this.store.select(authQuery.selectAuthUser))
+        withLatestFrom(this.store.select(UserStoreSelectors.selectUser))
       )
     ),
     tap(([action, user]) => {
@@ -130,7 +131,7 @@ export class TaskEffects {
     concatMap((action) =>
       of(action).pipe(
         withLatestFrom(
-          this.store.select(authQuery.selectAuthUser),
+          this.store.select(UserStoreSelectors.selectUser),
           this.store.select(TaskSelectors.selectCurrentTasksAll)
         )
       )
@@ -141,7 +142,7 @@ export class TaskEffects {
 
       this.fb1DataService.clearCompletedTodos(
         completedTasks,
-        user.todoListId,
+        user.taskListId,
         user.id
       );
     })
@@ -152,13 +153,13 @@ export class TaskEffects {
     ofType(CompletedTasksPageActions.itemToggled),
     concatMap((action) =>
       of(action).pipe(
-        withLatestFrom(this.store.select(authQuery.selectAuthUser))
+        withLatestFrom(this.store.select(UserStoreSelectors.selectUser))
       )
     ),
     tap(([action, user]) => {
       this.fb1DataService.moveToCurrent(
         action.todoCompleted,
-        user.todoListId,
+        user.taskListId,
         user.id
       );
     })
@@ -213,14 +214,14 @@ export class TaskEffects {
 
     concatMap((action) =>
       of(action).pipe(
-        withLatestFrom(this.store.select(authQuery.selectAuthUser))
+        withLatestFrom(this.store.select(UserStoreSelectors.selectUser))
       )
     ),
 
     tap(([action, user]) => {
       this.todoDataService.removeItem(
         action.currentTask.id,
-        user.todoListId,
+        user.taskListId,
         user.id
       );
     })
@@ -236,11 +237,11 @@ export class TaskEffects {
 
     concatMap((action) =>
       of(action).pipe(
-        withLatestFrom(this.store.select(authQuery.selectAuthUser))
+        withLatestFrom(this.store.select(UserStoreSelectors.selectUser))
       )
     ),
     tap(([action, user]) => {
-      this.todoDataService.save(action.currentTask, user.todoListId, user.id);
+      this.todoDataService.save(action.currentTask, user.taskListId, user.id);
     })
   );
 
