@@ -14,7 +14,6 @@ import {
 } from 'rxjs/operators';
 
 import { AuthApiActions } from '@app/auth/actions';
-import { authQuery } from '@app/auth/selectors/auth.selectors';
 import { UserStoreSelectors } from '@app/root-store/user-store';
 import { TaskListDataService } from '@app/services/task-list.data.service';
 

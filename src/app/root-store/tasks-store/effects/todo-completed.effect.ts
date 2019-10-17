@@ -14,7 +14,6 @@ import {
   withLatestFrom,
 } from 'rxjs/operators';
 
-import { authQuery } from '@app/auth/selectors/auth.selectors';
 import { UserStoreSelectors } from '@app/root-store/user-store';
 
 import { CompletedTaskDataService } from '../../../services/completed-task.data.service';

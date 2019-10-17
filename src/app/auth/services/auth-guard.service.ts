@@ -13,8 +13,7 @@ import { select, Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { catchError, exhaustMap, filter, map, take, tap } from 'rxjs/operators';
 
-import * as fromAuth from '@app/auth/reducers';
-import { authQuery } from '@app/auth/selectors/auth.selectors';
+import { selectHasChecked } from '@app/auth/selectors/auth.selectors';
 import { AuthService } from '@app/auth/services/auth.service';
 import { UserStoreSelectors } from '@app/root-store/user-store';
 
@@ -67,7 +66,7 @@ export class AuthGuardService implements CanActivate {
   checkStoreAuthentication() {
     //
     return this.store.pipe(
-      select(authQuery.selectHasChecked),
+      select(selectHasChecked),
       filter((hasChecked) => hasChecked),
       exhaustMap(() =>
         this.store.pipe(

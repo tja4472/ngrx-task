@@ -7,8 +7,6 @@ import { Store } from '@ngrx/store';
 import { EMPTY, of } from 'rxjs';
 import { concatMap, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 
-import { AuthApiActions } from '@app/auth/actions';
-import { authQuery } from '@app/auth/selectors/auth.selectors';
 import { TaskSelectors } from '@app/root-store/tasks-store/selectors';
 import { UserStoreSelectors } from '@app/root-store/user-store';
 
