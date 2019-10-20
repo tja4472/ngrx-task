@@ -30,7 +30,7 @@ export class SidenavComponent {
       shareReplay()
     );
 
-  user$: Observable<User>;
+  view$: Observable<{ user: User; taskListId: string }>;
   selected = 'Cn7vwq2PCR6uj2u5nw3d';
   taskLists$;
 
@@ -39,7 +39,19 @@ export class SidenavComponent {
     router: Router,
     private store: Store<any>
   ) {
-    this.user$ = this.store.select(UserStoreSelectors.selectUser);
+    this.view$ = this.store.select(UserStoreSelectors.selectUserAndTaskListId);
+    /*    
+    this.view$ = this.store.select(UserStoreSelectors.selectUser).pipe(
+      withLatestFrom(this.store.select(UserStoreSelectors.selectTaskListId)),
+      map(([user, taskListId]) => {
+        if (user === null) {
+          return null;
+        }
+        return { user, taskListId };
+      })
+    );
+*/
+
     this.taskLists$ = store.pipe(select(TaskListSelectors.selectAll));
 
     // Close sidenav on a handset device after route click.

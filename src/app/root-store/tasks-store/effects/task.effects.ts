@@ -44,13 +44,15 @@ export class TaskEffects {
     ofType(CompletedTaskDetailEditPageActions.removed),
     concatMap((action) =>
       of(action).pipe(
-        withLatestFrom(this.store.select(UserStoreSelectors.selectUser))
+        withLatestFrom(
+          this.store.select(UserStoreSelectors.selectUserAndTaskListId)
+        )
       )
     ),
-    tap(([action, user]) => {
+    tap(([action, { user, taskListId }]) => {
       this.todoCompletedDataService.removeItem(
         action.completedTask.id,
-        user.taskListId,
+        taskListId,
         user.id
       );
     })
@@ -61,13 +63,15 @@ export class TaskEffects {
     ofType(CompletedTaskDetailEditPageActions.saved),
     concatMap((action) =>
       of(action).pipe(
-        withLatestFrom(this.store.select(UserStoreSelectors.selectUser))
+        withLatestFrom(
+          this.store.select(UserStoreSelectors.selectUserAndTaskListId)
+        )
       )
     ),
-    tap(([action, user]) => {
+    tap(([action, { user, taskListId }]) => {
       this.todoCompletedDataService.save(
         action.completedTask,
-        user.taskListId,
+        taskListId,
         user.id
       );
     })
@@ -129,18 +133,18 @@ export class TaskEffects {
     concatMap((action) =>
       of(action).pipe(
         withLatestFrom(
-          this.store.select(UserStoreSelectors.selectUser),
+          this.store.select(UserStoreSelectors.selectUserAndTaskListId),
           this.store.select(TaskSelectors.selectCurrentTasksAll)
         )
       )
     ),
 
-    tap(([action, user, tasks]) => {
+    tap(([action, { user, taskListId }, tasks]) => {
       const completedTasks = tasks.filter((t) => t.isComplete);
 
       this.fb1DataService.clearCompletedTodos(
         completedTasks,
-        user.taskListId,
+        taskListId,
         user.id
       );
     })
@@ -151,13 +155,15 @@ export class TaskEffects {
     ofType(CompletedTasksPageActions.itemToggled),
     concatMap((action) =>
       of(action).pipe(
-        withLatestFrom(this.store.select(UserStoreSelectors.selectUser))
+        withLatestFrom(
+          this.store.select(UserStoreSelectors.selectUserAndTaskListId)
+        )
       )
     ),
-    tap(([action, user]) => {
+    tap(([action, { user, taskListId }]) => {
       this.fb1DataService.moveToCurrent(
         action.todoCompleted,
-        user.taskListId,
+        taskListId,
         user.id
       );
     })
@@ -212,14 +218,16 @@ export class TaskEffects {
 
     concatMap((action) =>
       of(action).pipe(
-        withLatestFrom(this.store.select(UserStoreSelectors.selectUser))
+        withLatestFrom(
+          this.store.select(UserStoreSelectors.selectUserAndTaskListId)
+        )
       )
     ),
 
-    tap(([action, user]) => {
+    tap(([action, { user, taskListId }]) => {
       this.todoDataService.removeItem(
         action.currentTask.id,
-        user.taskListId,
+        taskListId,
         user.id
       );
     })
@@ -235,11 +243,13 @@ export class TaskEffects {
 
     concatMap((action) =>
       of(action).pipe(
-        withLatestFrom(this.store.select(UserStoreSelectors.selectUser))
+        withLatestFrom(
+          this.store.select(UserStoreSelectors.selectUserAndTaskListId)
+        )
       )
     ),
-    tap(([action, user]) => {
-      this.todoDataService.save(action.currentTask, user.taskListId, user.id);
+    tap(([action, { user, taskListId }]) => {
+      this.todoDataService.save(action.currentTask, taskListId, user.id);
     })
   );
 

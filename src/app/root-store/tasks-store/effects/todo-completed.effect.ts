@@ -37,8 +37,10 @@ export class TodoCompletedEffects {
   listenForData$ = this.actions$.pipe(
     ofType(CompletedTasksRootGuardServiceActions.loadData),
     switchMap(() =>
-      this.store.select(UserStoreSelectors.selectUser).pipe(
-        switchMap((user) => this.dataService.getData(user.taskListId, user.id)),
+      this.store.select(UserStoreSelectors.selectUserAndTaskListId).pipe(
+        switchMap(({ user, taskListId }) =>
+          this.dataService.getData(taskListId, user.id)
+        ),
         takeUntil(
           this.actions$.pipe(ofType(CompletedTasksRootActions.destroyed))
         )

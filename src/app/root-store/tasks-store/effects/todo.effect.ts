@@ -90,9 +90,9 @@ export class TodoEffects {
   listenForData$ = this.actions$.pipe(
     ofType(CurrentTasksRootGuardServiceActions.loadData),
     switchMap(() =>
-      this.store.select(UserStoreSelectors.selectUser).pipe(
-        switchMap((user) =>
-          this.dataService.getData$(user.taskListId, user.id)
+      this.store.select(UserStoreSelectors.selectUserAndTaskListId).pipe(
+        switchMap(({ user, taskListId }) =>
+          this.dataService.getData$(taskListId, user.id)
         ),
         takeUntil(this.actions$.pipe(ofType(CurrentTasksRootActions.destroyed)))
       )
@@ -102,16 +102,36 @@ export class TodoEffects {
     )
   );
 
+  /*
+  @Effect()
+  listenForData$ = this.actions$.pipe(
+    ofType(CurrentTasksRootGuardServiceActions.loadData),
+    switchMap(() =>
+      this.store.select(UserStoreSelectors.selectUser).pipe(
+        switchMap((user) =>
+          this.dataService.getData$(user.aaaataskListId, user.id)
+        ),
+        takeUntil(this.actions$.pipe(ofType(CurrentTasksRootActions.destroyed)))
+      )
+    ),
+    map((items: CurrentTask[]) =>
+      TodoActions.loadSuccess({ currentTasks: items })
+    )
+  );  
+  */
+
   @Effect({ dispatch: false })
   reorderList$ = this.actions$.pipe(
     ofType(TodoActions.reorderList),
     concatMap((action) =>
       of(action).pipe(
-        withLatestFrom(this.store.select(UserStoreSelectors.selectUser))
+        withLatestFrom(
+          this.store.select(UserStoreSelectors.selectUserAndTaskListId)
+        )
       )
     ),
-    tap(([action, user]) => {
-      this.dataService.reorderItems(action.ids, user.taskListId, user.id);
+    tap(([action, { user, taskListId }]) => {
+      this.dataService.reorderItems(action.ids, taskListId, user.id);
     })
   );
 }

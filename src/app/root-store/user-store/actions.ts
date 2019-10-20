@@ -6,10 +6,11 @@ const title = 'User Store';
 
 export const clearUser = createAction(`[${title}] Clear User`);
 
-export const setUser = createAction(
+export const aaaasetUser = createAction(
   `[${title}] Set User`,
   props<{
     user: User;
+    taskListId: string;
   }>()
 );
 
