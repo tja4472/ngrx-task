@@ -184,7 +184,7 @@ export class AuthEffects {
         tap((x) => console.log('Get User Data aaa>', x, firebaseUser.uid)),
         map(
           (userInfo) =>
-            UserStoreActions.aaaasetUser({
+            UserStoreActions.setData({
               user: {
                 id: firebaseUser.uid,
                 email: firebaseUser.email,
@@ -209,7 +209,7 @@ export class AuthEffects {
 
   @Effect()
   bb1$ = this.actions$.pipe(
-    ofType(UserStoreActions.aaaasetUser),
+    ofType(UserStoreActions.setData),
     map(({ user }) => user),
     map((user) =>
       AuthApiActions.qqqautoSignInHaveUser({

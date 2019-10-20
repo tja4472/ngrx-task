@@ -18,12 +18,11 @@ const featureReducer = createReducer(
     const values: State = { ...initialState };
     return values;
   }),
-  on(featureActions.aaaasetUser, (state, { user, taskListId }) => {
+  on(featureActions.setData, (state, { user, taskListId }) => {
     const values: State = { ...state, user, taskListId };
     return values;
   }),
   on(featureActions.setTaskListId, (state, { taskListId }) => {
-    // const user: User = { ...state.user, aaaataskListId: taskListId };
     const values: State = { ...state, taskListId };
     return values;
   })
