@@ -42,7 +42,7 @@ export function logger(reducer: ActionReducer<State>): ActionReducer<State> {
 }
 
 // reset whole state except for authFeature and router
-function flush(reducer) {
+export function flush(reducer) {
   // tslint:disable-next-line: only-arrow-functions
   return function(state: fromAuth.State | undefined, action: Action) {
     if (action.type === AuthApiActions.signOutComplete.type) {
