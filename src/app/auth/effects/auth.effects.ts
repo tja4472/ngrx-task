@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -19,20 +20,14 @@ import {
 } from 'rxjs/operators';
 
 import {
+  AuthActions,
   AuthApiActions,
   SignInPageActions,
-  SignOutConfirmationAlertActions,
   SignUpPageActions,
 } from '@app/auth/actions';
 import { AuthService } from '@app/auth/services/auth.service';
-import {
-  UserStoreActions,
-  UserStoreSelectors,
-} from '@app/root-store/user-store';
 
-import { UserInfoDataService } from '../../services/user-info.data.service';
-
-// import { SignOutConfirmationAlertService } from '@app/auth/services/sign-out-confirmation-alert.service';
+import { SignoutConfirmationDialogComponent } from '../components/signout-confirmation-dialog/signout-confirmation-dialog.component';
 
 @Injectable()
 export class AuthEffects {
@@ -81,12 +76,29 @@ export class AuthEffects {
 
   @Effect({ dispatch: false })
   signOut$ = this.actions$.pipe(
-    ofType(AuthApiActions.signOut),
+    ofType(AuthActions.signOut),
     tap(() =>
       this.afAuth.auth.signOut().then(() => {
         this.router.navigate(['/sign-in']);
-        this.store.dispatch(AuthApiActions.signOutComplete());
+        this.store.dispatch(AuthActions.signOutComplete());
       })
+    )
+  );
+
+  @Effect()
+  signOutConfirmation$ = this.actions$.pipe(
+    ofType(AuthActions.signOutConfirmation),
+    exhaustMap(() => {
+      const dialogRef = this.dialog.open<
+        SignoutConfirmationDialogComponent,
+        undefined,
+        boolean
+      >(SignoutConfirmationDialogComponent);
+
+      return dialogRef.afterClosed();
+    }),
+    map((result) =>
+      result ? AuthActions.signOut() : AuthActions.signOutConfirmationDismiss()
     )
   );
 
@@ -265,11 +277,7 @@ export class AuthEffects {
     tap(() => this.signOutConfirmationAlertService.show())
   );
 */
-  @Effect()
-  signOutConfirmationAccepted$ = this.actions$.pipe(
-    ofType(SignOutConfirmationAlertActions.accepted.type),
-    map(() => AuthApiActions.signOut())
-  );
+
   // ==
 
   @Effect()
@@ -282,12 +290,11 @@ export class AuthEffects {
       | AuthApiActions.AuthApiActionsUnion
       | SignInPageActions.SignInPageActionsUnion
       | SignUpPageActions.SignUpPageActionsUnion
-      | SignOutConfirmationAlertActions.SignOutConfirmationAlertActionsUnion
     >,
     private authService: AuthService,
     private afAuth: AngularFireAuth,
     private router: Router,
-    private userInfoDataService: UserInfoDataService,
-    private store: Store<any> //   private signOutConfirmationAlertService: SignOutConfirmationAlertService
+    private dialog: MatDialog,
+    private store: Store<any>
   ) {}
 }

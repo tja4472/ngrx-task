@@ -5,7 +5,7 @@ import { Actions, createEffect, Effect, ofType } from '@ngrx/effects';
 import { EMPTY } from 'rxjs';
 import { concatMap, map } from 'rxjs/operators';
 
-import { AuthApiActions } from '@app/auth/actions';
+import { AuthActions } from '@app/auth/actions';
 
 import { HomePageActions } from '../actions';
 
@@ -24,7 +24,7 @@ export class HomeEffects {
   @Effect()
   signOut$ = this.actions$.pipe(
     ofType(HomePageActions.signOut),
-    map(() => AuthApiActions.signOut())
+    map(() => AuthActions.signOutConfirmation())
   );
 
   constructor(private actions$: Actions) {}

@@ -15,10 +15,6 @@ export const autoSignInNoUser = createAction(
   `[${title}] Auto Sign In - No User`
 );
 
-export const signOut = createAction(`[${title}]  Sign Out`);
-
-export const signOutComplete = createAction(`[${title}]  Sign Out - Complete`);
-
 // ==========================================================================
 
 export const autoSignInHaveUser = createAction(
@@ -53,8 +49,6 @@ const all = union({
   autoSignInNoUser,
   signInFailure,
   signInSuccess,
-  signOut,
-  signOutComplete,
   signUpFailure,
   signUpSuccess,
 });

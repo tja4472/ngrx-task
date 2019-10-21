@@ -13,7 +13,7 @@ import {
   withLatestFrom,
 } from 'rxjs/operators';
 
-import { AuthApiActions } from '@app/auth/actions';
+import { AuthActions, AuthApiActions } from '@app/auth/actions';
 import {
   UserStoreActions,
   UserStoreSelectors,
@@ -85,7 +85,7 @@ export class TaskListEffects {
       this.dataService
         .getData(user.id)
         .pipe(
-          takeUntil(this.actions$.pipe(ofType(AuthApiActions.signOutComplete)))
+          takeUntil(this.actions$.pipe(ofType(AuthActions.signOutComplete)))
         )
     ),
     map((items) => featureActions.loadSuccess({ items }))

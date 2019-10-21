@@ -12,21 +12,27 @@ import { SignInPageComponent } from '@app/auth/containers/sign-in-page/sign-in-p
 import { SignUpPageComponent } from '@app/auth/containers/sign-up-page/sign-up-page.component';
 import { AuthEffects } from '@app/auth/effects/auth.effects';
 import { reducers } from '@app/auth/reducers';
+import { MaterialModule } from '@app/material';
+
+import { SignoutConfirmationDialogComponent } from './components/signout-confirmation-dialog/signout-confirmation-dialog.component';
 
 export const COMPONENTS = [
   SignInPageComponent,
   SignInFormComponent,
   SignUpFormComponent,
   SignUpPageComponent,
+  SignoutConfirmationDialogComponent,
 ];
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    MaterialModule,
     AuthRoutingModule,
     StoreModule.forFeature('authFeature', reducers),
     EffectsModule.forFeature([AuthEffects]),
   ],
   declarations: COMPONENTS,
+  entryComponents: [SignoutConfirmationDialogComponent],
 })
 export class AuthModule {}

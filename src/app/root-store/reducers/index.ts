@@ -10,7 +10,7 @@ import {
   MetaReducer,
 } from '@ngrx/store';
 
-import { AuthApiActions } from '@app/auth/actions';
+import { AuthActions } from '@app/auth/actions';
 import * as fromAuth from '@app/auth/reducers';
 
 import { environment } from '../../../environments/environment';
@@ -45,7 +45,7 @@ export function logger(reducer: ActionReducer<State>): ActionReducer<State> {
 export function flush(reducer) {
   // tslint:disable-next-line: only-arrow-functions
   return function(state: fromAuth.State | undefined, action: Action) {
-    if (action.type === AuthApiActions.signOutComplete.type) {
+    if (action.type === AuthActions.signOutComplete.type) {
       return reducer(
         { authFeature: state.authFeature, router: state.router },
         action

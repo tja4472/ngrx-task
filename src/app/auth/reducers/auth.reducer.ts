@@ -1,4 +1,4 @@
-import { AuthApiActions } from '@app/auth/actions';
+import { AuthActions, AuthApiActions } from '@app/auth/actions';
 
 export interface AuthState {
   hasChecked: boolean;
@@ -22,7 +22,7 @@ export function authReducer(
     case AuthApiActions.signUpSuccess.type:
       return { ...state, hasChecked: true };
 
-    case AuthApiActions.signOut.type:
+    case AuthActions.signOut.type:
       return { ...initialState, hasChecked: true };
 
     default:
