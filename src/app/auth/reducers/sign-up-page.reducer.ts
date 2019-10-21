@@ -32,7 +32,7 @@ export function signUpPageReducer(
         pending: false,
       };
     }
-
+    /*
     case AuthApiActions.signUpFailure.type: {
       return {
         ...state,
@@ -40,7 +40,7 @@ export function signUpPageReducer(
         pending: false,
       };
     }
-
+*/
     default: {
       return state;
     }

@@ -30,6 +30,14 @@ export class SidenavComponent {
       shareReplay()
     );
 
+  viewNavigation = [
+    { link: '/home', label: 'Home Page' },
+    { link: '/sign-in', label: 'Sign In' },
+    { link: '/tasks/current', label: 'Current Tasks Page' },
+    { link: '/tasks/completed', label: 'Completed Tasks Page' },
+    { link: '/tasks/lists', label: 'Task Lists Page' },
+  ];
+
   view$: Observable<{ user: User; taskListId: string }>;
   selected = 'Cn7vwq2PCR6uj2u5nw3d';
   taskLists$;
