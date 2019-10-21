@@ -38,20 +38,15 @@ import { UserInfoDataService } from '../../services/user-info.data.service';
 export class AuthEffects {
   // @Effect({ dispatch: false })
   @Effect()
-  qqqautoSignIn$ = this.actions$.pipe(
+  autoSignIn$ = this.actions$.pipe(
     ofType(AuthApiActions.autoSignIn),
     switchMap(() =>
       this.afAuth.authState.pipe(
-        tap((firebaseUser) =>
-          console.log('BBBBBB-firebaseUser>', firebaseUser)
-        ),
         map((firebaseUser) => {
           if (firebaseUser === null) {
             return AuthApiActions.autoSignInNoUser();
           } else {
-            console.log('lll>', firebaseUser.uid);
-
-            return AuthApiActions.qqqHaveFirebaseUser({
+            return AuthApiActions.haveFirebaseUser({
               uid: firebaseUser.uid,
               email: firebaseUser.email,
               displayName: firebaseUser.displayName,
@@ -63,7 +58,6 @@ export class AuthEffects {
   );
 
   @Effect({ dispatch: false })
-  // @Effect()
   signIn$ = this.actions$.pipe(
     ofType(SignInPageActions.signIn),
     tap((action) => {
@@ -123,147 +117,7 @@ export class AuthEffects {
   );
 */
 
-  /*
-  @Effect()
-  authaaaaaa$ = this.actions$.pipe(
-    ofType(AuthApiActions.autoSignIn),
-    switchMap(() =>
-      this.afAuth.authState.pipe(
-        tap((firebaseUser) =>
-          console.log('AAAAAA-firebaseUser>', firebaseUser)
-        ),
-        filter((firebaseUser) => firebaseUser !== null),
-
-        map(({ uid, email, displayName }) =>
-          AuthApiActions.qqqHaveFirebaseUser({ uid, email, displayName })
-        )
-      )
-    )
-  );
-  */
-
-  /*
-        concatMap(() =>
-          of().pipe(
-            withLatestFrom(this.store.select(authQuery.selectHasChecked))
-          )
-        ),
-        map(([_, hasChecked]) => hasChecked),
-        tap((hasChecked) =>
-          console.log('AAAAAA-hasChecked>', hasChecked)
-        ),        
-        filter((hasChecked) => !hasChecked),
-
-        map(() => AuthApiActions.qqqautoSignInNoUser())
-      )  
-  */
-
-  // maybe not fire because already used?
-  cc$ = this.actions$.pipe(
-    ofType(AuthApiActions.autoSignIn),
-    tap(() => console.log('AAAAAAA')),
-    switchMap(() =>
-      this.afAuth.authState.pipe(
-        filter((firebaseUser) => firebaseUser === null),
-        tap((firebaseUser) =>
-          console.log('AAAAAA-firebaseUser>', firebaseUser)
-        ),
-        map(({ uid, email, displayName }) =>
-          AuthApiActions.qqqHaveFirebaseUser({ uid, email, displayName })
-        )
-      )
-    )
-  );
-
-  @Effect()
-  bb$ = this.actions$.pipe(
-    ofType(AuthApiActions.qqqHaveFirebaseUser),
-    tap(() => console.log('Get User Data')),
-    concatMap((firebaseUser) =>
-      from(this.userInfoDataService.getUserData(firebaseUser.uid)).pipe(
-        tap((x) => console.log('Get User Data aaa>', x, firebaseUser.uid)),
-        map(
-          (userInfo) =>
-            UserStoreActions.setData({
-              user: {
-                id: firebaseUser.uid,
-                email: firebaseUser.email,
-                name: firebaseUser.displayName,
-              },
-              taskListId: userInfo.todoListId,
-            })
-          /*        
-          AuthApiActions.qqqautoSignInHaveUser({
-            user: {
-              id: firebaseUser.uid,
-              email: firebaseUser.email,
-              name: firebaseUser.displayName,
-              todoListId: user.todoListId,
-            },
-          })
-*/
-        )
-      )
-    )
-  );
-
-  @Effect()
-  bb1$ = this.actions$.pipe(
-    ofType(UserStoreActions.setData),
-    map(({ user }) => user),
-    map((user) =>
-      AuthApiActions.qqqautoSignInHaveUser({
-        user: {
-          id: user.id,
-          email: user.email,
-          name: user.name,
-        },
-      })
-    )
-  );
-
-  /*
-  @Effect()
-  bb1$ = this.actions$.pipe(
-    ofType(AuthApiActions.qqqautoSignInHaveUser),
-    map(({ user }) => user),
-    map((userModel) =>
-      UserStoreActions.setUser({
-        user: {
-          id: userModel.id,
-          name: userModel.name,
-          email: userModel.email,
-          taskListId: userModel.todoListId,
-        },
-      })
-    )
-  );
-*/
-  /*
-  @Effect()
-  bb2$ = this.actions$.pipe(
-    ofType(AuthApiActions.signOut),
-    map(() => UserStoreActions.clearUser())
-  );
-*/
   // ======================================
-  /*
-  @Effect()
-  autoSignIn$ = this.actions$.pipe(
-    ofType(AuthApiActions.autoSignIn.type),
-    exhaustMap(() =>
-      this.authService.autoSignIn().pipe(
-        map((user) => {
-          if (!!user) {
-            return AuthApiActions.autoSignInHaveUser({ user });
-          } else {
-            return AuthApiActions.autoSignInNoUser();
-          }
-        })
-      )
-    )
-  );
-*/
   @Effect({ dispatch: false })
   doSignUp$ = this.actions$.pipe(
     ofType(SignInPageActions.showSignUpPage.type),

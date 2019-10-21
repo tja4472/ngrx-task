@@ -6,6 +6,11 @@ const title = 'User Store';
 
 export const clearUser = createAction(`[${title}] Clear User`);
 
+export const haveUser = createAction(
+  `[${title}] Have User`,
+  props<{ userId: string }>()
+);
+
 export const setData = createAction(
   `[${title}] Set Data`,
   props<{

@@ -14,7 +14,10 @@ import {
 } from 'rxjs/operators';
 
 import { AuthApiActions } from '@app/auth/actions';
-import { UserStoreSelectors } from '@app/root-store/user-store';
+import {
+  UserStoreActions,
+  UserStoreSelectors,
+} from '@app/root-store/user-store';
 import { TaskListDataService } from '@app/services/task-list.data.service';
 
 import * as featureActions from './actions';
@@ -29,8 +32,8 @@ export class TaskListEffects {
 
   @Effect()
   authListenForAuthSuccess$ = this.actions$.pipe(
-    ofType(AuthApiActions.qqqautoSignInHaveUser),
-    map((action) => featureActions.listenForData({ userId: action.user.id }))
+    ofType(UserStoreActions.haveUser),
+    map((action) => featureActions.listenForData({ userId: action.userId }))
   );
 
   /*

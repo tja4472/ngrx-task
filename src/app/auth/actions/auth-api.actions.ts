@@ -2,55 +2,52 @@ import { createAction, props, union } from '@ngrx/store';
 
 import { UserModel } from '@app/auth/models/user.model';
 
-export const qqqHaveFirebaseUser = createAction(
-  '[qqq] Have Firebase User',
+const title = 'Q-Auth/API';
+
+export const autoSignIn = createAction(`[${title}] Auto Sign In`);
+
+export const haveFirebaseUser = createAction(
+  `[${title}] Have Firebase User`,
   props<{ uid: string; email: string; displayName: string }>()
 );
 
-export const qqqautoSignInHaveUser = createAction(
-  '[qqq] Auto Sign In - Have User',
-  props<{ user: UserModel }>()
+export const autoSignInNoUser = createAction(
+  `[${title}] Auto Sign In - No User`
 );
 
-export const qqqautoSignInNoUser = createAction('[qqq] Auto Sign In - No User');
+export const signOut = createAction(`[${title}]  Sign Out`);
 
-export const autoSignIn = createAction('[Auth/API] Auto Sign In');
+export const signOutComplete = createAction(`[${title}]  Sign Out - Complete`);
+
+// ==========================================================================
 
 export const autoSignInHaveUser = createAction(
-  '[Auth/API] Auto Sign In - Have User',
+  `[Auth/API] Auto Sign In - Have User`,
   props<{ user: UserModel }>()
-);
-
-export const autoSignInNoUser = createAction(
-  '[Auth/API] Auto Sign In - No User'
 );
 
 export const signInFailure = createAction(
-  '[Auth/API] Sign In - Failure',
+  `[Auth/API] Sign In - Failure`,
   props<{ error: any }>()
 );
 
 export const signInSuccess = createAction(
-  '[Auth/API] Sign In - Success',
+  `[Auth/API] Sign In - Success`,
   props<{ user: UserModel }>()
 );
 
-export const signOut = createAction('[Auth API] Sign Out');
-
-export const signOutComplete = createAction('[Auth API] Sign Out - Complete');
-
 export const signUpFailure = createAction(
-  '[Auth/API] Sign Up - Failure',
+  `[Auth/API] Sign Up - Failure`,
   props<{ error: any }>()
 );
 
 export const signUpSuccess = createAction(
-  '[Auth/API] Sign Up - Success',
+  `[Auth/API] Sign Up - Success`,
   props<{ user: UserModel }>()
 );
 
 const all = union({
-  qqqautoSignInHaveUser,
+  haveFirebaseUser,
   autoSignIn,
   autoSignInHaveUser,
   autoSignInNoUser,

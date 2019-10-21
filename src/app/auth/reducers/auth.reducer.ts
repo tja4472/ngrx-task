@@ -16,7 +16,7 @@ export function authReducer(
     case AuthApiActions.autoSignInNoUser.type:
       return { ...state, hasChecked: true };
 
-    case AuthApiActions.qqqautoSignInHaveUser.type:
+    case AuthApiActions.haveFirebaseUser.type:
     case AuthApiActions.signInSuccess.type:
     case AuthApiActions.autoSignInHaveUser.type:
     case AuthApiActions.signUpSuccess.type:

@@ -3,17 +3,10 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 
-import { of } from 'rxjs';
-import {
-  concatMap,
-  filter,
-  map,
-  switchMap,
-  takeUntil,
-  tap,
-  withLatestFrom,
-} from 'rxjs/operators';
+import { from, of } from 'rxjs';
+import { concatMap, map, tap, withLatestFrom } from 'rxjs/operators';
 
+import { AuthApiActions } from '@app/auth/actions';
 import { UserInfoDataService } from '@app/services/user-info.data.service';
 
 import * as featureActions from './actions';
@@ -21,6 +14,35 @@ import * as featureSelectors from './selectors';
 
 @Injectable()
 export class UserStoreEffects {
+  @Effect()
+  haveFirebaseUser$ = this.actions$.pipe(
+    ofType(AuthApiActions.haveFirebaseUser),
+    concatMap((firebaseUser) =>
+      from(this.userInfoDataService.getUserData(firebaseUser.uid)).pipe(
+        map((userInfo) =>
+          featureActions.setData({
+            user: {
+              id: firebaseUser.uid,
+              email: firebaseUser.email,
+              name: firebaseUser.displayName,
+            },
+            taskListId: userInfo.todoListId,
+          })
+        )
+      )
+    )
+  );
+
+  @Effect()
+  setData$ = this.actions$.pipe(
+    ofType(featureActions.setData),
+    map(({ user }) => user),
+    map((user) =>
+      featureActions.haveUser({
+        userId: user.id,
+      })
+    )
+  );
   @Effect({ dispatch: false })
   setUserListId$ = this.actions$.pipe(
     ofType(featureActions.setTaskListId),
