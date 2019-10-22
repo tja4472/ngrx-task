@@ -5,20 +5,15 @@ import { SignInPageState } from '@app/auth/reducers/sign-in-page.reducer';
 
 const selectSignInPageState = createSelector(
   selectAuthFeatureState,
-  (state: AuthFeatureState) => state.loginPage
+  (state: AuthFeatureState) => state.signInPage
 );
 
-const selectSignInPageError = createSelector(
+export const selectSignInPageError = createSelector(
   selectSignInPageState,
   (state: SignInPageState) => state.error
 );
 
-const selectSignInPagePending = createSelector(
+export const selectSignInPagePending = createSelector(
   selectSignInPageState,
   (state: SignInPageState) => state.pending
 );
-
-export const signInPageQuery = {
-  selectSignInPageError,
-  selectSignInPagePending,
-};

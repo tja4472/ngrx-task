@@ -7,7 +7,7 @@ import * as fromRoot from '@app/root-store/reducers';
 
 export interface AuthFeatureState {
   auth: fromAuth.AuthState;
-  loginPage: fromSignInPage.SignInPageState;
+  signInPage: fromSignInPage.SignInPageState;
   signUpPage: fromSignUpPage.SignUpPageState;
 }
 
@@ -17,7 +17,7 @@ export interface State extends fromRoot.State {
 
 export const reducers: ActionReducerMap<AuthFeatureState> = {
   auth: fromAuth.authReducer,
-  loginPage: fromSignInPage.signInPageReducer,
+  signInPage: fromSignInPage.signInPageReducer,
   signUpPage: fromSignUpPage.signUpPageReducer,
 };
 
