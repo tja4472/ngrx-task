@@ -4,11 +4,10 @@ import { Action, select, Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
 
-import { signUpPageQuery } from '@app/auth/selectors/sign-up-page.selectors';
 import { User } from '@app/models';
 import { UserStoreSelectors } from '@app/root-store/user-store';
 
-import { SignInPageSelectors } from '../selectors';
+import { SignInPageSelectors, SignUpPageSelectors } from '../selectors';
 
 @Injectable({
   providedIn: 'root',
@@ -36,11 +35,11 @@ export class AuthFacade {
     );
 
     this.signUpPageError$ = store.pipe(
-      select(signUpPageQuery.selectSignUpPageError)
+      select(SignUpPageSelectors.selectSignUpPageError)
     );
 
     this.signUpPagePending$ = store.pipe(
-      select(signUpPageQuery.selectSignUpPagePending)
+      select(SignUpPageSelectors.selectSignUpPagePending)
     );
   }
 

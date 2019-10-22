@@ -8,17 +8,12 @@ const selectSignUpPageState = createSelector(
   (state: AuthFeatureState) => state.signUpPage
 );
 
-const selectSignUpPageError = createSelector(
+export const selectSignUpPageError = createSelector(
   selectSignUpPageState,
   (state: SignUpPageState) => state.error
 );
 
-const selectSignUpPagePending = createSelector(
+export const selectSignUpPagePending = createSelector(
   selectSignUpPageState,
   (state: SignUpPageState) => state.pending
 );
-
-export const signUpPageQuery = {
-  selectSignUpPageError,
-  selectSignUpPagePending,
-};
