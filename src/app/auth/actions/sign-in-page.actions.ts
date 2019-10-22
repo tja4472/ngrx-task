@@ -14,4 +14,4 @@ const all = union({
   signIn,
 });
 
-export type SignInPageActionsUnion = typeof all;
+export type QQQQSignInPageActionsUnion = typeof all;

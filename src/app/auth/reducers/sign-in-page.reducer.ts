@@ -1,3 +1,5 @@
+import { Action, createReducer, on } from '@ngrx/store';
+
 import { AuthApiActions, SignInPageActions } from '@app/auth/actions';
 
 export interface SignInPageState {
@@ -10,39 +12,29 @@ export const initialState: SignInPageState = {
   pending: false,
 };
 
-export function signInPageReducer(
-  state = initialState,
-  action:
-    | AuthApiActions.AuthApiActionsUnion
-    | SignInPageActions.SignInPageActionsUnion
-): SignInPageState {
-  switch (action.type) {
-    case SignInPageActions.signIn.type: {
-      return {
-        ...state,
-        error: null,
-        pending: true,
-      };
-    }
-
-    case AuthApiActions.signInSuccess.type: {
-      return {
-        ...state,
-        error: null,
-        pending: false,
-      };
-    }
-    /*
-    case AuthApiActions.signInFailure.type: {
-      return {
-        ...state,
-        error: action.error,
-        pending: false,
-      };
-    }
+/*
+Typescript not enforcing State type.
+https://github.com/microsoft/TypeScript/issues/241#issuecomment-540168588
+Hence const values: State = { bodge
 */
-    default: {
-      return state;
-    }
-  }
+const featureReducer = createReducer(
+  initialState,
+  on(SignInPageActions.signIn, (state) => {
+    const values: SignInPageState = { ...state, error: null, pending: true };
+    return values;
+  }),
+  on(AuthApiActions.signInSuccess, (state) => {
+    const values: SignInPageState = { ...state, error: null, pending: true };
+    return values;
+  })
+  /*
+  on(AuthApiActions.signInFailure, (state) => {
+    const values: SignInPageState = { ...state, error: null, pending: true };
+    return values;
+  })  
+  */
+);
+
+export function reducer(state: SignInPageState | undefined, action: Action) {
+  return featureReducer(state, action);
 }

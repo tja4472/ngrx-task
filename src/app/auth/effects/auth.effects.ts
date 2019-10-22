@@ -288,7 +288,7 @@ export class AuthEffects {
   constructor(
     private actions$: Actions<
       | AuthApiActions.AuthApiActionsUnion
-      | SignInPageActions.SignInPageActionsUnion
+      | SignInPageActions.QQQQSignInPageActionsUnion
       | SignUpPageActions.SignUpPageActionsUnion
     >,
     private authService: AuthService,
