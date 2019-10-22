@@ -17,11 +17,3 @@ export const signUpSuccess = createAction(
   '[Sign Up Page] Sign Up - Success',
   props<{ user: UserModel }>()
 );
-
-const all = union({
-  signUp,
-  signUpFailure,
-  signUpSuccess,
-});
-
-export type SignUpPageActionsUnion = typeof all;

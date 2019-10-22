@@ -8,10 +8,3 @@ export const signIn = createAction(
   '[Sign In Page] Sign In',
   props<{ credentials: Credentials }>()
 );
-
-const all = union({
-  showSignUpPage,
-  signIn,
-});
-
-export type QQQQSignInPageActionsUnion = typeof all;

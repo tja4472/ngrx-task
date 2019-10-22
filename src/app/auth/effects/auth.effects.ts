@@ -286,11 +286,7 @@ export class AuthEffects {
   );
 
   constructor(
-    private actions$: Actions<
-      | AuthApiActions.AuthApiActionsUnion
-      | SignInPageActions.QQQQSignInPageActionsUnion
-      | SignUpPageActions.SignUpPageActionsUnion
-    >,
+    private actions$: Actions,
     private authService: AuthService,
     private afAuth: AngularFireAuth,
     private router: Router,
