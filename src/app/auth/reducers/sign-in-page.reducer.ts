@@ -19,20 +19,26 @@ Hence const values: State = { bodge
 */
 const featureReducer = createReducer(
   initialState,
+  on(SignInPageActions.entered, (state) => {
+    const values: SignInPageState = { ...initialState };
+    return values;
+  }),
   on(SignInPageActions.signIn, (state) => {
     const values: SignInPageState = { ...state, error: null, pending: true };
     return values;
   }),
+  on(AuthApiActions.signInFailure, (state, { error }) => {
+    const values: SignInPageState = {
+      ...state,
+      error: error.message,
+      pending: false,
+    };
+    return values;
+  }),
   on(AuthApiActions.signInSuccess, (state) => {
-    const values: SignInPageState = { ...state, error: null, pending: true };
+    const values: SignInPageState = { ...state, error: null, pending: false };
     return values;
   })
-  /*
-  on(AuthApiActions.signInFailure, (state) => {
-    const values: SignInPageState = { ...state, error: null, pending: true };
-    return values;
-  })  
-  */
 );
 
 export function reducer(state: SignInPageState | undefined, action: Action) {

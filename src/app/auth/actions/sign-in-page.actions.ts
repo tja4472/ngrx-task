@@ -1,10 +1,14 @@
-import { createAction, props, union } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
 
 import { Credentials } from '@app/auth/models/credentials.model';
 
-export const showSignUpPage = createAction('[Sign In Page]  Show Sign Up Page');
+const title = 'Sign In Page';
+
+export const entered = createAction(`[${title}] Entered`);
+
+export const showSignUpPage = createAction(`[${title}] Show Sign Up Page`);
 
 export const signIn = createAction(
-  '[Sign In Page] Sign In',
+  `[${title}] Sign In`,
   props<{ credentials: Credentials }>()
 );

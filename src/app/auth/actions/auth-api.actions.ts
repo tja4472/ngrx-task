@@ -6,6 +6,8 @@ const title = 'Q-Auth/API';
 
 export const autoSignIn = createAction(`[${title}] Auto Sign In`);
 
+export const haveAppUser = createAction(`[${title}] Have App User`);
+
 export const haveFirebaseUser = createAction(
   `[${title}] Have Firebase User`,
   props<{ uid: string; email: string; displayName: string }>()
@@ -24,7 +26,7 @@ export const autoSignInHaveUser = createAction(
 
 export const signInFailure = createAction(
   `[Auth/API] Sign In - Failure`,
-  props<{ error: any }>()
+  props<{ error: { code: string; message: string } }>()
 );
 
 export const signInSuccess = createAction(

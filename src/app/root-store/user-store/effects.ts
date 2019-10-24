@@ -4,7 +4,7 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 
 import { from, of } from 'rxjs';
-import { concatMap, map, tap, withLatestFrom } from 'rxjs/operators';
+import { concatMap, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 
 import { AuthApiActions } from '@app/auth/actions';
 import { UserInfoDataService } from '@app/services/user-info.data.service';
@@ -37,11 +37,12 @@ export class UserStoreEffects {
   setData$ = this.actions$.pipe(
     ofType(featureActions.setData),
     map(({ user }) => user),
-    map((user) =>
+    switchMap((user) => [
       featureActions.haveUser({
         userId: user.id,
-      })
-    )
+      }),
+      AuthApiActions.haveAppUser(),
+    ])
   );
   @Effect({ dispatch: false })
   setUserListId$ = this.actions$.pipe(

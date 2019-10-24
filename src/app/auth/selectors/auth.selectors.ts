@@ -12,3 +12,8 @@ export const selectHasChecked = createSelector(
   selectAuthState,
   (state: AuthState) => state.hasChecked
 );
+
+export const selectHasUser = createSelector(
+  selectAuthState,
+  (state: AuthState) => state.userId !== null
+);

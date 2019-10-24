@@ -102,6 +102,22 @@ export class AuthEffects {
     )
   );
 
+  @Effect({ dispatch: false })
+  haveAppUser$ = this.actions$.pipe(
+    ofType(AuthApiActions.haveAppUser),
+    tap(() => {
+      console.log(
+        'this.authService.redirectUrl>',
+        this.authService.redirectUrl
+      );
+      if (this.authService.redirectUrl === '') {
+        this.router.navigate(['/']);
+      } else {
+        this.router.navigate([this.authService.redirectUrl]);
+      }
+    })
+  );
+
   /*
   @Effect()
   signOut$ = this.actions$.pipe(
@@ -152,10 +168,7 @@ export class AuthEffects {
 */
   @Effect({ dispatch: false })
   authSignInSuccess$ = this.actions$.pipe(
-    ofType(
-      AuthApiActions.signInSuccess.type,
-      AuthApiActions.signUpSuccess.type
-    ),
+    ofType(AuthApiActions.signInSuccess, AuthApiActions.signUpSuccess),
     tap(() => {
       console.log(
         'this.authService.redirectUrl>',

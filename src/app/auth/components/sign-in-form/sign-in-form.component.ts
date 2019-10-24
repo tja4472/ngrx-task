@@ -3,10 +3,13 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { Credentials } from '@app/auth/models/credentials.model';
 
+import { SignInFormPresenter } from './sign-in-form.presenter';
+
 @Component({
   selector: 'app-sign-in-form',
   templateUrl: './sign-in-form.component.html',
   styleUrls: ['./sign-in-form.component.css'],
+  viewProviders: [SignInFormPresenter],
 })
 export class SignInFormComponent implements OnInit {
   @Input()
@@ -15,9 +18,9 @@ export class SignInFormComponent implements OnInit {
   @Input()
   set pending(isPending: boolean) {
     if (isPending) {
-      this.loginForm.disable();
+      this.presenter.disable();
     } else {
-      this.loginForm.enable();
+      this.presenter.enable();
     }
   }
 
@@ -27,32 +30,23 @@ export class SignInFormComponent implements OnInit {
   @Output()
   readonly submitted = new EventEmitter<Credentials>();
 
-  get password() {
-    return this.loginForm.get('password');
-  }
-  get username() {
-    return this.loginForm.get('username');
+  get viewForm(): FormGroup {
+    return this.presenter.form;
   }
 
-  public loginForm = new FormGroup({
-    username: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required]),
-  });
-
-  constructor() {}
+  constructor(private presenter: SignInFormPresenter) {
+    this.presenter.init();
+  }
 
   ngOnInit() {}
 
-  signUp() {
+  viewSignUpClick() {
     this.SignUpClicked.emit();
   }
 
-  onSubmit() {
-    //
-    const value: Credentials = this.loginForm.value;
+  viewOnSubmit() {
+    const value: Credentials = this.presenter.checkout();
 
-    if (this.loginForm.valid) {
-      this.submitted.emit(value);
-    }
+    this.submitted.emit(value);
   }
 }

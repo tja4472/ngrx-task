@@ -13,27 +13,11 @@ import { SignInPageSelectors, SignUpPageSelectors } from '../selectors';
   providedIn: 'root',
 })
 export class AuthFacade {
-  public authUser$: Observable<User>;
-
-  public signInPageError$: Observable<string>;
-
-  public signInPagePending$: Observable<boolean>;
-
   public signUpPageError$: Observable<string>;
 
   public signUpPagePending$: Observable<boolean>;
 
   constructor(private store: Store<{}>) {
-    this.authUser$ = store.pipe(select(UserStoreSelectors.selectUser));
-
-    this.signInPageError$ = store.pipe(
-      select(SignInPageSelectors.selectSignInPageError)
-    );
-
-    this.signInPagePending$ = store.pipe(
-      select(SignInPageSelectors.selectSignInPagePending)
-    );
-
     this.signUpPageError$ = store.pipe(
       select(SignUpPageSelectors.selectSignUpPageError)
     );

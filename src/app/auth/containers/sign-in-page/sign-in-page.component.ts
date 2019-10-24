@@ -1,36 +1,39 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+
+import { select, Store } from '@ngrx/store';
+
+import { Observable } from 'rxjs';
 
 import { SignInPageActions } from '@app/auth/actions';
-import { AuthFacade } from '@app/auth/facades/auth.facade';
 import { Credentials } from '@app/auth/models/credentials.model';
+import { SignInPageSelectors } from '@app/auth/selectors';
 
 @Component({
   selector: 'app-sign-in-page',
   templateUrl: './sign-in-page.component.html',
   styleUrls: ['./sign-in-page.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignInPageComponent implements OnInit {
-  error$ = this.authFacade.signInPageError$;
-  pending$ = this.authFacade.signInPagePending$;
+  error$: Observable<string>;
+  pending$: Observable<boolean>;
 
-  constructor(private authFacade: AuthFacade) {}
+  constructor(private store: Store<any>) {
+    this.error$ = store.pipe(select(SignInPageSelectors.selectSignInPageError));
+    this.pending$ = store.pipe(
+      select(SignInPageSelectors.selectSignInPagePending)
+    );
+
+    this.store.dispatch(SignInPageActions.entered());
+  }
 
   ngOnInit() {}
 
-  viewSignInClicked() {
-    // temp!!!!
-    this.authFacade.dispatch(
-      SignInPageActions.signIn({
-        credentials: { username: 'b.b@b.com', password: 'password' },
-      })
-    );
-  }
-
   onSubmitted(credentials: Credentials) {
-    this.authFacade.dispatch(SignInPageActions.signIn({ credentials }));
+    this.store.dispatch(SignInPageActions.signIn({ credentials }));
   }
 
   onSignUp() {
-    this.authFacade.dispatch(SignInPageActions.showSignUpPage());
+    this.store.dispatch(SignInPageActions.showSignUpPage());
   }
 }
