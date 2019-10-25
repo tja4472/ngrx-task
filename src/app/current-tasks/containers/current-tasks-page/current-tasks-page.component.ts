@@ -20,7 +20,7 @@ import { TaskSelectors } from '@app/root-store/tasks-store/selectors';
 export class CurrentTasksPageComponent implements OnInit {
   currentTasks$: Observable<CurrentTask[]>;
 
-  constructor(private store: Store<any>) {
+  constructor(private store: Store<{}>) {
     this.currentTasks$ = store.pipe(
       select(TaskSelectors.selectCurrentTasksAll)
     );

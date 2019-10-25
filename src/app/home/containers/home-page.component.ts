@@ -14,7 +14,7 @@ import { HomePageActions } from '../actions';
   styles: [],
 })
 export class HomePageComponent {
-  constructor(private store: Store<any>) {}
+  constructor(private store: Store<{}>) {}
 
   viewSignOutClicked() {
     this.store.dispatch(HomePageActions.signOut());

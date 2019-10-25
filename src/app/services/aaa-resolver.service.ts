@@ -19,7 +19,7 @@ import { CurrentTask } from '../root-store/tasks-store/models';
   providedIn: 'root',
 })
 export class AaaResolverService implements Resolve<CurrentTask> {
-  constructor(private router: Router, private store: Store<any>) {}
+  constructor(private router: Router, private store: Store<{}>) {}
 
   waitForCurrentTasksToLoad(): Observable<boolean> {
     return this.store.pipe(

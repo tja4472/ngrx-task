@@ -24,5 +24,5 @@ export class TaskListsRootComponent implements OnDestroy, OnInit {
 
   ngOnInit(): void {}
 
-  constructor(private store: Store<any>) {}
+  constructor(private store: Store<{}>) {}
 }

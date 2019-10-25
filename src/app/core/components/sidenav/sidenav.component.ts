@@ -45,7 +45,7 @@ export class SidenavComponent {
   constructor(
     private breakpointObserver: BreakpointObserver,
     router: Router,
-    private store: Store<any>
+    private store: Store<{}>
   ) {
     this.view$ = this.store.select(UserStoreSelectors.selectUserAndTaskListId);
     /*    

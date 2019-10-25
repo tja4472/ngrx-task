@@ -15,7 +15,7 @@ import {
   providedIn: 'root',
 })
 export class TaskListGuardService implements CanActivate {
-  constructor(private store: Store<any>) {}
+  constructor(private store: Store<{}>) {}
 
   canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {
     return this.waitForTaskListsToLoad().pipe(

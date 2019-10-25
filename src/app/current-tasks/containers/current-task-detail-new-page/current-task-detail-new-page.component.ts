@@ -17,7 +17,7 @@ import {
 export class CurrentTaskDetailNewPageComponent implements OnInit {
   task = newCurrentTask();
 
-  constructor(private store: Store<any>) {}
+  constructor(private store: Store<{}>) {}
 
   ngOnInit() {}
 

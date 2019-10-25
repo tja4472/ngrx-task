@@ -61,7 +61,7 @@ export class UserStoreEffects {
 
   constructor(
     private actions$: Actions,
-    private store: Store<any>,
+    private store: Store<{}>,
     private userInfoDataService: UserInfoDataService
   ) {}
 }

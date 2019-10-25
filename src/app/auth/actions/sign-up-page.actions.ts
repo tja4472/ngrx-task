@@ -3,17 +3,11 @@ import { createAction, props, union } from '@ngrx/store';
 import { Credentials } from '@app/auth/models/credentials.model';
 import { UserModel } from '@app/auth/models/user.model';
 
+const title = 'Sign Up Page';
+
+export const entered = createAction(`[${title}] Entered`);
+
 export const signUp = createAction(
-  '[Sign Up Page] Sign Up',
+  `[${title}] Sign Up`,
   props<{ credentials: Credentials }>()
-);
-
-export const signUpFailure = createAction(
-  '[Sign Up Page] Sign Up - Failure',
-  props<{ error: any }>()
-);
-
-export const signUpSuccess = createAction(
-  '[Sign Up Page] Sign Up - Success',
-  props<{ user: UserModel }>()
 );

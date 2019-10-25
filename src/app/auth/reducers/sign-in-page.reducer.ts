@@ -34,10 +34,6 @@ const featureReducer = createReducer(
       pending: false,
     };
     return values;
-  }),
-  on(AuthApiActions.signInSuccess, (state) => {
-    const values: SignInPageState = { ...state, error: null, pending: false };
-    return values;
   })
 );
 

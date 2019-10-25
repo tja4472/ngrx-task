@@ -24,5 +24,5 @@ export class CompletedTasksRootComponent implements OnDestroy, OnInit {
 
   ngOnInit(): void {}
 
-  constructor(private store: Store<any>) {}
+  constructor(private store: Store<{}>) {}
 }

@@ -308,7 +308,7 @@ export class TaskEffects {
     private todoDataService: CurrentTaskDataService,
     private todoCompletedDataService: CompletedTaskDataService,
     private todoListsDataService: TaskListDataService,
-    private store: Store<any>,
+    private store: Store<{}>,
     private router: Router
   ) {}
 }

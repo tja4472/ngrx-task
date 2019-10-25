@@ -19,20 +19,22 @@ Hence const values: State = { bodge
 */
 const featureReducer = createReducer(
   initialState,
+  on(SignUpPageActions.entered, (state) => {
+    const values: SignUpPageState = { ...initialState };
+    return values;
+  }),
   on(SignUpPageActions.signUp, (state) => {
     const values: SignUpPageState = { ...state, error: null, pending: true };
     return values;
   }),
-  on(AuthApiActions.signInSuccess, (state) => {
-    const values: SignUpPageState = { ...state, error: null, pending: true };
+  on(AuthApiActions.signUpFailure, (state, { error }) => {
+    const values: SignUpPageState = {
+      ...state,
+      error: error.message,
+      pending: false,
+    };
     return values;
   })
-  /*
-  on(AuthApiActions.signInFailure, (state) => {
-    const values: SignUpPageState = { ...state, error: null, pending: true };
-    return values;
-  })  
-  */
 );
 
 export function reducer(state: SignUpPageState | undefined, action: Action) {

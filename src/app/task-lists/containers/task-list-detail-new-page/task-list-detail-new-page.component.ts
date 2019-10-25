@@ -17,7 +17,7 @@ import {
 export class TaskListDetailNewPageComponent implements OnInit {
   task$ = newTaskListListItem();
 
-  constructor(private store: Store<any>) {}
+  constructor(private store: Store<{}>) {}
 
   ngOnInit() {}
 

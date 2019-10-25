@@ -18,7 +18,7 @@ export class SignInPageComponent implements OnInit {
   error$: Observable<string>;
   pending$: Observable<boolean>;
 
-  constructor(private store: Store<any>) {
+  constructor(private store: Store<{}>) {
     this.error$ = store.pipe(select(SignInPageSelectors.selectSignInPageError));
     this.pending$ = store.pipe(
       select(SignInPageSelectors.selectSignInPagePending)

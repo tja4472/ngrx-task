@@ -12,7 +12,7 @@ import { TaskSelectors } from '@app/root-store/tasks-store/selectors';
   providedIn: 'root',
 })
 export class CurrentTaskGuardService implements CanActivate {
-  constructor(private store: Store<any>) {}
+  constructor(private store: Store<{}>) {}
 
   canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {
     return this.waitForCurrentTasksToLoad().pipe(

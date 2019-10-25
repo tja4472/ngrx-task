@@ -28,7 +28,7 @@ export class TodoEffects {
   //
   constructor(
     private actions$: Actions,
-    private store: Store<any>,
+    private store: Store<{}>,
     private dataService: CurrentTaskDataService
   ) {}
   /*

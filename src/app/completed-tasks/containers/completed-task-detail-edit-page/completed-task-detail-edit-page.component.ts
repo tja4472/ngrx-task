@@ -17,7 +17,7 @@ import { TaskSelectors } from '@app/root-store/tasks-store/selectors';
 export class CompletedTaskDetailEditPageComponent implements OnInit {
   task$: Observable<CompletedTask>;
 
-  constructor(private store: Store<any>) {
+  constructor(private store: Store<{}>) {
     this.task$ = store.pipe(select(TaskSelectors.selectCompletedTaskFromRoute));
   }
 

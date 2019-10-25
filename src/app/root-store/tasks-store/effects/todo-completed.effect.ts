@@ -30,7 +30,7 @@ export class TodoCompletedEffects {
   constructor(
     private actions$: Actions,
     private dataService: CompletedTaskDataService,
-    private store: Store<any>
+    private store: Store<{}>
   ) {}
 
   @Effect()

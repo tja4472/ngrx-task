@@ -22,7 +22,7 @@ import { TaskSelectors } from '@app/root-store/tasks-store/selectors';
 export class CompletedTasksPageComponent implements OnDestroy, OnInit {
   completedTasks$: Observable<CompletedTask[]>;
 
-  constructor(private store: Store<any>) {
+  constructor(private store: Store<{}>) {
     this.completedTasks$ = store.pipe(
       select(TaskSelectors.selectCompletedTasksAll)
     );

@@ -14,7 +14,7 @@ import { CompletedTasksRootGuardServiceActions } from '../root-store/tasks-store
   providedIn: 'root',
 })
 export class CompletedTasksRootGuardService implements CanActivate {
-  constructor(private store: Store<any>) {}
+  constructor(private store: Store<{}>) {}
 
   canActivate(): Observable<boolean> {
     return this.waitForAuth().pipe(

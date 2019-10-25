@@ -75,6 +75,40 @@ export class AuthEffects {
   );
 
   @Effect({ dispatch: false })
+  signUp$ = this.actions$.pipe(
+    ofType(SignUpPageActions.signUp),
+    tap((action) => {
+      const password = action.credentials.password;
+
+      this.afAuth.auth
+        .createUserWithEmailAndPassword(action.credentials.username, password)
+        .catch((error) =>
+          this.store.dispatch(
+            AuthApiActions.signUpFailure({
+              error: {
+                code: error.code,
+                message: error.message,
+              },
+            })
+          )
+        );
+    })
+  );
+
+  /*
+  @Effect()
+  signUp$ = this.actions$.pipe(
+    ofType(SignUpPageActions.signUp.type),
+    exhaustMap((action) =>
+      this.authService.signUp(action.credentials).pipe(
+        map((user) => AuthApiActions.signUpSuccess({ user })),
+        catchError((error) => of(AuthApiActions.signUpFailure({ error })))
+      )
+    )
+  );
+*/
+
+  @Effect({ dispatch: false })
   signOut$ = this.actions$.pipe(
     ofType(AuthActions.signOut),
     tap(() =>
@@ -154,143 +188,6 @@ export class AuthEffects {
     })
   );
 
-  /*
-  @Effect()
-  signUp$ = this.actions$.pipe(
-    ofType(SignUpPageActions.signUp.type),
-    exhaustMap((action) =>
-      this.authService.signUp(action.credentials).pipe(
-        map((user) => AuthApiActions.signUpSuccess({ user })),
-        catchError((error) => of(AuthApiActions.signUpFailure({ error })))
-      )
-    )
-  );
-*/
-  @Effect({ dispatch: false })
-  authSignInSuccess$ = this.actions$.pipe(
-    ofType(AuthApiActions.signInSuccess, AuthApiActions.signUpSuccess),
-    tap(() => {
-      console.log(
-        'this.authService.redirectUrl>',
-        this.authService.redirectUrl
-      );
-      if (this.authService.redirectUrl === '') {
-        this.router.navigate(['/']);
-      } else {
-        this.router.navigate([this.authService.redirectUrl]);
-      }
-    })
-  );
-
-  /*  
-  @Effect({ dispatch: false })
-  setUserListId$ = this.actions$.pipe(
-    ofType(AuthApiActions.setUserListId),
-    withLatestFrom(this.store.select(authQuery.selectAuthUser)),
-    map(([action, user]) =>
-      tap(() => {
-        user.todoListId = action.listId;
-        this.userInfoDataService.save(user, user.id);
-      })
-    )
-  );
-*/
-
-  /*
-  @Effect({ dispatch: false })
-  loginRedirect$ = this.actions$.pipe(
-    ofType<LoginSuccess>(AuthActionTypes.LoginSuccess),
-    tap(() => {
-      // this.router.navigate(['/books']);
-      if (this.authService.redirectUrl === '') {
-        console.log('MMMMMMMMMMMM');
-        this.router.navigate(['/']);
-      } else {
-        this.router.navigate([this.authService.redirectUrl]);
-      }
-    })
-  );
-*/
-
-  /*
-  @Effect()
-  signOutConfirmation$ = this.actions$.pipe(
-    ofType<SignOutConfirmationShow>(SignOutConfirmationActionTypes.Show),
-    exhaustMap(() =>
-      from(this.showSignOutPrompt()).pipe(
-        map((confirmed) => {
-          if (confirmed) {
-            return new SignOutConfirmationOk();
-          } else {
-            return new SignOutConfirmationCancel();
-          }
-        })
-      )
-    )
-  );
-  */
-
-  /*
-    @Effect({ dispatch: false })
-    logoutConfirmation$ = this.actions$
-      .ofType<Logout>(AuthActionTypes.Logout)
-      .pipe(
-        tap(() => {
-          console.log('### sign out ###');
-          // this.showSignOutPrompt();
-          this.showSignOutPrompt().then(() => {
-           console.log('aaaaaa');
-         });
-        })
-      );
-    */
-
-  /*
-  @Effect()
-  logoutConfirmation$ = this.actions$
-    .ofType<Logout>(AuthActionTypes.Logout)
-    .pipe(
-      exhaustMap(() =>
-        this.dialogService
-          .open(LogoutPromptComponent)
-          .afterClosed()
-          .pipe(
-            map((confirmed) => {
-              if (confirmed) {
-                return new LogoutConfirmed();
-              } else {
-                return new LogoutCancelled();
-              }
-            }),
-          ),
-      ),
-    );
-  */
-  /*
-  @Effect()
-  signOut$ = this.actions$.pipe(
-    ofType(AuthApiActions.signOut.type),
-    exhaustMap(() =>
-      this.authService.signOut().pipe(
-        tap(() => this.router.navigate(['/sign-in'])),
-        map(() => AuthApiActions.signOutComplete())
-        // catchError(() => of(new SignOutComplete()))
-      )
-    )
-  );
-*/
-
-  // ==
-  // SignOutConfirmationAlert
-  // ==
-  /*
-  @Effect({ dispatch: false })
-  signOutConfirmationAlertShow$ = this.actions$.pipe(
-    ofType(SignOutConfirmationAlertActions.show.type),
-    tap(() => this.signOutConfirmationAlertService.show())
-  );
-*/
-
   // ==
 
   @Effect()
@@ -304,6 +201,6 @@ export class AuthEffects {
     private afAuth: AngularFireAuth,
     private router: Router,
     private dialog: MatDialog,
-    private store: Store<any>
+    private store: Store<{}>
   ) {}
 }

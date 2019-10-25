@@ -1,23 +1,35 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+
+import { select, Store } from '@ngrx/store';
+
+import { Observable } from 'rxjs';
 
 import { SignUpPageActions } from '@app/auth/actions';
-import { AuthFacade } from '@app/auth/facades/auth.facade';
 import { Credentials } from '@app/auth/models/credentials.model';
+import { SignUpPageSelectors } from '@app/auth/selectors';
 
 @Component({
-  selector: 'tja-sign-up-page',
+  selector: 'app-sign-up-page',
   templateUrl: './sign-up-page.component.html',
   styleUrls: ['./sign-up-page.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignUpPageComponent implements OnInit {
-  error$ = this.authFacade.signUpPageError$;
-  pending$ = this.authFacade.signUpPagePending$;
+  error$: Observable<string>;
+  pending$: Observable<boolean>;
 
-  constructor(private authFacade: AuthFacade) {}
+  constructor(private store: Store<{}>) {
+    this.error$ = store.pipe(select(SignUpPageSelectors.selectSignUpPageError));
+    this.pending$ = store.pipe(
+      select(SignUpPageSelectors.selectSignUpPagePending)
+    );
+
+    this.store.dispatch(SignUpPageActions.entered());
+  }
 
   ngOnInit() {}
 
   onSubmitted(credentials: Credentials) {
-    this.authFacade.dispatch(SignUpPageActions.signUp({ credentials }));
+    this.store.dispatch(SignUpPageActions.signUp({ credentials }));
   }
 }

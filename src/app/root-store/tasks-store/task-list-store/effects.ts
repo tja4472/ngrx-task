@@ -25,9 +25,9 @@ import * as featureActions from './actions';
 @Injectable()
 export class TaskListEffects {
   constructor(
-    private actions$: Actions<AuthApiActions.AuthApiActionsUnion>,
+    private actions$: Actions,
     private dataService: TaskListDataService,
-    private store: Store<any>
+    private store: Store<{}>
   ) {}
 
   @Effect()
