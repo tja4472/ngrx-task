@@ -10,7 +10,9 @@ import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
+
 @NgModule({
   imports: [
     DragDropModule,
@@ -20,6 +22,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatButtonModule,
     MatSelectModule,
     MatSidenavModule,
+    MatSnackBarModule,
     MatListModule,
     MatMenuModule,
     MatIconModule,
@@ -34,6 +37,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatButtonModule,
     MatSelectModule,
     MatSidenavModule,
+    MatSnackBarModule,
     MatListModule,
     MatMenuModule,
     MatIconModule,
