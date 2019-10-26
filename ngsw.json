@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1572089640149,
+  "timestamp": 1572099774902,
   "index": "/ngrx-task/index.html",
   "assetGroups": [
     {
@@ -10,8 +10,8 @@
       "urls": [
         "/ngrx-task/6-es2015.11bba98cf1bd18cb9703.js",
         "/ngrx-task/6-es5.11bba98cf1bd18cb9703.js",
-        "/ngrx-task/7-es2015.fe2dfc8038d434dc4a87.js",
-        "/ngrx-task/7-es5.fe2dfc8038d434dc4a87.js",
+        "/ngrx-task/7-es2015.efa0a578d8d84e6e281d.js",
+        "/ngrx-task/7-es5.efa0a578d8d84e6e281d.js",
         "/ngrx-task/8-es2015.38bfb5156250098e6ab9.js",
         "/ngrx-task/8-es5.38bfb5156250098e6ab9.js",
         "/ngrx-task/common-es2015.fac3357b6b1eea425d26.js",
@@ -23,8 +23,8 @@
         "/ngrx-task/manifest.webmanifest",
         "/ngrx-task/polyfills-es2015.d1c6d91d83aaea5467fa.js",
         "/ngrx-task/polyfills-es5.49877aec7487f183a5f7.js",
-        "/ngrx-task/runtime-es2015.1e86de0169e3b4987144.js",
-        "/ngrx-task/runtime-es5.1e86de0169e3b4987144.js",
+        "/ngrx-task/runtime-es2015.7bc428bee686c7ea9e6c.js",
+        "/ngrx-task/runtime-es5.7bc428bee686c7ea9e6c.js",
         "/ngrx-task/styles.d88cc327b1a4e4e64ccb.css"
       ],
       "patterns": [
@@ -52,8 +52,8 @@
   "hashTable": {
     "/ngrx-task/6-es2015.11bba98cf1bd18cb9703.js": "82b0c99eaf01b4382ea5d81ab6fae8549a3e7472",
     "/ngrx-task/6-es5.11bba98cf1bd18cb9703.js": "fbc3e666308abc92153860c410ec28ed9cafd19d",
-    "/ngrx-task/7-es2015.fe2dfc8038d434dc4a87.js": "8cf5e34af022625f5ebe0dbe04844a5eafe4edc1",
-    "/ngrx-task/7-es5.fe2dfc8038d434dc4a87.js": "d0a49cf57a5363335dfa01cac0e1ed570e392a15",
+    "/ngrx-task/7-es2015.efa0a578d8d84e6e281d.js": "26d308b1b007df1342107fef91c89bebcbf5d92e",
+    "/ngrx-task/7-es5.efa0a578d8d84e6e281d.js": "cb01985266ebad4ba5c6ad0b2a118b5283987f27",
     "/ngrx-task/8-es2015.38bfb5156250098e6ab9.js": "0760f839bb860cd0cfb598e50b8abad3d5be4666",
     "/ngrx-task/8-es5.38bfb5156250098e6ab9.js": "95f63183f969537573bfb5722205c87fea73c384",
     "/ngrx-task/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
@@ -67,14 +67,14 @@
     "/ngrx-task/common-es2015.fac3357b6b1eea425d26.js": "4e5e1e012f55db80450ad0486e2344ebc8eec335",
     "/ngrx-task/common-es5.fac3357b6b1eea425d26.js": "38723487b65db9e9e9e14f260f8cc33e7e473f11",
     "/ngrx-task/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
-    "/ngrx-task/index.html": "2f6d2c3149f7568f46d704c71c9751586d25d7b1",
+    "/ngrx-task/index.html": "bedd3fb11952e22427aa9e96d2b33c382e5a1f5c",
     "/ngrx-task/main-es2015.e5464151fa01c3e56a1e.js": "78b00153e2ed8bd6354e1f1c4b52ed76156d1277",
     "/ngrx-task/main-es5.e5464151fa01c3e56a1e.js": "07bcc2b08b4fc4bcca01064e66bc4569518d78a6",
     "/ngrx-task/manifest.webmanifest": "9cedaf540a3edc5243f9a6f95de5301e5d2dc572",
     "/ngrx-task/polyfills-es2015.d1c6d91d83aaea5467fa.js": "4475b4672a9d4d6d52c5f786ab4d627e9cabb16f",
     "/ngrx-task/polyfills-es5.49877aec7487f183a5f7.js": "4476dd4fed8acf373ac74f0ecdf1a091daddbbd5",
-    "/ngrx-task/runtime-es2015.1e86de0169e3b4987144.js": "8514a55dc40040e42afb758144d064752102d638",
-    "/ngrx-task/runtime-es5.1e86de0169e3b4987144.js": "7fc622acef3fade715af1060a87a949117135af3",
+    "/ngrx-task/runtime-es2015.7bc428bee686c7ea9e6c.js": "b25b0d792d7f0c71872fe937377a4c4de8d5896c",
+    "/ngrx-task/runtime-es5.7bc428bee686c7ea9e6c.js": "2ca6c6ab431c003f141129205fea24385283271f",
     "/ngrx-task/styles.d88cc327b1a4e4e64ccb.css": "0930d064ed1c8cd403d70dba22d7ca6b1c25fe52"
   },
   "navigationUrls": [
