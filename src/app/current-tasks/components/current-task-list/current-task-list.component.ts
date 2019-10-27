@@ -26,6 +26,9 @@ export class CurrentTaskListComponent implements OnInit {
     moveItemInArray(this.movies, event.previousIndex, event.currentIndex);
   }
   */
+  viewTrackBy(index, item: CurrentTask) {
+    return item.id;
+  }
 
   drop(event: CdkDragDrop<CurrentTask[]>) {
     // console.log({ event });

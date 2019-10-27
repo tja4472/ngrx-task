@@ -18,4 +18,8 @@ export class CompletedTaskListComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
+
+  viewTrackBy(index, item: CompletedTask) {
+    return item.id;
+  }
 }

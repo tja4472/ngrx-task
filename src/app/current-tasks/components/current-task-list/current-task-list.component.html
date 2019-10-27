@@ -1,5 +1,9 @@
 <div class="list" cdkDropList (cdkDropListDropped)="drop($event)">
-  <div cdkDrag cdkDragLockAxis="y" *ngFor="let task of currentTasks">
+  <div
+    cdkDrag
+    cdkDragLockAxis="y"
+    *ngFor="let task of currentTasks; trackBy: viewTrackBy"
+  >
     <div class="list-item">
       <mat-checkbox
         [checked]="task.isComplete"

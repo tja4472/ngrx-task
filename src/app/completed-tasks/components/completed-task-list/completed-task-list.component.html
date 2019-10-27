@@ -1,5 +1,5 @@
 <div class="list">
-  <div *ngFor="let task of currentTasks">
+  <div *ngFor="let task of currentTasks; trackBy: viewTrackBy">
     <div class="list-item">
       <mat-checkbox
         [checked]="task.isComplete"
