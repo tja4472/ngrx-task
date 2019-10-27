@@ -21,22 +21,33 @@ export const initialState: State = adapter.getInitialState({
   loading: false,
 });
 
+/*
+Typescript not enforcing State type.
+https://github.com/microsoft/TypeScript/issues/241#issuecomment-540168588
+Hence const values: State = { bodge
+*/
 const currentTaskReducer = createReducer(
   initialState,
-  on(TodoActions.databaseListenForDataStart, (state) => ({
-    ...state,
-    loading: true,
-  })),
+  on(TodoActions.databaseListenForDataStart, (state) => {
+    const values: State = { ...state, loading: true };
+    return values;
+  }),
   on(
     TodoActions.databaseListenForDataStop,
     CurrentTasksRootActions.destroyed,
-    () => ({
-      ...initialState,
-    })
+    (state) => {
+      const values: State = { ...initialState };
+      return values;
+    }
   ),
-  on(TodoActions.loadSuccess, (state, { currentTasks }) =>
-    adapter.addAll(currentTasks, { ...state, loaded: true, loading: false })
-  )
+  on(TodoActions.loadSuccess, (state, { currentTasks }) => {
+    const values: State = { ...state, loaded: true, loading: false };
+    return adapter.addAll(currentTasks, values);
+  }),
+  on(TodoActions.reorderList, (state, { ids }) => {
+    const values: State = { ...state, ids };
+    return values;
+  })
 );
 
 export function reducer(state: State | undefined, action: Action) {
