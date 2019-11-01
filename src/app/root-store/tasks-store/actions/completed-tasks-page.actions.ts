@@ -8,3 +8,8 @@ export const itemToggled = createAction(
   `[${title}] Item Toggled`,
   props<{ todoCompleted: CompletedTask }>()
 );
+
+export const search = createAction(
+  `[${title}] Search`,
+  props<{ query: string }>()
+);

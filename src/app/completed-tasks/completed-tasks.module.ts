@@ -8,6 +8,7 @@ import { CompletedTasksRoutingModule } from './completed-tasks-routing.module';
 import {
   CompletedTaskDetailEditComponent,
   CompletedTaskListComponent,
+  SearchComponent,
 } from './components';
 import {
   CompletedTaskDetailEditPageComponent,
@@ -18,6 +19,7 @@ import {
 export const COMPONENTS = [
   CompletedTaskDetailEditComponent,
   CompletedTaskListComponent,
+  SearchComponent,
 ];
 
 export const CONTAINERS = [

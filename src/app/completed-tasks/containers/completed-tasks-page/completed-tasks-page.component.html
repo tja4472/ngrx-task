@@ -1,3 +1,7 @@
+<app-search
+  [searchText]="viewSearchQuery$ | async"
+  (search)="viewSearch($event)"
+></app-search>
 <app-completed-task-list
   [currentTasks]="completedTasks$ | async"
   (toggleCompleteItem)="toggleCompleteItem($event)"

@@ -22,3 +22,8 @@ export const getLoaded = createSelector(
   getTodoCompletedState,
   (state) => state.loaded
 );
+
+export const getQuery = createSelector(
+  getTodoCompletedState,
+  (state) => state.query
+);

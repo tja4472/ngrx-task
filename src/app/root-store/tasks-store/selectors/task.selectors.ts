@@ -30,7 +30,30 @@ export const selectCompletedTasksLoaded = createSelector(
   getTaskState,
   TodoCompletedSelectors.getLoaded
 );
+
+export const selectCompletedTasksQuery = createSelector(
+  getTaskState,
+  TodoCompletedSelectors.getQuery
+);
 // #endregion
+
+export const selectCompletedTasksQueried = createSelector(
+  selectCompletedTasksAll,
+  selectCompletedTasksQuery,
+  (tasks, query) => {
+    if (query === '') {
+      return tasks;
+    }
+
+    const result = tasks.filter(
+      (task) =>
+        task.name.toLowerCase().includes(query) ||
+        task.description.toLowerCase().includes(query)
+    );
+
+    return result;
+  }
+);
 
 // #region CurrentTasks
 export const selectCurrentTasksAll = createSelector(

@@ -8,6 +8,7 @@ import {
 import { select, Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 import { CompletedTasksPageActions } from '@app/root-store/tasks-store/actions';
 import { CompletedTask } from '@app/root-store/tasks-store/models';
@@ -21,10 +22,17 @@ import { TaskSelectors } from '@app/root-store/tasks-store/selectors';
 })
 export class CompletedTasksPageComponent implements OnDestroy, OnInit {
   completedTasks$: Observable<CompletedTask[]>;
+  viewSearchQuery$: Observable<string>;
 
   constructor(private store: Store<{}>) {
+    this.viewSearchQuery$ = store.pipe(
+      select(TaskSelectors.selectCompletedTasksQuery),
+      take(1)
+    );
+
     this.completedTasks$ = store.pipe(
-      select(TaskSelectors.selectCompletedTasksAll)
+      // select(TaskSelectors.selectCompletedTasksAll)
+      select(TaskSelectors.selectCompletedTasksQueried)
     );
   }
 
@@ -34,6 +42,10 @@ export class CompletedTasksPageComponent implements OnDestroy, OnInit {
 
   ngOnInit() {
     // this.store.dispatch(CompletedTasksPageActions.entered());
+  }
+
+  viewSearch(query: string) {
+    this.store.dispatch(CompletedTasksPageActions.search({ query }));
   }
 
   toggleCompleteItem(item: CompletedTask) {
