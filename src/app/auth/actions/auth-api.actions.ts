@@ -1,8 +1,6 @@
-import { createAction, props, union } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
 
-import { UserModel } from '@app/auth/models/user.model';
-
-const title = 'Q-Auth/API';
+const title = 'Auth/API';
 
 export const autoSignIn = createAction(`[${title}] Auto Sign In`);
 

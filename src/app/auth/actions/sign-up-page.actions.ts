@@ -1,7 +1,6 @@
-import { createAction, props, union } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
 
 import { Credentials } from '@app/auth/models/credentials.model';
-import { UserModel } from '@app/auth/models/user.model';
 
 const title = 'Sign Up Page';
 

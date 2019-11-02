@@ -1,4 +1,4 @@
-import { createAction, props, union } from '@ngrx/store';
+import { createAction } from '@ngrx/store';
 
 const title = 'Auth';
 
