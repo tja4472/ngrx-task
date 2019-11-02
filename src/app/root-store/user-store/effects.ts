@@ -21,7 +21,17 @@ effect$ = createEffect(() => {
     ...
   );
 });
+
+effectDispatchFalse$ = createEffect(
+  () => {
+    return this.actions$.pipe(
+      ...       
+    );
+  },
+  { dispatch: false }
+);
 ======================================= */
+
 @Injectable()
 export class UserStoreEffects {
   haveFirebaseUser$ = createEffect(() => {

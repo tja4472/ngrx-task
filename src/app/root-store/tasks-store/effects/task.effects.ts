@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Actions, createEffect, Effect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 
-import { EMPTY, of } from 'rxjs';
-import { concatMap, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { concatMap, tap, withLatestFrom } from 'rxjs/operators';
 
 import { TaskSelectors } from '@app/root-store/tasks-store/selectors';
 import { UserStoreSelectors } from '@app/root-store/user-store';
@@ -20,286 +20,332 @@ import {
   CurrentTaskDetailEditPageActions,
   CurrentTaskDetailNewPageActions,
   CurrentTasksPageActions,
-  TaskActions,
   TaskListDetailEditPageActions,
   TaskListDetailNewPageActions,
   TaskListsPageActions,
-  TodoActions,
-  TodoCompletedActions,
 } from '../actions';
+
+/* =======================================
+Improve typings of createEffect, help debugging
+https://github.com/ngrx/platform/issues/2192
+
+effect$ = createEffect(() => {
+  return this.actions$.pipe(
+    ...
+  );
+});
+
+effectDispatchFalse$ = createEffect(
+  () => {
+    return this.actions$.pipe(
+      ...       
+    );
+  },
+  { dispatch: false }
+);
+======================================= */
 
 @Injectable()
 export class TaskEffects {
-  loadTasks$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(TaskActions.loadTasks),
-      /** An EMPTY observable only emits completion. Replace with your own observable API request */
-      concatMap(() => EMPTY)
-    )
-  );
-
   //#region Completed Tasks
-  @Effect({ dispatch: false })
-  removeCompletedTask$ = this.actions$.pipe(
-    ofType(CompletedTaskDetailEditPageActions.removed),
-    concatMap((action) =>
-      of(action).pipe(
-        withLatestFrom(
-          this.store.select(UserStoreSelectors.selectUserAndTaskListId)
-        )
-      )
-    ),
-    tap(([action, { user, taskListId }]) => {
-      this.todoCompletedDataService.removeItem(
-        action.completedTask.id,
-        taskListId,
-        user.id
+  removeCompletedTask$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(CompletedTaskDetailEditPageActions.removed),
+        concatMap((action) =>
+          of(action).pipe(
+            withLatestFrom(
+              this.store.select(UserStoreSelectors.selectUserAndTaskListId)
+            )
+          )
+        ),
+        tap(([action, { user, taskListId }]) => {
+          this.todoCompletedDataService.removeItem(
+            action.completedTask.id,
+            taskListId,
+            user.id
+          );
+        })
       );
-    })
+    },
+    { dispatch: false }
   );
 
-  @Effect({ dispatch: false })
-  savecompletedTask$ = this.actions$.pipe(
-    ofType(CompletedTaskDetailEditPageActions.saved),
-    concatMap((action) =>
-      of(action).pipe(
-        withLatestFrom(
-          this.store.select(UserStoreSelectors.selectUserAndTaskListId)
-        )
-      )
-    ),
-    tap(([action, { user, taskListId }]) => {
-      this.todoCompletedDataService.save(
-        action.completedTask,
-        taskListId,
-        user.id
+  savecompletedTask$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(CompletedTaskDetailEditPageActions.saved),
+        concatMap((action) =>
+          of(action).pipe(
+            withLatestFrom(
+              this.store.select(UserStoreSelectors.selectUserAndTaskListId)
+            )
+          )
+        ),
+        tap(([action, { user, taskListId }]) => {
+          this.todoCompletedDataService.save(
+            action.completedTask,
+            taskListId,
+            user.id
+          );
+        })
       );
-    })
+    },
+    { dispatch: false }
   );
   //#endregion
 
   //#region Task Lists
-  @Effect({ dispatch: false })
-  newTaskList$ = this.actions$.pipe(
-    ofType(TaskListsPageActions.newTaskList),
-    tap(() => {
-      this.router.navigate(['/tasks/lists/new']);
-    })
+  newTaskList$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(TaskListsPageActions.newTaskList),
+        tap(() => {
+          this.router.navigate(['/tasks/lists/new']);
+        })
+      );
+    },
+    { dispatch: false }
   );
 
-  @Effect({ dispatch: false })
-  removeTaskList$ = this.actions$.pipe(
-    ofType(TaskListDetailEditPageActions.removed),
-    concatMap((action) =>
-      of(action).pipe(
-        withLatestFrom(this.store.select(UserStoreSelectors.selectUser))
-      )
-    ),
-    tap(([action, user]) => {
-      this.todoListsDataService.removeItem(action.taskList.id, user.id);
-    })
+  removeTaskList$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(TaskListDetailEditPageActions.removed),
+        concatMap((action) =>
+          of(action).pipe(
+            withLatestFrom(this.store.select(UserStoreSelectors.selectUser))
+          )
+        ),
+        tap(([action, user]) => {
+          this.todoListsDataService.removeItem(action.taskList.id, user.id);
+        })
+      );
+    },
+    { dispatch: false }
   );
 
-  @Effect({ dispatch: false })
-  saveTaskList$ = this.actions$.pipe(
-    ofType(TaskListDetailNewPageActions.saved),
-    concatMap((action) =>
-      of(action).pipe(
-        withLatestFrom(this.store.select(UserStoreSelectors.selectUser))
-      )
-    ),
-    tap(([action, user]) => {
-      this.todoListsDataService.save(action.taskList, user.id);
-    })
+  saveTaskList$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(TaskListDetailNewPageActions.saved),
+        concatMap((action) =>
+          of(action).pipe(
+            withLatestFrom(this.store.select(UserStoreSelectors.selectUser))
+          )
+        ),
+        tap(([action, user]) => {
+          this.todoListsDataService.save(action.taskList, user.id);
+        })
+      );
+    },
+    { dispatch: false }
   );
 
-  @Effect({ dispatch: false })
-  taskListDetailEditPageActionsSaved$ = this.actions$.pipe(
-    ofType(TaskListDetailEditPageActions.saved),
-    concatMap((action) =>
-      of(action).pipe(
-        withLatestFrom(this.store.select(UserStoreSelectors.selectUser))
-      )
-    ),
-    tap(([action, user]) => {
-      this.todoListsDataService.save(action.taskList, user.id);
-    })
+  taskListDetailEditPageActionsSaved$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(TaskListDetailEditPageActions.saved),
+        concatMap((action) =>
+          of(action).pipe(
+            withLatestFrom(this.store.select(UserStoreSelectors.selectUser))
+          )
+        ),
+        tap(([action, user]) => {
+          this.todoListsDataService.save(action.taskList, user.id);
+        })
+      );
+    },
+    { dispatch: false }
   );
   //#endregion
   //
-  @Effect({ dispatch: false })
-  clearCompleted$ = this.actions$.pipe(
-    ofType(CurrentTasksPageActions.clearCompleted),
-    concatMap((action) =>
-      of(action).pipe(
-        withLatestFrom(
-          this.store.select(UserStoreSelectors.selectUserAndTaskListId),
-          this.store.select(TaskSelectors.selectCurrentTasksAll)
-        )
-      )
-    ),
+  clearCompleted$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(CurrentTasksPageActions.clearCompleted),
+        concatMap((action) =>
+          of(action).pipe(
+            withLatestFrom(
+              this.store.select(UserStoreSelectors.selectUserAndTaskListId),
+              this.store.select(TaskSelectors.selectCurrentTasksAll)
+            )
+          )
+        ),
+        tap(([action, { user, taskListId }, tasks]) => {
+          const completedTasks = tasks.filter((t) => t.isComplete);
 
-    tap(([action, { user, taskListId }, tasks]) => {
-      const completedTasks = tasks.filter((t) => t.isComplete);
-
-      this.fb1DataService.clearCompletedTodos(
-        completedTasks,
-        taskListId,
-        user.id
+          this.fb1DataService.clearCompletedTodos(
+            completedTasks,
+            taskListId,
+            user.id
+          );
+        })
       );
-    })
+    },
+    { dispatch: false }
   );
 
-  @Effect({ dispatch: false })
-  completedTaskToggled$ = this.actions$.pipe(
-    ofType(CompletedTasksPageActions.itemToggled),
-    concatMap((action) =>
-      of(action).pipe(
-        withLatestFrom(
-          this.store.select(UserStoreSelectors.selectUserAndTaskListId)
-        )
-      )
-    ),
-    tap(([action, { user, taskListId }]) => {
-      this.fb1DataService.moveToCurrent(
-        action.todoCompleted,
-        taskListId,
-        user.id
+  completedTaskToggled$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(CompletedTasksPageActions.itemToggled),
+        concatMap((action) =>
+          of(action).pipe(
+            withLatestFrom(
+              this.store.select(UserStoreSelectors.selectUserAndTaskListId)
+            )
+          )
+        ),
+        tap(([action, { user, taskListId }]) => {
+          this.fb1DataService.moveToCurrent(
+            action.todoCompleted,
+            taskListId,
+            user.id
+          );
+        })
       );
-    })
+    },
+    { dispatch: false }
   );
 
-  @Effect({ dispatch: false })
-  completedTaskDetailEditPageComponent$ = this.actions$.pipe(
-    ofType(
-      CompletedTaskDetailEditPageActions.cancelled,
-      CompletedTaskDetailEditPageActions.removed,
-      CompletedTaskDetailEditPageActions.saved
-    ),
-    tap(({ completedTask }) => {
-      this.router.navigate(['/tasks/completed', { id: completedTask.id }]);
-    })
-  );
-
-  @Effect({ dispatch: false })
-  newCurrentTask$ = this.actions$.pipe(
-    ofType(CurrentTasksPageActions.newCurrentTask),
-    tap(() => {
-      this.router.navigate(['/tasks/current/new']);
-    })
-  );
-
-  @Effect({ dispatch: false })
-  currentTaskDetailEditPageComponent$ = this.actions$.pipe(
-    ofType(
-      CurrentTaskDetailEditPageActions.cancelled,
-      CurrentTaskDetailEditPageActions.removed,
-      CurrentTaskDetailEditPageActions.saved
-    ),
-    tap(({ currentTask }) => {
-      this.router.navigate(['/tasks/current', { id: currentTask.id }]);
-    })
-  );
-
-  @Effect({ dispatch: false })
-  currentTaskDetailNewPageComponent$ = this.actions$.pipe(
-    ofType(
-      CurrentTaskDetailNewPageActions.cancelled,
-      CurrentTaskDetailNewPageActions.saved
-    ),
-    tap(() => {
-      this.router.navigate(['/tasks/current']);
-    })
-  );
-
-  @Effect({ dispatch: false })
-  removeCurrentTodo$ = this.actions$.pipe(
-    ofType(CurrentTaskDetailEditPageActions.removed),
-
-    concatMap((action) =>
-      of(action).pipe(
-        withLatestFrom(
-          this.store.select(UserStoreSelectors.selectUserAndTaskListId)
-        )
-      )
-    ),
-
-    tap(([action, { user, taskListId }]) => {
-      this.todoDataService.removeItem(
-        action.currentTask.id,
-        taskListId,
-        user.id
+  completedTaskDetailEditPageComponent$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(
+          CompletedTaskDetailEditPageActions.cancelled,
+          CompletedTaskDetailEditPageActions.removed,
+          CompletedTaskDetailEditPageActions.saved
+        ),
+        tap(({ completedTask }) => {
+          this.router.navigate(['/tasks/completed', { id: completedTask.id }]);
+        })
       );
-    })
+    },
+    { dispatch: false }
   );
 
-  @Effect({ dispatch: false })
-  saveCurrentTodo$ = this.actions$.pipe(
-    ofType(
-      CurrentTaskDetailNewPageActions.saved,
-      CurrentTaskDetailEditPageActions.saved,
-      CurrentTasksPageActions.saveItem
-    ),
-
-    concatMap((action) =>
-      of(action).pipe(
-        withLatestFrom(
-          this.store.select(UserStoreSelectors.selectUserAndTaskListId)
-        )
-      )
-    ),
-    tap(([action, { user, taskListId }]) => {
-      this.todoDataService.save(action.currentTask, taskListId, user.id);
-    })
+  newCurrentTask$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(CurrentTasksPageActions.newCurrentTask),
+        tap(() => {
+          this.router.navigate(['/tasks/current/new']);
+        })
+      );
+    },
+    { dispatch: false }
   );
 
-  /*
-  @Effect()
-  enterLoadData$ = this.actions$.pipe(
-    ofType(
-      AuthApiActions.autoSignInHaveUser,
-      AuthApiActions.setUserListId,
-      AuthApiActions.signInSuccess
-    ),
-    concatMap((action) =>
-      of(action).pipe(
-        withLatestFrom(this.store.select(authQuery.selectAuthUser))
-      )
-    ),
-    switchMap(([_, user]) => [
-      TodoActions.databaseListenForDataStart({
-        todoListId: user.todoListId,
-        userId: user.id,
-      }),
-      TodoCompletedActions.databaseListenForDataStart({
-        todoListId: user.todoListId,
-        userId: user.id,
-      }),
-    ])
-  );
-*/
-
-  @Effect({ dispatch: false })
-  taskListDetailEditPageComponent$ = this.actions$.pipe(
-    ofType(
-      TaskListDetailEditPageActions.cancelled,
-      TaskListDetailEditPageActions.removed,
-      TaskListDetailEditPageActions.saved
-    ),
-    tap(({ taskList }) => {
-      this.router.navigate(['tasks/lists', { id: taskList.id }]);
-    })
+  currentTaskDetailEditPageComponent$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(
+          CurrentTaskDetailEditPageActions.cancelled,
+          CurrentTaskDetailEditPageActions.removed,
+          CurrentTaskDetailEditPageActions.saved
+        ),
+        tap(({ currentTask }) => {
+          this.router.navigate(['/tasks/current', { id: currentTask.id }]);
+        })
+      );
+    },
+    { dispatch: false }
   );
 
-  @Effect({ dispatch: false })
-  taskListDetailNewPageComponent$ = this.actions$.pipe(
-    ofType(
-      TaskListDetailNewPageActions.cancelled,
-      TaskListDetailNewPageActions.saved
-    ),
-    tap(() => {
-      this.router.navigate(['tasks/lists']);
-    })
+  currentTaskDetailNewPageComponent$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(
+          CurrentTaskDetailNewPageActions.cancelled,
+          CurrentTaskDetailNewPageActions.saved
+        ),
+        tap(() => {
+          this.router.navigate(['/tasks/current']);
+        })
+      );
+    },
+    { dispatch: false }
+  );
+
+  removeCurrentTodo$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(CurrentTaskDetailEditPageActions.removed),
+
+        concatMap((action) =>
+          of(action).pipe(
+            withLatestFrom(
+              this.store.select(UserStoreSelectors.selectUserAndTaskListId)
+            )
+          )
+        ),
+
+        tap(([action, { user, taskListId }]) => {
+          this.todoDataService.removeItem(
+            action.currentTask.id,
+            taskListId,
+            user.id
+          );
+        })
+      );
+    },
+    { dispatch: false }
+  );
+
+  saveCurrentTodo$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(
+          CurrentTaskDetailNewPageActions.saved,
+          CurrentTaskDetailEditPageActions.saved,
+          CurrentTasksPageActions.saveItem
+        ),
+
+        concatMap((action) =>
+          of(action).pipe(
+            withLatestFrom(
+              this.store.select(UserStoreSelectors.selectUserAndTaskListId)
+            )
+          )
+        ),
+        tap(([action, { user, taskListId }]) => {
+          this.todoDataService.save(action.currentTask, taskListId, user.id);
+        })
+      );
+    },
+    { dispatch: false }
+  );
+
+  taskListDetailEditPageComponent$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(
+          TaskListDetailEditPageActions.cancelled,
+          TaskListDetailEditPageActions.removed,
+          TaskListDetailEditPageActions.saved
+        ),
+        tap(({ taskList }) => {
+          this.router.navigate(['tasks/lists', { id: taskList.id }]);
+        })
+      );
+    },
+    { dispatch: false }
+  );
+
+  taskListDetailNewPageComponent$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(
+          TaskListDetailNewPageActions.cancelled,
+          TaskListDetailNewPageActions.saved
+        ),
+        tap(() => {
+          this.router.navigate(['tasks/lists']);
+        })
+      );
+    },
+    { dispatch: false }
   );
 
   constructor(

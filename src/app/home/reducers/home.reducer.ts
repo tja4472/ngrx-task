@@ -1,7 +1,5 @@
 import { Action, createReducer, on } from '@ngrx/store';
 
-import * as HomeActions from '../actions/home-page.actions';
-
 export const homeFeatureKey = 'home';
 
 // tslint:disable-next-line: no-empty-interface
@@ -10,9 +8,9 @@ export interface State {}
 export const initialState: State = {};
 
 const homeReducer = createReducer(
-  initialState,
+  initialState
 
-  on(HomeActions.loadHomes, (state) => state)
+  // on(HomeActions.qqqqloadHomes, (state) => state)
 );
 
 export function reducer(state: State | undefined, action: Action) {

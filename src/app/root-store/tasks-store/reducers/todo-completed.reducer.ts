@@ -4,7 +4,6 @@ import { Action, createReducer, on } from '@ngrx/store';
 import {
   CompletedTasksPageActions,
   CompletedTasksRootActions,
-  TaskActions,
   TodoCompletedActions,
 } from '../actions';
 import { CompletedTask } from '../models';
@@ -40,10 +39,6 @@ const completedTaskReducer = createReducer(
     const values: State = { ...state, query: lowerCaseQuery };
     return values;
   }),
-  on(TaskActions.completedTaskDetailsPageEnter, (state, { id }) => ({
-    ...state,
-    selectedId: id,
-  })),
   on(TodoCompletedActions.databaseListenForDataStart, (state) => ({
     ...state,
     loading: true,

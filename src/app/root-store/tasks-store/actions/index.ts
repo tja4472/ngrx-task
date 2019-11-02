@@ -11,7 +11,6 @@ import * as TaskListDetailEditPageActions from './task-list-detail-edit-page.act
 import * as TaskListDetailNewPageActions from './task-list-detail-new-page.actions';
 import * as TaskListsPageActions from './task-lists-page.actions';
 import * as TaskListsRootActions from './task-lists-root.actions';
-import * as TaskActions from './task.actions';
 import * as TodoCompletedActions from './todo-completed.action';
 import * as TodoActions from './todo.action';
 
@@ -25,7 +24,6 @@ export {
   CurrentTasksPageActions,
   CurrentTasksRootActions,
   CurrentTasksRootGuardServiceActions,
-  TaskActions,
   TaskListDetailEditPageActions,
   TaskListDetailNewPageActions,
   TaskListsPageActions,
