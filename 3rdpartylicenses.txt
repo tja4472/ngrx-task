@@ -348,6 +348,9 @@ Apache-2.0
 @firebase/logger
 Apache-2.0
 
+@firebase/performance
+Apache-2.0
+
 @firebase/util
 Apache-2.0
 
@@ -399,6 +402,8 @@ firebase/app
 firebase/auth
 
 firebase/firestore
+
+firebase/performance
 
 hammerjs
 MIT
