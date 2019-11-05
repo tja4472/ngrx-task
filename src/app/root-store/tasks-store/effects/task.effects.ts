@@ -25,6 +25,7 @@ import {
   TaskListsPageActions,
 } from '../actions';
 
+import * as firebase from 'firebase/app';
 /* =======================================
 Improve typings of createEffect, help debugging
 https://github.com/ngrx/platform/issues/2192
@@ -231,6 +232,22 @@ export class TaskEffects {
         ofType(CurrentTasksPageActions.newCurrentTask),
         tap(() => {
           this.router.navigate(['/tasks/current/new']);
+        })
+      );
+    },
+    { dispatch: false }
+  );
+
+  enterCurrentTasksPage$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(CurrentTasksPageActions.enter),
+        tap(() => {
+          const analytics = firebase.analytics();
+          analytics.logEvent('enterCurrentTasksPage', {
+            level: '10',
+            difficulty: 'expert',
+          });
         })
       );
     },
