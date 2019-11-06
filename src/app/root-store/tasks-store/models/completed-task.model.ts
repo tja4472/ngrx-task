@@ -3,6 +3,7 @@ export interface CompletedTask {
   readonly description?: string;
   readonly isComplete: boolean;
   readonly name: string;
+  readonly updatedTimestamp: number;
 }
 
 export function newCompletedTask(): CompletedTask {
@@ -11,5 +12,6 @@ export function newCompletedTask(): CompletedTask {
     id: '',
     isComplete: true,
     name: '',
+    updatedTimestamp: Date.now(),
   };
 }

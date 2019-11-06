@@ -10,6 +10,9 @@ import {
   newCompletedTask,
 } from '../root-store/tasks-store/models';
 
+import * as firebase from 'firebase/app';
+import 'firebase/firestore';
+
 const DATA_COLLECTION = 'completed-todos';
 const USERS_COLLECTION = 'users';
 
@@ -18,6 +21,7 @@ interface FirestoreDoc {
   description?: string;
   name: string;
   isComplete: boolean;
+  updatedTimestamp: number;
 }
 
 @Injectable({
@@ -52,6 +56,18 @@ export class CompletedTaskDataService {
   public save(item: CompletedTask, taskListId: string, userId: string): void {
     const doc = this.toFirestoreDoc(item);
 
+    const a = firebase.firestore.FieldValue.serverTimestamp();
+    console.log('serverTimestamp>', a);
+
+    const b = new Date();
+    console.log('new Date()>', b);
+
+    const c = Date.now();
+    console.log('Date.now()>', c);
+
+    const d = new Date(c);
+    console.log('new Date(c)>', d);
+
     if (item.id === '') {
       doc.id = this.afs.createId();
     }
@@ -78,20 +94,28 @@ export class CompletedTaskDataService {
       id: item.id,
       isComplete: item.isComplete,
       name: item.name,
+      updatedTimestamp: Date.now(),
     };
 
     return result;
   }
 
   private fromFirestoreDoc(x: FirestoreDoc): CompletedTask {
-    //
+    // Temp fix till all recors in database updated.
+    let updatedTimestamp = x.updatedTimestamp;
+
+    if (updatedTimestamp === undefined) {
+      updatedTimestamp = Date.now();
+    }
+
     const result: CompletedTask = {
       ...newCompletedTask(),
       description: x.description,
       id: x.id,
       name: x.name,
+      updatedTimestamp,
     };
-
+    console.log('result>', result);
     return result;
   }
 }
