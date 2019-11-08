@@ -5,18 +5,74 @@ import { MatCheckboxChange } from '@angular/material/checkbox';
 
 import { CompletedTask } from '@app/root-store/tasks-store/models';
 
+import * as moment from 'moment';
+
+interface GroupTasksByDate {
+  header: string;
+  tasks: CompletedTask[];
+}
+
 @Component({
   selector: 'app-completed-task-list',
   templateUrl: './completed-task-list.component.html',
   styleUrls: ['./completed-task-list.component.css'],
 })
 export class CompletedTaskListComponent implements OnInit {
+  private inputCurrentTasks: CompletedTask[];
+
   @Input()
-  currentTasks: CompletedTask[];
+  set currentTasks(tasks: CompletedTask[]) {
+    this.inputCurrentTasks = tasks;
+
+    this.viewGroupByDateArray = this.convertToGroupByDateArray(tasks);
+  }
+
+  get currentTasks(): CompletedTask[] {
+    return this.inputCurrentTasks;
+  }
 
   @Output() toggleCompleteItem = new EventEmitter<CompletedTask>();
 
+  viewGroupByDateArray: GroupTasksByDate[] = [];
+
   constructor() {}
+
+  private convertToGroupByDateArray(
+    tasks: CompletedTask[]
+  ): GroupTasksByDate[] {
+    // sort by descending updatedTimestamp
+    const sorted = tasks.sort((a, b) => {
+      if (a.updatedTimestamp > b.updatedTimestamp) {
+        return -1;
+      }
+
+      if (a.updatedTimestamp < b.updatedTimestamp) {
+        return 1;
+      }
+
+      return 0;
+    });
+
+    const result: GroupTasksByDate[] = [];
+
+    let header = '';
+    let groupTasks: CompletedTask[] = [];
+
+    sorted.forEach((value) => {
+      const dateText = moment(value.updatedTimestamp).format('ddd, D MMM YYYY');
+      // dateText += ':' + value.updatedTimestamp;
+
+      if (dateText === header) {
+        groupTasks.push(value);
+      } else {
+        header = dateText;
+        groupTasks = [{ ...value }];
+        result.push({ header, tasks: groupTasks });
+      }
+    });
+
+    return result;
+  }
 
   ngOnInit() {}
 

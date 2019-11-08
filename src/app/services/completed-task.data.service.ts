@@ -56,18 +56,6 @@ export class CompletedTaskDataService {
   public save(item: CompletedTask, taskListId: string, userId: string): void {
     const doc = this.toFirestoreDoc(item);
 
-    const a = firebase.firestore.FieldValue.serverTimestamp();
-    console.log('serverTimestamp>', a);
-
-    const b = new Date();
-    console.log('new Date()>', b);
-
-    const c = Date.now();
-    console.log('Date.now()>', c);
-
-    const d = new Date(c);
-    console.log('new Date(c)>', d);
-
     if (item.id === '') {
       doc.id = this.afs.createId();
     }
@@ -115,7 +103,7 @@ export class CompletedTaskDataService {
       name: x.name,
       updatedTimestamp,
     };
-    console.log('result>', result);
+
     return result;
   }
 }

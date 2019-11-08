@@ -27,19 +27,31 @@
   opacity: 0;
 }
 
+.aa {
+  height: 300px;
+}
+
+.app-class .mat-list-item {
+  height: auto;
+}
+
 .list {
   flex-grow: 1;
   flex-basis: 0px;
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
+  background: white;
 }
 
 .list-item {
   display: flex;
   flex-wrap: nowrap;
-  padding: 10px 10px;
+  flex-grow: 1;
+  padding: 10px 0px;
+  /* 
   border-bottom: solid 1px #ccc;
+  */
   box-sizing: border-box;
   background: white;
 }
