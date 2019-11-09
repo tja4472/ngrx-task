@@ -71,12 +71,7 @@ export class AuthGuardService implements CanActivate {
     return this.store.pipe(
       select(selectHasChecked),
       filter((hasChecked) => hasChecked),
-      exhaustMap(() =>
-        this.store.pipe(
-          select(selectHasUser),
-          take(1)
-        )
-      )
+      exhaustMap(() => this.store.pipe(select(selectHasUser), take(1)))
     );
   }
 

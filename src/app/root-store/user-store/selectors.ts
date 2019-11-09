@@ -15,10 +15,7 @@ export const selectUser = createSelector(
   (state) => state.user
 );
 
-export const selectIsLoggedIn = createSelector(
-  selectUser,
-  (user) => !!user
-);
+export const selectIsLoggedIn = createSelector(selectUser, (user) => !!user);
 
 export const selectUserAndTaskListId = createSelector(
   selectUser,

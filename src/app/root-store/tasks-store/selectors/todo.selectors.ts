@@ -8,17 +8,8 @@ const getTodoState = createFeatureSelector<fromTodo.State>(
 
 const { selectEntities, selectAll } = fromTodo.adapter.getSelectors();
 
-export const getAllTodo = createSelector(
-  getTodoState,
-  selectAll
-);
+export const getAllTodo = createSelector(getTodoState, selectAll);
 
-export const getEntities = createSelector(
-  getTodoState,
-  selectEntities
-);
+export const getEntities = createSelector(getTodoState, selectEntities);
 
-export const getLoaded = createSelector(
-  getTodoState,
-  (state) => state.loaded
-);
+export const getLoaded = createSelector(getTodoState, (state) => state.loaded);
