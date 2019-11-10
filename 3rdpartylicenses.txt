@@ -60,10 +60,6 @@ MIT
 @angular/fire
 MIT
 
-@angular/fire/auth
-
-@angular/fire/firestore
-
 @angular/forms
 MIT
 
@@ -91,34 +87,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-
-@angular/material/button
-
-@angular/material/card
-
-@angular/material/checkbox
-
-@angular/material/core
-
-@angular/material/dialog
-
-@angular/material/divider
-
-@angular/material/form-field
-
-@angular/material/icon
-
-@angular/material/list
-
-@angular/material/menu
-
-@angular/material/select
-
-@angular/material/sidenav
-
-@angular/material/snack-bar
-
-@angular/material/toolbar
 
 @angular/platform-browser
 MIT
