@@ -2,7 +2,7 @@
   <div *ngFor="let task of currentTasks">
     <div class="list-item">
       <a [routerLink]="['/tasks/lists/edit', task.id]">
-        <div class="middle" [ngClass]="{ 'line-through': task.isComplete }">
+        <div class="middle">
           <div class="name">{{ task.name }}</div>
         </div>
       </a>
