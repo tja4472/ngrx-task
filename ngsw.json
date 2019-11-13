@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1573554403139,
+  "timestamp": 1573641933014,
   "index": "/ngrx-task/index.html",
   "assetGroups": [
     {
@@ -10,8 +10,8 @@
       "urls": [
         "/ngrx-task/6-es2015.d53a7019ae714dd1dbb2.js",
         "/ngrx-task/6-es5.d53a7019ae714dd1dbb2.js",
-        "/ngrx-task/7-es2015.bcb027d6233600594ebb.js",
-        "/ngrx-task/7-es5.bcb027d6233600594ebb.js",
+        "/ngrx-task/7-es2015.1dc3a8aaafe609c2b331.js",
+        "/ngrx-task/7-es5.1dc3a8aaafe609c2b331.js",
         "/ngrx-task/8-es2015.8a57a5156055938f5b01.js",
         "/ngrx-task/8-es5.8a57a5156055938f5b01.js",
         "/ngrx-task/9-es2015.80861dcf691826198602.js",
@@ -20,13 +20,13 @@
         "/ngrx-task/common-es5.64a0c8d1660e56c833d8.js",
         "/ngrx-task/favicon.ico",
         "/ngrx-task/index.html",
-        "/ngrx-task/main-es2015.b5e1c4aeafd8e3d38cde.js",
-        "/ngrx-task/main-es5.b5e1c4aeafd8e3d38cde.js",
+        "/ngrx-task/main-es2015.9e17065059256fa7a311.js",
+        "/ngrx-task/main-es5.9e17065059256fa7a311.js",
         "/ngrx-task/manifest.webmanifest",
         "/ngrx-task/polyfills-es2015.ad387f4b6618353803c2.js",
         "/ngrx-task/polyfills-es5.2e9ef896a519bba3e356.js",
-        "/ngrx-task/runtime-es2015.c781bc242812c40e7744.js",
-        "/ngrx-task/runtime-es5.c781bc242812c40e7744.js",
+        "/ngrx-task/runtime-es2015.92dd6f70bafc0b8dbbb8.js",
+        "/ngrx-task/runtime-es5.92dd6f70bafc0b8dbbb8.js",
         "/ngrx-task/styles.d88cc327b1a4e4e64ccb.css"
       ],
       "patterns": [
@@ -54,8 +54,8 @@
   "hashTable": {
     "/ngrx-task/6-es2015.d53a7019ae714dd1dbb2.js": "9e59fec3fba307c13f0a4b3b772642546029176e",
     "/ngrx-task/6-es5.d53a7019ae714dd1dbb2.js": "f2dad14e1d619a2bcd6284095c11ab24f6003947",
-    "/ngrx-task/7-es2015.bcb027d6233600594ebb.js": "9e6fca2cf812901eded180a66dd1be2ebfa8b957",
-    "/ngrx-task/7-es5.bcb027d6233600594ebb.js": "9e6fca2cf812901eded180a66dd1be2ebfa8b957",
+    "/ngrx-task/7-es2015.1dc3a8aaafe609c2b331.js": "43e655045c777b23d0848f8dc19f87605653df4d",
+    "/ngrx-task/7-es5.1dc3a8aaafe609c2b331.js": "43e655045c777b23d0848f8dc19f87605653df4d",
     "/ngrx-task/8-es2015.8a57a5156055938f5b01.js": "e7cb00fada756c203988345b74d24ff751229b85",
     "/ngrx-task/8-es5.8a57a5156055938f5b01.js": "35a9e54a374daab2b1c4bce54ff1b91c0b5e8aad",
     "/ngrx-task/9-es2015.80861dcf691826198602.js": "d5bb7d8a48c78450dfa8f2c27657a21698274841",
@@ -71,14 +71,14 @@
     "/ngrx-task/common-es2015.64a0c8d1660e56c833d8.js": "24861aa8af581dcb41d2028dbb12121af963f406",
     "/ngrx-task/common-es5.64a0c8d1660e56c833d8.js": "73f9351c9063409d83c9714700f79257ff1a0bf2",
     "/ngrx-task/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
-    "/ngrx-task/index.html": "493288b5950bf46bdbe9301ae28779329bc88d2a",
-    "/ngrx-task/main-es2015.b5e1c4aeafd8e3d38cde.js": "0ed3e24743b243b6061962136c05533802bac86b",
-    "/ngrx-task/main-es5.b5e1c4aeafd8e3d38cde.js": "adf121152c0a0448132738488a871c1039f1f76c",
+    "/ngrx-task/index.html": "45e61c260b06dec2e4341461ee251ef3149569e2",
+    "/ngrx-task/main-es2015.9e17065059256fa7a311.js": "00912096c3f6b70bf0ec4be287cbc30f1e0aaee5",
+    "/ngrx-task/main-es5.9e17065059256fa7a311.js": "1c049e539bbfa99a75a6990731f996b172496f88",
     "/ngrx-task/manifest.webmanifest": "9cedaf540a3edc5243f9a6f95de5301e5d2dc572",
     "/ngrx-task/polyfills-es2015.ad387f4b6618353803c2.js": "1112697fe02dc6f7480e899bc1511c46780a282f",
     "/ngrx-task/polyfills-es5.2e9ef896a519bba3e356.js": "5c0530e76371f936e90fe202019909ca7dfecceb",
-    "/ngrx-task/runtime-es2015.c781bc242812c40e7744.js": "60477c8d90d71636ab014200eed26ea244c4f32e",
-    "/ngrx-task/runtime-es5.c781bc242812c40e7744.js": "8a3a037bb9d91050f3ded2f6f194b951fdb1daf6",
+    "/ngrx-task/runtime-es2015.92dd6f70bafc0b8dbbb8.js": "7df95ffe5c6117707c25c8e6c408b18842b3ca6c",
+    "/ngrx-task/runtime-es5.92dd6f70bafc0b8dbbb8.js": "c8442a11624460dea9356cb04c317654989cd534",
     "/ngrx-task/styles.d88cc327b1a4e4e64ccb.css": "0930d064ed1c8cd403d70dba22d7ca6b1c25fe52"
   },
   "navigationUrls": [
