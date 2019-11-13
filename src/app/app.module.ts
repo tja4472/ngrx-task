@@ -6,6 +6,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFirePerformanceModule } from '@angular/fire/performance';
 
 import { AuthModule } from '@app/auth';
 import { CoreModule } from '@app/core';
@@ -25,6 +26,7 @@ import { RootStoreModule } from './root-store';
     AngularFirestoreModule.enablePersistence(),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    AngularFirePerformanceModule,
     AuthModule,
     HomeModule,
     AppRoutingModule,

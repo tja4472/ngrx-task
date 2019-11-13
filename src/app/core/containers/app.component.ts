@@ -6,7 +6,6 @@ import { SwUpdate } from '@angular/service-worker';
 import * as firebase from 'firebase/app';
 // tslint:disable-next-line: ordered-imports
 import 'firebase/analytics';
-import 'firebase/performance';
 
 @Component({
   selector: 'app-root',
@@ -22,7 +21,6 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     const analytics = firebase.analytics();
     analytics.logEvent('start_game', { level: '10', difficulty: 'expert' });
-    const perf = firebase.performance();
 
     if (this.swUpdate.isEnabled) {
       this.swUpdate.available.subscribe(() => {
