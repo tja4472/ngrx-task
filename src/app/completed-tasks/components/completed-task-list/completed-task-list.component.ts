@@ -5,7 +5,7 @@ import { MatCheckboxChange } from '@angular/material/checkbox';
 
 import { CompletedTask } from '@app/root-store/tasks-store/models';
 
-import * as moment from 'moment';
+import { format } from 'date-fns';
 
 interface GroupTasksByDate {
   header: string;
@@ -59,8 +59,8 @@ export class CompletedTaskListComponent implements OnInit {
     let groupTasks: CompletedTask[] = [];
 
     sorted.forEach((value) => {
-      const dateText = moment(value.updatedTimestamp).format('ddd, D MMM YYYY');
-      // dateText += ':' + value.updatedTimestamp;
+      const dateText = format(value.updatedTimestamp, 'E, d MMM yyyy');
+      // const dateText = moment(value.updatedTimestamp).format('ddd, D MMM YYYY');
 
       if (dateText === header) {
         groupTasks.push(value);
