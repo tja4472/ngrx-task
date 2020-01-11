@@ -1,10 +1,8 @@
 // tslint:disable: ban-types
 
-// Copied from https://github.com/timdeschryver/ngrx-etc
+// Copied from https://github.com/timdeschryver/ngrx-etc/blob/master/src/mutable-on/mutable-on.ts
 
-import { Action, ActionCreator } from '@ngrx/store';
-import { ActionType } from '@ngrx/store/src/models';
-import { On } from '@ngrx/store/src/reducer_creator';
+import { Action, ActionCreator, ActionType, On } from '@ngrx/store';
 
 import produce, { Draft } from 'immer';
 
