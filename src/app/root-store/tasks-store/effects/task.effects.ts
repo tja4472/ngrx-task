@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { AngularFireAnalytics } from '@angular/fire/analytics';
+
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 
@@ -25,7 +27,6 @@ import {
   TaskListsPageActions,
 } from '../actions';
 
-import * as firebase from 'firebase/app';
 /* =======================================
 Improve typings of createEffect, help debugging
 https://github.com/ngrx/platform/issues/2192
@@ -243,8 +244,7 @@ export class TaskEffects {
       return this.actions$.pipe(
         ofType(CurrentTasksPageActions.enter),
         tap(() => {
-          const analytics = firebase.analytics();
-          analytics.logEvent('enterCurrentTasksPage', {
+          this.analytics.logEvent('enterCurrentTasksPage', {
             level: '10',
             difficulty: 'expert',
           });
@@ -367,6 +367,7 @@ export class TaskEffects {
 
   constructor(
     private actions$: Actions,
+    private analytics: AngularFireAnalytics,
     private fb1DataService: Fb1DataService,
     private todoDataService: CurrentTaskDataService,
     private todoCompletedDataService: CompletedTaskDataService,
