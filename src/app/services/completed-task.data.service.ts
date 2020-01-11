@@ -10,9 +10,6 @@ import {
   newCompletedTask,
 } from '../root-store/tasks-store/models';
 
-import * as firebase from 'firebase/app';
-import 'firebase/firestore';
-
 const DATA_COLLECTION = 'completed-todos';
 const USERS_COLLECTION = 'users';
 
