@@ -1,11 +1,9 @@
-import { Action, createReducer, on } from '@ngrx/store';
-
-import { User } from '@app/models';
-
-import { mutableOn } from '../util/mutable-on';
+import { Action, createReducer } from '@ngrx/store';
 
 import * as featureActions from './actions';
 import { initialState, State } from './state';
+
+import { mutableOn } from 'ngrx-etc';
 
 export const featureKey = 'user';
 
