@@ -8,7 +8,10 @@ import {
   CurrentTasksPageActions,
   TodoActions,
 } from '@app/root-store/tasks-store/actions';
-import { CurrentTask } from '@app/root-store/tasks-store/models';
+import {
+  CurrentTask,
+  toggleIsComplete,
+} from '@app/root-store/tasks-store/models';
 import { TaskSelectors } from '@app/root-store/tasks-store/selectors';
 
 @Component({
@@ -43,9 +46,10 @@ export class CurrentTasksPageComponent implements OnInit {
   }
 
   toggleCompleteItem(item: CurrentTask) {
-    const newItem: CurrentTask = { ...item, isComplete: !item.isComplete };
+    const updatedTask: CurrentTask = toggleIsComplete(item, !item.isComplete);
+
     this.store.dispatch(
-      CurrentTasksPageActions.saveItem({ currentTask: newItem })
+      CurrentTasksPageActions.saveItem({ currentTask: updatedTask })
     );
   }
 }

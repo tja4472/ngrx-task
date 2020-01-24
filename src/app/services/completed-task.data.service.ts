@@ -18,6 +18,7 @@ interface FirestoreDoc {
   description?: string;
   name: string;
   isComplete: boolean;
+  completedTimestamp: number;
   updatedTimestamp: number;
 }
 
@@ -78,6 +79,7 @@ export class CompletedTaskDataService {
       description: item.description,
       id: item.id,
       isComplete: item.isComplete,
+      completedTimestamp: item.completedTimestamp,
       name: item.name,
       updatedTimestamp: Date.now(),
     };
@@ -86,11 +88,16 @@ export class CompletedTaskDataService {
   }
 
   private fromFirestoreDoc(x: FirestoreDoc): CompletedTask {
-    // Temp fix till all recors in database updated.
+    // Temp fix till all records in database updated.
+    let completedTimestamp = x.completedTimestamp;
     let updatedTimestamp = x.updatedTimestamp;
 
     if (updatedTimestamp === undefined) {
       updatedTimestamp = Date.now();
+    }
+
+    if (completedTimestamp === undefined) {
+      completedTimestamp = updatedTimestamp;
     }
 
     const result: CompletedTask = {
@@ -98,6 +105,7 @@ export class CompletedTaskDataService {
       description: x.description,
       id: x.id,
       name: x.name,
+      completedTimestamp,
       updatedTimestamp,
     };
 

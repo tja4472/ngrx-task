@@ -40,13 +40,13 @@ export class CompletedTaskListComponent implements OnInit {
   private convertToGroupByDateArray(
     tasks: CompletedTask[]
   ): GroupTasksByDate[] {
-    // sort by descending updatedTimestamp
+    // sort by descending completedTimestamp
     const sorted = tasks.sort((a, b) => {
-      if (a.updatedTimestamp > b.updatedTimestamp) {
+      if (a.completedTimestamp > b.completedTimestamp) {
         return -1;
       }
 
-      if (a.updatedTimestamp < b.updatedTimestamp) {
+      if (a.completedTimestamp < b.completedTimestamp) {
         return 1;
       }
 
@@ -59,7 +59,7 @@ export class CompletedTaskListComponent implements OnInit {
     let groupTasks: CompletedTask[] = [];
 
     sorted.forEach((value) => {
-      const dateText = format(value.updatedTimestamp, 'E, d MMM yyyy');
+      const dateText = format(value.completedTimestamp, 'E, d MMM yyyy');
       // const dateText = moment(value.updatedTimestamp).format('ddd, D MMM YYYY');
 
       if (dateText === header) {

@@ -16,6 +16,7 @@ interface FirestoreDoc {
   index: number;
   name: string;
   isComplete: boolean;
+  completedTimestamp: number;
 }
 
 @Injectable({
@@ -96,6 +97,7 @@ export class CurrentTaskDataService {
       id: item.id,
       index: item.index,
       isComplete: item.isComplete,
+      completedTimestamp: item.completedTimestamp,
       name: item.name,
     };
 
@@ -103,12 +105,19 @@ export class CurrentTaskDataService {
   }
 
   private fromFirestoreDoc(x: FirestoreDoc): CurrentTask {
+    // Temp fix till all records in database updated.
+    let completedTimestamp = x.completedTimestamp;
+
+    if (completedTimestamp === undefined) {
+      completedTimestamp = null;
+    }
     //
     const result: CurrentTask = {
       description: x.description,
       id: x.id,
       index: x.index,
       isComplete: x.isComplete,
+      completedTimestamp,
       name: x.name,
     };
 

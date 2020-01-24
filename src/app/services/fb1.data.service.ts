@@ -26,10 +26,11 @@ export class Fb1DataService {
   ) {
     //
     items.map((x: CurrentTask) => {
-      const todoCompleted = {
+      const todoCompleted: CompletedTask = {
         ...newCompletedTask(),
         description: x.description,
         name: x.name,
+        completedTimestamp: x.completedTimestamp,
       };
 
       this.todoCompletedDataService.save(todoCompleted, todoListId, userId);
