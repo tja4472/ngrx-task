@@ -26,7 +26,7 @@ export class CurrentTaskListComponent implements OnInit {
     moveItemInArray(this.movies, event.previousIndex, event.currentIndex);
   }
   */
-  viewTrackBy(index, item: CurrentTask) {
+  viewTrackBy(index: number, item: CurrentTask) {
     return item.id;
   }
 

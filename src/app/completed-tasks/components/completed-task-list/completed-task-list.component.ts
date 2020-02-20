@@ -76,7 +76,7 @@ export class CompletedTaskListComponent implements OnInit {
 
   ngOnInit() {}
 
-  viewTrackBy(index, item: CompletedTask) {
+  viewTrackBy(index: number, item: CompletedTask) {
     return item.id;
   }
 }

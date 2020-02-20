@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 import { filter, map, shareReplay, withLatestFrom } from 'rxjs/operators';
 
 import { User } from '@app/models';
+import { TaskListListItem } from '@app/root-store/tasks-store/models';
 import { TaskListSelectors } from '@app/root-store/tasks-store/selectors';
 import {
   UserStoreActions,
@@ -40,7 +41,7 @@ export class SidenavComponent {
 
   view$: Observable<{ user: User; taskListId: string }>;
   selected = 'Cn7vwq2PCR6uj2u5nw3d';
-  taskLists$;
+  taskLists$: Observable<TaskListListItem[]>;
 
   constructor(
     private breakpointObserver: BreakpointObserver,
