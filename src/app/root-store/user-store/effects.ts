@@ -36,7 +36,10 @@ effectDispatchFalse$ = createEffect(
 export class UserStoreEffects {
   haveFirebaseUser$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(AuthApiActions.haveFirebaseUser),
+      ofType(
+        AuthApiActions.autoSignInHaveFirebaseUser,
+        AuthApiActions.manualSignInHaveFirebaseUser
+      ),
       concatMap((firebaseUser) =>
         from(this.userInfoDataService.getUserData(firebaseUser.uid)).pipe(
           map((userInfo) =>

@@ -17,9 +17,13 @@ import { CurrentTasksRootGuardServiceActions } from '../root-store/tasks-store/a
 export class CurrentTasksRootGuardService implements CanActivate {
   constructor(private store: Store<{}>) {}
 
+  // what happens if try to navigate to http://localhost:4200/tasks/current
+  // but are logged out?
+  // Answer: Calls canActivate() but redirected by AuthGuardService:canActivate
   canActivate(): Observable<boolean> {
+    // console.log('### CurrentTasksRootGuardService:canActivate');
     return this.waitForAuth().pipe(
-      // tap(() => console.log('waitForAuth - complete')),
+      tap((user) => console.log('waitForAuth - complete>', user)),
       switchMap(() =>
         this.waitForCurrentTasksToLoad().pipe(
           // tap(() => console.log('waitForCompletedTasksToLoad - complete')),
@@ -43,6 +47,7 @@ export class CurrentTasksRootGuardService implements CanActivate {
       tap((loaded) => {
         // console.log('waitForCompletedTasksToLoad>loaded>', loaded);
         if (!loaded) {
+          console.log('waitForCurrentTasksToLoad:user and taskid?');
           this.store.dispatch(CurrentTasksRootGuardServiceActions.loadData());
         }
       }),

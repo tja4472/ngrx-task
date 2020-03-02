@@ -18,9 +18,9 @@
     "lib": ["es2018", "dom"],
     "strict": true,
     "noImplicitAny": true,
-    "noImplicitThis": false,
-    "alwaysStrict": false,
-    "strictBindCallApply": false,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "strictBindCallApply": true,
     "strictNullChecks": false,
     "strictFunctionTypes": false,
     "strictPropertyInitialization": false

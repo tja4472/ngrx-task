@@ -20,16 +20,13 @@ import {
 import { AuthService } from '@app/auth/services/auth.service';
 import { UserStoreSelectors } from '@app/root-store/user-store';
 
+import { AuthGuardServiceActions } from '../actions';
+
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuardService implements CanActivate {
-  constructor(
-    private authService: AuthService,
-    private readonly auth$: AngularFireAuth,
-    private store: Store<{}>,
-    private router: Router
-  ) {}
+  constructor(private authService: AuthService, private store: Store<{}>) {}
 
   // https://angular.io/guide/router#canactivate-requiring-authentication
   /*
@@ -46,6 +43,7 @@ export class AuthGuardService implements CanActivate {
   */
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     //
+    // console.log('### AuthGuardService:canActivate');
     const url: string = state.url;
     // console.log('url>', url);
     this.authService.redirectUrl = url;
@@ -58,7 +56,14 @@ export class AuthGuardService implements CanActivate {
           //
           // https://juristr.com/blog/2018/11/better-route-guard-redirects/
           // Angular version 7.1.0
-          return this.router.parseUrl('/sign-in');
+
+          // return this.router.parseUrl('/sign-in');
+          this.store.dispatch(
+            AuthGuardServiceActions.navigateToSignIn({
+              requestedUrl: state.url,
+            })
+          );
+          return false;
         } else {
           return true;
         }

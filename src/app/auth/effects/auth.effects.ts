@@ -4,21 +4,32 @@ import { Router } from '@angular/router';
 
 import { AngularFireAuth } from '@angular/fire/auth';
 
-import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { Store } from '@ngrx/store';
+import { Actions, createEffect, ofType, OnInitEffects } from '@ngrx/effects';
+import { Action, Store } from '@ngrx/store';
 
-import { defer, of } from 'rxjs';
-import { exhaustMap, map, switchMap, tap } from 'rxjs/operators';
+import { of } from 'rxjs';
+import {
+  concatMap,
+  exhaustMap,
+  first,
+  map,
+  skip,
+  switchMap,
+  tap,
+  withLatestFrom,
+} from 'rxjs/operators';
 
 import {
   AuthActions,
   AuthApiActions,
+  AuthGuardServiceActions,
   SignInPageActions,
   SignUpPageActions,
 } from '@app/auth/actions';
-import { AuthService } from '@app/auth/services/auth.service';
+import { selectQueryParam } from '@app/root-store/reducers';
 
 import { SignoutConfirmationDialogComponent } from '../components/signout-confirmation-dialog/signout-confirmation-dialog.component';
+import { selectIsAutoSignIn } from '../selectors/auth.selectors';
 
 /* =======================================
 Improve typings of createEffect, help debugging
@@ -41,17 +52,47 @@ effectDispatchFalse$ = createEffect(
 ======================================= */
 
 @Injectable()
-export class AuthEffects {
+export class AuthEffects implements OnInitEffects {
+  // With enablePersistence the first result will be from
+  // the autoSignIn.
   autoSignIn$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(AuthApiActions.autoSignIn),
+      // tap(() => console.log('### autoSignIn$')),
       switchMap(() =>
         this.afAuth.authState.pipe(
+          first(),
           map((firebaseUser) => {
             if (firebaseUser === null) {
-              return AuthApiActions.autoSignInNoUser();
+              return AuthApiActions.autoSignInNoFirebaseUser();
             } else {
-              return AuthApiActions.haveFirebaseUser({
+              return AuthApiActions.autoSignInHaveFirebaseUser({
+                uid: firebaseUser.uid,
+                email: firebaseUser.email,
+                displayName: firebaseUser.displayName,
+              });
+            }
+          })
+        )
+      )
+    );
+  });
+
+  manualSignIn$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(
+        AuthApiActions.autoSignInHaveFirebaseUser,
+        AuthApiActions.autoSignInNoFirebaseUser
+      ),
+      // tap(() => console.log('### manualSignIn$')),
+      switchMap(() =>
+        this.afAuth.authState.pipe(
+          skip(1),
+          map((firebaseUser) => {
+            if (firebaseUser === null) {
+              return AuthApiActions.manualSignInNoFirebaseUser();
+            } else {
+              return AuthApiActions.manualSignInHaveFirebaseUser({
                 uid: firebaseUser.uid,
                 email: firebaseUser.email,
                 displayName: firebaseUser.displayName,
@@ -70,7 +111,6 @@ export class AuthEffects {
         tap((action) => {
           // const password = 'aaaaa';
           const password = action.credentials.password;
-
           this.afAuth.auth
             .signInWithEmailAndPassword(action.credentials.username, password)
             .catch((error) =>
@@ -117,6 +157,20 @@ export class AuthEffects {
     { dispatch: false }
   );
 
+  navigateToSignIn$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(AuthGuardServiceActions.navigateToSignIn),
+        tap((action) => {
+          this.router.navigate(['/sign-in'], {
+            queryParams: { return: action.requestedUrl },
+          });
+        })
+      );
+    },
+    { dispatch: false }
+  );
+
   signOut$ = createEffect(
     () => {
       return this.actions$.pipe(
@@ -156,17 +210,24 @@ export class AuthEffects {
     () => {
       return this.actions$.pipe(
         ofType(AuthApiActions.haveAppUser),
-        tap(() => {
-          console.log(
-            'this.authService.redirectUrl>',
-            this.authService.redirectUrl
-          );
-          if (this.authService.redirectUrl === '') {
-            this.router.navigate(['/']);
-          } else {
-            this.router.navigate([this.authService.redirectUrl]);
-          }
-        })
+        concatMap((action) =>
+          of(action).pipe(
+            withLatestFrom(
+              this.store.select(selectQueryParam('return')),
+              this.store.select(selectIsAutoSignIn)
+            ),
+            tap(([_, returnUrl, isAutoSignIn]) => {
+              if (returnUrl) {
+                this.router.navigateByUrl(returnUrl);
+              } else {
+                if (!isAutoSignIn) {
+                  // Manual sign in with no return url.
+                  this.router.navigateByUrl('/');
+                }
+              }
+            })
+          )
+        )
       );
     },
     { dispatch: false }
@@ -184,16 +245,15 @@ export class AuthEffects {
     { dispatch: false }
   );
 
-  init$ = createEffect(() => {
-    return defer(() => of(null)).pipe(map(() => AuthApiActions.autoSignIn()));
-  });
-
   constructor(
     private actions$: Actions,
-    private authService: AuthService,
     private afAuth: AngularFireAuth,
     private router: Router,
     private dialog: MatDialog,
     private store: Store<{}>
   ) {}
+
+  ngrxOnInitEffects(): Action {
+    return AuthApiActions.autoSignIn();
+  }
 }
