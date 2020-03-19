@@ -11,6 +11,7 @@ import { of } from 'rxjs';
 import {
   concatMap,
   exhaustMap,
+  filter,
   first,
   map,
   skip,
@@ -29,7 +30,7 @@ import {
 import { selectQueryParam } from '@app/root-store/reducers';
 
 import { SignoutConfirmationDialogComponent } from '../components/signout-confirmation-dialog/signout-confirmation-dialog.component';
-import { selectIsAutoSignIn } from '../selectors/auth.selectors';
+import { selectIsAutoSignIn, selectUserId } from '../selectors/auth.selectors';
 
 /* =======================================
 Improve typings of createEffect, help debugging
@@ -77,6 +78,25 @@ export class AuthEffects implements OnInitEffects {
       )
     );
   });
+
+  // Watch userId and perform operations on change.
+  aaAAAAA$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        // tap((action) => console.log('aaAAAAA$:action',action)),
+        ofType(AuthApiActions.autoSignIn),
+        tap((action) => console.log('aaAAAAA$:actionA', action)),
+        switchMap(() =>
+          this.store.select(selectUserId).pipe(
+            tap((userId) => console.log('aaAAAAA:userId>', userId)),
+            filter((userId) => userId !== null),
+            tap((userId) => console.log('aaAAAAA:Signed in userId>', userId))
+          )
+        )
+      );
+    },
+    { dispatch: false }
+  );
 
   manualSignIn$ = createEffect(() => {
     return this.actions$.pipe(
@@ -206,6 +226,40 @@ export class AuthEffects implements OnInitEffects {
     );
   });
 
+  aaaSignInRedirect$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(AuthApiActions.manualSignInHaveFirebaseUser),
+        concatMap((action) =>
+          of(action).pipe(
+            withLatestFrom(
+              this.store.select(selectQueryParam('return')),
+              this.store.select(selectIsAutoSignIn)
+            ),
+            tap(([_, returnUrl, isAutoSignIn]) => {
+              console.log(
+                'aaaRedirect$:returnUrl,isAutoSignIn>',
+                returnUrl,
+                isAutoSignIn
+              );
+              if (returnUrl) {
+                // this.router.navigateByUrl(returnUrl);
+              } else {
+                /*                
+                if (!isAutoSignIn) {
+                  // Manual sign in with no return url.
+                  this.router.navigateByUrl('/');
+                }
+*/
+              }
+            })
+          )
+        )
+      );
+    },
+    { dispatch: false }
+  );
+
   haveAppUser$ = createEffect(
     () => {
       return this.actions$.pipe(
@@ -217,6 +271,11 @@ export class AuthEffects implements OnInitEffects {
               this.store.select(selectIsAutoSignIn)
             ),
             tap(([_, returnUrl, isAutoSignIn]) => {
+              console.log(
+                'AAAAA:returnUrl,isAutoSignIn>',
+                returnUrl,
+                isAutoSignIn
+              );
               if (returnUrl) {
                 this.router.navigateByUrl(returnUrl);
               } else {

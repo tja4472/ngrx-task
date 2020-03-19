@@ -56,6 +56,136 @@ ng generate container tasks/containers/CompletedTasksPage --spec false --changeD
 # UPDATE src/app/tasks/tasks.module.ts (862 bytes)
 ```
 
+On Startup - Signed In - Home page(unguarded)
+
+- @ngrx/store/init
+- @ngrx/store/update-reducers
+- @ngrx/effects/init
+- [Auth/API] Auto Sign In
+- @ngrx/router-store/request
+- @ngrx/router-store/navigation
+- @ngrx/router-store/navigated
+- [Auth/API] Auto Sign In - Have Firebase User
+- [User Store] Set Data
+- [User Store] Have User
+- [Auth/API] Have App User
+- [Task List Store] Listen For Data
+- [Task List Store] Load Success
+
+On Startup - Signed In - Current Tasks page(guarded)
+
+- @ngrx/store/init
+- @ngrx/store/update-reducers
+- @ngrx/effects/init
+- [Auth/API] Auto Sign In
+- @ngrx/router-store/request
+- @ngrx/router-store/navigation
+- [Auth/API] Auto Sign In - Have Firebase User
+- [User Store] Set Data
+- [Current Tasks Root Guard Service] Load data
+- [User Store] Have User
+- [Auth/API] Have App User
+- [Task List Store] Listen For Data
+- [Todo] Load Success
+- @ngrx/router-store/navigated
+- [Current Tasks Page] Enter
+- [Task List Store] Load Success
+
+On Startup - Signed Out - Home page(unguarded)
+
+- @ngrx/store/init
+- @ngrx/store/update-reducers
+- @ngrx/effects/init
+- [Auth/API] Auto Sign In
+- @ngrx/router-store/request
+- @ngrx/router-store/navigation
+- @ngrx/router-store/navigated
+- Auth/API] Auto Sign In - No Firebase User
+
+On Startup - Signed Out - Current Tasks page(guarded)
+
+- @ngrx/store/init
+- @ngrx/store/update-reducers
+- @ngrx/effects/init
+- [Auth/API] Auto Sign In
+- @ngrx/router-store/request
+- @ngrx/router-store/navigation
+- [Auth/API] Auto Sign In - No Firebase User
+- [Auth Guard Service] Navigate To Sign In
+- @ngrx/router-store/cancel
+- @ngrx/router-store/request
+- @ngrx/router-store/navigation
+- [Sign In Page] Entered
+- @ngrx/router-store/navigated
+
+On Sign In - With return url(http://localhost:4200/sign-in?return=%2Ftasks%2Fcurrent)
+
+- [Sign In Page] Sign In
+- [Auth/API] Manual Sign In - Have Firebase User
+- [User Store] Set Data
+- [User Store] Have User
+- [Auth/API] Have App User
+- [Task List Store] Listen For Data
+- @ngrx/router-store/request
+- @ngrx/router-store/navigation
+- [Current Tasks Root Guard Service] Load data
+- [Task List Store] Load Success
+- [Todo] Load Success"
+- @ngrx/router-store/navigated
+- [Current Tasks Page] Enter
+
+On Sign In - With no return url
+
+- [Sign In Page] Sign In
+- [Auth/API] Manual Sign In - Have Firebase User
+- [User Store] Set Data
+- [User Store] Have User
+- [Auth/API] Have App User
+- [Task List Store] Listen For Data
+- @ngrx/router-store/request
+- @ngrx/router-store/navigation
+- @ngrx/router-store/navigated // /home
+- [Task List Store] Load Success
+
+# Sign in redirects
+
+## Auto Sign In
+
+### Signed In
+
+http://localhost:4200/tasks/current -> http://localhost:4200/tasks/current
+returnUrl: undefined
+isAutoSignIn: true
+
+### Signed Out
+
+http://localhost:4200/tasks/current -> http://localhost:4200/sign-in?return=%2Ftasks%2Fcurrent
+After Sign In
+returnUrl: /tasks/current
+isAutoSignIn: true
+
+## Manual Sign In
+
+### http://localhost:4200/sign-in
+
+After Sign In
+returnUrl: undefined
+isAutoSignIn: false
+
+result: http://localhost:4200/home
+
+### http://localhost:4200/sign-in?return=%2Ftasks%2Fcurrent
+
+After Sign In
+returnUrl: /tasks/current
+isAutoSignIn: false
+
+result: http://localhost:4200/tasks/current
+
+# Questions
+
+Load user profile as part of authService or independently using effects?
+
 Replace `ng-core-template` with new repostory name.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.1.

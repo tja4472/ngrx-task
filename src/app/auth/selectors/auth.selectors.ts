@@ -22,3 +22,8 @@ export const selectIsAutoSignIn = createSelector(
   selectAuthState,
   (state: AuthState) => state.isAutoSignIn
 );
+
+export const selectUserId = createSelector(
+  selectAuthState,
+  (state: AuthState) => state.userId
+);
