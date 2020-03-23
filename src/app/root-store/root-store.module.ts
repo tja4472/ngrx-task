@@ -19,10 +19,10 @@ import { UserStoreModule } from './user-store';
     StoreModule.forRoot(ROOT_REDUCERS, {
       metaReducers,
       runtimeChecks: {
-        strictStateImmutability: true,
-        strictActionImmutability: true,
+        // strictStateImmutability and strictActionImmutability are enabled by default
         strictStateSerializability: true,
         strictActionSerializability: true,
+        strictActionWithinNgZone: true,
       },
     }),
     StoreRouterConnectingModule.forRoot({

@@ -23,7 +23,9 @@
     "strictBindCallApply": true,
     "strictNullChecks": false,
     "strictFunctionTypes": false,
-    "strictPropertyInitialization": false
+    "strictPropertyInitialization": false,
+    // remove skipLibCheck when ngrx-etc updated to 4.0.0
+    "skipLibCheck": true
   },
   "angularCompilerOptions": {
     "strictTemplates": true,
