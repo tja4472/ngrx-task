@@ -6,8 +6,17 @@ import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterTestingModule } from '@angular/router/testing';
+
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+
+import { RootStoreModule } from '@app/root-store';
 
 import { SidenavComponent } from './sidenav.component';
+
+import { environment } from 'src/environments/environment';
 
 describe('SidenavComponent', () => {
   let component: SidenavComponent;
@@ -24,6 +33,11 @@ describe('SidenavComponent', () => {
         MatListModule,
         MatSidenavModule,
         MatToolbarModule,
+        RouterTestingModule,
+        RootStoreModule,
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFirestoreModule,
+        AngularFireAnalyticsModule,
       ],
     }).compileComponents();
   }));
