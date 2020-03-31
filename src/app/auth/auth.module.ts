@@ -11,7 +11,7 @@ import { SignUpFormComponent } from '@app/auth/components/sign-up-form/sign-up-f
 import { SignInPageComponent } from '@app/auth/containers/sign-in-page/sign-in-page.component';
 import { SignUpPageComponent } from '@app/auth/containers/sign-up-page/sign-up-page.component';
 import { AuthEffects } from '@app/auth/effects/auth.effects';
-import { reducers } from '@app/auth/reducers';
+import { authFeatureKey, reducers } from '@app/auth/reducers';
 import { MaterialModule } from '@app/material';
 
 import { SignoutConfirmationDialogComponent } from './components/signout-confirmation-dialog/signout-confirmation-dialog.component';
@@ -29,7 +29,7 @@ export const COMPONENTS = [
     ReactiveFormsModule,
     MaterialModule,
     AuthRoutingModule,
-    StoreModule.forFeature('authFeature', reducers),
+    StoreModule.forFeature(authFeatureKey, reducers),
     EffectsModule.forFeature([AuthEffects]),
   ],
   declarations: COMPONENTS,

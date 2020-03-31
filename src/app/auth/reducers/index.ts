@@ -5,6 +5,8 @@ import * as fromSignInPage from '@app/auth/reducers/sign-in-page.reducer';
 import * as fromSignUpPage from '@app/auth/reducers/sign-up-page.reducer';
 import * as fromRoot from '@app/root-store/reducers';
 
+export const authFeatureKey = 'authFeature';
+
 export interface AuthFeatureState {
   auth: fromAuth.AuthState;
   signInPage: fromSignInPage.SignInPageState;
@@ -12,7 +14,7 @@ export interface AuthFeatureState {
 }
 
 export interface State extends fromRoot.State {
-  authFeature: AuthFeatureState;
+  [authFeatureKey]: AuthFeatureState;
 }
 
 export const reducers: ActionReducerMap<AuthFeatureState> = {
@@ -24,4 +26,4 @@ export const reducers: ActionReducerMap<AuthFeatureState> = {
 export const selectAuthFeatureState = createFeatureSelector<
   State,
   AuthFeatureState
->('authFeature');
+>(authFeatureKey);
