@@ -2,12 +2,10 @@
   <mat-icon matPrefix>search</mat-icon>
   <mat-label>Search</mat-label>
   <input
-    #box
     type="text"
     matInput
     placeholder="Search"
     [formControl]="viewSearchControl"
-    (keyup)="search.emit(box.value)"
   />
   <button
     matSuffix

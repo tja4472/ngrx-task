@@ -5,11 +5,15 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+
 import {
   CompletedTaskListComponent,
   SearchComponent,
 } from '@app/completed-tasks/components';
 import { MaterialModule } from '@app/material';
+import { CompletedTasksPageActions } from '@app/root-store/tasks-store/actions';
 import { CompletedTask } from '@app/root-store/tasks-store/models';
 import { TaskState } from '@app/root-store/tasks-store/reducers';
 
@@ -21,6 +25,9 @@ describe(CompletedTasksPageComponent.name, () => {
   let component: CompletedTasksPageComponent;
   let fixture: ComponentFixture<CompletedTasksPageComponent>;
   let mockStore: MockStore;
+
+  const destroy: Subject<void> = new Subject();
+  const observer: jasmine.Spy = jasmine.createSpy('tasks observer');
 
   const expectedTasks: CompletedTask[] = [
     {
@@ -110,8 +117,20 @@ describe(CompletedTasksPageComponent.name, () => {
     fixture = TestBed.createComponent(CompletedTasksPageComponent);
     mockStore = TestBed.inject(MockStore);
 
+    spyOn(mockStore, 'dispatch');
     component = fixture.componentInstance;
+
+    component.completedTasks$.pipe(takeUntil(destroy)).subscribe(observer);
     fixture.detectChanges();
+  });
+
+  afterEach(() => {
+    destroy.next();
+    observer.calls.reset();
+  });
+
+  afterAll(() => {
+    destroy.complete();
   });
 
   it('should compile', () => {
@@ -129,6 +148,10 @@ describe(CompletedTasksPageComponent.name, () => {
     expect(component.completedTasks$).toBeObservable(expected);
   });
 
+  it('bbbshould filter completed tasks', () => {
+    expect(observer).toHaveBeenCalledWith(expectedTasks);
+  });
+
   it('should have query', () => {
     /*      
     component.viewSearchQuery$.subscribe((query) => {
@@ -137,5 +160,45 @@ describe(CompletedTasksPageComponent.name, () => {
 */
     const expected = cold('(a|)', { a: 'aaa' });
     expect(component.viewSearchQuery$).toBeObservable(expected);
+  });
+
+  /*
+
+  viewSearch(query: string) {
+    this.store.dispatch(CompletedTasksPageActions.search({ query }));
+  }
+
+  toggleCompleteItem(item: CompletedTask) {
+    this.store.dispatch(
+      CompletedTasksPageActions.itemToggled({ todoCompleted: item })
+    );
+  }
+*/
+
+  it('should dispatch a CompletedTasksPageActions.search action on search', () => {
+    const $event = 'search term';
+    const action = CompletedTasksPageActions.search({ query: $event });
+
+    component.viewSearch($event);
+
+    expect(mockStore.dispatch).toHaveBeenCalledWith(action);
+  });
+
+  it('eeeeeeeee', () => {
+    const $event: CompletedTask = {
+      description: 'ddd',
+      id: '242YYpXnNPyBXmneb1CN',
+      isComplete: true,
+      completedTimestamp: 1579624337545,
+      name: 'aaa',
+      updatedTimestamp: 1579624341771,
+    };
+    const action = CompletedTasksPageActions.itemToggled({
+      todoCompleted: $event,
+    });
+
+    component.toggleCompleteItem($event);
+
+    expect(mockStore.dispatch).toHaveBeenCalledWith(action);
   });
 });
