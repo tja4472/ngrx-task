@@ -45,7 +45,7 @@ effect$ = createEffect(() => {
 effectDispatchFalse$ = createEffect(
   () => {
     return this.actions$.pipe(
-      ...       
+      ...
     );
   },
   { dispatch: false }
@@ -245,7 +245,7 @@ export class AuthEffects implements OnInitEffects {
               if (returnUrl) {
                 // this.router.navigateByUrl(returnUrl);
               } else {
-                /*                
+                /*
                 if (!isAutoSignIn) {
                   // Manual sign in with no return url.
                   this.router.navigateByUrl('/');

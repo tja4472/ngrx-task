@@ -21,7 +21,7 @@ const featureReducer = createReducer(
     };
     return values;
   }),
-  /*  
+  /*
   on(AuthApiActions.signOutComplete, () => ({
     ...initialState,
   })),
@@ -29,7 +29,7 @@ const featureReducer = createReducer(
 
   on(featureActions.loadSuccess, (state, { items }) => {
     const values: State = { ...state, loaded: true, loading: false };
-    return featureAdapter.addAll(items, values);
+    return featureAdapter.setAll(items, values);
   })
 );
 

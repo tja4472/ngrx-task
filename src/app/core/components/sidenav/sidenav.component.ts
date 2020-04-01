@@ -49,7 +49,7 @@ export class SidenavComponent {
     private store: Store<{}>
   ) {
     this.view$ = this.store.select(UserStoreSelectors.selectUserAndTaskListId);
-    /*    
+    /*
     this.view$ = this.store.select(UserStoreSelectors.selectUser).pipe(
       withLatestFrom(this.store.select(UserStoreSelectors.selectTaskListId)),
       map(([user, taskListId]) => {

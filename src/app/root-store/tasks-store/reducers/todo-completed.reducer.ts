@@ -51,7 +51,7 @@ const completedTaskReducer = createReducer(
     })
   ),
   on(TodoCompletedActions.loadSuccess, (state, { completedTasks }) =>
-    adapter.addAll(completedTasks, {
+    adapter.setAll(completedTasks, {
       ...state,
       loaded: true,
       loading: false,

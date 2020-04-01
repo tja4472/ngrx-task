@@ -25,7 +25,7 @@ effect$ = createEffect(() => {
 effectDispatchFalse$ = createEffect(
   () => {
     return this.actions$.pipe(
-      ...       
+      ...
     );
   },
   { dispatch: false }

@@ -46,7 +46,7 @@ describe('Service: UserInfoDataService - no TestBed', () => {
     expect(service).toBeTruthy();
   });
 
-  /*  
+  /*
   it('usersCollectionPath should be apps/APP-CODE/users', () => {
     const spy = jest
       .spyOn(environmentService, 'appCode', 'get')
@@ -87,8 +87,8 @@ describe('Service: UserInfoDataService - TestBed', () => {
       ],
     });
 
-    userInfoDataService = TestBed.get(UserInfoDataService);
-    environmentService = TestBed.get(EnvironmentService);
+    userInfoDataService = TestBed.inject(UserInfoDataService);
+    environmentService = TestBed.inject(EnvironmentService);
   });
 
   it('should be created', inject(
@@ -136,8 +136,8 @@ describe('UserInfoDataService - AngularFirestoreStub', () => {
       ],
     });
 
-    userInfoDataService = TestBed.get(UserInfoDataService);
-    environmentService = TestBed.get(EnvironmentService);
+    userInfoDataService = TestBed.inject(UserInfoDataService);
+    environmentService = TestBed.inject(EnvironmentService);
   });
   /*
   it('should be created', inject(
@@ -147,7 +147,7 @@ describe('UserInfoDataService - AngularFirestoreStub', () => {
     }
   ));
 */
-  /*  
+  /*
   it('usersCollectionPath should be apps/APP-CODE/users', () => {
     // const spy = spyOnProperty(environmentService, 'appCode').and.returnValue(
     //  'APP-CODE'
@@ -174,7 +174,7 @@ describe('UserInfoDataService - Testing without beforeEach()', () => {
     // const makeEnvironmentService = EnvironmentService.
     // const s = jest.fn({key: jest.fn()});
 
-    const environmentServiceSpy = { 
+    const environmentServiceSpy = {
       appCode: jest.fn(),
       settings: {appCode: jest.fn()}
     };

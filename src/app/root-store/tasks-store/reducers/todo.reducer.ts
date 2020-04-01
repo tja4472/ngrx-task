@@ -42,7 +42,7 @@ const currentTaskReducer = createReducer(
   ),
   on(TodoActions.loadSuccess, (state, { currentTasks }) => {
     const values: State = { ...state, loaded: true, loading: false };
-    return adapter.addAll(currentTasks, values);
+    return adapter.setAll(currentTasks, values);
   }),
   on(TodoActions.reorderList, (state, { ids }) => {
     const values: State = { ...state, ids };

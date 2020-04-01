@@ -19,7 +19,7 @@ import {
 
 import { cold } from 'jasmine-marbles';
 
-fdescribe('example01-' + CompletedTasksPageComponent.name, () => {
+describe('example01-' + CompletedTasksPageComponent.name, () => {
   let component: CompletedTasksPageComponent;
   let fixture: ComponentFixture<CompletedTasksPageComponent>;
   let store: MockStore;

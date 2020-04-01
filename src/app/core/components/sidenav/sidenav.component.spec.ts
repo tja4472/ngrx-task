@@ -27,7 +27,7 @@ import { SidenavComponent } from './sidenav.component';
 
 import { environment } from 'src/environments/environment';
 
-fdescribe('SidenavComponent', () => {
+describe('SidenavComponent', () => {
   let component: SidenavComponent;
   let fixture: ComponentFixture<SidenavComponent>;
 
@@ -53,7 +53,7 @@ fdescribe('SidenavComponent', () => {
     taskListId: null,
   };
 
-  /*  
+  /*
   const initialState = {
     authFeature: {
       auth: {

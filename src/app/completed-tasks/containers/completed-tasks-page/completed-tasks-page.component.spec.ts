@@ -153,7 +153,7 @@ describe(CompletedTasksPageComponent.name, () => {
   });
 
   it('should have query', () => {
-    /*      
+    /*
     component.viewSearchQuery$.subscribe((query) => {
       expect(query).toEqual('aaa');
     });

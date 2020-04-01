@@ -30,47 +30,47 @@ describe('mocks', () => {
 
   test("mock implementation", () => {
     const mock = jest.fn(() => "bar");
-  
+
     expect(mock("foo")).toBe("bar");
     expect(mock).toHaveBeenCalledWith("foo");
   });
-  
+
   test("also mock implementation", () => {
     const mock = jest.fn().mockImplementation(() => "bar");
-  
+
     expect(mock("foo")).toBe("bar");
     expect(mock).toHaveBeenCalledWith("foo");
   });
-  
+
   test("mock implementation one time", () => {
     const mock = jest.fn().mockImplementationOnce(() => "bar");
-  
+
     expect(mock("foo")).toBe("bar");
     expect(mock).toHaveBeenCalledWith("foo");
-  
+
     expect(mock("baz")).toBe(undefined);
     expect(mock).toHaveBeenCalledWith("baz");
   });
-  
+
   test("mock return value", () => {
     const mock = jest.fn();
     mock.mockReturnValue("bar");
-  
+
     expect(mock("foo")).toBe("bar");
     expect(mock).toHaveBeenCalledWith("foo");
   });
-  
+
   test("mock promise resolution", () => {
     const mock = jest.fn();
     mock.mockResolvedValue("bar");
-  
+
     expect(mock("foo")).resolves.toBe("bar");
     expect(mock).toHaveBeenCalledWith("foo");
-  });  
+  });
 });
 
 describe('Test1: UserInfoDataService - TestBed', () => {
-    
+
     let environmentServiceStub: Partial<EnvironmentService>;
 
     environmentServiceStub = {
@@ -92,7 +92,7 @@ describe('Test1: UserInfoDataService - TestBed', () => {
     // const environmentService = new EnvironmentService();
     let environmentService: EnvironmentService;
     let userInfoDataService: UserInfoDataService;
-  
+
     beforeEach(() => {
       TestBed.configureTestingModule({
         // Provide both the service-to-test and its dependencies.
@@ -102,23 +102,23 @@ describe('Test1: UserInfoDataService - TestBed', () => {
           { provide: AngularFirestore, useValue: AngularFirestoreStub },
         ],
       });
-  
+
       userInfoDataService = TestBed.get(UserInfoDataService);
       environmentService = TestBed.get(EnvironmentService);
     });
-  
+
     it('should be created', inject(
       [UserInfoDataService],
       (service: UserInfoDataService) => {
         expect(service).toBeTruthy();
       }
     ));
-  
+
     it('usersCollectionPath should be apps/APP-CODE/users', () => {
       // const spy = jest
       //   .spyOn(environmentService, 'appCode')
       //   .mockReturnValue('APP-CODE');
-  
+
       // environmentService.appCode = 'bbbbb';
       expect(userInfoDataService.usersCollectionPath).toEqual(
         'apps/APP-CODE/users'
@@ -126,12 +126,12 @@ describe('Test1: UserInfoDataService - TestBed', () => {
       // expect(spy).toHaveBeenCalled();
       // expect(spy).toHaveBeenCalledTimes(1);
     });
-   
+
   });
 
 
   describe('Test2', () => {
-    
+
     // let myClass;
     @Injectable()
     class FakeEnvironmentService extends EnvironmentService {
@@ -161,7 +161,7 @@ describe('Test1: UserInfoDataService - TestBed', () => {
     // const environmentService = new EnvironmentService();
     let environmentService: EnvironmentService;
     let userInfoDataService: UserInfoDataService;
-  
+
     beforeEach(() => {
       TestBed.configureTestingModule({
         // Provide both the service-to-test and its dependencies.
@@ -171,22 +171,22 @@ describe('Test1: UserInfoDataService - TestBed', () => {
           { provide: AngularFirestore, useValue: AngularFirestoreStub },
         ],
       });
-  
+
       userInfoDataService = TestBed.get(UserInfoDataService);
       environmentService = TestBed.get(EnvironmentService);
     });
-  
+
     it('ssss', () => {
         const fakeEnvironmentService = new FakeEnvironmentService();
         const spy = jest.spyOn(fakeEnvironmentService, 'appCode', 'get');
         expect(fakeEnvironmentService.appCode).toEqual('aa');
     });
- 
+
     it('usersCollectionPath should be apps/APP-CODE/users', () => {
       const spy = jest
          .spyOn(environmentService, 'appCode', 'get')
          .mockReturnValue('APP-CODE');
-  
+
       // environmentService.appCode = 'bbbbb';
       expect(userInfoDataService.usersCollectionPath).toEqual(
         'apps/APP-CODE/users'
@@ -194,6 +194,6 @@ describe('Test1: UserInfoDataService - TestBed', () => {
       // expect(spy).toHaveBeenCalled();
       // expect(spy).toHaveBeenCalledTimes(1);
     });
-   
+
   });
   */

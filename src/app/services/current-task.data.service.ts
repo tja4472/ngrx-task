@@ -47,7 +47,7 @@ export class CurrentTaskDataService {
     const batch = this.afs.firestore.batch();
 
     ids.forEach((id, i) => {
-      /*      
+      /*
       this.firestoreCollection(todoListId, userId)
         .doc(id)
         .update({ index: i });
