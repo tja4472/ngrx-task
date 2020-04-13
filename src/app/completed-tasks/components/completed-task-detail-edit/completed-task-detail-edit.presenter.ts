@@ -10,18 +10,24 @@ import {
 import { ControlNames, getFormControlNames } from '@app/core/utility';
 import { CompletedTask } from '@app/root-store/tasks-store/models';
 
+import { typedFormControl, typedFormGroup } from 'ngx-forms-typed';
+
 interface Model {
   name: string;
   description: string;
   isComplete: boolean;
 }
 
+/*
 type ModelControls = { [key in keyof Model]: AbstractControl };
 type ModelFormGroup = FormGroup & { value: Model; controls: ModelControls };
+*/
 
 // ===
+/*
 type ObjectAsMap<T> = { [K in keyof T]-?: K };
 type a = ObjectAsMap<Model>;
+*/
 /*
 type a = {
     name: "name";
@@ -33,11 +39,19 @@ type a = {
 
 @Injectable()
 export class CompletedTaskDetailEditPresenter {
+  /*
   form = new FormGroup({
     name: new FormControl('', Validators.required),
     description: new FormControl(),
     isComplete: new FormControl(),
   } as ModelControls) as ModelFormGroup;
+  */
+
+  form = typedFormGroup<Model>({
+    name: typedFormControl<string>('', Validators.required),
+    description: typedFormControl<string>(),
+    isComplete: typedFormControl<boolean>(),
+  });
 
   #formControlNames: ControlNames<Model>;
 
@@ -61,7 +75,14 @@ export class CompletedTaskDetailEditPresenter {
       name: this.initialData.name,
       description: this.initialData.description,
       isComplete: this.initialData.isComplete,
+    });
+    /*
+    this.form.setValue({
+      name: this.initialData.name,
+      description: this.initialData.description,
+      isComplete: this.initialData.isComplete,
     } as Model);
+    */
     /*
     this.form = this.formBuilder.group({
       name: [this.initialData.name, Validators.required],
