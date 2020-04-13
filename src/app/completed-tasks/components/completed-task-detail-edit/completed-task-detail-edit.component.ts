@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 
 import { CompletedTask } from '@app/root-store/tasks-store/models';
 
@@ -17,8 +16,16 @@ export class CompletedTaskDetailEditComponent implements OnInit {
   @Output() remove = new EventEmitter<CompletedTask>();
   @Output() checkout = new EventEmitter<CompletedTask>();
 
-  get checkoutForm(): FormGroup {
+  get checkoutForm() {
     return this.presenter.form;
+  }
+
+  get formControlNames() {
+    return this.presenter.formControlNames;
+  }
+
+  get isSubmitButtonDisabled(): boolean {
+    return this.presenter.isSubmitButtonDisabled;
   }
 
   constructor(private presenter: CompletedTaskDetailEditPresenter) {}

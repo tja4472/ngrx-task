@@ -1,5 +1,7 @@
 https://blog.nrwl.io/ngrx-patterns-and-techniques-f46126e2b1e5
 
+- [ngx-forms-typed](https://github.com/gparlakov/forms-typed/tree/master/projects/forms)
+
 # NgrxTask
 
 https://tja4472.github.io/ngrx-task/
