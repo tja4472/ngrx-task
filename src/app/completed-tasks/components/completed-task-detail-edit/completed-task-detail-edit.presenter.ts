@@ -8,9 +8,11 @@ import {
 } from '@angular/forms';
 
 import { ControlNames, getFormControlNames } from '@app/core/utility';
+import {
+  typedFormControl,
+  typedFormGroup,
+} from '@app/external-libs/ngx-forms-typed/forms-typed';
 import { CompletedTask } from '@app/root-store/tasks-store/models';
-
-import { typedFormControl, typedFormGroup } from 'ngx-forms-typed';
 
 interface Model {
   name: string;
