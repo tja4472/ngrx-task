@@ -19,6 +19,10 @@ export interface State {
   router: fromRouter.RouterReducerState<any>;
 }
 
+export const ROOT_REDUCERS: ActionReducerMap<State> = {
+  router: fromRouter.routerReducer,
+};
+/*
 export const ROOT_REDUCERS = new InjectionToken<
   ActionReducerMap<State, Action>
 >('Root reducers token', {
@@ -26,6 +30,7 @@ export const ROOT_REDUCERS = new InjectionToken<
     router: fromRouter.routerReducer,
   }),
 });
+*/
 
 // console.log all actions
 export function logger(reducer: ActionReducer<State>): ActionReducer<State> {
@@ -44,7 +49,7 @@ export function logger(reducer: ActionReducer<State>): ActionReducer<State> {
 // reset whole state except for authFeature and router
 export function flush(reducer: any) {
   // tslint:disable-next-line: only-arrow-functions
-  return function(state: fromAuth.State | undefined, action: Action) {
+  return function (state: fromAuth.State | undefined, action: Action) {
     if (action.type === AuthActions.signOutComplete.type) {
       return reducer(
         { authFeature: state.authFeature, router: state.router },
@@ -55,7 +60,7 @@ export function flush(reducer: any) {
   };
 }
 
-export const metaReducers: MetaReducer<State>[] = !environment.production
+export const metaReducers: MetaReducer<any>[] = !environment.production
   ? [logger, flush]
   : [flush];
 
