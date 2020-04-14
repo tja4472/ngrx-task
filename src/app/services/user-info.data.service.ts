@@ -68,9 +68,7 @@ export class UserInfoDataService {
   }
 
   public async getUserData(userId: string): Promise<UserInfo> {
-    const userData = await this.getItem$(userId)
-      .pipe(take(1))
-      .toPromise();
+    const userData = await this.getItem$(userId).pipe(take(1)).toPromise();
 
     if (!!userData) {
       // Have userData.

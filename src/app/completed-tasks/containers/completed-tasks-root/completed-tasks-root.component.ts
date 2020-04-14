@@ -12,9 +12,7 @@ import { CompletedTasksRootActions } from '@app/root-store/tasks-store/actions';
 @Component({
   selector: 'app-completed-tasks-root',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
-    <router-outlet></router-outlet>
-  `,
+  template: ` <router-outlet></router-outlet> `,
   styleUrls: ['./completed-tasks-root.component.css'],
 })
 export class CompletedTasksRootComponent implements OnDestroy, OnInit {

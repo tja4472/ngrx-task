@@ -61,9 +61,7 @@ export class CurrentTaskDataService {
   }
 
   public removeItem(id: string, taskListId: string, userId: string): void {
-    this.firestoreCollection(taskListId, userId)
-      .doc(id)
-      .delete();
+    this.firestoreCollection(taskListId, userId).doc(id).delete();
   }
 
   public save(item: CurrentTask, taskListId: string, userId: string): void {
@@ -73,9 +71,7 @@ export class CurrentTaskDataService {
       doc.id = this.afs.createId();
     }
 
-    this.firestoreCollection(taskListId, userId)
-      .doc(doc.id)
-      .set(doc);
+    this.firestoreCollection(taskListId, userId).doc(doc.id).set(doc);
   }
 
   private firestoreCollection(taskListId: string, userId: string) {

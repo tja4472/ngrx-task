@@ -12,9 +12,7 @@ import { CurrentTasksRootActions } from '@app/root-store/tasks-store/actions';
 @Component({
   selector: 'app-current-tasks-root',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
-    <router-outlet></router-outlet>
-  `,
+  template: ` <router-outlet></router-outlet> `,
   styleUrls: ['./current-tasks-root.component.css'],
 })
 export class CurrentTasksRootComponent implements OnDestroy, OnInit {

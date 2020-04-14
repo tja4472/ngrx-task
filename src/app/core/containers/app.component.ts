@@ -7,9 +7,7 @@ import { AngularFireAnalytics } from '@angular/fire/analytics';
 @Component({
   selector: 'app-root',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
-    <app-sidenav></app-sidenav>
-  `,
+  template: ` <app-sidenav></app-sidenav> `,
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {

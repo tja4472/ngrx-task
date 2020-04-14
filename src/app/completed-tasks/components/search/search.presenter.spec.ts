@@ -59,8 +59,9 @@ describe(SearchPresenter.name, () => {
       expect(searchTermsSpy).toHaveBeenCalledTimes(1);
     }));
 
-    it(`that is the latest preceeded by at most ${debounceTime -
-      1} milliseconds of inactivity`, fakeAsync(() => {
+    it(`that is the latest preceeded by at most ${
+      debounceTime - 1
+    } milliseconds of inactivity`, fakeAsync(() => {
       const medusa = 'medusa';
       const wasp = 'wasp';
 
