@@ -131,7 +131,7 @@ export class AuthEffects implements OnInitEffects {
         tap((action) => {
           // const password = 'aaaaa';
           const password = action.credentials.password;
-          this.afAuth.auth
+          this.afAuth
             .signInWithEmailAndPassword(action.credentials.username, password)
             .catch((error) =>
               this.store.dispatch(
@@ -156,7 +156,7 @@ export class AuthEffects implements OnInitEffects {
         tap((action) => {
           const password = action.credentials.password;
 
-          this.afAuth.auth
+          this.afAuth
             .createUserWithEmailAndPassword(
               action.credentials.username,
               password
@@ -196,7 +196,7 @@ export class AuthEffects implements OnInitEffects {
       return this.actions$.pipe(
         ofType(AuthActions.signOut),
         tap(() =>
-          this.afAuth.auth.signOut().then(() => {
+          this.afAuth.signOut().then(() => {
             this.router.navigate(['/sign-in']);
             this.store.dispatch(AuthActions.signOutComplete());
           })
