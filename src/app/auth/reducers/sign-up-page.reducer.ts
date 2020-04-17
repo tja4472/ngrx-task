@@ -17,7 +17,7 @@ Typescript not enforcing State type.
 https://github.com/microsoft/TypeScript/issues/241#issuecomment-540168588
 Hence const values: State = { bodge
 */
-const featureReducer = createReducer(
+export const reducer = createReducer(
   initialState,
   on(SignUpPageActions.entered, (state) => {
     const values: SignUpPageState = { ...initialState };
@@ -36,7 +36,3 @@ const featureReducer = createReducer(
     return values;
   })
 );
-
-export function reducer(state: SignUpPageState | undefined, action: Action) {
-  return featureReducer(state, action);
-}

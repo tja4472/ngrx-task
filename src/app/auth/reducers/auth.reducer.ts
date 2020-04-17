@@ -19,7 +19,7 @@ Typescript not enforcing State type.
 https://github.com/microsoft/TypeScript/issues/241#issuecomment-540168588
 Hence const values: State = { bodge
 */
-const featureReducer = createReducer(
+export const reducer = createReducer(
   initialState,
   on(
     AuthApiActions.autoSignInHaveFirebaseUser,
@@ -42,31 +42,3 @@ const featureReducer = createReducer(
     return values;
   })
 );
-
-export function reducer(state: AuthState | undefined, action: Action) {
-  return featureReducer(state, action);
-}
-
-/*
-export function reducer(
-  state = initialState,
-  action: AuthApiActions.AuthApiActionsUnion
-): AuthState {
-  switch (action.type) {
-    case AuthApiActions.autoSignInNoUser.type:
-      return { ...state, hasChecked: true };
-
-    case AuthApiActions.haveFirebaseUser.type:
-    case AuthApiActions.signInSuccess.type:
-    case AuthApiActions.autoSignInHaveUser.type:
-    case AuthApiActions.signUpSuccess.type:
-      return { ...state, hasChecked: true };
-
-    case AuthActions.signOut.type:
-      return { ...initialState, hasChecked: true };
-
-    default:
-      return state;
-  }
-}
-*/

@@ -7,12 +7,8 @@ export interface State {}
 
 export const initialState: State = {};
 
-const homeReducer = createReducer(
+export const reducer = createReducer(
   initialState
 
   // on(HomeActions.qqqqloadHomes, (state) => state)
 );
-
-export function reducer(state: State | undefined, action: Action) {
-  return homeReducer(state, action);
-}

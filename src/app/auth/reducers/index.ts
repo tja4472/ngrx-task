@@ -17,7 +17,7 @@ export interface State extends fromRoot.State {
   [authFeatureKey]: AuthFeatureState;
 }
 
-export const reducers: ActionReducerMap<AuthFeatureState> = {
+export const authReducers: ActionReducerMap<AuthFeatureState> = {
   auth: fromAuth.reducer,
   signInPage: fromSignInPage.reducer,
   signUpPage: fromSignUpPage.reducer,

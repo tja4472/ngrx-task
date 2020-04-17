@@ -32,7 +32,7 @@ Typescript not enforcing State type.
 https://github.com/microsoft/TypeScript/issues/241#issuecomment-540168588
 Hence const values: State = { bodge
 */
-const completedTaskReducer = createReducer(
+export const reducer = createReducer(
   initialState,
   on(CompletedTasksPageActions.search, (state, { query }) => {
     const lowerCaseQuery = query.toLowerCase();
@@ -58,7 +58,3 @@ const completedTaskReducer = createReducer(
     })
   )
 );
-
-export function reducer(state: State | undefined, action: Action) {
-  return completedTaskReducer(state, action);
-}

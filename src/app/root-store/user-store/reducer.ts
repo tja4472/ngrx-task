@@ -12,7 +12,7 @@ Typescript not enforcing State type.
 https://github.com/microsoft/TypeScript/issues/241#issuecomment-540168588
 Hence const values: State = { bodge
 */
-const featureReducer = createReducer(
+export const reducer = createReducer(
   initialState,
   /*
   on(featureActions.clearUser, (state) => {
@@ -39,7 +39,3 @@ const featureReducer = createReducer(
     state.taskListId = taskListId;
   })
 );
-
-export function reducer(state: State | undefined, action: Action) {
-  return featureReducer(state, action);
-}

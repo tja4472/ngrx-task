@@ -26,7 +26,7 @@ Typescript not enforcing State type.
 https://github.com/microsoft/TypeScript/issues/241#issuecomment-540168588
 Hence const values: State = { bodge
 */
-const currentTaskReducer = createReducer(
+export const reducer = createReducer(
   initialState,
   on(TodoActions.databaseListenForDataStart, (state) => {
     const values: State = { ...state, loading: true };
@@ -49,7 +49,3 @@ const currentTaskReducer = createReducer(
     return values;
   })
 );
-
-export function reducer(state: State | undefined, action: Action) {
-  return currentTaskReducer(state, action);
-}

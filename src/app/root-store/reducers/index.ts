@@ -19,18 +19,9 @@ export interface State {
   router: fromRouter.RouterReducerState<any>;
 }
 
-export const ROOT_REDUCERS: ActionReducerMap<State> = {
+export const rootReducers: ActionReducerMap<State> = {
   router: fromRouter.routerReducer,
 };
-/*
-export const ROOT_REDUCERS = new InjectionToken<
-  ActionReducerMap<State, Action>
->('Root reducers token', {
-  factory: () => ({
-    router: fromRouter.routerReducer,
-  }),
-});
-*/
 
 // console.log all actions
 export function logger(reducer: ActionReducer<State>): ActionReducer<State> {

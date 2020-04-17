@@ -6,7 +6,7 @@ import { RouterState, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
-import { metaReducers, ROOT_REDUCERS } from '@app/root-store/reducers';
+import { metaReducers, rootReducers } from '@app/root-store/reducers';
 import { TasksStoreModule } from '@app/root-store/tasks-store';
 
 import { UserStoreModule } from './user-store';
@@ -16,7 +16,7 @@ import { UserStoreModule } from './user-store';
     CommonModule,
     TasksStoreModule,
     UserStoreModule,
-    StoreModule.forRoot(ROOT_REDUCERS, {
+    StoreModule.forRoot(rootReducers, {
       metaReducers,
       runtimeChecks: {
         // strictStateImmutability and strictActionImmutability are enabled by default

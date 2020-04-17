@@ -1,4 +1,4 @@
-import { Action, combineReducers } from '@ngrx/store';
+import { Action, ActionReducerMap, combineReducers } from '@ngrx/store';
 
 import * as fromRoot from '@app/root-store/reducers';
 
@@ -22,11 +22,8 @@ export interface State extends fromRoot.State {
   [taskFeatureKey]: TaskState;
 }
 
-/** Provide reducer in AoT-compilation happy way */
-export function reducers(state: TaskState | undefined, action: Action) {
-  return combineReducers({
-    [fromTodo.todoFeatureKey]: fromTodo.reducer,
-    [fromTodoCompleted.todoCompletedFeatureKey]: fromTodoCompleted.reducer,
-    [fromTodoLists.featureKey]: fromTodoLists.reducer,
-  })(state, action);
-}
+export const taskReducers: ActionReducerMap<TaskState> = {
+  [fromTodo.todoFeatureKey]: fromTodo.reducer,
+  [fromTodoCompleted.todoCompletedFeatureKey]: fromTodoCompleted.reducer,
+  [fromTodoLists.featureKey]: fromTodoLists.reducer,
+};

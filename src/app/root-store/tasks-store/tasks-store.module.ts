@@ -13,7 +13,7 @@ import { TaskListEffects } from './task-list-store/effects';
 @NgModule({
   imports: [
     CommonModule,
-    StoreModule.forFeature(fromTask.taskFeatureKey, fromTask.reducers),
+    StoreModule.forFeature(fromTask.taskFeatureKey, fromTask.taskReducers),
     EffectsModule.forFeature([
       TaskEffects,
       TaskListEffects,
