@@ -3,16 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
-import { AngularFireModule } from '@angular/fire';
-import {
-  AngularFireAnalyticsModule,
-  ScreenTrackingService,
-  UserTrackingService,
-} from '@angular/fire/analytics';
-import { AngularFireAuthModule } from '@angular/fire/auth';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { AngularFirePerformanceModule } from '@angular/fire/performance';
-
 import { AuthModule } from '@app/auth';
 import { CoreModule } from '@app/core';
 import { AppComponent } from '@app/core/containers';
@@ -20,6 +10,7 @@ import { HomeModule } from '@app/home';
 
 import { environment } from '../environments/environment';
 
+import { AppFirebaseModule } from './app-firebase.module';
 import { AppRoutingModule } from './app-routing.module';
 import { RootStoreModule } from './root-store';
 
@@ -27,12 +18,7 @@ import { RootStoreModule } from './root-store';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule.enablePersistence(),
-    AngularFireAnalyticsModule,
-    AngularFireAuthModule,
-    AngularFirestoreModule,
-    AngularFirePerformanceModule,
+    AppFirebaseModule,
     AuthModule,
     HomeModule,
     AppRoutingModule,
@@ -42,7 +28,6 @@ import { RootStoreModule } from './root-store';
       enabled: environment.production,
     }),
   ],
-  providers: [ScreenTrackingService, UserTrackingService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
