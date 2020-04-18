@@ -1,6 +1,8 @@
-import { Action, createReducer, on } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
 
 import { AuthActions, AuthApiActions } from '@app/auth/actions';
+
+export const authReducerKey = 'auth';
 
 export interface AuthState {
   hasChecked: boolean;
