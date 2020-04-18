@@ -18,7 +18,7 @@ export interface TaskState {
 
 // export const initialState: TaskState = {};
 
-export interface State extends fromRoot.State {
+export interface State extends fromRoot.RootState {
   [taskFeatureKey]: TaskState;
 }
 

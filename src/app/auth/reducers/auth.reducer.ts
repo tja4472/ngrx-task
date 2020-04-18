@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 
-import { AuthActions, AuthApiActions } from '@app/auth/actions';
+import { AuthActions, AuthApiActions } from '../actions';
 
 export const authReducerKey = 'auth';
 
@@ -30,7 +30,7 @@ const values: State = {
 Automatic type checking for the state that is returned by the on function in createReducer
 https://github.com/ngrx/platform/issues/2412
 */
-export const reducer = createReducer(
+export const authReducer = createReducer(
   initialState,
   on(
     AuthApiActions.autoSignInHaveFirebaseUser,

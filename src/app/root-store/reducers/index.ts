@@ -15,16 +15,18 @@ import * as fromAuth from '@app/auth/reducers';
 
 import { environment } from '../../../environments/environment';
 
-export interface State {
+export interface RootState {
   router: fromRouter.RouterReducerState<any>;
 }
 
-export const rootReducers: ActionReducerMap<State> = {
+export const rootReducers: ActionReducerMap<RootState> = {
   router: fromRouter.routerReducer,
 };
 
 // console.log all actions
-export function logger(reducer: ActionReducer<State>): ActionReducer<State> {
+export function logger(
+  reducer: ActionReducer<RootState>
+): ActionReducer<RootState> {
   return (state, action) => {
     const result = reducer(state, action);
     console.groupCollapsed(action.type);
@@ -40,7 +42,7 @@ export function logger(reducer: ActionReducer<State>): ActionReducer<State> {
 // reset whole state except for authFeature and router
 export function flush(reducer: any) {
   // tslint:disable-next-line: only-arrow-functions
-  return function (state: fromAuth.State | undefined, action: Action) {
+  return function (state: fromAuth.AuthRootState | undefined, action: Action) {
     if (action.type === AuthActions.signOutComplete.type) {
       return reducer(
         { authFeature: state.authFeature, router: state.router },
@@ -56,7 +58,7 @@ export const metaReducers: MetaReducer<any>[] = !environment.production
   : [flush];
 
 export const selectRouter = createFeatureSelector<
-  State,
+  RootState,
   fromRouter.RouterReducerState<any>
 >(fromRouter.DEFAULT_ROUTER_FEATURENAME);
 

@@ -1,6 +1,8 @@
-import { Action, createReducer, on } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
 
-import { AuthApiActions, SignInPageActions } from '@app/auth/actions';
+import { AuthApiActions, SignInPageActions } from '../actions';
+
+export const signInPageReducerKey = 'signInPage';
 
 export interface SignInPageState {
   pending: boolean;
@@ -26,7 +28,7 @@ const values: State = {
 Automatic type checking for the state that is returned by the on function in createReducer
 https://github.com/ngrx/platform/issues/2412
 */
-export const reducer = createReducer(
+export const signInPageReducer = createReducer(
   initialState,
   on(SignInPageActions.entered, (): SignInPageState => ({ ...initialState })),
   on(

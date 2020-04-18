@@ -1,30 +1,38 @@
 import { ActionReducerMap, createFeatureSelector } from '@ngrx/store';
 
-import * as fromAuth from '@app/auth/reducers/auth.reducer';
-import { authReducerKey } from '@app/auth/reducers/auth.reducer';
-import * as fromSignInPage from '@app/auth/reducers/sign-in-page.reducer';
-import * as fromSignUpPage from '@app/auth/reducers/sign-up-page.reducer';
-import * as fromRoot from '@app/root-store/reducers';
+import { RootState } from '@app/root-store/reducers';
+
+import { authReducer, authReducerKey, AuthState } from './auth.reducer';
+import {
+  signInPageReducer,
+  signInPageReducerKey,
+  SignInPageState,
+} from './sign-in-page.reducer';
+import {
+  signUpPageReducer,
+  signUpPageReducerKey,
+  SignUpPageState,
+} from './sign-up-page.reducer';
 
 export const authFeatureKey = 'authFeature';
 
 export interface AuthFeatureState {
-  [authReducerKey]: fromAuth.AuthState;
-  signInPage: fromSignInPage.SignInPageState;
-  signUpPage: fromSignUpPage.SignUpPageState;
+  [authReducerKey]: AuthState;
+  [signInPageReducerKey]: SignInPageState;
+  [signUpPageReducerKey]: SignUpPageState;
 }
 
-export interface State extends fromRoot.State {
+export interface AuthRootState extends RootState {
   [authFeatureKey]: AuthFeatureState;
 }
 
 export const authReducers: ActionReducerMap<AuthFeatureState> = {
-  [authReducerKey]: fromAuth.reducer,
-  signInPage: fromSignInPage.reducer,
-  signUpPage: fromSignUpPage.reducer,
+  [authReducerKey]: authReducer,
+  [signInPageReducerKey]: signInPageReducer,
+  [signUpPageReducerKey]: signUpPageReducer,
 };
 
 export const selectAuthFeatureState = createFeatureSelector<
-  State,
+  AuthRootState,
   AuthFeatureState
 >(authFeatureKey);
