@@ -30,31 +30,50 @@ export const initialState: State = adapter.getInitialState({
 /*
 Typescript not enforcing State type.
 https://github.com/microsoft/TypeScript/issues/241#issuecomment-540168588
-Hence const values: State = { bodge
+
+const values: State = {
+  ...state,
+  loaded: true,
+  loading: false,
+};
+*/
+/*
+Automatic type checking for the state that is returned by the on function in createReducer
+https://github.com/ngrx/platform/issues/2412
 */
 export const reducer = createReducer(
   initialState,
-  on(CompletedTasksPageActions.search, (state, { query }) => {
-    const lowerCaseQuery = query.toLowerCase();
-    const values: State = { ...state, query: lowerCaseQuery };
-    return values;
-  }),
-  on(TodoCompletedActions.databaseListenForDataStart, (state) => ({
-    ...state,
-    loading: true,
-  })),
+  on(
+    CompletedTasksPageActions.search,
+    (state, { query }): State => {
+      const lowerCaseQuery = query.toLowerCase();
+      return { ...state, query: lowerCaseQuery };
+    }
+  ),
+  on(
+    TodoCompletedActions.databaseListenForDataStart,
+    (state): State => ({
+      ...state,
+      loading: true,
+    })
+  ),
   on(
     TodoCompletedActions.databaseListenForDataStop,
     CompletedTasksRootActions.destroyed,
-    () => ({
+    (): State => ({
       ...initialState,
     })
   ),
-  on(TodoCompletedActions.loadSuccess, (state, { completedTasks }) =>
-    adapter.setAll(completedTasks, {
-      ...state,
-      loaded: true,
-      loading: false,
-    })
+  on(
+    TodoCompletedActions.loadSuccess,
+    (state, { completedTasks }): State => {
+      const values: State = {
+        ...state,
+        loaded: true,
+        loading: false,
+      };
+
+      return adapter.setAll(completedTasks, values);
+    }
   )
 );

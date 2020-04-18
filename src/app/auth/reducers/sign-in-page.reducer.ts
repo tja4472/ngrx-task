@@ -15,24 +15,30 @@ export const initialState: SignInPageState = {
 /*
 Typescript not enforcing State type.
 https://github.com/microsoft/TypeScript/issues/241#issuecomment-540168588
-Hence const values: State = { bodge
+
+const values: State = {
+  ...state,
+  loaded: true,
+  loading: false,
+};
+*/
+/*
+Automatic type checking for the state that is returned by the on function in createReducer
+https://github.com/ngrx/platform/issues/2412
 */
 export const reducer = createReducer(
   initialState,
-  on(SignInPageActions.entered, (state) => {
-    const values: SignInPageState = { ...initialState };
-    return values;
-  }),
-  on(SignInPageActions.signIn, (state) => {
-    const values: SignInPageState = { ...state, error: null, pending: true };
-    return values;
-  }),
-  on(AuthApiActions.signInFailure, (state, { error }) => {
-    const values: SignInPageState = {
+  on(SignInPageActions.entered, (): SignInPageState => ({ ...initialState })),
+  on(
+    SignInPageActions.signIn,
+    (state): SignInPageState => ({ ...state, error: null, pending: true })
+  ),
+  on(
+    AuthApiActions.signInFailure,
+    (state, { error }): SignInPageState => ({
       ...state,
       error: error.message,
       pending: false,
-    };
-    return values;
-  })
+    })
+  )
 );

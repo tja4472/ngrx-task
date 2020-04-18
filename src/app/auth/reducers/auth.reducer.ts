@@ -17,28 +17,34 @@ export const initialState: AuthState = {
 /*
 Typescript not enforcing State type.
 https://github.com/microsoft/TypeScript/issues/241#issuecomment-540168588
-Hence const values: State = { bodge
+
+const values: State = {
+  ...state,
+  loaded: true,
+  loading: false,
+};
+*/
+/*
+Automatic type checking for the state that is returned by the on function in createReducer
+https://github.com/ngrx/platform/issues/2412
 */
 export const reducer = createReducer(
   initialState,
   on(
     AuthApiActions.autoSignInHaveFirebaseUser,
     AuthApiActions.manualSignInHaveFirebaseUser,
-    (state, { uid }) => {
-      const values: AuthState = { ...state, hasChecked: true, userId: uid };
-      return values;
-    }
+    (state, { uid }): AuthState => ({ ...state, hasChecked: true, userId: uid })
   ),
-  on(AuthActions.signOutComplete, (state) => {
-    const values: AuthState = { ...state, userId: null };
-    return values;
-  }),
-  on(AuthApiActions.autoSignInNoFirebaseUser, (state) => {
-    const values: AuthState = { ...initialState, hasChecked: true };
-    return values;
-  }),
-  on(AuthApiActions.manualSignInHaveFirebaseUser, (state) => {
-    const values: AuthState = { ...state, isAutoSignIn: false };
-    return values;
-  })
+  on(
+    AuthActions.signOutComplete,
+    (state): AuthState => ({ ...state, userId: null })
+  ),
+  on(
+    AuthApiActions.autoSignInNoFirebaseUser,
+    (): AuthState => ({ ...initialState, hasChecked: true })
+  ),
+  on(
+    AuthApiActions.manualSignInHaveFirebaseUser,
+    (state): AuthState => ({ ...state, isAutoSignIn: false })
+  )
 );
