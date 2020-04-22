@@ -7,17 +7,16 @@ const routes: Routes = [
   {
     path: 'tasks/completed',
     loadChildren: () =>
-      import('./completed-tasks').then((mod) => mod.CompletedTasksModule),
+      import('./completed-tasks').then((m) => m.CompletedTasksModule),
   },
   {
     path: 'tasks/current',
     loadChildren: () =>
-      import('./current-tasks').then((mod) => mod.CurrentTasksModule),
+      import('./current-tasks').then((m) => m.CurrentTasksModule),
   },
   {
     path: 'tasks/lists',
-    loadChildren: () =>
-      import('./task-lists').then((mod) => mod.TaskListsModule),
+    loadChildren: () => import('./task-lists').then((m) => m.TaskListsModule),
   },
 
   { path: '', redirectTo: '/home', pathMatch: 'full' },
