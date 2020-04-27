@@ -1,28 +1,10 @@
 import { createAction, props } from '@ngrx/store';
 
+import { AppUser } from '../models/app-user.model';
+
 const title = 'Auth/API';
 
-export const autoSignIn = createAction(`[${title}] Auto Sign In`);
-
-export const haveAppUser = createAction(`[${title}] Have App User`);
-
-export const autoSignInHaveFirebaseUser = createAction(
-  `[${title}] Auto Sign In - Have Firebase User`,
-  props<{ uid: string; email: string; displayName: string }>()
-);
-
-export const autoSignInNoFirebaseUser = createAction(
-  `[${title}] Auto Sign In - No Firebase User`
-);
-
-export const manualSignInHaveFirebaseUser = createAction(
-  `[${title}] Manual Sign In - Have Firebase User`,
-  props<{ uid: string; email: string; displayName: string }>()
-);
-
-export const manualSignInNoFirebaseUser = createAction(
-  `[${title}] Manual Sign In - No Firebase User`
-);
+export const autoSignInCheck = createAction(`[${title}] Auto Sign In Check`);
 
 export const signInFailure = createAction(
   `[${title}] Sign In - Failure`,
@@ -32,4 +14,14 @@ export const signInFailure = createAction(
 export const signUpFailure = createAction(
   `[${title}] Sign Up - Failure`,
   props<{ error: any }>()
+);
+
+export const signInHaveUser = createAction(
+  `[${title}] Sign In - Have User`,
+  props<{ appUser: AppUser; isAutoSignIn: boolean }>()
+);
+
+export const signInNoUser = createAction(
+  `[${title}] Sign In - No User`,
+  props<{ isAutoSignIn: boolean }>()
 );

@@ -34,42 +34,6 @@ effectDispatchFalse$ = createEffect(
 
 @Injectable()
 export class UserStoreEffects {
-  haveFirebaseUser$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(
-        AuthApiActions.autoSignInHaveFirebaseUser,
-        AuthApiActions.manualSignInHaveFirebaseUser
-      ),
-      concatMap((firebaseUser) =>
-        from(this.userInfoDataService.getUserData(firebaseUser.uid)).pipe(
-          map((userInfo) =>
-            featureActions.setData({
-              user: {
-                id: firebaseUser.uid,
-                email: firebaseUser.email,
-                name: firebaseUser.displayName,
-              },
-              taskListId: userInfo.todoListId,
-            })
-          )
-        )
-      )
-    );
-  });
-
-  setData$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(featureActions.setData),
-      map(({ user }) => user),
-      switchMap((user) => [
-        featureActions.haveUser({
-          userId: user.id,
-        }),
-        AuthApiActions.haveAppUser(),
-      ])
-    );
-  });
-
   setUserListId$ = createEffect(
     () => {
       return this.actions$.pipe(

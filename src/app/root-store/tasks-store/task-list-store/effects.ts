@@ -13,7 +13,7 @@ import {
   withLatestFrom,
 } from 'rxjs/operators';
 
-import { AuthActions } from '@app/auth/actions';
+import { AuthActions, AuthApiActions } from '@app/auth/actions';
 import {
   UserStoreActions,
   UserStoreSelectors,
@@ -46,8 +46,10 @@ effectDispatchFalse$ = createEffect(
 export class TaskListEffects {
   authListenForAuthSuccess$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(UserStoreActions.haveUser),
-      map((action) => featureActions.listenForData({ userId: action.userId }))
+      ofType(AuthApiActions.signInHaveUser),
+      map((action) =>
+        featureActions.listenForData({ userId: action.appUser.uid })
+      )
     );
   });
 

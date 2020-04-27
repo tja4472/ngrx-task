@@ -33,20 +33,24 @@ https://github.com/ngrx/platform/issues/2412
 export const authReducer = createReducer(
   initialState,
   on(
-    AuthApiActions.autoSignInHaveFirebaseUser,
-    AuthApiActions.manualSignInHaveFirebaseUser,
-    (state, { uid }): AuthState => ({ ...state, hasChecked: true, userId: uid })
-  ),
-  on(
     AuthActions.signOutComplete,
     (state): AuthState => ({ ...state, userId: null })
   ),
   on(
-    AuthApiActions.autoSignInNoFirebaseUser,
-    (): AuthState => ({ ...initialState, hasChecked: true })
+    AuthApiActions.signInNoUser,
+    (_, { isAutoSignIn }): AuthState => ({
+      ...initialState,
+      hasChecked: true,
+      isAutoSignIn,
+    })
   ),
   on(
-    AuthApiActions.manualSignInHaveFirebaseUser,
-    (state): AuthState => ({ ...state, isAutoSignIn: false })
+    AuthApiActions.signInHaveUser,
+    (state, { appUser, isAutoSignIn }): AuthState => ({
+      ...state,
+      hasChecked: true,
+      userId: appUser.uid,
+      isAutoSignIn,
+    })
   )
 );

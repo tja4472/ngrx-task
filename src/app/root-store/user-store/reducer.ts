@@ -1,5 +1,7 @@
 import { Action, createReducer } from '@ngrx/store';
 
+import { AuthApiActions } from '@app/auth/actions';
+
 import * as featureActions from './actions';
 import { initialState, State } from './state';
 
@@ -30,15 +32,12 @@ export const reducer = createReducer(
   }),
 */
 
+  /*
   mutableOn(featureActions.setData, (state, { user, taskListId }) => {
-    /*
-    const values: State = { ...state, user, taskListId };
-    return values;
-*/
-
     state.user = user;
     state.taskListId = taskListId;
   }),
+  */
   mutableOn(featureActions.setTaskListId, (state, { taskListId }) => {
     /*
     const values: State = { ...state, taskListId };
@@ -46,5 +45,13 @@ export const reducer = createReducer(
 */
 
     state.taskListId = taskListId;
+  }),
+  mutableOn(AuthApiActions.signInHaveUser, (state, { appUser }) => {
+    state.user = {
+      email: appUser.email,
+      id: appUser.uid,
+      name: appUser.displayName,
+    };
+    state.taskListId = appUser.taskListId;
   })
 );

@@ -7,7 +7,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Actions, createEffect, ofType, OnInitEffects } from '@ngrx/effects';
 import { Action, Store } from '@ngrx/store';
 
-import { of } from 'rxjs';
+import { from, of } from 'rxjs';
 import {
   concatMap,
   exhaustMap,
@@ -31,6 +31,7 @@ import { selectQueryParam } from '@app/root-store/reducers';
 
 import { SignoutConfirmationDialogComponent } from '../components/signout-confirmation-dialog/signout-confirmation-dialog.component';
 import { selectIsAutoSignIn, selectUserId } from '../selectors/auth.selectors';
+import { AuthService } from '../services/auth.service';
 
 /* =======================================
 Improve typings of createEffect, help debugging
@@ -56,35 +57,80 @@ effectDispatchFalse$ = createEffect(
 export class AuthEffects implements OnInitEffects {
   // With enablePersistence the first result will be from
   // the autoSignIn.
-  autoSignIn$ = createEffect(() => {
+  //#region Sign In
+  bbbautoSignInNoUser$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(AuthApiActions.autoSignIn),
-      // tap(() => console.log('### autoSignIn$')),
+      ofType(AuthApiActions.autoSignInCheck),
       switchMap(() =>
-        this.afAuth.authState.pipe(
+        this.authService.appUser$.pipe(
           first(),
-          map((firebaseUser) => {
-            if (firebaseUser === null) {
-              return AuthApiActions.autoSignInNoFirebaseUser();
-            } else {
-              return AuthApiActions.autoSignInHaveFirebaseUser({
-                uid: firebaseUser.uid,
-                email: firebaseUser.email,
-                displayName: firebaseUser.displayName,
-              });
-            }
+          filter((appUser) => appUser === null),
+          map((appUser) => {
+            return AuthApiActions.signInNoUser({ isAutoSignIn: true });
           })
         )
       )
     );
   });
 
+  bbbautoSignInHaveUser$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(AuthApiActions.autoSignInCheck),
+      switchMap(() =>
+        this.authService.appUser$.pipe(
+          first(),
+          filter((appUser) => appUser !== null),
+          map((appUser) => {
+            return AuthApiActions.signInHaveUser({
+              appUser,
+              isAutoSignIn: true,
+            });
+          })
+        )
+      )
+    );
+  });
+
+  bbbsignInNoUser$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(AuthApiActions.autoSignInCheck),
+      switchMap(() =>
+        this.authService.appUser$.pipe(
+          skip(1),
+          filter((appUser) => appUser === null),
+          map((appUser) => {
+            return AuthApiActions.signInNoUser({ isAutoSignIn: false });
+          })
+        )
+      )
+    );
+  });
+
+  bbbsignInHaveUser$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(AuthApiActions.autoSignInCheck),
+      switchMap(() =>
+        this.authService.appUser$.pipe(
+          skip(1),
+          filter((appUser) => appUser !== null),
+          map((appUser) => {
+            return AuthApiActions.signInHaveUser({
+              appUser,
+              isAutoSignIn: false,
+            });
+          })
+        )
+      )
+    );
+  });
+  //#endregion
+
   // Watch userId and perform operations on change.
   aaAAAAA$ = createEffect(
     () => {
       return this.actions$.pipe(
         // tap((action) => console.log('aaAAAAA$:action',action)),
-        ofType(AuthApiActions.autoSignIn),
+        ofType(AuthApiActions.autoSignInCheck),
         tap((action) => console.log('aaAAAAA$:actionA', action)),
         switchMap(() =>
           this.store.select(selectUserId).pipe(
@@ -98,6 +144,7 @@ export class AuthEffects implements OnInitEffects {
     { dispatch: false }
   );
 
+  /*
   manualSignIn$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(
@@ -123,6 +170,7 @@ export class AuthEffects implements OnInitEffects {
       )
     );
   });
+*/
 
   signIn$ = createEffect(
     () => {
@@ -226,44 +274,10 @@ export class AuthEffects implements OnInitEffects {
     );
   });
 
-  aaaSignInRedirect$ = createEffect(
-    () => {
-      return this.actions$.pipe(
-        ofType(AuthApiActions.manualSignInHaveFirebaseUser),
-        concatMap((action) =>
-          of(action).pipe(
-            withLatestFrom(
-              this.store.select(selectQueryParam('return')),
-              this.store.select(selectIsAutoSignIn)
-            ),
-            tap(([_, returnUrl, isAutoSignIn]) => {
-              console.log(
-                'aaaRedirect$:returnUrl,isAutoSignIn>',
-                returnUrl,
-                isAutoSignIn
-              );
-              if (returnUrl) {
-                // this.router.navigateByUrl(returnUrl);
-              } else {
-                /*
-                if (!isAutoSignIn) {
-                  // Manual sign in with no return url.
-                  this.router.navigateByUrl('/');
-                }
-*/
-              }
-            })
-          )
-        )
-      );
-    },
-    { dispatch: false }
-  );
-
   haveAppUser$ = createEffect(
     () => {
       return this.actions$.pipe(
-        ofType(AuthApiActions.haveAppUser),
+        ofType(AuthApiActions.signInHaveUser),
         concatMap((action) =>
           of(action).pipe(
             withLatestFrom(
@@ -307,12 +321,13 @@ export class AuthEffects implements OnInitEffects {
   constructor(
     private actions$: Actions,
     private afAuth: AngularFireAuth,
+    private authService: AuthService,
     private router: Router,
     private dialog: MatDialog,
     private store: Store<{}>
   ) {}
 
   ngrxOnInitEffects(): Action {
-    return AuthApiActions.autoSignIn();
+    return AuthApiActions.autoSignInCheck();
   }
 }
