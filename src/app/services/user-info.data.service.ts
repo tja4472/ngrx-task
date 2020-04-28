@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 import { AngularFirestore } from '@angular/fire/firestore';
 
-import { from, Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 
 import { EnvironmentService } from '@app/core/environment.service';
@@ -17,12 +17,8 @@ export interface FirestoreDoc {
   todoListId: string;
 }
 
-export const fromFirestoreDoc = (x: FirestoreDoc | null): UserInfo | null => {
+export const fromFirestoreDoc = (x: FirestoreDoc): UserInfo => {
   //
-  if (x == null) {
-    return null;
-  }
-
   const result: UserInfo = {
     todoListId: x.todoListId,
   };
@@ -105,11 +101,19 @@ export class UserInfoDataService {
   }
   */
 
-  public getItem$(userId: string): Observable<UserInfo | null> {
+  // Need to throw error if doc is undefined.
+  public getItem$(userId: string): Observable<UserInfo> {
     //
     return this.firestoreDocument(userId)
       .valueChanges()
-      .pipe(map((item) => fromFirestoreDoc(item)));
+      .pipe(
+        map((item) => {
+          if (item === undefined) {
+            throw new Error('UserInfo undefined');
+          }
+          return fromFirestoreDoc(item);
+        })
+      );
   }
 
   public save(item: UserInfo, userId: string): Promise<void> {

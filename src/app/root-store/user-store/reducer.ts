@@ -1,6 +1,7 @@
 import { Action, createReducer } from '@ngrx/store';
 
 import { AuthApiActions } from '@app/auth/actions';
+import { SidenavActions } from '@app/core/components/sidenav/actions';
 
 import * as featureActions from './actions';
 import { initialState, State } from './state';
@@ -38,7 +39,7 @@ export const reducer = createReducer(
     state.taskListId = taskListId;
   }),
   */
-  mutableOn(featureActions.setTaskListId, (state, { taskListId }) => {
+  mutableOn(SidenavActions.selectTaskListId, (state, { taskListId }) => {
     /*
     const values: State = { ...state, taskListId };
     return values;

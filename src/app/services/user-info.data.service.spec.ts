@@ -13,10 +13,11 @@ import {
 } from '@app/services/user-info.data.service';
 
 describe('Conversion functions', () => {
+  /*
   it('#fromFirestoreDoc should return null', () => {
     expect(fromFirestoreDoc(null)).toEqual(null);
   });
-
+*/
   it('#fromFirestoreDoc should return UserInfo', () => {
     const expectedUserInfo: UserInfo = { todoListId: 'TODO_LIST_ID' };
     const firestoreDoc: FirestoreDoc = { todoListId: 'TODO_LIST_ID' };

@@ -7,6 +7,7 @@ import { from, of } from 'rxjs';
 import { concatMap, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 
 import { AuthApiActions } from '@app/auth/actions';
+import { SidenavActions } from '@app/core/components/sidenav/actions';
 import { UserInfoDataService } from '@app/services/user-info.data.service';
 
 import * as featureActions from './actions';
@@ -37,7 +38,7 @@ export class UserStoreEffects {
   setUserListId$ = createEffect(
     () => {
       return this.actions$.pipe(
-        ofType(featureActions.setTaskListId),
+        ofType(SidenavActions.selectTaskListId),
         concatMap((action) =>
           of(action).pipe(
             withLatestFrom(this.store.select(featureSelectors.selectUser))

@@ -53,6 +53,13 @@ effectDispatchFalse$ = createEffect(
 );
 ======================================= */
 
+// Infer type guard => array.filter(x => !!x) should refine Array<T|null> to Array<T>
+// https://github.com/microsoft/TypeScript/issues/16069#issuecomment-565658443
+// https://www.npmjs.com/package/ts-is-present
+function isPresent<T>(t: T | undefined | null | void): t is T {
+  return t !== undefined && t !== null;
+}
+
 @Injectable()
 export class AuthEffects implements OnInitEffects {
   // With enablePersistence the first result will be from
@@ -79,7 +86,8 @@ export class AuthEffects implements OnInitEffects {
       switchMap(() =>
         this.authService.appUser$.pipe(
           first(),
-          filter((appUser) => appUser !== null),
+          // filter((appUser) => appUser !== null),
+          filter(isPresent),
           map((appUser) => {
             return AuthApiActions.signInHaveUser({
               appUser,
@@ -112,7 +120,8 @@ export class AuthEffects implements OnInitEffects {
       switchMap(() =>
         this.authService.appUser$.pipe(
           skip(1),
-          filter((appUser) => appUser !== null),
+          // filter((appUser) => appUser !== null),
+          filter(isPresent),
           map((appUser) => {
             return AuthApiActions.signInHaveUser({
               appUser,

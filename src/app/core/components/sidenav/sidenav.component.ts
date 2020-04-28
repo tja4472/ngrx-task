@@ -16,6 +16,8 @@ import {
   UserStoreSelectors,
 } from '@app/root-store/user-store';
 
+import { SidenavActions } from './actions';
+
 @Component({
   selector: 'app-sidenav',
   templateUrl: './sidenav.component.html',
@@ -73,10 +75,8 @@ export class SidenavComponent {
   }
 
   public viewtodoListsSelectChange(todoListId: any): void {
-    // console.log('todoListId>', todoListId.value);
-    // this.userService.SetTodoListId(todoListId);
     this.store.dispatch(
-      UserStoreActions.setTaskListId({ taskListId: todoListId.value })
+      SidenavActions.selectTaskListId({ taskListId: todoListId.value })
     );
   }
 }
