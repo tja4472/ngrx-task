@@ -37,7 +37,6 @@ export class AuthService {
                 taskListId: userInfo.todoListId,
                 uid: user.uid,
                 email: user.email,
-                displayName: user.displayName,
               };
               return result;
             })

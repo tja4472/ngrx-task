@@ -51,7 +51,6 @@ export const reducer = createReducer(
     state.user = {
       email: appUser.email,
       id: appUser.uid,
-      name: appUser.displayName,
     };
     state.taskListId = appUser.taskListId;
   })
