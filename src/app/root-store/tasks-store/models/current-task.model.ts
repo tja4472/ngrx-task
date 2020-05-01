@@ -1,5 +1,5 @@
 export interface CurrentTask {
-  readonly description?: string;
+  readonly description: string | null;
   readonly id: string;
   readonly index: number;
   readonly isComplete: boolean;
@@ -9,7 +9,7 @@ export interface CurrentTask {
 
 export function newCurrentTask(): CurrentTask {
   return {
-    description: '',
+    description: null,
     id: '',
     index: 0,
     isComplete: false,

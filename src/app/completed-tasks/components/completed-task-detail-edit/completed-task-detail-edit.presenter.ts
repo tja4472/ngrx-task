@@ -16,7 +16,7 @@ import { CompletedTask } from '@app/root-store/tasks-store/models';
 
 interface Model {
   name: string;
-  description: string;
+  description: string | null;
   isComplete: boolean;
 }
 

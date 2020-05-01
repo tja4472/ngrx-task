@@ -56,7 +56,7 @@ export const selectCompletedTasksQueried = createSelector(
     }
 
     const result = tasks.filter((task) => {
-      if (task.description === undefined) {
+      if (task.description === null) {
         return task.name.toLowerCase().includes(query);
       } else {
         return (

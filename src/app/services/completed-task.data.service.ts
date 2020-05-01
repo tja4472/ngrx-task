@@ -15,7 +15,7 @@ const USERS_COLLECTION = 'users';
 
 interface FirestoreDoc {
   id: string;
-  description?: string;
+  description: string | null;
   name: string;
   isComplete: boolean;
   completedTimestamp: number;

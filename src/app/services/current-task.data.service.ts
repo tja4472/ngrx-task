@@ -12,7 +12,7 @@ const USERS_COLLECTION = 'users';
 
 interface FirestoreDoc {
   id: string;
-  description?: string;
+  description: string | null;
   index: number;
   name: string;
   isComplete: boolean;

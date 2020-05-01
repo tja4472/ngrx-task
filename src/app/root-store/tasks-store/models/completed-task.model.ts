@@ -1,6 +1,6 @@
 export interface CompletedTask {
   readonly id: string;
-  readonly description?: string;
+  readonly description: string | null;
   readonly isComplete: boolean;
   readonly completedTimestamp: number;
   readonly name: string;
@@ -9,7 +9,7 @@ export interface CompletedTask {
 
 export function newCompletedTask(): CompletedTask {
   return {
-    description: '',
+    description: null,
     id: '',
     isComplete: true,
     completedTimestamp: Date.now(),

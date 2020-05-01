@@ -1,5 +1,10 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -15,11 +20,24 @@ export class CurrentTaskDetailEditPresenter implements OnDestroy {
 
   initialData: CurrentTask;
 
-  get completedTimestampControl() {
-    return this.form.get('completedTimestamp');
+  get completedTimestampControl(): AbstractControl {
+    const result = this.form.get('completedTimestamp');
+
+    if (result === null) {
+      throw new Error('completedTimestamp AbstractControl is null');
+    }
+
+    return result;
   }
-  get isCompleteControl() {
-    return this.form.get('isComplete');
+
+  get isCompleteControl(): AbstractControl {
+    const result = this.form.get('isComplete');
+
+    if (result === null) {
+      throw new Error('isComplete AbstractControl is null');
+    }
+
+    return result;
   }
 
   private unsubscribe: Subject<void> = new Subject();

@@ -15,7 +15,7 @@ import { TaskSelectors } from '@app/root-store/tasks-store/selectors';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CompletedTaskDetailEditPageComponent implements OnInit {
-  task$: Observable<CompletedTask>;
+  task$: Observable<CompletedTask | undefined>;
 
   constructor(private store: Store<{}>) {
     this.task$ = store.pipe(select(TaskSelectors.selectCompletedTaskFromRoute));
