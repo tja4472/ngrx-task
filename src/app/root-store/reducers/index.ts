@@ -43,6 +43,9 @@ export function logger(
 export function flush(reducer: any) {
   // tslint:disable-next-line: only-arrow-functions
   return function (state: fromAuth.AuthRootState | undefined, action: Action) {
+    if (state === undefined) {
+      return reducer(state, action);
+    }
     if (action.type === AuthActions.signOutComplete.type) {
       return reducer(
         { authFeature: state.authFeature, router: state.router },

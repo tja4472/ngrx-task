@@ -3,7 +3,7 @@ export interface CurrentTask {
   readonly id: string;
   readonly index: number;
   readonly isComplete: boolean;
-  readonly completedTimestamp: number;
+  readonly completedTimestamp: number | null;
   readonly name: string;
 }
 
@@ -23,7 +23,7 @@ export function toggleIsComplete(
   newIsCompleteValue: boolean
 ): CurrentTask {
   let isComplete: boolean;
-  let completedTimestamp: number;
+  let completedTimestamp: number | null;
 
   if (newIsCompleteValue) {
     isComplete = true;
@@ -38,9 +38,9 @@ export function toggleIsComplete(
   return updatedTask;
 }
 
-export function getCompletedTimestamp(isComplete: boolean): number {
+export function getCompletedTimestamp(isComplete: boolean): number | null {
   //
-  let completedTimestamp: number = null;
+  let completedTimestamp: number | null = null;
 
   if (isComplete) {
     completedTimestamp = Date.now();

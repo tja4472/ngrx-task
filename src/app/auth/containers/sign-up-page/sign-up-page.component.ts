@@ -15,7 +15,7 @@ import { SignUpPageSelectors } from '@app/auth/selectors';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignUpPageComponent implements OnInit {
-  error$: Observable<string>;
+  error$: Observable<string | null>;
   pending$: Observable<boolean>;
 
   constructor(private store: Store<{}>) {

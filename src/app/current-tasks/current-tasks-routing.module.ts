@@ -10,6 +10,7 @@ import {
   CurrentTasksPageComponent,
   CurrentTasksRootComponent,
 } from './containers';
+import { CurrentTaskDetailEditPageComponentGuard } from './guards';
 
 const routes: Routes = [
   {
@@ -24,6 +25,7 @@ const routes: Routes = [
       {
         path: 'edit/:id',
         component: CurrentTaskDetailEditPageComponent,
+        canActivate: [CurrentTaskDetailEditPageComponentGuard],
       },
       {
         path: 'new',

@@ -7,7 +7,7 @@ export const authReducerKey = 'auth';
 export interface AuthState {
   hasChecked: boolean;
   isAutoSignIn: boolean;
-  userId: string;
+  userId: string | null;
 }
 
 export const initialState: AuthState = {

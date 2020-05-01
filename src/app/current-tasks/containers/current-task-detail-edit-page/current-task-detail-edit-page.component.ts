@@ -17,8 +17,20 @@ import { TaskSelectors } from '@app/root-store/tasks-store/selectors';
 export class CurrentTaskDetailEditPageComponent implements OnInit {
   task$: Observable<CurrentTask>;
 
+  // what to do if task is null ?
+  // show 404: not found
+  // dispatch action task not found.
   constructor(private store: Store<{}>) {
-    this.task$ = store.pipe(select(TaskSelectors.selectCurrentTaskFromRoute));
+    // The undefined task is caught by guard.
+    this.task$ = store.pipe(
+      select(TaskSelectors.selectCurrentTaskFromRoute)
+    ) as Observable<CurrentTask>;
+
+    const subscribe = store
+      .pipe(select(TaskSelectors.selectCurrentTaskFromRoute))
+      .subscribe((x) => {
+        console.log('SSSSS>', x);
+      });
   }
 
   ngOnInit() {}

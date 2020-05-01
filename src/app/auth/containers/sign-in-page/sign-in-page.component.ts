@@ -15,7 +15,7 @@ import { SignInPageSelectors } from '@app/auth/selectors';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignInPageComponent implements OnInit {
-  error$: Observable<string>;
+  error$: Observable<string | null>;
   pending$: Observable<boolean>;
 
   constructor(private store: Store<{}>) {
