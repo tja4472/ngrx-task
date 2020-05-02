@@ -4,6 +4,7 @@ import { select, Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
 
+import { RootState } from '@app/root-store/reducers';
 import { CurrentTaskDetailEditPageActions } from '@app/root-store/tasks-store/actions';
 import { CurrentTask } from '@app/root-store/tasks-store/models';
 import { TaskSelectors } from '@app/root-store/tasks-store/selectors';
@@ -20,7 +21,7 @@ export class CurrentTaskDetailEditPageComponent implements OnInit {
   // what to do if task is null ?
   // show 404: not found
   // dispatch action task not found.
-  constructor(private store: Store<{}>) {
+  constructor(private store: Store<RootState>) {
     // The undefined task is caught by guard.
     this.task$ = store.pipe(
       select(TaskSelectors.selectCurrentTaskFromRoute)

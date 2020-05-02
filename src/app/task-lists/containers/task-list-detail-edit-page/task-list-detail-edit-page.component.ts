@@ -4,6 +4,7 @@ import { select, Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
 
+import { RootState } from '@app/root-store/reducers';
 import { TaskListDetailEditPageActions } from '@app/root-store/tasks-store/actions';
 import { TaskListListItem } from '@app/root-store/tasks-store/models';
 import { TaskSelectors } from '@app/root-store/tasks-store/selectors';
@@ -17,7 +18,7 @@ import { TaskSelectors } from '@app/root-store/tasks-store/selectors';
 export class TaskListDetailEditPageComponent implements OnInit {
   task$: Observable<TaskListListItem | undefined>;
 
-  constructor(private store: Store<{}>) {
+  constructor(private store: Store<RootState>) {
     this.task$ = store.pipe(select(TaskSelectors.selectTaskListFromRoute));
   }
 

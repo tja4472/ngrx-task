@@ -4,6 +4,7 @@ import { select, Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
 
+import { RootState } from '@app/root-store/reducers';
 import { CompletedTaskDetailEditPageActions } from '@app/root-store/tasks-store/actions';
 import { CompletedTask } from '@app/root-store/tasks-store/models';
 import { TaskSelectors } from '@app/root-store/tasks-store/selectors';
@@ -17,7 +18,7 @@ import { TaskSelectors } from '@app/root-store/tasks-store/selectors';
 export class CompletedTaskDetailEditPageComponent implements OnInit {
   task$: Observable<CompletedTask | undefined>;
 
-  constructor(private store: Store<{}>) {
+  constructor(private store: Store<RootState>) {
     this.task$ = store.pipe(select(TaskSelectors.selectCompletedTaskFromRoute));
   }
 

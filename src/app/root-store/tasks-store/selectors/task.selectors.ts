@@ -4,7 +4,7 @@ import {
   MemoizedSelector,
 } from '@ngrx/store';
 
-import { selectRouteId } from '@app/root-store/reducers';
+import { RootState, selectRouteId } from '@app/root-store/reducers';
 
 import {
   CompletedTask,
@@ -88,7 +88,7 @@ export const selectCurrentTasksLoaded = createSelector(
 // #endregion
 
 export const selectCompletedTaskFromRoute: MemoizedSelector<
-  object,
+  RootState,
   CompletedTask | undefined
 > = createSelector(selectCompletedTasksEntities, selectRouteId, (tasks, id) => {
   if (id === undefined) {
@@ -98,7 +98,7 @@ export const selectCompletedTaskFromRoute: MemoizedSelector<
 });
 
 export const selectCurrentTaskFromRoute: MemoizedSelector<
-  object,
+  RootState,
   CurrentTask | undefined
 > = createSelector(selectCurrentTasksEntities, selectRouteId, (tasks, id) => {
   if (id === undefined) {
@@ -108,7 +108,7 @@ export const selectCurrentTaskFromRoute: MemoizedSelector<
 });
 
 export const selectTaskListFromRoute: MemoizedSelector<
-  object,
+  RootState,
   TaskListListItem | undefined
 > = createSelector(selectEntities, selectRouteId, (taskLists, id) => {
   if (id === undefined) {

@@ -21,12 +21,16 @@ import { AuthService } from '@app/auth/services/auth.service';
 import { UserStoreSelectors } from '@app/root-store/user-store';
 
 import { AuthGuardServiceActions } from '../actions';
+import { AuthRootState } from '../reducers';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuardService implements CanActivate {
-  constructor(private authService: AuthService, private store: Store<{}>) {}
+  constructor(
+    private authService: AuthService,
+    private store: Store<AuthRootState>
+  ) {}
 
   // https://angular.io/guide/router#canactivate-requiring-authentication
   /*

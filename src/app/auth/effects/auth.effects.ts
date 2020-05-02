@@ -30,6 +30,7 @@ import {
 import { selectQueryParam } from '@app/root-store/reducers';
 
 import { SignoutConfirmationDialogComponent } from '../components/signout-confirmation-dialog/signout-confirmation-dialog.component';
+import { AuthRootState } from '../reducers';
 import { selectIsAutoSignIn, selectUserId } from '../selectors/auth.selectors';
 import { AuthService } from '../services/auth.service';
 
@@ -333,7 +334,7 @@ export class AuthEffects implements OnInitEffects {
     private authService: AuthService,
     private router: Router,
     private dialog: MatDialog,
-    private store: Store<{}>
+    private store: Store<AuthRootState>
   ) {}
 
   ngrxOnInitEffects(): Action {

@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 
 import { SignUpPageActions } from '@app/auth/actions';
 import { Credentials } from '@app/auth/models/credentials.model';
+import { AuthRootState } from '@app/auth/reducers';
 import { SignUpPageSelectors } from '@app/auth/selectors';
 
 @Component({
@@ -18,7 +19,7 @@ export class SignUpPageComponent implements OnInit {
   error$: Observable<string | null>;
   pending$: Observable<boolean>;
 
-  constructor(private store: Store<{}>) {
+  constructor(private store: Store<AuthRootState>) {
     this.error$ = store.pipe(select(SignUpPageSelectors.selectSignUpPageError));
     this.pending$ = store.pipe(
       select(SignUpPageSelectors.selectSignUpPagePending)

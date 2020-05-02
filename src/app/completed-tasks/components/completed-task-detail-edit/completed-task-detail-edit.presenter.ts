@@ -51,7 +51,7 @@ export class CompletedTaskDetailEditPresenter {
 
   form = typedFormGroup<Model>({
     name: typedFormControl<string>('', Validators.required),
-    description: typedFormControl<string>(),
+    description: typedFormControl<string | null>(),
     isComplete: typedFormControl<boolean>(),
   });
 

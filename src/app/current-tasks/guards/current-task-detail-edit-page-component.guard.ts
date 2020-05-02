@@ -6,6 +6,7 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { filter, map, switchMap, take, tap } from 'rxjs/operators';
 
+import { RootState } from '@app/root-store/reducers';
 import { TaskSelectors } from '@app/root-store/tasks-store/selectors';
 
 import { CurrentTaskDetailEditPageComponentGuardActions } from '../actions';
@@ -16,7 +17,7 @@ import { CurrentTaskDetailEditPageComponentGuardActions } from '../actions';
   providedIn: 'root',
 })
 export class CurrentTaskDetailEditPageComponentGuard implements CanActivate {
-  constructor(private store: Store<{}>, private router: Router) {}
+  constructor(private store: Store<RootState>, private router: Router) {}
 
   /*
   canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {

@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 
 import { SignInPageActions } from '@app/auth/actions';
 import { Credentials } from '@app/auth/models/credentials.model';
+import { AuthRootState } from '@app/auth/reducers';
 import { SignInPageSelectors } from '@app/auth/selectors';
 
 @Component({
@@ -18,7 +19,7 @@ export class SignInPageComponent implements OnInit {
   error$: Observable<string | null>;
   pending$: Observable<boolean>;
 
-  constructor(private store: Store<{}>) {
+  constructor(private store: Store<AuthRootState>) {
     this.error$ = store.pipe(select(SignInPageSelectors.selectSignInPageError));
     this.pending$ = store.pipe(
       select(SignInPageSelectors.selectSignInPagePending)
