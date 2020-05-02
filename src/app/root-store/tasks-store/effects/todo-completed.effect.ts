@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 
+import { of } from 'rxjs';
 import { map, switchMap, takeUntil } from 'rxjs/operators';
 
 import { UserStoreSelectors } from '@app/root-store/user-store';
@@ -42,9 +43,13 @@ export class TodoCompletedEffects {
       ofType(CompletedTasksRootGuardServiceActions.loadData),
       switchMap(() =>
         this.store.select(UserStoreSelectors.selectUserAndTaskListId).pipe(
-          switchMap(({ user, taskListId }) =>
-            this.dataService.getData(taskListId, user.id)
-          ),
+          switchMap((a) => {
+            if (a === null || a.taskListId === null) {
+              const result: CompletedTask[] = [];
+              return of(result);
+            }
+            return this.dataService.getData(a.taskListId, a.user.id);
+          }),
           takeUntil(
             this.actions$.pipe(ofType(CompletedTasksRootActions.destroyed))
           )

@@ -63,13 +63,16 @@ export class TaskListEffects {
       ),
       map(([_, user]) => user),
       filter((user) => user !== null),
-      switchMap((user) =>
-        this.dataService
+      switchMap((user) => {
+        if (user == null) {
+          return of([]);
+        }
+        return this.dataService
           .getData(user.id)
           .pipe(
             takeUntil(this.actions$.pipe(ofType(AuthActions.signOutComplete)))
-          )
-      ),
+          );
+      }),
       map((items) => featureActions.loadSuccess({ items }))
     );
   });

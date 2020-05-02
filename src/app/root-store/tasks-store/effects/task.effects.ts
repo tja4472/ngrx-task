@@ -61,11 +61,15 @@ export class TaskEffects {
             )
           )
         ),
-        tap(([action, { user, taskListId }]) => {
+        tap(([action, a]) => {
+          if (a === null || a.taskListId === null) {
+            return;
+          }
+
           this.todoCompletedDataService.removeItem(
             action.completedTask.id,
-            taskListId,
-            user.id
+            a.taskListId,
+            a.user.id
           );
         })
       );
@@ -84,11 +88,15 @@ export class TaskEffects {
             )
           )
         ),
-        tap(([action, { user, taskListId }]) => {
+        tap(([action, a]) => {
+          if (a === null || a.taskListId === null) {
+            return;
+          }
+
           this.todoCompletedDataService.save(
             action.completedTask,
-            taskListId,
-            user.id
+            a.taskListId,
+            a.user.id
           );
         })
       );
@@ -120,6 +128,10 @@ export class TaskEffects {
           )
         ),
         tap(([action, user]) => {
+          if (user === null) {
+            return;
+          }
+
           this.todoListsDataService.removeItem(action.taskList.id, user.id);
         })
       );
@@ -137,6 +149,9 @@ export class TaskEffects {
           )
         ),
         tap(([action, user]) => {
+          if (user === null) {
+            return;
+          }
           this.todoListsDataService.save(action.taskList, user.id);
         })
       );
@@ -154,6 +169,9 @@ export class TaskEffects {
           )
         ),
         tap(([action, user]) => {
+          if (user === null) {
+            return;
+          }
           this.todoListsDataService.save(action.taskList, user.id);
         })
       );
@@ -174,13 +192,16 @@ export class TaskEffects {
             )
           )
         ),
-        tap(([action, { user, taskListId }, tasks]) => {
+        tap(([action, a, tasks]) => {
+          if (a === null || a.taskListId === null) {
+            return;
+          }
           const completedTasks = tasks.filter((t) => t.isComplete);
 
           this.fb1DataService.clearCompletedTodos(
             completedTasks,
-            taskListId,
-            user.id
+            a.taskListId,
+            a.user.id
           );
         })
       );
@@ -199,11 +220,15 @@ export class TaskEffects {
             )
           )
         ),
-        tap(([action, { user, taskListId }]) => {
+        tap(([action, a]) => {
+          if (a === null || a.taskListId === null) {
+            return;
+          }
+
           this.fb1DataService.moveToCurrent(
             action.todoCompleted,
-            taskListId,
-            user.id
+            a.taskListId,
+            a.user.id
           );
         })
       );
@@ -298,11 +323,15 @@ export class TaskEffects {
           )
         ),
 
-        tap(([action, { user, taskListId }]) => {
+        tap(([action, a]) => {
+          if (a === null || a.taskListId === null) {
+            return;
+          }
+
           this.todoDataService.removeItem(
             action.currentTask.id,
-            taskListId,
-            user.id
+            a.taskListId,
+            a.user.id
           );
         })
       );
@@ -326,8 +355,16 @@ export class TaskEffects {
             )
           )
         ),
-        tap(([action, { user, taskListId }]) => {
-          this.todoDataService.save(action.currentTask, taskListId, user.id);
+        tap(([action, a]) => {
+          if (a === null || a.taskListId === null) {
+            return;
+          }
+
+          this.todoDataService.save(
+            action.currentTask,
+            a.taskListId,
+            a.user.id
+          );
         })
       );
     },

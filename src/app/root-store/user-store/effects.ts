@@ -47,7 +47,9 @@ export class UserStoreEffects {
         tap(([action, user]) => {
           const saveUser = { ...user, todoListId: action.taskListId };
 
-          this.userInfoDataService.save(saveUser, user.id);
+          if (user !== null) {
+            this.userInfoDataService.save(saveUser, user.id);
+          }
         })
       );
     },

@@ -50,9 +50,13 @@ export class TodoEffects {
       ofType(CurrentTasksRootGuardServiceActions.loadData),
       switchMap(() =>
         this.store.select(UserStoreSelectors.selectUserAndTaskListId).pipe(
-          switchMap(({ user, taskListId }) =>
-            this.dataService.getData$(taskListId, user.id)
-          ),
+          switchMap((a) => {
+            if (a === null || a.taskListId === null) {
+              const result: CurrentTask[] = [];
+              return of(result);
+            }
+            return this.dataService.getData$(a.taskListId, a.user.id);
+          }),
           takeUntil(
             this.actions$.pipe(ofType(CurrentTasksRootActions.destroyed))
           )
@@ -75,8 +79,11 @@ export class TodoEffects {
             )
           )
         ),
-        tap(([action, { user, taskListId }]) => {
-          this.dataService.reorderItems(action.ids, taskListId, user.id);
+        tap(([action, a]) => {
+          if (a === null || a.taskListId === null) {
+            return;
+          }
+          this.dataService.reorderItems(action.ids, a.taskListId, a.user.id);
         })
       );
     },

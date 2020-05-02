@@ -15,7 +15,7 @@ import { TaskSelectors } from '@app/root-store/tasks-store/selectors';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TaskListDetailEditPageComponent implements OnInit {
-  task$: Observable<TaskListListItem>;
+  task$: Observable<TaskListListItem | undefined>;
 
   constructor(private store: Store<{}>) {
     this.task$ = store.pipe(select(TaskSelectors.selectTaskListFromRoute));

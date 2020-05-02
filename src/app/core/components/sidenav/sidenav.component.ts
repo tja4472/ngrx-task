@@ -41,7 +41,7 @@ export class SidenavComponent {
     { link: '/tasks/lists', label: 'Task Lists Page' },
   ];
 
-  view$: Observable<{ user: User; taskListId: string } | null>;
+  view$: Observable<{ user: User; taskListId: string | null } | null>;
   selected = 'Cn7vwq2PCR6uj2u5nw3d';
   taskLists$: Observable<TaskListListItem[]>;
 

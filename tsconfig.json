@@ -20,12 +20,13 @@
     "noImplicitThis": true,
     "alwaysStrict": true,
     "strictBindCallApply": true,
-    "strictNullChecks": false,
+    "strictNullChecks": true,
     "strictFunctionTypes": false,
     "strictPropertyInitialization": false
   },
   "angularCompilerOptions": {
     "strictTemplates": true,
+    "strictNullInputTypes": false,
     "strictInjectionParameters": true
   }
 }

@@ -16,7 +16,7 @@ interface FirestoreDoc {
   index: number;
   name: string;
   isComplete: boolean;
-  completedTimestamp: number;
+  completedTimestamp: number | null;
 }
 
 @Injectable({

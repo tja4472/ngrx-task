@@ -26,6 +26,9 @@ export class Fb1DataService {
   ) {
     //
     items.map((x: CurrentTask) => {
+      if (x.completedTimestamp === null) {
+        throw new Error('completedTimestamp is null');
+      }
       const todoCompleted: CompletedTask = {
         ...newCompletedTask(),
         description: x.description,

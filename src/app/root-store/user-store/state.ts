@@ -1,8 +1,8 @@
 import { User } from '@app/models';
 
 export interface State {
-  user: User;
-  taskListId: string;
+  user: User | null;
+  taskListId: string | null;
 }
 
 export const initialState: State = {
