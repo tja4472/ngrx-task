@@ -2,12 +2,15 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 import { select, Store } from '@ngrx/store';
 
-import { Observable } from 'rxjs';
+import { Observable, pipe } from 'rxjs';
+import { filter } from 'rxjs/operators';
 
 import { RootState } from '@app/root-store/reducers';
 import { CurrentTaskDetailEditPageActions } from '@app/root-store/tasks-store/actions';
 import { CurrentTask } from '@app/root-store/tasks-store/models';
 import { TaskSelectors } from '@app/root-store/tasks-store/selectors';
+
+import { isPresent } from 'ts-is-present';
 
 @Component({
   selector: 'app-current-task-detail-edit-page',
@@ -18,20 +21,14 @@ import { TaskSelectors } from '@app/root-store/tasks-store/selectors';
 export class CurrentTaskDetailEditPageComponent implements OnInit {
   task$: Observable<CurrentTask>;
 
-  // what to do if task is null ?
-  // show 404: not found
-  // dispatch action task not found.
   constructor(private store: Store<RootState>) {
-    // The undefined task is caught by guard.
+    // The undefined task is caught by route guard.
     this.task$ = store.pipe(
-      select(TaskSelectors.selectCurrentTaskFromRoute)
-    ) as Observable<CurrentTask>;
-
-    const subscribe = store
-      .pipe(select(TaskSelectors.selectCurrentTaskFromRoute))
-      .subscribe((x) => {
-        console.log('SSSSS>', x);
-      });
+      select(TaskSelectors.selectCurrentTaskFromRoute),
+      // Typescript type guard does not work here, so use isPresent.
+      // https://github.com/microsoft/TypeScript/issues/16069#issuecomment-565658443
+      filter(isPresent)
+    );
   }
 
   ngOnInit() {}

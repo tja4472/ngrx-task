@@ -34,6 +34,8 @@ import { AuthRootState } from '../reducers';
 import { selectIsAutoSignIn, selectUserId } from '../selectors/auth.selectors';
 import { AuthService } from '../services/auth.service';
 
+import { isPresent } from 'ts-is-present';
+
 /* =======================================
 Improve typings of createEffect, help debugging
 https://github.com/ngrx/platform/issues/2192
@@ -53,13 +55,6 @@ effectDispatchFalse$ = createEffect(
   { dispatch: false }
 );
 ======================================= */
-
-// Infer type guard => array.filter(x => !!x) should refine Array<T|null> to Array<T>
-// https://github.com/microsoft/TypeScript/issues/16069#issuecomment-565658443
-// https://www.npmjs.com/package/ts-is-present
-function isPresent<T>(t: T | undefined | null | void): t is T {
-  return t !== undefined && t !== null;
-}
 
 @Injectable()
 export class AuthEffects implements OnInitEffects {
@@ -87,7 +82,8 @@ export class AuthEffects implements OnInitEffects {
       switchMap(() =>
         this.authService.appUser$.pipe(
           first(),
-          // filter((appUser) => appUser !== null),
+          // Typescript type guard does not work here, so use isPresent.
+          // https://github.com/microsoft/TypeScript/issues/16069#issuecomment-565658443
           filter(isPresent),
           map((appUser) => {
             return AuthApiActions.signInHaveUser({
@@ -121,7 +117,8 @@ export class AuthEffects implements OnInitEffects {
       switchMap(() =>
         this.authService.appUser$.pipe(
           skip(1),
-          // filter((appUser) => appUser !== null),
+          // Typescript type guard does not work here, so use isPresent.
+          // https://github.com/microsoft/TypeScript/issues/16069#issuecomment-565658443
           filter(isPresent),
           map((appUser) => {
             return AuthApiActions.signInHaveUser({
