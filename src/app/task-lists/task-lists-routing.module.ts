@@ -9,6 +9,7 @@ import {
   TaskListsPageComponent,
   TaskListsRootComponent,
 } from './containers';
+import { TaskListDetailEditPageComponentGuard } from './guards';
 
 const routes: Routes = [
   {
@@ -23,6 +24,7 @@ const routes: Routes = [
       {
         path: 'edit/:id',
         component: TaskListDetailEditPageComponent,
+        canActivate: [TaskListDetailEditPageComponentGuard],
       },
       {
         path: 'new',

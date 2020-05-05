@@ -9,6 +9,7 @@ import {
   CompletedTasksPageComponent,
   CompletedTasksRootComponent,
 } from './containers';
+import { CompletedTaskDetailEditPageComponentGuard } from './guards';
 
 const routes: Routes = [
   {
@@ -23,6 +24,7 @@ const routes: Routes = [
       {
         path: 'edit/:id',
         component: CompletedTaskDetailEditPageComponent,
+        canActivate: [CompletedTaskDetailEditPageComponentGuard],
       },
     ],
   },
