@@ -1,17 +1,28 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router } from '@angular/router';
+import { CanActivate, Router } from '@angular/router';
 
 import { select, Store } from '@ngrx/store';
 
-import { Observable } from 'rxjs';
-import { filter, map, switchMap, take, tap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import {
+  catchError,
+  filter,
+  map,
+  switchMap,
+  take,
+  tap,
+  timeout,
+} from 'rxjs/operators';
 
 import { RootState } from '@app/root-store/reducers';
-import { TaskSelectors } from '@app/root-store/tasks-store/selectors';
+import {
+  TaskListSelectors,
+  TaskSelectors,
+} from '@app/root-store/tasks-store/selectors';
 
 import { TaskListDetailEditPageComponentGuardActions } from '../actions';
 
-// We don't want load component unless the task exists
+// We don't want load component unless the task list exists
 // in the Store.
 @Injectable({
   providedIn: 'root',
@@ -19,25 +30,22 @@ import { TaskListDetailEditPageComponentGuardActions } from '../actions';
 export class TaskListDetailEditPageComponentGuard implements CanActivate {
   constructor(private store: Store<RootState>, private router: Router) {}
 
-  /*
-  canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {
-    return this.waitForCurrentTasksToLoad().pipe(
-      switchMap(() => this.hasCurrentTask())
+  canActivate(): Observable<boolean> {
+    return this.waitForTaskListsToLoad().pipe(
+      timeout(5000),
+      switchMap(() => {
+        return this.hasTaskListInStore();
+      }),
+      catchError((err) => of(false))
     );
   }
-*/
-  canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {
-    return this.hasTaskList();
-  }
 
-  private hasTaskList(): Observable<boolean> {
+  private hasTaskListInStore(): Observable<boolean> {
     return this.store.pipe(
       select(TaskSelectors.selectTaskListFromRoute),
       map((todo) => todo !== undefined),
       tap((x) => {
         if (x === false) {
-          // throw action Current Task not found
-          console.log('hasTaskList>', x);
           this.store.dispatch(
             TaskListDetailEditPageComponentGuardActions.taskListNotFound()
           );
@@ -48,9 +56,9 @@ export class TaskListDetailEditPageComponentGuard implements CanActivate {
     );
   }
 
-  private waitForCurrentTasksToLoad(): Observable<boolean> {
+  private waitForTaskListsToLoad(): Observable<boolean> {
     return this.store.pipe(
-      select(TaskSelectors.selectCurrentTasksLoaded),
+      select(TaskListSelectors.selectLoaded),
       filter((loaded) => loaded),
       take(1)
     );

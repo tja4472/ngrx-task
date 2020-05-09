@@ -6,6 +6,7 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { filter, map, switchMap, take } from 'rxjs/operators';
 
+import { RootState } from '@app/root-store/reducers';
 import {
   TaskListSelectors,
   TaskSelectors,
@@ -15,7 +16,7 @@ import {
   providedIn: 'root',
 })
 export class TaskListGuardService implements CanActivate {
-  constructor(private store: Store<{}>) {}
+  constructor(private store: Store<RootState>) {}
 
   canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {
     return this.waitForTaskListsToLoad().pipe(
