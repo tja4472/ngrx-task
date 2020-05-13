@@ -17,6 +17,5 @@
     "statusBar.border": "#807592",
     "titleBar.border": "#807592"
   },
-  "peacock.color": "#807592",
-  "typescript.preferences.renameShorthandProperties": false
+  "peacock.color": "#807592"
 }
