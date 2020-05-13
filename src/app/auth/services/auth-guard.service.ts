@@ -2,69 +2,54 @@ import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
   CanActivate,
-  Router,
+  CanLoad,
+  Route,
   RouterStateSnapshot,
 } from '@angular/router';
 
-import { AngularFireAuth } from '@angular/fire/auth';
-
 import { select, Store } from '@ngrx/store';
 
-import { Observable, of } from 'rxjs';
-import { catchError, exhaustMap, filter, map, take, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { exhaustMap, filter, map, take } from 'rxjs/operators';
 
-import {
-  selectHasChecked,
-  selectHasUser,
-} from '@app/auth/selectors/auth.selectors';
-import { AuthService } from '@app/auth/services/auth.service';
-import { UserStoreSelectors } from '@app/root-store/user-store';
-
+import { selectHasChecked, selectHasUser } from '..//selectors/auth.selectors';
 import { AuthGuardServiceActions } from '../actions';
 import { AuthRootState } from '../reducers';
+import { AuthService } from '../services/auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuardService implements CanActivate {
+export class AuthGuardService implements CanActivate, CanLoad {
   constructor(
     private authService: AuthService,
     private store: Store<AuthRootState>
   ) {}
 
-  // https://angular.io/guide/router#canactivate-requiring-authentication
-  /*
-  checkLogin(url: string): boolean {
-    if (this.authService.isLoggedIn) { return true; }
-
-    // Store the attempted URL for redirecting
-    this.authService.redirectUrl = url;
-
-    // Navigate to the login page with extras
-    this.router.navigate(['/login']);
-    return false;
-  }
-  */
-  canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+  canActivate(
+    next: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Observable<boolean> {
     //
-    // console.log('### AuthGuardService:canActivate');
-    const url: string = state.url;
-    // console.log('url>', url);
+    return this.checkAuth(state.url);
+  }
+
+  canLoad(route: Route): Observable<boolean> {
+    const url = `/${route.path}`;
+    return this.checkAuth(url);
+  }
+
+  private checkAuth(url: string) {
+    //
     this.authService.redirectUrl = url;
 
     return this.checkStoreAuthentication().pipe(
+      take(1),
       map((storeOrApiAuth) => {
         if (!storeOrApiAuth) {
-          // this.router.navigate(['/sign-in']);
-          // return false;
-          //
-          // https://juristr.com/blog/2018/11/better-route-guard-redirects/
-          // Angular version 7.1.0
-
-          // return this.router.parseUrl('/sign-in');
           this.store.dispatch(
             AuthGuardServiceActions.navigateToSignIn({
-              requestedUrl: state.url,
+              requestedUrl: url,
             })
           );
           return false;
@@ -75,7 +60,7 @@ export class AuthGuardService implements CanActivate {
     );
   }
 
-  checkStoreAuthentication() {
+  private checkStoreAuthentication() {
     //
     return this.store.pipe(
       select(selectHasChecked),
