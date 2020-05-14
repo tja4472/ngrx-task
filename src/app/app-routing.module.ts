@@ -23,6 +23,7 @@ const routes: Routes = [
     canLoad: [AuthGuardService, TaskListsGuard],
   },
 
+  { path: 'tasks', redirectTo: '/tasks/current', pathMatch: 'full' },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   {
     path: '**',
