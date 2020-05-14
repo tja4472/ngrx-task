@@ -11,11 +11,13 @@ const routes: Routes = [
     path: 'tasks/completed',
     loadChildren: () =>
       import('./completed-tasks').then((m) => m.CompletedTasksModule),
+    canLoad: [AuthGuardService],
   },
   {
     path: 'tasks/current',
     loadChildren: () =>
       import('./current-tasks').then((m) => m.CurrentTasksModule),
+    canLoad: [AuthGuardService],
   },
   {
     path: 'tasks/lists',
