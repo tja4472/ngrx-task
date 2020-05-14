@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1589462463991,
+  "timestamp": 1589464593703,
   "index": "/ngrx-task/index.html",
   "assetGroups": [
     {
@@ -82,7 +82,7 @@
     "/ngrx-task/index.html": "bc9acd7585a89f37773e47136c7e6834de8fab33",
     "/ngrx-task/main-es2015.2aeeaf15d336f2db458d.js": "812f6a703c0c63059cb4569df8c35d5d01906ecb",
     "/ngrx-task/main-es5.2aeeaf15d336f2db458d.js": "193379c5c9276902c821444efc417cd999c3a641",
-    "/ngrx-task/manifest.webmanifest": "9cedaf540a3edc5243f9a6f95de5301e5d2dc572",
+    "/ngrx-task/manifest.webmanifest": "c9c037106e3ba6a5e30cde48333c3e1eaad84abe",
     "/ngrx-task/polyfills-es2015.97d197cbed531238bd9e.js": "402d06d81e9c42091eb60be871155e0756f271a7",
     "/ngrx-task/polyfills-es5.aba29f167a90f2836303.js": "bd5bf8f945b923de414cf85fd8f4d0a6b1aaafc6",
     "/ngrx-task/runtime-es2015.3048fddfbb2d7e981d07.js": "5a727ec47be772fd87e77bb439614aeaf8b9a52b",
