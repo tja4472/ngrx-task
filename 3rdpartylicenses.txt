@@ -860,6 +860,9 @@ Apache-2.0
  
 
 
+ts-is-present
+MIT
+
 tslib
 Apache-2.0
 Apache License
