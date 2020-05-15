@@ -26,6 +26,8 @@ import { RootStoreModule } from './root-store';
     CoreModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
+      // Make work with Firebase
+      registrationStrategy: 'registerImmediately',
     }),
   ],
   bootstrap: [AppComponent],
