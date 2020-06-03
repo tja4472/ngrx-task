@@ -43,7 +43,7 @@
     "ngrx-etc": "4.1.0",
     "rxjs": "6.5.5",
     "ts-is-present": "1.1.1",
-    "tslib": "1.11.2",
+    "tslib": "1.13.0",
     "zone.js": "0.10.3"
   },
   "devDependencies": {
