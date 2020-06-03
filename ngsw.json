@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1591181069952,
+  "timestamp": 1591181688429,
   "index": "/ngrx-task/index.html",
   "assetGroups": [
     {
@@ -30,8 +30,8 @@
         "/ngrx-task/common-es5.3966c26190648ffb5523.js",
         "/ngrx-task/favicon.ico",
         "/ngrx-task/index.html",
-        "/ngrx-task/main-es2015.decc6c7d278ad16f64a7.js",
-        "/ngrx-task/main-es5.decc6c7d278ad16f64a7.js",
+        "/ngrx-task/main-es2015.55b00513963966032e7f.js",
+        "/ngrx-task/main-es5.55b00513963966032e7f.js",
         "/ngrx-task/manifest.webmanifest",
         "/ngrx-task/polyfills-es2015.eca58d98fd604d64f65d.js",
         "/ngrx-task/polyfills-es5.3644e01fec787c71c0de.js",
@@ -91,9 +91,9 @@
     "/ngrx-task/common-es2015.3966c26190648ffb5523.js": "8a352caea2254251f312d7411a57b4c525a0bf63",
     "/ngrx-task/common-es5.3966c26190648ffb5523.js": "534f0251a8a60953d06ef100370c83e9ad811017",
     "/ngrx-task/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
-    "/ngrx-task/index.html": "a236f5de58bbe81f79afad034b0dcd765b902431",
-    "/ngrx-task/main-es2015.decc6c7d278ad16f64a7.js": "50db2f13c1f9f1711ae8846548d883a3002d25cd",
-    "/ngrx-task/main-es5.decc6c7d278ad16f64a7.js": "ab59709ad8331d89dced25ef4d3e6d7a86641f4a",
+    "/ngrx-task/index.html": "1449c24eba9d3c3623748514ade703dbc3e3d944",
+    "/ngrx-task/main-es2015.55b00513963966032e7f.js": "50db2f13c1f9f1711ae8846548d883a3002d25cd",
+    "/ngrx-task/main-es5.55b00513963966032e7f.js": "ab59709ad8331d89dced25ef4d3e6d7a86641f4a",
     "/ngrx-task/manifest.webmanifest": "8c84248720bbce35eeb660d5a61d0ab487e5dc91",
     "/ngrx-task/polyfills-es2015.eca58d98fd604d64f65d.js": "c901d4eb52c4ad9104e1bb98e110adaf3f313980",
     "/ngrx-task/polyfills-es5.3644e01fec787c71c0de.js": "19f7e5ef2fd64a1682642430e9fb083df3e74dc6",
