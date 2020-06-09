@@ -13,6 +13,7 @@
         mat-raised-button
         color="accent"
         type="button"
+        [disabled]="this.viewForm.disabled"
         (click)="viewSignUpClick()"
       >
         Sign Up
@@ -31,11 +32,12 @@
               id="username"
               placeholder="User Name"
               formControlName="username"
+              required
             />
             <mat-error
               *ngIf="viewForm.controls['username'].hasError('required')"
             >
-              User Name is <strong>required</strong>
+              User Name is required
             </mat-error>
           </mat-form-field>
         </div>
@@ -49,11 +51,12 @@
               id="password"
               placeholder="Password"
               formControlName="password"
+              required
             />
             <mat-error
               *ngIf="viewForm.controls['password'].hasError('required')"
             >
-              Password is <strong>required</strong>
+              Password is required
             </mat-error>
           </mat-form-field>
         </div>
