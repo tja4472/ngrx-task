@@ -20,6 +20,7 @@ import {
   withLatestFrom,
 } from 'rxjs/operators';
 
+import { pathPrefix, routeNames } from '@app/app-route-names';
 import {
   AuthActions,
   AuthApiActions,
@@ -318,7 +319,7 @@ export class AuthEffects implements OnInitEffects {
       return this.actions$.pipe(
         ofType(SignInPageActions.showSignUpPage),
         tap(() => {
-          this.router.navigate(['/sign-up']);
+          this.router.navigate([pathPrefix + routeNames.signUp.path]);
         })
       );
     },

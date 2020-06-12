@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { routeNames } from '@app/app-route-names';
 import { AuthGuardService } from '@app/auth/services/auth-guard.service';
 
 import {
@@ -18,17 +19,20 @@ const routes: Routes = [
     canActivate: [AuthGuardService],
     children: [
       {
-        path: '',
-        component: TaskListsPageComponent,
-      },
-      {
-        path: 'edit/:id',
+        path:
+          routeNames.taskLists.edit.path +
+          '/:' +
+          routeNames.taskLists.edit.idParam,
         component: TaskListDetailEditPageComponent,
         canActivate: [TaskListDetailEditPageComponentGuard],
       },
       {
-        path: 'new',
+        path: routeNames.taskLists.new.path,
         component: TaskListDetailNewPageComponent,
+      },
+      {
+        path: '',
+        component: TaskListsPageComponent,
       },
     ],
   },

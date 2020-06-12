@@ -4,7 +4,12 @@ import {
   MemoizedSelector,
 } from '@ngrx/store';
 
-import { RootState, selectRouteId } from '@app/root-store/reducers';
+import { routeNames } from '@app/app-route-names';
+import {
+  RootState,
+  selectRouteId,
+  selectRouteParam,
+} from '@app/root-store/reducers';
 
 import {
   CompletedTask,
@@ -90,29 +95,41 @@ export const selectCurrentTasksLoaded = createSelector(
 export const selectCompletedTaskFromRoute: MemoizedSelector<
   RootState,
   CompletedTask | undefined
-> = createSelector(selectCompletedTasksEntities, selectRouteId, (tasks, id) => {
-  if (id === undefined) {
-    return undefined;
+> = createSelector(
+  selectCompletedTasksEntities,
+  selectRouteParam(routeNames.completedTasks.edit.idParam),
+  (tasks, id) => {
+    if (id === undefined) {
+      return undefined;
+    }
+    return tasks[id];
   }
-  return tasks[id];
-});
+);
 
 export const selectCurrentTaskFromRoute: MemoizedSelector<
   RootState,
   CurrentTask | undefined
-> = createSelector(selectCurrentTasksEntities, selectRouteId, (tasks, id) => {
-  if (id === undefined) {
-    return undefined;
+> = createSelector(
+  selectCurrentTasksEntities,
+  selectRouteParam(routeNames.currentTasks.edit.idParam),
+  (tasks, id) => {
+    if (id === undefined) {
+      return undefined;
+    }
+    return tasks[id];
   }
-  return tasks[id];
-});
+);
 
 export const selectTaskListFromRoute: MemoizedSelector<
   RootState,
   TaskListListItem | undefined
-> = createSelector(selectEntities, selectRouteId, (taskLists, id) => {
-  if (id === undefined) {
-    return undefined;
+> = createSelector(
+  selectEntities,
+  selectRouteParam(routeNames.taskLists.edit.idParam),
+  (taskLists, id) => {
+    if (id === undefined) {
+      return undefined;
+    }
+    return taskLists[id];
   }
-  return taskLists[id];
-});
+);

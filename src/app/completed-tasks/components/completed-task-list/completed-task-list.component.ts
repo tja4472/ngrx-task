@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 
+import { pathPrefix, routeNames } from '@app/app-route-names';
 import { CompletedTask } from '@app/root-store/tasks-store/models';
 
 import { format } from 'date-fns';
@@ -78,5 +79,14 @@ export class CompletedTaskListComponent implements OnInit {
 
   viewTrackBy(index: number, item: CompletedTask) {
     return item.id;
+  }
+
+  editPath() {
+    return (
+      pathPrefix +
+      routeNames.completedTasks.path +
+      pathPrefix +
+      routeNames.completedTasks.edit.path
+    );
   }
 }

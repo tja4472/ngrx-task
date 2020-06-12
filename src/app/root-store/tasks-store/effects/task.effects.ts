@@ -9,6 +9,7 @@ import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 import { concatMap, tap, withLatestFrom } from 'rxjs/operators';
 
+import { pathPrefix, routeNames } from '@app/app-route-names';
 import { TaskSelectors } from '@app/root-store/tasks-store/selectors';
 import { UserStoreSelectors } from '@app/root-store/user-store';
 
@@ -111,7 +112,12 @@ export class TaskEffects {
       return this.actions$.pipe(
         ofType(TaskListsPageActions.newTaskList),
         tap(() => {
-          this.router.navigate(['/tasks/lists/new']);
+          this.router.navigate([
+            pathPrefix +
+              routeNames.taskLists.path +
+              pathPrefix +
+              routeNames.taskLists.new.path,
+          ]);
         })
       );
     },
@@ -245,7 +251,10 @@ export class TaskEffects {
           CompletedTaskDetailEditPageActions.saved
         ),
         tap(({ completedTask }) => {
-          this.router.navigate(['/tasks/completed', { id: completedTask.id }]);
+          this.router.navigate([
+            pathPrefix + routeNames.completedTasks.path,
+            { id: completedTask.id },
+          ]);
         })
       );
     },
@@ -257,7 +266,10 @@ export class TaskEffects {
       return this.actions$.pipe(
         ofType(CurrentTasksPageActions.newCurrentTask),
         tap(() => {
-          this.router.navigate(['/tasks/current/new']);
+          this.router.navigate([
+            pathPrefix + routeNames.currentTasks.path,
+            routeNames.currentTasks.new.path,
+          ]);
         })
       );
     },
@@ -288,7 +300,10 @@ export class TaskEffects {
           CurrentTaskDetailEditPageActions.saved
         ),
         tap(({ currentTask }) => {
-          this.router.navigate(['/tasks/current', { id: currentTask.id }]);
+          this.router.navigate([
+            pathPrefix + routeNames.currentTasks.path,
+            { id: currentTask.id },
+          ]);
         })
       );
     },
@@ -303,7 +318,7 @@ export class TaskEffects {
           CurrentTaskDetailNewPageActions.saved
         ),
         tap(() => {
-          this.router.navigate(['/tasks/current']);
+          this.router.navigate([pathPrefix + routeNames.currentTasks.path]);
         })
       );
     },
@@ -380,7 +395,10 @@ export class TaskEffects {
           TaskListDetailEditPageActions.saved
         ),
         tap(({ taskList }) => {
-          this.router.navigate(['tasks/lists', { id: taskList.id }]);
+          this.router.navigate([
+            pathPrefix + routeNames.taskLists.path,
+            { id: taskList.id },
+          ]);
         })
       );
     },
@@ -395,7 +413,7 @@ export class TaskEffects {
           TaskListDetailNewPageActions.saved
         ),
         tap(() => {
-          this.router.navigate(['tasks/lists']);
+          this.router.navigate([pathPrefix + routeNames.taskLists.path]);
         })
       );
     },

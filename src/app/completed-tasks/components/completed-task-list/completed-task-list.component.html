@@ -12,7 +12,7 @@
           [checked]="item.isComplete"
           (change)="toggleCompleteItem.emit(item)"
         ></mat-checkbox>
-        <a [routerLink]="['/tasks/completed/edit', item.id]">
+        <a [routerLink]="[editPath(), item.id]">
           <div class="middle">
             <div class="name">{{ item.name }}</div>
             <div class="description">{{ item.description }}</div>

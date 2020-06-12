@@ -1,5 +1,3 @@
-import { InjectionToken } from '@angular/core';
-
 import * as fromRouter from '@ngrx/router-store';
 import {
   Action,

@@ -2,6 +2,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 
+import { pathPrefix, routeNames } from '@app/app-route-names';
 import { CurrentTask } from '@app/root-store/tasks-store/models';
 
 @Component({
@@ -52,6 +53,14 @@ export class CurrentTaskListComponent implements OnInit {
     this.reorderItems.emit(bbb);
   }
 
+  editPath() {
+    return (
+      pathPrefix +
+      routeNames.currentTasks.path +
+      pathPrefix +
+      routeNames.currentTasks.edit.path
+    );
+  }
   /*
   onCompleteChange(toDo: Todo, change: MatCheckboxChange) {
     this.toDoChange.emit({

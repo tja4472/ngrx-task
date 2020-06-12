@@ -8,6 +8,7 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { filter, map, shareReplay, withLatestFrom } from 'rxjs/operators';
 
+import { pathPrefix, routeNames } from '@app/app-route-names';
 import { User } from '@app/models';
 import { TaskListListItem } from '@app/root-store/tasks-store/models';
 import { TaskListSelectors } from '@app/root-store/tasks-store/selectors';
@@ -34,11 +35,17 @@ export class SidenavComponent {
     );
 
   viewNavigation = [
-    { link: '/home', label: 'Home Page' },
-    { link: '/sign-in', label: 'Sign In' },
-    { link: '/tasks/current', label: 'Current Tasks Page' },
-    { link: '/tasks/completed', label: 'Completed Tasks Page' },
-    { link: '/tasks/lists', label: 'Task Lists Page' },
+    { link: pathPrefix + routeNames.home.path, label: 'Home Page' },
+    { link: pathPrefix + routeNames.signIn.path, label: 'Sign In' },
+    {
+      link: pathPrefix + routeNames.currentTasks.path,
+      label: 'Current Tasks Page',
+    },
+    {
+      link: pathPrefix + routeNames.completedTasks.path,
+      label: 'Completed Tasks Page',
+    },
+    { link: pathPrefix + routeNames.taskLists.path, label: 'Task Lists Page' },
   ];
 
   view$: Observable<{ user: User; taskListId: string | null } | null>;

@@ -10,7 +10,7 @@
         (change)="toggleCompleteItem.emit(task)"
       ></mat-checkbox>
 
-      <a [routerLink]="['/tasks/current/edit', task.id]">
+      <a [routerLink]="[editPath(), task.id]">
         <div class="middle" [ngClass]="{ 'line-through': task.isComplete }">
           <div class="name">{{ task.name }}</div>
           <div class="description">{{ task.description }}</div>

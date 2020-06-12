@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
+import { pathPrefix, routeNames } from '@app/app-route-names';
 import { TaskListListItem } from '@app/root-store/tasks-store/models';
 
 @Component({
@@ -16,4 +17,13 @@ export class TaskListListComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
+
+  editPath() {
+    return (
+      pathPrefix +
+      routeNames.taskLists.path +
+      pathPrefix +
+      routeNames.taskLists.edit.path
+    );
+  }
 }
