@@ -39,7 +39,7 @@
     "@ngrx/store-devtools": "9.2.0",
     "angular-cli-ghpages": "0.6.2",
     "date-fns": "2.14.0",
-    "firebase": "7.15.1",
+    "firebase": "7.15.2",
     "ngrx-etc": "4.1.0",
     "rxjs": "6.5.5",
     "ts-is-present": "1.1.1",
@@ -47,8 +47,8 @@
     "zone.js": "0.10.3"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "0.901.8",
-    "@angular/cli": "9.1.8",
+    "@angular-devkit/build-angular": "0.901.9",
+    "@angular/cli": "9.1.9",
     "@angular/compiler-cli": "9.1.11",
     "@angular/language-service": "9.1.11",
     "@testing-library/angular": "9.3.1",
