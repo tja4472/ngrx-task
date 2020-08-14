@@ -81,7 +81,7 @@ describe('@testing-library/angular', () => {
 
     // userEvent.type doesn't toggle form.dirty
     // userEvent.type(userNameControl, 'tim');
-    component.input(userNameControl, {
+    fireEvent.input(userNameControl, {
       target: {
         value: 'dfdf',
       },
@@ -95,7 +95,7 @@ describe('@testing-library/angular', () => {
     expect(screen.queryByText('User Name is required')).toBeNull();
 
     // Clear user name.
-    component.input(userNameControl, {
+    fireEvent.input(userNameControl, {
       target: {
         value: '',
       },
@@ -173,7 +173,7 @@ describe(SignInFormComponent.name, () => {
 
     expect(screen.queryByText('Password is required')).not.toBeNull();
 
-    component.input(userNameControl, {
+    fireEvent.input(userNameControl, {
       target: {
         value: 'dfdf',
       },
@@ -181,7 +181,7 @@ describe(SignInFormComponent.name, () => {
 
     expect(screen.queryByText('User Name is required')).toBeNull();
 
-    component.input(passwordControl, {
+    fireEvent.input(passwordControl, {
       target: {
         value: 'PASSWORD',
       },
@@ -198,7 +198,7 @@ describe(SignInFormComponent.name, () => {
     );
 
     // Clear user name.
-    component.input(userNameControl, {
+    fireEvent.input(userNameControl, {
       target: {
         value: '',
       },
@@ -207,7 +207,7 @@ describe(SignInFormComponent.name, () => {
     expect(screen.queryByText('User Name is required')).not.toBeNull();
 
     // Clear password
-    component.input(passwordControl, {
+    fireEvent.input(passwordControl, {
       target: {
         value: '',
       },
@@ -221,26 +221,26 @@ describe(SignInFormComponent.name, () => {
       password: 'apassword',
     };
 
-    component.input(userNameControl, {
+    fireEvent.input(userNameControl, {
       target: {
         value: inputValues.username,
       },
     });
 
-    component.input(passwordControl, {
+    fireEvent.input(passwordControl, {
       target: {
         value: inputValues.password,
       },
     });
 
     // check submit
-    component.click(signInButtonControl);
+    fireEvent.click(signInButtonControl);
     expect(submittedSpy).toHaveBeenCalledTimes(1);
     expect(submittedSpy).toHaveBeenCalledWith({
       ...inputValues,
     });
 
-    component.click(signUpButtonControl);
+    fireEvent.click(signUpButtonControl);
     expect(signUpClickedSpy).toHaveBeenCalledTimes(1);
   });
 });

@@ -15,7 +15,7 @@ import { SignInPageSelectors } from '../../selectors';
 import { SignInPageComponent } from './sign-in-page.component';
 import { SignInPageComponentModule } from './sign-in-page.module';
 
-import { fireEvent, render, screen, userEvent } from '@testing-library/angular';
+import { fireEvent, render, screen } from '@testing-library/angular';
 
 async function setup({
   errorMessage = null,
@@ -127,13 +127,13 @@ describe(SignInPageComponent.name, () => {
       password: 'apassword',
     };
 
-    component.input(userNameControl, {
+    fireEvent.input(userNameControl, {
       target: {
         value: inputValues.username,
       },
     });
 
-    component.input(passwordControl, {
+    fireEvent.input(passwordControl, {
       target: {
         value: inputValues.password,
       },
@@ -145,11 +145,11 @@ describe(SignInPageComponent.name, () => {
         password: inputValues.password,
       },
     });
-    component.click(signInButtonControl);
+    fireEvent.click(signInButtonControl);
     expect(mockStoreDispatchSpy).toHaveBeenCalledWith(signInAction);
 
     const showSignUpPageAction = SignInPageActions.showSignUpPage();
-    component.click(signUpButtonControl);
+    fireEvent.click(signUpButtonControl);
     expect(mockStoreDispatchSpy).toHaveBeenCalledWith(showSignUpPageAction);
   });
 });
