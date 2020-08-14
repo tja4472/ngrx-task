@@ -43,8 +43,8 @@ async function setup({
     ],
   });
 
-  const userNameControl = screen.getByPlaceholderText('User Name');
-  const passwordControl = screen.getByPlaceholderText('Password');
+  const userNameControl = screen.getByTestId('username');
+  const passwordControl = screen.getByTestId('password');
   const signInButtonControl = screen.getByRole('button', {
     name: /sign in/i,
   });
