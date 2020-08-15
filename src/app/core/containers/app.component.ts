@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SwUpdate } from '@angular/service-worker';
 
-import { AngularFireAnalytics } from '@angular/fire/analytics';
+// import { AngularFireAnalytics } from '@angular/fire/analytics';
 
 @Component({
   selector: 'app-root',
@@ -12,11 +12,11 @@ import { AngularFireAnalytics } from '@angular/fire/analytics';
 })
 export class AppComponent implements OnInit {
   constructor(
-    analytics: AngularFireAnalytics,
+    // analytics: AngularFireAnalytics,
     private swUpdate: SwUpdate,
     private snackbar: MatSnackBar
   ) {
-    analytics.logEvent('start_game', { level: '10', difficulty: 'expert' });
+    // analytics.logEvent('start_game', { level: '10', difficulty: 'expert' });
   }
 
   ngOnInit(): void {

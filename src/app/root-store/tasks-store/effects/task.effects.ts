@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AngularFireAnalytics } from '@angular/fire/analytics';
+// import { AngularFireAnalytics } from '@angular/fire/analytics';
 
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
@@ -281,10 +281,12 @@ export class TaskEffects {
       return this.actions$.pipe(
         ofType(CurrentTasksPageActions.enter),
         tap(() => {
+          /*
           this.analytics.logEvent('enterCurrentTasksPage', {
             level: '10',
             difficulty: 'expert',
           });
+*/
         })
       );
     },
@@ -422,7 +424,7 @@ export class TaskEffects {
 
   constructor(
     private actions$: Actions,
-    private analytics: AngularFireAnalytics,
+    // private analytics: AngularFireAnalytics,
     private fb1DataService: Fb1DataService,
     private todoDataService: CurrentTaskDataService,
     private todoCompletedDataService: CompletedTaskDataService,
