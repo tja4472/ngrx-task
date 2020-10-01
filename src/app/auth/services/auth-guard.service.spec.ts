@@ -26,14 +26,14 @@ describe(AuthGuardService.name, () => {
   let authSelectorsSelectHasUser: MemoizedSelector<AuthRootState, boolean>;
   // Spies
   let mockStoreDispatchSpy: jasmine.Spy;
-  let spyObjRouterStateSnapshot: RouterStateSnapshot;
-  let spyObjActivatedRouteSnapshot: ActivatedRouteSnapshot;
+  let spyObjRouterStateSnapshot: jasmine.SpyObj<RouterStateSnapshot>;
+  let spyObjActivatedRouteSnapshot: jasmine.SpyObj<ActivatedRouteSnapshot>;
 
   const dummyUrl = 'dummy/url';
 
   beforeEach(() => {
-    const spyObjAuthService = jasmine.createSpyObj('AuthService', [
-      'redirctUrl',
+    const spyObjAuthService = jasmine.createSpyObj<AuthService>('AuthService', [
+      'redirectUrl',
     ]);
 
     TestBed.configureTestingModule({
