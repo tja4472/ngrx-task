@@ -6,6 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { SignInFormComponent } from './sign-in-form.component';
 
 import { fireEvent, render, screen } from '@testing-library/angular';
+import userEvent from '@testing-library/user-event';
 
 async function setup({
   errorMessage = null,
@@ -80,13 +81,15 @@ describe('@testing-library/angular', () => {
     expect(screen.queryByText('User Name is required')).not.toBeNull();
 
     // userEvent.type doesn't toggle form.dirty
-    // userEvent.type(userNameControl, 'tim');
+    // fixed in? @testing-library/user-event": "12.1.6"
+    userEvent.type(userNameControl, 'tim');
+    /*
     fireEvent.input(userNameControl, {
       target: {
         value: 'dfdf',
       },
     });
-
+*/
     expect(componentInstance.viewForm.dirty).toBeTruthy('dirty');
     expect(componentInstance.viewForm.pristine).toBeFalsy('pristine');
     expect(componentInstance.viewForm.touched).toBeTruthy('touched');
