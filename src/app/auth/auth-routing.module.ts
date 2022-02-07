@@ -12,6 +12,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: routeNames.signInComponentStore.path,
+    loadChildren: () =>
+      import('./containers/sign-in-page-component-store').then(
+        (m) => m.SignInPageComponentStoreComponentModule
+      ),
+  },
+  {
     path: routeNames.signUp.path,
     loadChildren: () =>
       import('./containers/sign-up-page').then(

@@ -38,6 +38,10 @@ export class SidenavComponent {
     { link: pathPrefix + routeNames.home.path, label: 'Home Page' },
     { link: pathPrefix + routeNames.signIn.path, label: 'Sign In' },
     {
+      link: pathPrefix + routeNames.signInComponentStore.path,
+      label: 'Sign In(ComponentStore)',
+    },
+    {
       link: pathPrefix + routeNames.currentTasks.path,
       label: 'Current Tasks Page',
     },
