@@ -12,7 +12,7 @@ import {
   Spectator,
 } from '@ngneat/spectator';
 
-fdescribe('SignInFormComponent(spectator)', () => {
+describe('SignInFormComponent(spectator)', () => {
   let spectator: Spectator<SignInFormComponent>;
   // const createComponent = createComponentFactory(SignInFormComponent);
   const createComponent = createComponentFactory<SignInFormComponent>({
