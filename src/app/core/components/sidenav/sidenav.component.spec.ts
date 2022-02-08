@@ -1,5 +1,5 @@
 import { LayoutModule } from '@angular/cdk/layout';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
@@ -72,23 +72,25 @@ describe('SidenavComponent', () => {
     user: userState,
   };
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [SidenavComponent],
-      imports: [
-        NoopAnimationsModule,
-        LayoutModule,
-        MatButtonModule,
-        MatIconModule,
-        MatListModule,
-        MatSelectModule,
-        MatSidenavModule,
-        MatToolbarModule,
-        RouterTestingModule,
-      ],
-      providers: [provideMockStore({ initialState })],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [SidenavComponent],
+        imports: [
+          NoopAnimationsModule,
+          LayoutModule,
+          MatButtonModule,
+          MatIconModule,
+          MatListModule,
+          MatSelectModule,
+          MatSidenavModule,
+          MatToolbarModule,
+          RouterTestingModule,
+        ],
+        providers: [provideMockStore({ initialState })],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(SidenavComponent);
