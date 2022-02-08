@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 import { inject, TestBed } from '@angular/core/testing';
 
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 import {
   ConvertService,

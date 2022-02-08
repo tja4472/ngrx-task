@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 import { from, Observable, of } from 'rxjs';
 import { first, map, switchMap } from 'rxjs/operators';
