@@ -2,7 +2,7 @@
 
 // this needs tob on first line
 // else get: TypeError: Cannot read property 'assertPresent' of undefined
-import 'zone.js/dist/zone-testing';
+import 'zone.js/testing';
 
 // tslint:disable-next-line: ordered-imports
 import { getTestBed } from '@angular/core/testing';
