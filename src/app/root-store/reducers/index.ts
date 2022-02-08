@@ -59,7 +59,6 @@ export const metaReducers: MetaReducer<any>[] = !environment.production
   : [flush];
 
 export const selectRouter = createFeatureSelector<
-  RootState,
   fromRouter.RouterReducerState<any>
 >(fromRouter.DEFAULT_ROUTER_FEATURENAME);
 
