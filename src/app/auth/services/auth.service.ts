@@ -95,6 +95,7 @@ export class AuthService {
     return from(this.auth.signInWithEmailAndPassword(email, password));
   }
 
+  /*
   async aaaaa(
     email: string,
     password: string
@@ -111,7 +112,7 @@ export class AuthService {
         value: result,
       };
       return success;
-*/
+*
     } catch (error) {
       const errorCode: string = error.code;
       const errorMessage: string = error.message;
@@ -120,11 +121,12 @@ export class AuthService {
       /*
       const resultError: ResultError = { type: 'error', error, errorCode };
       return resultError;
-*/
+*
     }
   }
 
   bbbb(email: string, password: string) {
     return from(this.aaaaa(email, password));
   }
+*/
 }

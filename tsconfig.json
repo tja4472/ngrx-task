@@ -24,7 +24,11 @@
     "strictBindCallApply": true,
     "strictNullChecks": true,
     "strictFunctionTypes": true,
-    "strictPropertyInitialization": false
+    "strictPropertyInitialization": false,
+    // Required for angularfire to work with typescript 4.5.5
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true
+    // ^^^^
   },
   "angularCompilerOptions": {
     "strictTemplates": true,

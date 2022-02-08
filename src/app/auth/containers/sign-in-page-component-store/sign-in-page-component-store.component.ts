@@ -51,7 +51,7 @@ export class SignInPageComponentStoreComponent implements OnInit {
     // this.signInPageComponentStore.effect1('test text');
     // this.signInPageComponentStore.effect2(credentials);
     // this.signInPageComponentStore.effect3(credentials);
-    this.signInPageComponentStore.effect4(credentials);
+    // this.signInPageComponentStore.effect4(credentials);
   }
 
   onSignUp() {
