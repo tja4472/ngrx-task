@@ -48,6 +48,16 @@ export class TaskListDataService {
     this.firestoreCollection(userId).doc(doc.id).set(doc);
   }
 
+  public saveB(item: TaskListListItem, userId: string) {
+    const doc = this.toFirestoreDoc(item);
+
+    if (item.id === '') {
+      doc.id = this.afs.createId();
+    }
+
+    return this.firestoreCollection(userId).doc(doc.id).set(doc);
+  }
+
   private firestoreCollection(userId: string) {
     //
     return this.afs

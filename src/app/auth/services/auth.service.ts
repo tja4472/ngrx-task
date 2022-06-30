@@ -8,6 +8,13 @@ import { first, map, switchMap } from 'rxjs/operators';
 import { UserInfoDataService } from '@app/services/user-info.data.service';
 
 import { AppUser } from '../models/app-user.model';
+import { newUserInfo } from '@app/models/user-info.model';
+
+import {
+  newTaskListListItemB,
+  TaskListListItem,
+} from '@app/root-store/tasks-store/models';
+import { TaskListDataService } from '@app/services/task-list.data.service';
 
 // https://benjaminjohnson.me/blog/typesafe-errors-in-typescript
 type ResultSuccess<T> = { type: 'success'; value: T };
@@ -26,6 +33,7 @@ export class AuthService {
 
   constructor(
     private readonly auth: AngularFireAuth,
+    private taskListDataService: TaskListDataService,
     private userInfoDataService: UserInfoDataService
   ) {
     this.appUser$ = this.auth.user.pipe(
@@ -93,6 +101,30 @@ export class AuthService {
   // firebase.FirebaseError
   login(email: string, password: string) {
     return from(this.auth.signInWithEmailAndPassword(email, password));
+  }
+
+  public async signUp(email: string, password: string) {
+    const userCredential = await this.auth.createUserWithEmailAndPassword(
+      email,
+      password
+    );
+
+    if (userCredential.user == null) {
+      throw new Error('user is null');
+    }
+
+    const defaultValue = newUserInfo();
+    await this.userInfoDataService.save(defaultValue, userCredential.user.uid);
+
+    const taskListListItem: TaskListListItem = {
+      id: defaultValue.todoListId,
+      name: defaultValue.todoListId + ' name',
+    };
+
+    await this.taskListDataService.saveB(
+      taskListListItem,
+      userCredential.user.uid
+    );
   }
 
   /*

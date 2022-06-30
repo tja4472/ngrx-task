@@ -9,3 +9,10 @@ export function newTaskListListItem(): TaskListListItem {
     name: '',
   };
 }
+
+export function newTaskListListItemB(id: string): TaskListListItem {
+  return {
+    id: id,
+    name: '',
+  };
+}

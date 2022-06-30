@@ -212,6 +212,19 @@ export class AuthEffects implements OnInitEffects {
         tap((action) => {
           const password = action.credentials.password;
 
+          this.authService
+            .signUp(action.credentials.username, password)
+            .catch((error) =>
+              this.store.dispatch(
+                AuthApiActions.signUpFailure({
+                  error: {
+                    code: error.code,
+                    message: error.message,
+                  },
+                })
+              )
+            );
+          /*
           this.afAuth
             .createUserWithEmailAndPassword(
               action.credentials.username,
@@ -227,6 +240,7 @@ export class AuthEffects implements OnInitEffects {
                 })
               )
             );
+            */
         })
       );
     },
