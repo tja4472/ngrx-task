@@ -9,7 +9,9 @@ import { HomePageActions } from '../actions';
   template: `
     Home Page
 
-    <button (click)="viewSignOutClicked()">Sign Out</button>
+    <button data-test="sign-out-button" (click)="viewSignOutClicked()">
+      Sign Out
+    </button>
   `,
   styles: [],
 })
