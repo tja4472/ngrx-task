@@ -8,6 +8,7 @@ const user = {
 describe('Auth', () => {
   beforeEach(() => {
     // Runs before every test block
+    // Force sidenav to be shown.
     cy.viewport('ipad-2', 'landscape');
     cy.wrap(clearDatabase('demo-1'));
     cy.wrap(clearUserAccounts('demo-1'));

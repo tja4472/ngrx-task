@@ -8,6 +8,7 @@
         <div class="col">
           <mat-form-field class="full-width">
             <input
+              data-test="name-input"
               matInput
               id="name"
               placeholder="Name"
@@ -24,6 +25,7 @@
     </mat-card-content>
     <mat-card-actions>
       <button
+        data-test="submit-button"
         mat-raised-button
         color="primary"
         type="submit"
@@ -32,6 +34,7 @@
         Submit
       </button>
       <button
+        data-test="cancel-button"
         mat-raised-button
         color="accent"
         type="button"
@@ -40,6 +43,7 @@
         Cancel
       </button>
       <button
+        data-test="remove-button"
         mat-raised-button
         color="accent"
         type="button"

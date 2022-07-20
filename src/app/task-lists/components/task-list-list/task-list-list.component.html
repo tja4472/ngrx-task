@@ -1,6 +1,6 @@
 <div class="list">
   <div *ngFor="let task of currentTasks">
-    <div class="list-item">
+    <div class="list-item" data-test="list-item">
       <a [routerLink]="[editPath(), task.id]">
         <div class="middle">
           <div class="name">{{ task.name }}</div>
@@ -10,6 +10,11 @@
   </div>
 </div>
 
-<button mat-fab class="fab-bottom-right" (click)="newCurrentTask.emit()">
+<button
+  data-test="create-task-list-button"
+  mat-fab
+  class="fab-bottom-right"
+  (click)="newCurrentTask.emit()"
+>
   <mat-icon>add</mat-icon>
 </button>
