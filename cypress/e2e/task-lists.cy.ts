@@ -23,71 +23,6 @@ describe('Task Lists', () => {
     cy.location('pathname').should('eq', '/tasks/lists');
   });
 
-  it.skip('Task Lists page', () => {
-    // Edit Cancel test
-    cy.getBySel('list-item')
-      .should('have.length', 1)
-      .should('contain.text', 'default-list name')
-      .click();
-    cy.location('pathname').should('eq', '/tasks/lists/edit/default-list');
-    cy.getBySel('submit-button').should('be.disabled');
-    cy.getBySel('cancel-button').should('be.enabled');
-    cy.getBySel('remove-button').should('be.enabled');
-    cy.getBySel('name-field').type('GGGG');
-    cy.getBySel('submit-button').should('be.enabled');
-    cy.getBySel('cancel-button').should('be.enabled').click();
-    cy.location('pathname').should('eq', '/tasks/lists;id=default-list');
-    cy.getBySel('list-item')
-      .should('have.length', 1)
-      .should('contain.text', 'default-list name');
-    // Edit Submit test
-    cy.getBySel('list-item')
-      .should('have.length', 1)
-      .should('contain.text', 'default-list name')
-      .click();
-    cy.location('pathname').should('eq', '/tasks/lists/edit/default-list');
-    cy.getBySel('submit-button').should('be.disabled');
-    cy.getBySel('cancel-button').should('be.enabled');
-    cy.getBySel('remove-button').should('be.enabled');
-    cy.getBySel('name-field').type('GGGG');
-    cy.getBySel('submit-button').should('be.enabled').click();
-    cy.location('pathname').should('eq', '/tasks/lists;id=default-list');
-    cy.getBySel('list-item')
-      .should('have.length', 1)
-      .should('contain.text', 'default-list nameGGGG');
-    cy.getBySel('task-list-name')
-      .should('be.visible')
-      .should('contain.text', 'default-list nameGGGG');
-    // Create Cancel test
-    cy.getBySel('create-task-list-button').should('be.enabled').click();
-    cy.location('pathname').should('eq', '/tasks/lists/new');
-    cy.getBySel('submit-button').should('be.disabled');
-    cy.getBySel('cancel-button').should('be.enabled');
-    cy.getBySel('name-field').type('BBBB');
-    cy.getBySel('cancel-button').should('be.enabled').click();
-    cy.getBySel('list-item')
-      .should('have.length', 1)
-      .should('contain.text', 'default-list nameGGGG');
-    // Create Submit test
-    cy.getBySel('create-task-list-button').should('be.enabled').click();
-    cy.location('pathname').should('eq', '/tasks/lists/new');
-    cy.getBySel('submit-button').should('be.disabled');
-    cy.getBySel('cancel-button').should('be.enabled');
-    cy.getBySel('name-field').type('BBBB');
-    cy.getBySel('submit-button').should('be.enabled').click();
-    cy.getBySel('list-item')
-      .should('have.length', 2)
-      .should('contain.text', 'default-list nameGGGG')
-      .should('contain.text', 'BBBB');
-    // Edit Remove test
-    cy.getBySel('list-item').should('have.length', 2).find('BBBB').click();
-    /*
-    cy.getBySel('item-name').should('have.length', 2)
-    .eq(0)
-    .should('contain.text', 'Second task');
-    */
-  });
-
   it('detail-edit: Cancel', () => {
     cy.getBySel('list-item')
       .should('have.length', 1)
@@ -127,7 +62,7 @@ describe('Task Lists', () => {
   });
 
   it('detail-edit: Remove', () => {
-    cy.getBySel('create-task-list-button').should('be.enabled').click();
+    cy.getBySel('new-task-list-button').should('be.enabled').click();
     cy.location('pathname').should('eq', '/tasks/lists/new');
     cy.getBySel('submit-button').should('be.disabled');
     cy.getBySel('cancel-button').should('be.enabled');
@@ -145,7 +80,7 @@ describe('Task Lists', () => {
   });
 
   it('detail-new: Cancel', () => {
-    cy.getBySel('create-task-list-button').should('be.enabled').click();
+    cy.getBySel('new-task-list-button').should('be.enabled').click();
     cy.location('pathname').should('eq', '/tasks/lists/new');
     cy.getBySel('submit-button').should('be.disabled');
     cy.getBySel('cancel-button').should('be.enabled');
@@ -157,7 +92,7 @@ describe('Task Lists', () => {
   });
 
   it('detail-new: Submit', () => {
-    cy.getBySel('create-task-list-button').should('be.enabled').click();
+    cy.getBySel('new-task-list-button').should('be.enabled').click();
     cy.location('pathname').should('eq', '/tasks/lists/new');
     cy.getBySel('submit-button').should('be.disabled');
     cy.getBySel('cancel-button').should('be.enabled');

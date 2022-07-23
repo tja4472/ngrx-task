@@ -2,6 +2,7 @@
   <mat-card class="shipping-card">
     <mat-card-actions>
       <button
+        data-test="submit-button"
         mat-raised-button
         color="primary"
         type="submit"
@@ -10,6 +11,7 @@
         Submit
       </button>
       <button
+        data-test="cancel-button"
         mat-raised-button
         color="accent"
         type="button"
@@ -24,13 +26,18 @@
     <mat-card-content>
       <div class="row">
         <div class="col">
-          <mat-checkbox formControlName="isComplete">Is Complete</mat-checkbox>
+          <mat-checkbox
+            data-test="is-complete-checkbox"
+            formControlName="isComplete"
+            >Is Complete</mat-checkbox
+          >
         </div>
       </div>
       <div class="row">
         <div class="col">
           <mat-form-field class="full-width">
             <input
+              data-test="name-input"
               matInput
               id="name"
               placeholder="Name"
@@ -48,6 +55,7 @@
         <div class="col">
           <mat-form-field class="full-width">
             <textarea
+              data-test="description-textarea"
               matInput
               id="description"
               placeholder="Description"

@@ -58,7 +58,7 @@ describe('Main tests', () => {
     cy.getBySel('sidenav-current-tasks').click();
     // Current tasks page
     cy.location('pathname').should('eq', '/tasks/current');
-    cy.getBySel('new-task-fab').should('be.visible');
+    cy.getBySel('new-current-task-button').should('be.visible');
     cy.getBySel('sidenav-completed-tasks').click();
     // Completed Tasks page
     cy.location('pathname').should('eq', '/tasks/completed');
@@ -69,7 +69,7 @@ describe('Main tests', () => {
     cy.getBySel('task-lists-page').should('be.visible');
     cy.getBySel('sidenav-current-tasks').click();
     // Current tasks page
-    cy.getBySel('new-task-fab').should('be.visible').click();
+    cy.getBySel('new-current-task-button').should('be.visible').click();
     // New Current Task page
     cy.location('pathname').should('eq', '/tasks/current/new');
     cy.get('#name').type('First task');
@@ -77,7 +77,7 @@ describe('Main tests', () => {
     cy.get('.mat-card-actions > .mat-primary').click();
     // Current tasks page
     cy.location('pathname').should('eq', '/tasks/current');
-    cy.getBySel('new-task-fab').should('be.visible').click();
+    cy.getBySel('new-current-task-button').should('be.visible').click();
     // New Current Task page
     cy.location('pathname').should('eq', '/tasks/current/new');
     cy.get('#name').type('Second task');

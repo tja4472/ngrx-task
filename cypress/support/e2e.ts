@@ -30,6 +30,20 @@ declare global {
         dataTestPrefixAttribute: string,
         args?: any
       ): Chainable<JQuery<HTMLElement>>;
+      /**
+       *
+       * Calls cy.parent using [data-test=${dataTestAttribute}]
+       * @param dataTestAttribute
+       *
+       */
+      parentBySel(dataTestAttribute: string): Chainable<JQuery<HTMLElement>>;
+      /**
+       * Calls cy.find using [data-test=${dataTestAttribute}]
+       * @param selector
+       * @example cy.findBySel('list-item')
+       */
+      findBySel(dataTestAttribute: string): Chainable<JQuery<HTMLElement>>;
+
       signIn(email: string, password: string): Chainable<JQuery<HTMLElement>>;
       signOut(): Chainable<JQuery<HTMLElement>>;
       signUp(email: string, password: string): Chainable<JQuery<HTMLElement>>;
@@ -38,26 +52,41 @@ declare global {
   }
 }
 
-/*
-// Hide xhr in command log.
-// https://github.com/cypress-io/cypress/issues/7362#issuecomment-1168915062
-const routes = ['localhost:8080'];
+// Adapted from https://github.com/Muritavo/cypress-toolkit/blob/main/src/support/utility.ts#L36
+const origLog = Cypress.log;
 
-Cypress.on('log:added', (ev) => {
-  console.log('>>>', ev.consoleProps?.URL);
+// Filter out Firebase xhr log entries.
+Cypress.log = function (opts, ...other) {
+  // console.log('>>>>>>>>>>>>>>>>');
+  // console.log('>> opts.displayName>', opts.displayName);
+
   if (
-    ev.displayName === 'xhr' &&
-    routes.some((route) => ev.consoleProps?.URL.includes(route))
+    (opts.displayName && ['xhr', 'image'].includes(opts.displayName)) ||
+    (opts.name && ['Coverage', 'readfile'].includes(opts.name)) ||
+    ['@cypress/code-coverage'].some((a) =>
+      opts.message
+        ? opts.message[0] && String(opts.message[0]).includes(a)
+        : false
+    )
   ) {
-    console.log('AAAAA');
-    const w: any = window;
-    const el: any = Array.from(
-      w.top.document.querySelectorAll('.command-wrapper')
-    ).slice(-1)[0];
-    if (el) {
-      console.log('BBBB');      
-      el.parentElement.style.display = 'none';
-    }
+    // console.log('== opts.message>', opts.message);
+    // console.log('== opts.displayName>', opts.displayName);
+    // console.log('== opts.type>', opts.type);
+    // delete: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/delete
+    delete opts.message;
+    delete opts.displayName;
+    delete opts.type;
+    const p = new Proxy(
+      {},
+      {
+        get: () => {
+          return () => p;
+        },
+      }
+    );
+
+    return p;
   }
-});
-*/
+
+  return origLog(opts, ...other) as any;
+};

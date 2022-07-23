@@ -36,6 +36,22 @@ Cypress.Commands.add('getBySelLike', (selector, ...args) => {
   return cy.get(`[data-test*=${selector}]`, ...args);
 });
 
+Cypress.Commands.add(
+  'findBySel',
+  { prevSubject: 'element' },
+  (subject, dataTestAttribute) => {
+    return cy.wrap(subject).find(`[data-test=${dataTestAttribute}]`);
+  }
+);
+
+Cypress.Commands.add(
+  'parentBySel',
+  { prevSubject: 'element' },
+  (subject, dataTestAttribute) => {
+    return cy.wrap(subject).parent(`[data-test=${dataTestAttribute}]`);
+  }
+);
+
 Cypress.Commands.add('signIn', (email, password) => {
   // Home page
   // cy.visit('/');

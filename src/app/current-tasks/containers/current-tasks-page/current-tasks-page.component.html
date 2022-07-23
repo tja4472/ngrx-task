@@ -6,12 +6,23 @@
 >
 </app-current-task-list>
 
-<button class="more-vert-menu" mat-icon-button [matMenuTriggerFor]="appMenu">
+<button
+  data-test="vert-menu-button"
+  class="more-vert-menu"
+  mat-icon-button
+  [matMenuTriggerFor]="appMenu"
+>
   <mat-icon>more_vert</mat-icon>
 </button>
 
 <mat-menu #appMenu="matMenu">
-  <button mat-menu-item (click)="viewClearCompleted()">Clear Completed</button>
+  <button
+    data-test="clear-completed-button"
+    mat-menu-item
+    (click)="viewClearCompleted()"
+  >
+    Clear Completed
+  </button>
 </mat-menu>
 
 <!--
