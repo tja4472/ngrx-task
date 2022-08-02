@@ -1,8 +1,8 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import {
   AbstractControl,
-  FormBuilder,
-  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormGroup,
   Validators,
 } from '@angular/forms';
 
@@ -15,7 +15,7 @@ import { takeUntil } from 'rxjs/operators';
 
 @Injectable()
 export class CurrentTaskDetailNewPresenter implements OnDestroy {
-  form: FormGroup;
+  form: UntypedFormGroup;
 
   initialData: CurrentTask;
 
@@ -41,7 +41,7 @@ export class CurrentTaskDetailNewPresenter implements OnDestroy {
 
   private unsubscribe: Subject<void> = new Subject();
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: UntypedFormBuilder) {}
 
   init(todo: CurrentTask) {
     this.initialData = { ...todo };

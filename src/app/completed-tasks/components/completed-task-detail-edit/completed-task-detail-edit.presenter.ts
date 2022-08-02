@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {
   AbstractControl,
-  FormBuilder,
+  UntypedFormBuilder,
   FormControl,
   FormGroup,
   Validators,
@@ -67,7 +67,7 @@ export class CompletedTaskDetailEditPresenter {
 
   initialData: CompletedTask;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: UntypedFormBuilder) {
     this.#formControlNames = getFormControlNames<Model>(this.form.controls);
   }
 

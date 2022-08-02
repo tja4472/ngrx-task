@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { Credentials } from '@app/auth/models/credentials.model';
 
@@ -30,7 +30,7 @@ export class SignInFormComponent implements OnInit {
   @Output()
   readonly submitted = new EventEmitter<Credentials>();
 
-  get viewForm(): FormGroup {
+  get viewForm(): UntypedFormGroup {
     return this.presenter.form;
   }
 

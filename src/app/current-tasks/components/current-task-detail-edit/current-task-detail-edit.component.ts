@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 
 import { CurrentTask } from '@app/root-store/tasks-store/models';
 
@@ -32,7 +32,7 @@ export class CurrentTaskDetailEditComponent implements OnInit {
   @Output() remove = new EventEmitter<CurrentTask>();
   @Output() checkout = new EventEmitter<CurrentTask>();
 
-  get checkoutForm(): FormGroup {
+  get checkoutForm(): UntypedFormGroup {
     return this.presenter.form;
   }
 

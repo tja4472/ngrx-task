@@ -1,15 +1,19 @@
 import { Injectable } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 
 import { TaskListListItem } from '@app/root-store/tasks-store/models';
 
 @Injectable()
 export class TaskListDetailNewPresenter {
-  form: FormGroup;
+  form: UntypedFormGroup;
 
   initialData: TaskListListItem;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: UntypedFormBuilder) {}
 
   init(todo: TaskListListItem) {
     this.initialData = { ...todo };

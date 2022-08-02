@@ -1,8 +1,8 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import {
   AbstractControl,
-  FormBuilder,
-  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormGroup,
   Validators,
 } from '@angular/forms';
 
@@ -16,7 +16,7 @@ import {
 
 @Injectable()
 export class CurrentTaskDetailEditPresenter implements OnDestroy {
-  form: FormGroup;
+  form: UntypedFormGroup;
 
   initialData: CurrentTask;
 
@@ -42,7 +42,7 @@ export class CurrentTaskDetailEditPresenter implements OnDestroy {
 
   private unsubscribe: Subject<void> = new Subject();
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: UntypedFormBuilder) {}
 
   init(todo: CurrentTask) {
     this.initialData = { ...todo };

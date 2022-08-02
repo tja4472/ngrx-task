@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 
 import { Observable, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
 
 @Injectable()
 export class SearchPresenter {
-  public searchControl: FormControl = new FormControl('');
+  public searchControl: UntypedFormControl = new UntypedFormControl('');
 
   private searchTerms: Subject<string> = new Subject();
 
