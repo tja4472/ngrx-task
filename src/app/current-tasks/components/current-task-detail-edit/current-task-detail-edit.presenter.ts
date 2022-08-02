@@ -57,12 +57,14 @@ export class CurrentTaskDetailEditPresenter implements OnDestroy {
     this.isCompleteControl.valueChanges
       .pipe(takeUntil(this.unsubscribe))
       .subscribe((value: boolean) => {
+        console.log('value changes>', value);
         this.completedTimestampControl.setValue(getCompletedTimestamp(value));
       });
   }
 
   checkout(): CurrentTask {
     const todoData: CurrentTask = { ...this.initialData, ...this.form.value };
+    console.log('this.form.value >', this.form.value);
     this.form.reset();
 
     return todoData;
