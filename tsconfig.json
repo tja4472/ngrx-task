@@ -30,6 +30,9 @@
     "skipLibCheck": true
     // ^^^^
   },
+  // Required for jest to work with cypress
+  "include": ["src/**/*", "libs/**/*"],
+  // ^^^^
   "angularCompilerOptions": {
     "strictTemplates": true,
     "strictNullInputTypes": false,

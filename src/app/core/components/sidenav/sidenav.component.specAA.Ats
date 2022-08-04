@@ -72,25 +72,23 @@ describe('SidenavComponent', () => {
     user: userState,
   };
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [SidenavComponent],
-        imports: [
-          NoopAnimationsModule,
-          LayoutModule,
-          MatButtonModule,
-          MatIconModule,
-          MatListModule,
-          MatSelectModule,
-          MatSidenavModule,
-          MatToolbarModule,
-          RouterTestingModule,
-        ],
-        providers: [provideMockStore({ initialState })],
-      }).compileComponents();
-    })
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [SidenavComponent],
+      imports: [
+        NoopAnimationsModule,
+        LayoutModule,
+        MatButtonModule,
+        MatIconModule,
+        MatListModule,
+        MatSelectModule,
+        MatSidenavModule,
+        MatToolbarModule,
+        RouterTestingModule,
+      ],
+      providers: [provideMockStore({ initialState })],
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(SidenavComponent);
