@@ -1,7 +1,6 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  OnInit,
   ViewEncapsulation,
 } from '@angular/core';
 
@@ -24,7 +23,7 @@ import { SignInPageComponentStore } from './sign-in-page-component-store.store';
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [SignInPageComponentStore],
 })
-export class SignInPageComponentStoreComponent implements OnInit {
+export class SignInPageComponentStoreComponent {
   // error$: Observable<string | null>;
   // pending$: Observable<boolean>;
 
@@ -41,8 +40,6 @@ export class SignInPageComponentStoreComponent implements OnInit {
     // );
     // this.store.dispatch(SignInPageActions.entered());
   }
-
-  ngOnInit() {}
 
   onSubmitted(credentials: Credentials) {
     // this.store.dispatch(SignInPageActions.signIn({ credentials }));

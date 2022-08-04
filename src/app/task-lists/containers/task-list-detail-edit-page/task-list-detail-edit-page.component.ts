@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import { select, Store } from '@ngrx/store';
 
@@ -15,14 +15,12 @@ import { TaskSelectors } from '@app/root-store/tasks-store/selectors';
   styleUrls: ['./task-list-detail-edit-page.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TaskListDetailEditPageComponent implements OnInit {
+export class TaskListDetailEditPageComponent {
   task$: Observable<TaskListListItem | undefined>;
 
   constructor(private store: Store<RootState>) {
     this.task$ = store.pipe(select(TaskSelectors.selectTaskListFromRoute));
   }
-
-  ngOnInit() {}
 
   viewCancelled(taskList: TaskListListItem): void {
     this.store.dispatch(TaskListDetailEditPageActions.cancelled({ taskList }));

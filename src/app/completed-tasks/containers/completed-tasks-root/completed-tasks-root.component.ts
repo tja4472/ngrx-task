@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 
@@ -15,12 +10,10 @@ import { CompletedTasksRootActions } from '@app/root-store/tasks-store/actions';
   template: ` <router-outlet></router-outlet> `,
   styleUrls: ['./completed-tasks-root.component.css'],
 })
-export class CompletedTasksRootComponent implements OnDestroy, OnInit {
+export class CompletedTasksRootComponent implements OnDestroy {
   ngOnDestroy(): void {
     this.store.dispatch(CompletedTasksRootActions.destroyed());
   }
-
-  ngOnInit(): void {}
 
   constructor(private store: Store<{}>) {}
 }

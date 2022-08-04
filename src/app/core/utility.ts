@@ -57,5 +57,6 @@ export function getFormControlNames<Model>(
 
   console.log('controlsA>', controlsA);
 
+  // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
   return controlsA as ControlNames<Model>;
 }

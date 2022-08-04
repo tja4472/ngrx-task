@@ -88,5 +88,6 @@ Cypress.log = function (opts, ...other) {
     return p;
   }
 
+  // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
   return origLog(opts, ...other) as any;
 };

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import { select, Store } from '@ngrx/store';
 
@@ -15,14 +15,12 @@ import { TaskSelectors } from '@app/root-store/tasks-store/selectors';
   styleUrls: ['./completed-task-detail-edit-page.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CompletedTaskDetailEditPageComponent implements OnInit {
+export class CompletedTaskDetailEditPageComponent {
   task$: Observable<CompletedTask | undefined>;
 
   constructor(private store: Store<RootState>) {
     this.task$ = store.pipe(select(TaskSelectors.selectCompletedTaskFromRoute));
   }
-
-  ngOnInit() {}
 
   viewCancelled(completedTask: CompletedTask): void {
     this.store.dispatch(

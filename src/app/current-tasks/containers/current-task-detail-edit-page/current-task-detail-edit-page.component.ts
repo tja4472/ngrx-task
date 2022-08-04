@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import { select, Store } from '@ngrx/store';
 
@@ -18,7 +18,7 @@ import { isPresent } from 'ts-is-present';
   styleUrls: ['./current-task-detail-edit-page.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CurrentTaskDetailEditPageComponent implements OnInit {
+export class CurrentTaskDetailEditPageComponent {
   task$: Observable<CurrentTask>;
 
   constructor(private store: Store<RootState>) {
@@ -30,8 +30,6 @@ export class CurrentTaskDetailEditPageComponent implements OnInit {
       filter(isPresent)
     );
   }
-
-  ngOnInit() {}
 
   viewCancelled(todo: CurrentTask): void {
     this.store.dispatch(

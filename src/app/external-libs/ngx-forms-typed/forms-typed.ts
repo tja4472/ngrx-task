@@ -110,6 +110,7 @@ export function typedFormArray<K extends Array<T> = any[], T = any>(
     | null,
   asyncValidators?: AsyncValidatorFn | AsyncValidatorFn[] | null
 ): TypedFormArray<K, T> {
+  // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
   return new UntypedFormArray(
     controls,
     validatorOrOptions,
@@ -154,6 +155,7 @@ export function typedFormGroup<K, C extends Controls<K> = TypedControlsIn<K>>(
   validatorOrOpts?: ValidatorFn | ValidatorFn[] | AbstractControlOptions | null,
   asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null
 ): TypedFormGroup<K, C> {
+  // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
   return new UntypedFormGroup(controls, validatorOrOpts, asyncValidator) as any;
 }
 

@@ -1,5 +1,5 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 
@@ -18,7 +18,7 @@ interface GroupTasksByDate {
   templateUrl: './completed-task-list.component.html',
   styleUrls: ['./completed-task-list.component.css'],
 })
-export class CompletedTaskListComponent implements OnInit {
+export class CompletedTaskListComponent {
   private inputCurrentTasks: CompletedTask[];
 
   @Input()
@@ -74,8 +74,6 @@ export class CompletedTaskListComponent implements OnInit {
 
     return result;
   }
-
-  ngOnInit() {}
 
   viewTrackBy(index: number, item: CompletedTask) {
     return item.id;

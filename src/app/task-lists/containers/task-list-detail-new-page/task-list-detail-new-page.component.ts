@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 
@@ -14,12 +14,10 @@ import {
   styleUrls: ['./task-list-detail-new-page.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TaskListDetailNewPageComponent implements OnInit {
+export class TaskListDetailNewPageComponent {
   task$ = newTaskListListItem();
 
   constructor(private store: Store<{}>) {}
-
-  ngOnInit() {}
 
   viewCancelled(todoCompleted: TaskListListItem): void {
     this.store.dispatch(TaskListDetailNewPageActions.cancelled());

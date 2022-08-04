@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { Credentials } from '@app/auth/models/credentials.model';
@@ -11,7 +11,7 @@ import { SignUpFormPresenter } from './sign-up-form.presenter';
   styleUrls: ['./sign-up-form.component.css'],
   viewProviders: [SignUpFormPresenter],
 })
-export class SignUpFormComponent implements OnInit {
+export class SignUpFormComponent {
   @Input()
   errorMessage: string | null;
 
@@ -34,8 +34,6 @@ export class SignUpFormComponent implements OnInit {
   constructor(private presenter: SignUpFormPresenter) {
     this.presenter.init();
   }
-
-  ngOnInit() {}
 
   viewOnSubmit() {
     const value: Credentials = this.presenter.checkout();

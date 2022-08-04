@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 
@@ -15,12 +10,6 @@ import { Store } from '@ngrx/store';
   template: ` <router-outlet></router-outlet> `,
   styleUrls: ['./task-lists-root.component.css'],
 })
-export class TaskListsRootComponent implements OnDestroy, OnInit {
-  ngOnDestroy(): void {
-    // this.store.dispatch(TaskListsRootActions.destroyed());
-  }
-
-  ngOnInit(): void {}
-
+export class TaskListsRootComponent {
   constructor(private store: Store<{}>) {}
 }

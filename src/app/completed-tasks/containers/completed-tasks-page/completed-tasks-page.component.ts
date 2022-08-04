@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import { select, Store } from '@ngrx/store';
 
@@ -20,7 +15,7 @@ import { TaskSelectors } from '@app/root-store/tasks-store/selectors';
   styleUrls: ['./completed-tasks-page.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CompletedTasksPageComponent implements OnDestroy, OnInit {
+export class CompletedTasksPageComponent {
   completedTasks$: Observable<CompletedTask[]>;
   viewSearchQuery$: Observable<string>;
 
@@ -34,14 +29,6 @@ export class CompletedTasksPageComponent implements OnDestroy, OnInit {
       // select(TaskSelectors.selectCompletedTasksAll)
       select(TaskSelectors.selectCompletedTasksQueried)
     );
-  }
-
-  ngOnDestroy(): void {
-    // this.store.dispatch(CompletedTasksPageActions.destroyed());
-  }
-
-  ngOnInit() {
-    // this.store.dispatch(CompletedTasksPageActions.entered());
   }
 
   viewSearch(query: string) {

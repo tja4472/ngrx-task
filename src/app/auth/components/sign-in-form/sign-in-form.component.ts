@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { Credentials } from '@app/auth/models/credentials.model';
@@ -11,7 +11,7 @@ import { SignInFormPresenter } from './sign-in-form.presenter';
   styleUrls: ['./sign-in-form.component.css'],
   viewProviders: [SignInFormPresenter],
 })
-export class SignInFormComponent implements OnInit {
+export class SignInFormComponent {
   @Input()
   errorMessage: string | null;
 
@@ -37,8 +37,6 @@ export class SignInFormComponent implements OnInit {
   constructor(private presenter: SignInFormPresenter) {
     this.presenter.init();
   }
-
-  ngOnInit() {}
 
   viewSignUpClick() {
     this.SignUpClicked.emit();

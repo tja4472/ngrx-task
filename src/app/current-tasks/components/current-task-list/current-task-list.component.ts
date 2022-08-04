@@ -1,5 +1,5 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 
 import { pathPrefix, routeNames } from '@app/app-route-names';
@@ -10,7 +10,7 @@ import { CurrentTask } from '@app/root-store/tasks-store/models';
   templateUrl: './current-task-list.component.html',
   styleUrls: ['./current-task-list.component.css'],
 })
-export class CurrentTaskListComponent implements OnInit {
+export class CurrentTaskListComponent {
   @Input()
   currentTasks: CurrentTask[];
 
@@ -19,8 +19,6 @@ export class CurrentTaskListComponent implements OnInit {
   @Output() toggleCompleteItem = new EventEmitter<CurrentTask>();
 
   constructor() {}
-
-  ngOnInit() {}
 
   /*
   drop(event: CdkDragDrop<string[]>) {

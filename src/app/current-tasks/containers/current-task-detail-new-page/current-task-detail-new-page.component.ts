@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 
@@ -14,12 +14,10 @@ import {
   styleUrls: ['./current-task-detail-new-page.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CurrentTaskDetailNewPageComponent implements OnInit {
+export class CurrentTaskDetailNewPageComponent {
   task = newCurrentTask();
 
   constructor(private store: Store<{}>) {}
-
-  ngOnInit() {}
 
   viewCancelled(todo: CurrentTask): void {
     this.store.dispatch(CurrentTaskDetailNewPageActions.cancelled());
