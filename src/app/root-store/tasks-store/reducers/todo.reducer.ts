@@ -11,9 +11,8 @@ export interface State extends EntityState<CurrentTask> {
   loading: boolean;
 }
 
-export const adapter: EntityAdapter<CurrentTask> = createEntityAdapter<
-  CurrentTask
->();
+export const adapter: EntityAdapter<CurrentTask> =
+  createEntityAdapter<CurrentTask>();
 
 export const initialState: State = adapter.getInitialState({
   // additional entity state properties
@@ -46,17 +45,14 @@ export const reducer = createReducer(
     CurrentTasksRootActions.destroyed,
     (): State => ({ ...initialState })
   ),
-  on(
-    TodoActions.loadSuccess,
-    (state, { currentTasks }): State => {
-      const values: State = {
-        ...state,
-        loaded: true,
-        loading: false,
-      };
+  on(TodoActions.loadSuccess, (state, { currentTasks }): State => {
+    const values: State = {
+      ...state,
+      loaded: true,
+      loading: false,
+    };
 
-      return adapter.setAll(currentTasks, values);
-    }
-  ),
+    return adapter.setAll(currentTasks, values);
+  }),
   on(TodoActions.reorderList, (state, { ids }): State => ({ ...state, ids }))
 );

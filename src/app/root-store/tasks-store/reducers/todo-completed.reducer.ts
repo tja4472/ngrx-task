@@ -16,9 +16,8 @@ export interface State extends EntityState<CompletedTask> {
   query: string;
 }
 
-export const adapter: EntityAdapter<CompletedTask> = createEntityAdapter<
-  CompletedTask
->();
+export const adapter: EntityAdapter<CompletedTask> =
+  createEntityAdapter<CompletedTask>();
 
 export const initialState: State = adapter.getInitialState({
   // additional entity state properties
@@ -43,13 +42,10 @@ https://github.com/ngrx/platform/issues/2412
 */
 export const reducer = createReducer(
   initialState,
-  on(
-    CompletedTasksPageActions.search,
-    (state, { query }): State => {
-      const lowerCaseQuery = query.toLowerCase();
-      return { ...state, query: lowerCaseQuery };
-    }
-  ),
+  on(CompletedTasksPageActions.search, (state, { query }): State => {
+    const lowerCaseQuery = query.toLowerCase();
+    return { ...state, query: lowerCaseQuery };
+  }),
   on(
     TodoCompletedActions.databaseListenForDataStart,
     (state): State => ({
@@ -64,16 +60,13 @@ export const reducer = createReducer(
       ...initialState,
     })
   ),
-  on(
-    TodoCompletedActions.loadSuccess,
-    (state, { completedTasks }): State => {
-      const values: State = {
-        ...state,
-        loaded: true,
-        loading: false,
-      };
+  on(TodoCompletedActions.loadSuccess, (state, { completedTasks }): State => {
+    const values: State = {
+      ...state,
+      loaded: true,
+      loading: false,
+    };
 
-      return adapter.setAll(completedTasks, values);
-    }
-  )
+    return adapter.setAll(completedTasks, values);
+  })
 );

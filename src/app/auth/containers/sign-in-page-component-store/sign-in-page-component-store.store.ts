@@ -22,9 +22,7 @@ export interface SignInPageComponentStoreState {
 }
 
 @Injectable()
-export class SignInPageComponentStore extends ComponentStore<
-  SignInPageComponentStoreState
-> {
+export class SignInPageComponentStore extends ComponentStore<SignInPageComponentStoreState> {
   constructor(private readonly authService: AuthService) {
     // set defaults
     super({ error: null, pending: false });

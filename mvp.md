@@ -4,9 +4,7 @@ I usually expose observables that emits values when an action such as checkout i
 
 ```html
 <!-- heroes.component.html -->
-<button (click)="addHero(heroName.value)">
-  add
-</button>
+<button (click)="addHero(heroName.value)">add</button>
 ```
 
 ```ts

@@ -36,15 +36,12 @@ export const reducer = createReducer(
   })),
 */
 
-  on(
-    featureActions.loadSuccess,
-    (state, { items }): State => {
-      const values: State = {
-        ...state,
-        loaded: true,
-        loading: false,
-      };
-      return featureAdapter.setAll(items, values);
-    }
-  )
+  on(featureActions.loadSuccess, (state, { items }): State => {
+    const values: State = {
+      ...state,
+      loaded: true,
+      loading: false,
+    };
+    return featureAdapter.setAll(items, values);
+  })
 );

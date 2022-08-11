@@ -32,6 +32,5 @@ export const authReducers: ActionReducerMap<AuthFeatureState> = {
   [signUpPageReducerKey]: signUpPageReducer,
 };
 
-export const selectAuthFeatureState = createFeatureSelector<AuthFeatureState>(
-  authFeatureKey
-);
+export const selectAuthFeatureState =
+  createFeatureSelector<AuthFeatureState>(authFeatureKey);
