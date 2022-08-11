@@ -21,6 +21,6 @@ import { TaskListEffects } from './task-list-store/effects';
       TodoCompletedEffects,
     ]),
   ],
-  providers: [TaskEffects, TaskListEffects, TodoEffects, TodoCompletedEffects],
+  providers: [],
 })
 export class TasksStoreModule {}

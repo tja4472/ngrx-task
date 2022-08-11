@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
 
@@ -18,8 +18,8 @@ import { TaskSelectors } from '@app/root-store/tasks-store/selectors';
 export class TaskListDetailEditPageComponent {
   task$: Observable<TaskListListItem | undefined>;
 
-  constructor(private store: Store<RootState>) {
-    this.task$ = store.pipe(select(TaskSelectors.selectTaskListFromRoute));
+  constructor(private readonly store: Store) {
+    this.task$ = store.select(TaskSelectors.selectTaskListFromRoute);
   }
 
   viewCancelled(taskList: TaskListListItem): void {

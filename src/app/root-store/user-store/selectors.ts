@@ -3,15 +3,15 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { featureKey } from './reducer';
 import { State } from './state';
 
-const getFeatureState = createFeatureSelector<State>(featureKey);
+const selectFeatureState = createFeatureSelector<State>(featureKey);
 
 export const selectTaskListId = createSelector(
-  getFeatureState,
+  selectFeatureState,
   (state) => state.taskListId
 );
 
 export const selectUser = createSelector(
-  getFeatureState,
+  selectFeatureState,
   (state) => state.user
 );
 

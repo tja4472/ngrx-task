@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate } from '@angular/router';
 
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
 import { filter, map, switchMap, take } from 'rxjs/operators';
@@ -13,7 +13,7 @@ import { TaskSelectors } from '@app/root-store/tasks-store/selectors';
   providedIn: 'root',
 })
 export class CompletedTaskGuardService implements CanActivate {
-  constructor(private store: Store<RootState>) {}
+  constructor(private readonly store: Store) {}
 
   canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {
     return this.waitForCompletedTasksToLoad().pipe(
@@ -22,16 +22,15 @@ export class CompletedTaskGuardService implements CanActivate {
   }
 
   private hasCompletedTask(): Observable<boolean> {
-    return this.store.pipe(
-      select(TaskSelectors.selectCompletedTaskFromRoute),
+    return this.store.select(TaskSelectors.selectCompletedTaskFromRoute).pipe(
+      // eslint-disable-next-line @ngrx/avoid-mapping-selectors
       map((todo) => todo !== undefined),
       take(1)
     );
   }
 
   private waitForCompletedTasksToLoad(): Observable<boolean> {
-    return this.store.pipe(
-      select(TaskSelectors.selectCompletedTasksLoaded),
+    return this.store.select(TaskSelectors.selectCompletedTasksLoaded).pipe(
       filter((loaded) => loaded),
       take(1)
     );

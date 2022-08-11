@@ -26,29 +26,29 @@ import { selectEntities } from './task-list';
 import * as TodoCompletedSelectors from './todo-completed.selectors';
 import * as TodoSelectors from './todo.selectors';
 
-const getTaskState = createFeatureSelector<fromTask.TaskState>(
+const selectTaskState = createFeatureSelector<fromTask.TaskState>(
   fromTask.taskFeatureKey
 );
 
 // #region CompletedTasks
 export const selectCompletedTasksAll = createSelector(
-  getTaskState,
-  TodoCompletedSelectors.getAllTodoCompleted
+  selectTaskState,
+  TodoCompletedSelectors.selectAllTodoCompleted
 );
 
 export const selectCompletedTasksEntities = createSelector(
-  getTaskState,
-  TodoCompletedSelectors.getEntities
+  selectTaskState,
+  TodoCompletedSelectors.selectEntitiesA
 );
 
 export const selectCompletedTasksLoaded = createSelector(
-  getTaskState,
-  TodoCompletedSelectors.getLoaded
+  selectTaskState,
+  TodoCompletedSelectors.selectLoaded
 );
 
 export const selectCompletedTasksQuery = createSelector(
-  getTaskState,
-  TodoCompletedSelectors.getQuery
+  selectTaskState,
+  TodoCompletedSelectors.selectQuery
 );
 // #endregion
 
@@ -77,25 +77,22 @@ export const selectCompletedTasksQueried = createSelector(
 
 // #region CurrentTasks
 export const selectCurrentTasksAll = createSelector(
-  getTaskState,
-  TodoSelectors.getAllTodo
+  selectTaskState,
+  TodoSelectors.selectAllTodo
 );
 
 export const selectCurrentTasksEntities = createSelector(
-  getTaskState,
-  TodoSelectors.getEntities
+  selectTaskState,
+  TodoSelectors.selectEntitiesA
 );
 
 export const selectCurrentTasksLoaded = createSelector(
-  getTaskState,
-  TodoSelectors.getLoaded
+  selectTaskState,
+  TodoSelectors.selectLoaded
 );
 // #endregion
 
-export const selectCompletedTaskFromRoute: MemoizedSelector<
-  RootState,
-  CompletedTask | undefined
-> = createSelector(
+export const selectCompletedTaskFromRoute = createSelector(
   selectCompletedTasksEntities,
   selectRouteParam(routeNames.completedTasks.edit.idParam),
   (tasks, id) => {
@@ -106,10 +103,7 @@ export const selectCompletedTaskFromRoute: MemoizedSelector<
   }
 );
 
-export const selectCurrentTaskFromRoute: MemoizedSelector<
-  RootState,
-  CurrentTask | undefined
-> = createSelector(
+export const selectCurrentTaskFromRoute = createSelector(
   selectCurrentTasksEntities,
   selectRouteParam(routeNames.currentTasks.edit.idParam),
   (tasks, id) => {
@@ -120,10 +114,7 @@ export const selectCurrentTaskFromRoute: MemoizedSelector<
   }
 );
 
-export const selectTaskListFromRoute: MemoizedSelector<
-  RootState,
-  TaskListListItem | undefined
-> = createSelector(
+export const selectTaskListFromRoute = createSelector(
   selectEntities,
   selectRouteParam(routeNames.taskLists.edit.idParam),
   (taskLists, id) => {

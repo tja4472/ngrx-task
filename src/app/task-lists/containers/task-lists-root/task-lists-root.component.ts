@@ -11,5 +11,5 @@ import { Store } from '@ngrx/store';
   styleUrls: ['./task-lists-root.component.css'],
 })
 export class TaskListsRootComponent {
-  constructor(private store: Store<{}>) {}
+  constructor(private readonly store: Store) {}
 }

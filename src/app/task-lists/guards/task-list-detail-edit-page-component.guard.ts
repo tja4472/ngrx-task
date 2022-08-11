@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 
 import { Observable, of } from 'rxjs';
 import {
@@ -28,7 +28,7 @@ import { TaskListDetailEditPageComponentGuardActions } from '../actions';
   providedIn: 'root',
 })
 export class TaskListDetailEditPageComponentGuard implements CanActivate {
-  constructor(private store: Store<RootState>, private router: Router) {}
+  constructor(private readonly store: Store, private router: Router) {}
 
   canActivate(): Observable<boolean> {
     return this.waitForTaskListsToLoad().pipe(
@@ -41,8 +41,8 @@ export class TaskListDetailEditPageComponentGuard implements CanActivate {
   }
 
   private hasTaskListInStore(): Observable<boolean> {
-    return this.store.pipe(
-      select(TaskSelectors.selectTaskListFromRoute),
+    return this.store.select(TaskSelectors.selectTaskListFromRoute).pipe(
+      // eslint-disable-next-line @ngrx/avoid-mapping-selectors
       map((todo) => todo !== undefined),
       tap((x) => {
         if (x === false) {
@@ -57,8 +57,7 @@ export class TaskListDetailEditPageComponentGuard implements CanActivate {
   }
 
   private waitForTaskListsToLoad(): Observable<boolean> {
-    return this.store.pipe(
-      select(TaskListSelectors.selectLoaded),
+    return this.store.select(TaskListSelectors.selectLoaded).pipe(
       filter((loaded) => loaded),
       take(1)
     );

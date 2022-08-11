@@ -190,6 +190,7 @@ export class AuthEffects implements OnInitEffects {
           this.afAuth
             .signInWithEmailAndPassword(action.credentials.username, password)
             .catch((error) =>
+              // eslint-disable-next-line @ngrx/no-dispatch-in-effects
               this.store.dispatch(
                 AuthApiActions.signInFailure({
                   error: {
@@ -215,6 +216,7 @@ export class AuthEffects implements OnInitEffects {
           this.authService
             .signUp(action.credentials.username, password)
             .catch((error) =>
+              // eslint-disable-next-line @ngrx/no-dispatch-in-effects
               this.store.dispatch(
                 AuthApiActions.signUpFailure({
                   error: {
@@ -268,6 +270,7 @@ export class AuthEffects implements OnInitEffects {
         tap(() =>
           this.afAuth.signOut().then(() => {
             this.router.navigate(['/sign-in']);
+            // eslint-disable-next-line @ngrx/no-dispatch-in-effects
             this.store.dispatch(AuthActions.signOutComplete());
           })
         )
@@ -341,12 +344,12 @@ export class AuthEffects implements OnInitEffects {
   );
 
   constructor(
-    private actions$: Actions,
+    private readonly actions$: Actions,
     private afAuth: AngularFireAuth,
     private authService: AuthService,
     private router: Router,
     private dialog: MatDialog,
-    private store: Store<AuthRootState>
+    private readonly store: Store
   ) {}
 
   ngrxOnInitEffects(): Action {

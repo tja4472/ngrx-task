@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 
 import { Observable, pipe } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -21,10 +21,9 @@ import { isPresent } from 'ts-is-present';
 export class CurrentTaskDetailEditPageComponent {
   task$: Observable<CurrentTask>;
 
-  constructor(private store: Store<RootState>) {
+  constructor(private readonly store: Store) {
     // The undefined task is caught by route guard.
-    this.task$ = store.pipe(
-      select(TaskSelectors.selectCurrentTaskFromRoute),
+    this.task$ = store.select(TaskSelectors.selectCurrentTaskFromRoute).pipe(
       // Typescript type guard does not work here, so use isPresent.
       // https://github.com/microsoft/TypeScript/issues/16069#issuecomment-565658443
       filter(isPresent)

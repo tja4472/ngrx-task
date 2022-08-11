@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router } from '@angular/router';
 
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
 import { filter, map, switchMap, take, tap } from 'rxjs/operators';
@@ -17,7 +17,7 @@ import { CurrentTaskDetailEditPageComponentGuardActions } from '../actions';
   providedIn: 'root',
 })
 export class CurrentTaskDetailEditPageComponentGuard implements CanActivate {
-  constructor(private store: Store<RootState>, private router: Router) {}
+  constructor(private readonly store: Store, private router: Router) {}
 
   /*
   canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {
@@ -31,8 +31,8 @@ export class CurrentTaskDetailEditPageComponentGuard implements CanActivate {
   }
 
   private hasCurrentTask(): Observable<boolean> {
-    return this.store.pipe(
-      select(TaskSelectors.selectCurrentTaskFromRoute),
+    return this.store.select(TaskSelectors.selectCurrentTaskFromRoute).pipe(
+      // eslint-disable-next-line @ngrx/avoid-mapping-selectors
       map((todo) => todo !== undefined),
       tap((x) => {
         if (x === false) {
@@ -49,8 +49,7 @@ export class CurrentTaskDetailEditPageComponentGuard implements CanActivate {
   }
 
   private waitForCurrentTasksToLoad(): Observable<boolean> {
-    return this.store.pipe(
-      select(TaskSelectors.selectCurrentTasksLoaded),
+    return this.store.select(TaskSelectors.selectCurrentTasksLoaded).pipe(
       filter((loaded) => loaded),
       take(1)
     );

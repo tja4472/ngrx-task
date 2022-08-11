@@ -15,5 +15,5 @@ export class CompletedTasksRootComponent implements OnDestroy {
     this.store.dispatch(CompletedTasksRootActions.destroyed());
   }
 
-  constructor(private store: Store<{}>) {}
+  constructor(private readonly store: Store) {}
 }

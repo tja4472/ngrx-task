@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router } from '@angular/router';
 
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
 import { filter, map, switchMap, take } from 'rxjs/operators';
@@ -16,7 +16,7 @@ import {
   providedIn: 'root',
 })
 export class TaskListGuardService implements CanActivate {
-  constructor(private store: Store<RootState>) {}
+  constructor(private readonly store: Store) {}
 
   canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {
     return this.waitForTaskListsToLoad().pipe(
@@ -25,16 +25,15 @@ export class TaskListGuardService implements CanActivate {
   }
 
   private hasTaskList(): Observable<boolean> {
-    return this.store.pipe(
-      select(TaskSelectors.selectTaskListFromRoute),
+    return this.store.select(TaskSelectors.selectTaskListFromRoute).pipe(
+      // eslint-disable-next-line @ngrx/avoid-mapping-selectors
       map((todo) => todo !== undefined),
       take(1)
     );
   }
 
   private waitForTaskListsToLoad(): Observable<boolean> {
-    return this.store.pipe(
-      select(TaskListSelectors.selectLoaded),
+    return this.store.select(TaskListSelectors.selectLoaded).pipe(
       filter((loaded) => loaded),
       take(1)
     );

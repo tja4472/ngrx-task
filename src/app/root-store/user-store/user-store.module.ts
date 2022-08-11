@@ -13,6 +13,6 @@ import { featureKey, reducer } from './reducer';
     StoreModule.forFeature(featureKey, reducer),
     EffectsModule.forFeature([UserStoreEffects]),
   ],
-  providers: [UserStoreEffects],
+  providers: [],
 })
 export class UserStoreModule {}

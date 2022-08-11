@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
 
@@ -17,8 +17,8 @@ import { TaskListSelectors } from '@app/root-store/tasks-store/selectors';
 export class TaskListsPageComponent implements OnInit {
   taskLists$: Observable<TaskListListItem[]>;
 
-  constructor(private store: Store<{}>) {
-    this.taskLists$ = store.pipe(select(TaskListSelectors.selectAll));
+  constructor(private readonly store: Store) {
+    this.taskLists$ = store.select(TaskListSelectors.selectAll);
   }
 
   ngOnInit() {

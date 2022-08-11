@@ -17,7 +17,7 @@ import {
 export class CurrentTaskDetailNewPageComponent {
   task = newCurrentTask();
 
-  constructor(private store: Store<{}>) {}
+  constructor(private readonly store: Store) {}
 
   viewCancelled(todo: CurrentTask): void {
     this.store.dispatch(CurrentTaskDetailNewPageActions.cancelled());

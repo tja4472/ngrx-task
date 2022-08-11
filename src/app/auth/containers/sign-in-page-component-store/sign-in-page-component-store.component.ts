@@ -31,7 +31,7 @@ export class SignInPageComponentStoreComponent {
   readonly vm$ = this.signInPageComponentStore.vm$;
 
   constructor(
-    private store: Store<AuthRootState>,
+    private readonly store: Store,
     private readonly signInPageComponentStore: SignInPageComponentStore
   ) {
     // this.error$ = store.pipe(select(SignInPageSelectors.selectSignInPageError));

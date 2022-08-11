@@ -58,7 +58,7 @@ export class UserStoreEffects {
 
   constructor(
     private actions$: Actions,
-    private store: Store<{}>,
+    private readonly store: Store,
     private userInfoDataService: UserInfoDataService
   ) {}
 }

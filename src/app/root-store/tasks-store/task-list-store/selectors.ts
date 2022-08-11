@@ -3,15 +3,21 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { featureKey } from './reducer';
 import { featureAdapter, State } from './state';
 
-const getTodoListsState = createFeatureSelector<State>(featureKey);
+const selectTodoListsState = createFeatureSelector<State>(featureKey);
 
 const { selectEntities, selectAll } = featureAdapter.getSelectors();
 
-export const getAllTodoLists = createSelector(getTodoListsState, selectAll);
+export const selectAllTodoLists = createSelector(
+  selectTodoListsState,
+  selectAll
+);
 
-export const getEntities = createSelector(getTodoListsState, selectEntities);
+export const selectEntitiesA = createSelector(
+  selectTodoListsState,
+  selectEntities
+);
 
-export const getLoaded = createSelector(
-  getTodoListsState,
+export const selectLoaded = createSelector(
+  selectTodoListsState,
   (state) => state.loaded
 );

@@ -2,28 +2,28 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 import * as fromTodoCompleted from '../reducers/todo-completed.reducer';
 
-const getTodoCompletedState = createFeatureSelector<fromTodoCompleted.State>(
+const selectTodoCompletedState = createFeatureSelector<fromTodoCompleted.State>(
   fromTodoCompleted.todoCompletedFeatureKey
 );
 
 const { selectEntities, selectAll } = fromTodoCompleted.adapter.getSelectors();
 
-export const getAllTodoCompleted = createSelector(
-  getTodoCompletedState,
+export const selectAllTodoCompleted = createSelector(
+  selectTodoCompletedState,
   selectAll
 );
 
-export const getEntities = createSelector(
-  getTodoCompletedState,
+export const selectEntitiesA = createSelector(
+  selectTodoCompletedState,
   selectEntities
 );
 
-export const getLoaded = createSelector(
-  getTodoCompletedState,
+export const selectLoaded = createSelector(
+  selectTodoCompletedState,
   (state) => state.loaded
 );
 
-export const getQuery = createSelector(
-  getTodoCompletedState,
+export const selectQuery = createSelector(
+  selectTodoCompletedState,
   (state) => state.query
 );

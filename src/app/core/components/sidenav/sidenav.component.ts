@@ -3,7 +3,7 @@ import { Component, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { NavigationEnd, Router } from '@angular/router';
 
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
 import { filter, map, shareReplay, withLatestFrom } from 'rxjs/operators';
@@ -80,7 +80,7 @@ export class SidenavComponent {
   constructor(
     private breakpointObserver: BreakpointObserver,
     router: Router,
-    private store: Store<{}>
+    private readonly store: Store
   ) {
     this.view$ = this.store.select(UserStoreSelectors.selectUserAndTaskListId);
     /*
@@ -95,7 +95,7 @@ export class SidenavComponent {
     );
 */
 
-    this.taskLists$ = store.pipe(select(TaskListSelectors.selectAll));
+    this.taskLists$ = store.select(TaskListSelectors.selectAll);
 
     // Close sidenav on a handset device after route click.
     router.events

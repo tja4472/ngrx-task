@@ -3,19 +3,19 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { taskFeatureKey, TaskState } from '../reducers';
 import { TaskListSelectors } from '../task-list-store';
 
-const getTaskState = createFeatureSelector<TaskState>(taskFeatureKey);
+const selectTaskState = createFeatureSelector<TaskState>(taskFeatureKey);
 
 export const selectAll = createSelector(
-  getTaskState,
-  TaskListSelectors.getAllTodoLists
+  selectTaskState,
+  TaskListSelectors.selectAllTodoLists
 );
 
 export const selectEntities = createSelector(
-  getTaskState,
-  TaskListSelectors.getEntities
+  selectTaskState,
+  TaskListSelectors.selectEntitiesA
 );
 
 export const selectLoaded = createSelector(
-  getTaskState,
-  TaskListSelectors.getLoaded
+  selectTaskState,
+  TaskListSelectors.selectLoaded
 );

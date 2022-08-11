@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
 
@@ -23,10 +23,8 @@ import { TaskSelectors } from '@app/root-store/tasks-store/selectors';
 export class CurrentTasksPageComponent implements OnInit {
   currentTasks$: Observable<CurrentTask[]>;
 
-  constructor(private store: Store<{}>) {
-    this.currentTasks$ = store.pipe(
-      select(TaskSelectors.selectCurrentTasksAll)
-    );
+  constructor(private readonly store: Store) {
+    this.currentTasks$ = store.select(TaskSelectors.selectCurrentTasksAll);
   }
 
   ngOnInit() {

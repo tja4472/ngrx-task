@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
 
@@ -19,11 +19,9 @@ export class SignInPageComponent {
   error$: Observable<string | null>;
   pending$: Observable<boolean>;
 
-  constructor(private store: Store<AuthRootState>) {
-    this.error$ = store.pipe(select(SignInPageSelectors.selectSignInPageError));
-    this.pending$ = store.pipe(
-      select(SignInPageSelectors.selectSignInPagePending)
-    );
+  constructor(private readonly store: Store) {
+    this.error$ = store.select(SignInPageSelectors.selectSignInPageError);
+    this.pending$ = store.select(SignInPageSelectors.selectSignInPagePending);
 
     this.store.dispatch(SignInPageActions.entered());
   }

@@ -64,6 +64,6 @@ export class TodoCompletedEffects {
   constructor(
     private actions$: Actions,
     private dataService: CompletedTaskDataService,
-    private store: Store<{}>
+    private readonly store: Store
   ) {}
 }

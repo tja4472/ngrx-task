@@ -7,7 +7,7 @@ import {
   RouterStateSnapshot,
 } from '@angular/router';
 
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
 import { exhaustMap, filter, map, take } from 'rxjs/operators';
@@ -23,7 +23,7 @@ import { AuthService } from '../services/auth.service';
 export class AuthGuardService implements CanActivate, CanLoad {
   constructor(
     private authService: AuthService,
-    private store: Store<AuthRootState>
+    private readonly store: Store
   ) {}
 
   canActivate(
@@ -62,10 +62,9 @@ export class AuthGuardService implements CanActivate, CanLoad {
 
   private checkStoreAuthentication() {
     //
-    return this.store.pipe(
-      select(selectHasChecked),
+    return this.store.select(selectHasChecked).pipe(
       filter((hasChecked) => hasChecked),
-      exhaustMap(() => this.store.pipe(select(selectHasUser), take(1)))
+      exhaustMap(() => this.store.select(selectHasUser).pipe(take(1)))
     );
   }
 

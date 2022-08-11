@@ -80,6 +80,6 @@ export class TaskListEffects {
   constructor(
     private actions$: Actions,
     private dataService: TaskListDataService,
-    private store: Store<{}>
+    private readonly store: Store
   ) {}
 }

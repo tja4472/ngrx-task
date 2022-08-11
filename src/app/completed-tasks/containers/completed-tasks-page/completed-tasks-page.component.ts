@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -19,16 +19,14 @@ export class CompletedTasksPageComponent {
   completedTasks$: Observable<CompletedTask[]>;
   viewSearchQuery$: Observable<string>;
 
-  constructor(private store: Store<{}>) {
-    this.viewSearchQuery$ = store.pipe(
-      select(TaskSelectors.selectCompletedTasksQuery),
-      take(1)
-    );
+  constructor(private readonly store: Store) {
+    this.viewSearchQuery$ = store
+      .select(TaskSelectors.selectCompletedTasksQuery)
+      .pipe(take(1));
 
-    this.completedTasks$ = store.pipe(
+    this.completedTasks$ = store
       // select(TaskSelectors.selectCompletedTasksAll)
-      select(TaskSelectors.selectCompletedTasksQueried)
-    );
+      .select(TaskSelectors.selectCompletedTasksQueried);
   }
 
   viewSearch(query: string) {

@@ -17,7 +17,7 @@ import {
 export class TaskListDetailNewPageComponent {
   task$ = newTaskListListItem();
 
-  constructor(private store: Store<{}>) {}
+  constructor(private readonly store: Store) {}
 
   viewCancelled(todoCompleted: TaskListListItem): void {
     this.store.dispatch(TaskListDetailNewPageActions.cancelled());

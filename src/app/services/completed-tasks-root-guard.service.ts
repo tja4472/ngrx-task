@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate } from '@angular/router';
 
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 
 import { Observable, of } from 'rxjs';
 import { filter, first, switchMap, take, tap } from 'rxjs/operators';
@@ -14,7 +14,7 @@ import { CompletedTasksRootGuardServiceActions } from '../root-store/tasks-store
   providedIn: 'root',
 })
 export class CompletedTasksRootGuardService implements CanActivate {
-  constructor(private store: Store<{}>) {}
+  constructor(private readonly store: Store) {}
 
   canActivate(): Observable<boolean> {
     return this.waitForAuth().pipe(
@@ -29,16 +29,14 @@ export class CompletedTasksRootGuardService implements CanActivate {
   }
 
   private waitForAuth() {
-    return this.store.pipe(
-      select(UserStoreSelectors.selectUser),
+    return this.store.select(UserStoreSelectors.selectUser).pipe(
       filter((user) => !!user),
       first()
     );
   }
 
   private waitForCompletedTasksToLoad(): Observable<boolean> {
-    return this.store.pipe(
-      select(TaskSelectors.selectCompletedTasksLoaded),
+    return this.store.select(TaskSelectors.selectCompletedTasksLoaded).pipe(
       tap((loaded) => {
         // console.log('waitForCompletedTasksToLoad>loaded>', loaded);
         if (!loaded) {

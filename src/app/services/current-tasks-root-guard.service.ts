@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate } from '@angular/router';
 
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 
 import { Observable, of } from 'rxjs';
 import { filter, first, switchMap, take, tap } from 'rxjs/operators';
@@ -15,7 +15,7 @@ import { CurrentTasksRootGuardServiceActions } from '../root-store/tasks-store/a
   providedIn: 'root',
 })
 export class CurrentTasksRootGuardService implements CanActivate {
-  constructor(private store: Store<{}>) {}
+  constructor(private readonly store: Store) {}
 
   // what happens if try to navigate to http://localhost:4200/tasks/current
   // but are logged out?
@@ -34,16 +34,14 @@ export class CurrentTasksRootGuardService implements CanActivate {
   }
 
   private waitForAuth() {
-    return this.store.pipe(
-      select(UserStoreSelectors.selectUser),
+    return this.store.select(UserStoreSelectors.selectUser).pipe(
       filter((user) => !!user),
       first()
     );
   }
 
   private waitForCurrentTasksToLoad(): Observable<boolean> {
-    return this.store.pipe(
-      select(TaskSelectors.selectCurrentTasksLoaded),
+    return this.store.select(TaskSelectors.selectCurrentTasksLoaded).pipe(
       tap((loaded) => {
         // console.log('waitForCompletedTasksToLoad>loaded>', loaded);
         if (!loaded) {

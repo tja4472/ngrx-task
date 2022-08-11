@@ -19,11 +19,9 @@ export class SignUpPageComponent {
   error$: Observable<string | null>;
   pending$: Observable<boolean>;
 
-  constructor(private store: Store<AuthRootState>) {
-    this.error$ = store.pipe(select(SignUpPageSelectors.selectSignUpPageError));
-    this.pending$ = store.pipe(
-      select(SignUpPageSelectors.selectSignUpPagePending)
-    );
+  constructor(private readonly store: Store) {
+    this.error$ = store.select(SignUpPageSelectors.selectSignUpPageError);
+    this.pending$ = store.select(SignUpPageSelectors.selectSignUpPagePending);
 
     this.store.dispatch(SignUpPageActions.entered());
   }

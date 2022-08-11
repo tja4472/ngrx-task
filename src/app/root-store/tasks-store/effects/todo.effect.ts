@@ -92,7 +92,7 @@ export class TodoEffects {
 
   constructor(
     private actions$: Actions,
-    private store: Store<{}>,
+    private readonly store: Store,
     private dataService: CurrentTaskDataService
   ) {}
 }
