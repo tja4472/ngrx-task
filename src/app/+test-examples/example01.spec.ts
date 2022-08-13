@@ -1,3 +1,6 @@
+/**
+ * @jest-environment jsdom
+ */
 // https://github.com/tja4472/wiki/wiki/NgRx-Testing
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -19,7 +22,7 @@ import {
 
 import { cold } from 'jasmine-marbles';
 
-describe('example01-' + CompletedTasksPageComponent.name, () => {
+describe('example01', () => {
   let component: CompletedTasksPageComponent;
   let fixture: ComponentFixture<CompletedTasksPageComponent>;
   let store: MockStore;
@@ -43,7 +46,7 @@ describe('example01-' + CompletedTasksPageComponent.name, () => {
     fixture = TestBed.createComponent(CompletedTasksPageComponent);
     store = TestBed.inject(MockStore);
 
-    spyOn(store, 'dispatch');
+    jest.spyOn(store, 'dispatch');
     component = fixture.componentInstance;
   });
 

@@ -1,3 +1,6 @@
+/**
+ * @jest-environment jsdom
+ */
 import { TestBed } from '@angular/core/testing';
 import { Route } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -14,12 +17,12 @@ import { TaskListsGuard } from './task-lists.guard';
 
 import { getTestScheduler } from 'jasmine-marbles';
 
-describe(TaskListsGuard.name, () => {
+describe('TaskListsGuard', () => {
   let guard: TaskListsGuard;
   let mockStore: MockStore;
-  let taskListSelectorsSelectLoaded: MemoizedSelector<TaskState, boolean>;
+  let selectTaskListSelectorsSelectLoaded: MemoizedSelector<TaskState, boolean>;
 
-  let mockStoreDispatchSpy: jasmine.Spy;
+  let mockStoreDispatchSpy: jest.SpyInstance;
 
   const dummyUrl = 'dummy/url';
   const route: Route = { path: dummyUrl };
@@ -31,11 +34,11 @@ describe(TaskListsGuard.name, () => {
     });
 
     mockStore = TestBed.inject(MockStore);
-    mockStoreDispatchSpy = spyOn(mockStore, 'dispatch');
+    mockStoreDispatchSpy = jest.spyOn(mockStore, 'dispatch');
 
     guard = TestBed.inject(TaskListsGuard);
 
-    taskListSelectorsSelectLoaded = mockStore.overrideSelector(
+    selectTaskListSelectorsSelectLoaded = mockStore.overrideSelector(
       TaskListSelectors.selectLoaded,
       false
     );
@@ -61,14 +64,14 @@ describe(TaskListsGuard.name, () => {
     });
 
     it('should return Observable<true> if url task list does exist in store', () => {
-      taskListSelectorsSelectLoaded.setResult(true);
+      selectTaskListSelectorsSelectLoaded.setResult(true);
       const scheduler = getTestScheduler();
       scheduler.run(({ expectObservable }) => {
         expectObservable(guard.canLoad(route)).toBe('(a|)', { a: true });
       });
 
       // suppress 'has no expectations' warnings.
-      expect().nothing();
+      // expect().nothing();
     });
   });
 });

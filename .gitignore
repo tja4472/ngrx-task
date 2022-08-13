@@ -51,3 +51,7 @@ src/app/firebase-config.ts
 .firebaserc
 *.log
 **/serviceAccount*.json
+
+# Cypress
+/cypress/screenshots
+/cypress/videos

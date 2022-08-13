@@ -14,7 +14,7 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "es2020",
-    "lib": ["es2018", "dom"],
+    "lib": ["es2020", "dom"],
     "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
@@ -26,13 +26,14 @@
     "strictFunctionTypes": true,
     "strictPropertyInitialization": false,
     // Required for angularfire to work with typescript 4.5.5
-    "skipDefaultLibCheck": true,
-    "skipLibCheck": true
+    // "skipDefaultLibCheck": true,
+    // "skipLibCheck": true
     // ^^^^
   },
   // Required for jest to work with cypress
   "include": ["src/**/*", "libs/**/*"],
   // ^^^^
+  "files": ["./setup-jest.ts"],    
   "angularCompilerOptions": {
     "strictTemplates": true,
     "strictNullInputTypes": false,
