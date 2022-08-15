@@ -54,9 +54,7 @@ export function flush(reducer: any) {
   };
 }
 
-export const metaReducers: MetaReducer<any>[] = !environment.production
-  ? [logger, flush]
-  : [flush];
+
 
 export const selectRouter = createFeatureSelector<
   fromRouter.RouterReducerState<any>

@@ -17,6 +17,10 @@ import { TaskListsGuard } from './task-lists.guard';
 
 import { getTestScheduler } from 'jasmine-marbles';
 
+
+// src/environments/environment.ts:1:35 - error TS2307: Cannot find module '@app/firebase/firebase-config-dev' or its corresponding type declarations.
+// src/app/root-store/reducers/index.ts
+
 describe('TaskListsGuard', () => {
   let guard: TaskListsGuard;
   let mockStore: MockStore;

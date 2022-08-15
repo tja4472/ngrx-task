@@ -3,13 +3,19 @@ import { NgModule } from '@angular/core';
 
 import { EffectsModule } from '@ngrx/effects';
 import { RouterState, StoreRouterConnectingModule } from '@ngrx/router-store';
-import { StoreModule } from '@ngrx/store';
+import { MetaReducer, StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
-import { metaReducers, rootReducers } from '@app/root-store/reducers';
+import { flush, logger, rootReducers } from '@app/root-store/reducers';
 import { TasksStoreModule } from '@app/root-store/tasks-store';
 
 import { UserStoreModule } from './user-store';
+
+import { environment } from '../../environments/environment';
+
+const metaReducers: MetaReducer<any>[] = !environment.production
+  ? [logger, flush]
+  : [flush];
 
 @NgModule({
   imports: [

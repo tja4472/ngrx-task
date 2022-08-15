@@ -1,9 +1,8 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
-import { featureKey } from './reducer';
-import { State } from './state';
+import { State, userStoreFeatureKey } from './user-store.reducer';
 
-const selectFeatureState = createFeatureSelector<State>(featureKey);
+const selectFeatureState = createFeatureSelector<State>(userStoreFeatureKey);
 
 export const selectTaskListId = createSelector(
   selectFeatureState,

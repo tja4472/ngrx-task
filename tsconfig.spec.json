@@ -6,5 +6,6 @@
     "types": ["jest", "node"]
   },
   "files": ["src/polyfills.ts", "./setup-jest.ts"],
-  "include": ["src/**/*.spec.ts", "src/**/*.d.ts"]
+  "include": ["src/**/*.spec.ts", "src/**/*.d.ts"],
+  "exclude": ["src/environments/**/*"]  
 }
