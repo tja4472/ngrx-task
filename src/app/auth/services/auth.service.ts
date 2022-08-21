@@ -70,6 +70,10 @@ export class AuthService {
         })
       )
 */
+createAppUser$(): Observable<AppUser | null> {
+  return this.appUser$;
+}
+
   signIn() {
     this.auth
       .signInWithEmailAndPassword('email', 'password')

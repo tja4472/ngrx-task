@@ -35,7 +35,7 @@ import { AuthRootState } from '../reducers';
 import { selectIsAutoSignIn, selectUserId } from '../selectors/auth.selectors';
 import { AuthService } from '../services/auth.service';
 
-import { isPresent } from 'ts-is-present';
+import { AppUser } from '../models/app-user.model';
 
 /* =======================================
 Improve typings of createEffect, help debugging
@@ -81,11 +81,9 @@ export class AuthEffects implements OnInitEffects {
     return this.actions$.pipe(
       ofType(AuthApiActions.autoSignInCheck),
       switchMap(() =>
-        this.authService.appUser$.pipe(
+        this.authService.createAppUser$().pipe(
           first(),
-          // Typescript type guard does not work here, so use isPresent.
-          // https://github.com/microsoft/TypeScript/issues/16069#issuecomment-565658443
-          filter(isPresent),
+          filter((appUser): appUser is AppUser => appUser !== null),
           map((appUser) => {
             return AuthApiActions.signInHaveUser({
               appUser,
@@ -116,11 +114,9 @@ export class AuthEffects implements OnInitEffects {
     return this.actions$.pipe(
       ofType(AuthApiActions.autoSignInCheck),
       switchMap(() =>
-        this.authService.appUser$.pipe(
+        this.authService.createAppUser$().pipe(
           skip(1),
-          // Typescript type guard does not work here, so use isPresent.
-          // https://github.com/microsoft/TypeScript/issues/16069#issuecomment-565658443
-          filter(isPresent),
+          filter((appUser): appUser is AppUser => appUser !== null),
           map((appUser) => {
             return AuthApiActions.signInHaveUser({
               appUser,

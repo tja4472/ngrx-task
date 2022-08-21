@@ -10,8 +10,6 @@ import { CurrentTaskDetailEditPageActions } from '@app/root-store/tasks-store/ac
 import { CurrentTask } from '@app/root-store/tasks-store/models';
 import { TaskSelectors } from '@app/root-store/tasks-store/selectors';
 
-import { isPresent } from 'ts-is-present';
-
 @Component({
   selector: 'app-current-task-detail-edit-page',
   templateUrl: './current-task-detail-edit-page.component.html',
@@ -23,11 +21,13 @@ export class CurrentTaskDetailEditPageComponent {
 
   constructor(private readonly store: Store) {
     // The undefined task is caught by route guard.
-    this.task$ = store.select(TaskSelectors.selectCurrentTaskFromRoute).pipe(
-      // Typescript type guard does not work here, so use isPresent.
-      // https://github.com/microsoft/TypeScript/issues/16069#issuecomment-565658443
-      filter(isPresent)
-    );
+    this.task$ = store
+      .select(TaskSelectors.selectCurrentTaskFromRoute)
+      .pipe(
+        filter(
+          (currentTask): currentTask is CurrentTask => currentTask !== undefined
+        )
+      );
   }
 
   viewCancelled(todo: CurrentTask): void {
