@@ -19,5 +19,7 @@ export class EnvironmentService implements Environment {
     return environment.production;
   }
 
-  constructor() {}
+  constructor() {
+    console.log('sssssssssssssssssss');
+  }
 }

@@ -8,11 +8,13 @@ import { CoreModule } from '@app/core';
 import { AppComponent } from '@app/core/containers';
 import { HomeModule } from '@app/home';
 
-import { environment } from '../environments/environment';
-
 import { AppFirebaseModule } from './app-firebase.module';
 import { AppRoutingModule } from './app-routing.module';
 import { RootStoreModule } from './root-store';
+
+import { EnvironmentService } from '@app/environment.service';
+
+const environmentService = new EnvironmentService();
 
 @NgModule({
   imports: [
@@ -25,7 +27,7 @@ import { RootStoreModule } from './root-store';
     RootStoreModule,
     CoreModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: environment.production,
+      enabled: environmentService.production,
       // Make work with Firebase
       registrationStrategy: 'registerImmediately',
     }),

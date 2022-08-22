@@ -31,7 +31,6 @@ import {
 import { selectQueryParam } from '@app/root-store/reducers';
 
 import { SignoutConfirmationDialogComponent } from '../components/signout-confirmation-dialog/signout-confirmation-dialog.component';
-import { AuthRootState } from '../reducers';
 import { selectIsAutoSignIn, selectUserId } from '../selectors/auth.selectors';
 import { AuthService } from '../services/auth.service';
 

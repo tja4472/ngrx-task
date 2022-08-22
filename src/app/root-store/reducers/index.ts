@@ -11,8 +11,6 @@ import {
 import { AuthActions } from '@app/auth/actions';
 import * as fromAuth from '@app/auth/reducers';
 
-import { environment } from '../../../environments/environment';
-
 export interface RootState {
   router: fromRouter.RouterReducerState<any>;
 }
@@ -53,8 +51,6 @@ export function flush(reducer: any) {
     return reducer(state, action);
   };
 }
-
-
 
 export const selectRouter = createFeatureSelector<
   fromRouter.RouterReducerState<any>

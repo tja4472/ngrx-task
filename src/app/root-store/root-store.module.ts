@@ -11,9 +11,11 @@ import { TasksStoreModule } from '@app/root-store/tasks-store';
 
 import { UserStoreModule } from './user-store';
 
-import { environment } from '../../environments/environment';
+import { EnvironmentService } from '@app/environment.service';
 
-const metaReducers: MetaReducer<any>[] = !environment.production
+const environmentService = new EnvironmentService();
+
+const metaReducers: MetaReducer<any>[] = !environmentService.production
   ? [logger, flush]
   : [flush];
 

@@ -25,6 +25,8 @@ import { of } from 'rxjs';
 import { AppUser } from '../models/app-user.model';
 import { TestScheduler } from 'rxjs/testing';
 
+import { EnvironmentService } from '@app/environment.service';
+import { Environment } from '../../../environments/environment-types';
 /*
   https://rxjs.dev/guide/testing/marble-testing#marble-syntax
 
@@ -37,6 +39,26 @@ let actions$ = new Observable<Action>();
 function setup() {
   const angularFireAuthMock = jest.fn();
   const matDialogMock = jest.fn();
+
+  const mockEnvironment: Environment = {
+    appCode: '--mockEnvironment--',
+    production: false,
+    firebase: {
+      config: {
+        apiKey: 'demo-1-key',
+        authDomain: '',
+        databaseURL: '',
+        projectId: 'demo-1',
+        storageBucket: '',
+        messagingSenderId: '',
+        appId: '',
+      },
+      emulators: {
+        auth: ['http://localhost:9099'],
+        firestore: ['localhost', 8080],
+      },
+    },
+  };
 
   const mockAuthService = {
     createAppUser$: jest.fn(),
@@ -53,6 +75,7 @@ function setup() {
         provide: AuthService,
         useValue: mockAuthService,
       },
+      { provide: EnvironmentService, useValue: mockEnvironment },
       { provide: MatDialog, useValue: matDialogMock },
     ],
   });

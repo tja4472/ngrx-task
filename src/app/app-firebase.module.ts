@@ -19,11 +19,13 @@ import {
 } from '@angular/fire/compat/firestore';
 // import { AngularFirePerformanceModule } from '@angular/fire/compat/performance';
 
-import { environment } from '../environments/environment';
+import { EnvironmentService } from '@app/environment.service';
+
+const environmentService = new EnvironmentService();
 
 @NgModule({
   imports: [
-    AngularFireModule.initializeApp(environment.firebase.config),
+    AngularFireModule.initializeApp(environmentService.firebase.config),
     AngularFirestoreModule.enablePersistence(),
     // AngularFireAnalyticsModule,
     AngularFireAuthModule,
@@ -39,11 +41,11 @@ import { environment } from '../environments/environment';
     },
     {
       provide: USE_AUTH_EMULATOR,
-      useValue: environment.firebase.emulators?.auth,
+      useValue: environmentService.firebase.emulators?.auth,
     },
     {
       provide: USE_FIRESTORE_EMULATOR,
-      useValue: environment.firebase.emulators?.firestore,
+      useValue: environmentService.firebase.emulators?.firestore,
     },
   ],
 })

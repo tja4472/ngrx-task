@@ -6,7 +6,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 
-import { EnvironmentService } from '@app/core/environment.service';
+import { EnvironmentService } from '@app/environment.service';
 import { newUserInfo, UserInfo } from '@app/models/user-info.model';
 
 /*
