@@ -31,9 +31,10 @@
     // ^^^^
   },
   // Required for jest to work with cypress
-  "include": ["src/**/*.ts", "libs/**/*.ts"],
-  // ^^^^
-  "files": ["./setup-jest.ts"],    
+  "include": ["src/**/*.ts"],
+  "files": ["./setup-jest.ts"],  
+  "exclude": ["node_modules", "cyprus","cypress.config.ts"],  
+  // ^^^^ 
   "angularCompilerOptions": {
     "strictTemplates": true,
     "strictNullInputTypes": false,

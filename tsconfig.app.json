@@ -5,5 +5,9 @@
     "types": []
   },
   "files": ["src/main.ts", "src/polyfills.ts"],
-  "exclude": ["src/**/*.spec.ts", "src/environments/**/*"]
+  "exclude": [
+    "src/**/*.spec.ts",
+    "src/environments/**/*",
+    "src/app/+test-examples/**/*"
+  ]
 }

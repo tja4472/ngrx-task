@@ -19,39 +19,6 @@ import './commands';
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 
-declare global {
-  namespace Cypress {
-    interface Chainable {
-      getBySel(
-        dataTestAttribute: string,
-        args?: any
-      ): Chainable<JQuery<HTMLElement>>;
-      getBySelLike(
-        dataTestPrefixAttribute: string,
-        args?: any
-      ): Chainable<JQuery<HTMLElement>>;
-      /**
-       *
-       * Calls cy.parent using [data-test=${dataTestAttribute}]
-       * @param dataTestAttribute
-       *
-       */
-      parentBySel(dataTestAttribute: string): Chainable<JQuery<HTMLElement>>;
-      /**
-       * Calls cy.find using [data-test=${dataTestAttribute}]
-       * @param selector
-       * @example cy.findBySel('list-item')
-       */
-      findBySel(dataTestAttribute: string): Chainable<JQuery<HTMLElement>>;
-
-      signIn(email: string, password: string): Chainable<JQuery<HTMLElement>>;
-      signOut(): Chainable<JQuery<HTMLElement>>;
-      signUp(email: string, password: string): Chainable<JQuery<HTMLElement>>;
-      visitHomePage(): Chainable<JQuery<HTMLElement>>;
-    }
-  }
-}
-
 // Adapted from https://github.com/Muritavo/cypress-toolkit/blob/main/src/support/utility.ts#L36
 const origLog = Cypress.log;
 

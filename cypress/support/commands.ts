@@ -27,6 +27,39 @@
 // https://docs.cypress.io/api/cypress-api/custom-commands
 // https://docs.cypress.io/guides/tooling/typescript-support#Types-for-Custom-Commands
 
+declare global {
+  namespace Cypress {
+    interface Chainable {
+      getBySel(
+        dataTestAttribute: string,
+        args?: any
+      ): Chainable<JQuery<HTMLElement>>;
+      getBySelLike(
+        dataTestPrefixAttribute: string,
+        args?: any
+      ): Chainable<JQuery<HTMLElement>>;
+      /**
+       *
+       * Calls cy.parent using [data-test=${dataTestAttribute}]
+       * @param dataTestAttribute
+       *
+       */
+      parentBySel(dataTestAttribute: string): Chainable<JQuery<HTMLElement>>;
+      /**
+       * Calls cy.find using [data-test=${dataTestAttribute}]
+       * @param selector
+       * @example cy.findBySel('list-item')
+       */
+      findBySel(dataTestAttribute: string): Chainable<JQuery<HTMLElement>>;
+
+      signIn(email: string, password: string): Chainable<JQuery<HTMLElement>>;
+      signOut(): Chainable<JQuery<HTMLElement>>;
+      signUp(email: string, password: string): Chainable<JQuery<HTMLElement>>;
+      visitHomePage(): Chainable<JQuery<HTMLElement>>;
+    }
+  }
+}
+
 // https://github.com/cypress-io/cypress-realworld-app/blob/develop/cypress/support/commands.ts
 Cypress.Commands.add('getBySel', (selector, ...args) => {
   return cy.get(`[data-test=${selector}]`, ...args);

@@ -1,6 +1,7 @@
 # https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs
 # https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 # https://github.com/cypress-io/github-action
+
 name: tests
 
 on:
@@ -40,12 +41,22 @@ jobs:
           path: ~/.cache/firebase/emulators
           key: ${{ runner.os }}-firebase-emulators-${{ hashFiles('~/.cache/firebase/emulators/**') }}
 
-      - name: Cypress tests
+      - name: Run E2E tests
         uses: cypress-io/github-action@v4
         with:
+          browser: chrome
           start: npm run emulator-demo-1, npm run start:emulator-demo
           wait-on: 'http://localhost:4400, http://localhost:4200'
           command: npm run cypress:run:emulate-demo
+
+      - name: Run Component tests
+        uses: cypress-io/github-action@v4
+        with:
+          browser: chrome
+          # we have already installed everything
+          install: false
+          # to run component tests we need to use "component: true"
+          component: true
 
   jest:
     name: Jest tests

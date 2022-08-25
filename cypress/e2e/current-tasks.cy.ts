@@ -132,7 +132,7 @@ describe('Current Tasks', () => {
         .find('[type="checkbox"]')
         .should('be.checked');
       cy.getBySel('vert-menu-button').should('be.visible').click();
-      cy.getBySel('clear-completed-button').should('be.visible').click();
+      cy.getBySel('clear-completed-button').should('be.visible').contains('Clear Completed').click();
       cy.getBySel('list-item')
         .should('be.visible')
         .should('have.length', 1)

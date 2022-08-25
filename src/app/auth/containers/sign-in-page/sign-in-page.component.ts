@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 
@@ -15,14 +15,15 @@ import { SignInPageSelectors } from '@app/auth/selectors';
   styleUrls: ['./sign-in-page.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SignInPageComponent {
+export class SignInPageComponent implements OnInit {
   error$: Observable<string | null>;
   pending$: Observable<boolean>;
 
   constructor(private readonly store: Store) {
     this.error$ = store.select(SignInPageSelectors.selectSignInPageError);
     this.pending$ = store.select(SignInPageSelectors.selectSignInPagePending);
-
+  }
+  ngOnInit(): void {
     this.store.dispatch(SignInPageActions.entered());
   }
 
