@@ -4,9 +4,9 @@ import { Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
 
-import { SignInPageActions } from '@app/auth/actions';
+import { SignInPageActions } from '@app/auth/actions/sign-in-page.actions';
+
 import { Credentials } from '@app/auth/models/credentials.model';
-import { AuthRootState } from '@app/auth/reducers';
 import { SignInPageSelectors } from '@app/auth/selectors';
 
 @Component({

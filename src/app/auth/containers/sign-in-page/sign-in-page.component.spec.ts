@@ -6,7 +6,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 
-import { SignInPageActions } from '@app/auth/actions';
+import { SignInPageActions } from '@app/auth/actions/sign-in-page.actions';
 
 import { SignInPageSelectors } from '../../selectors';
 

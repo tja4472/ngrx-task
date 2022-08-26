@@ -18,9 +18,10 @@ import {
   AuthActions,
   AuthApiActions,
   AuthGuardServiceActions,
-  SignInPageActions,
   SignUpPageActions,
 } from '@app/auth/actions';
+import { SignInPageActions } from '@app/auth/actions/sign-in-page.actions';
+
 import { of } from 'rxjs';
 import { AppUser } from '../models/app-user.model';
 import { TestScheduler } from 'rxjs/testing';

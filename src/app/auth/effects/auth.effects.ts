@@ -25,9 +25,10 @@ import {
   AuthActions,
   AuthApiActions,
   AuthGuardServiceActions,
-  SignInPageActions,
   SignUpPageActions,
 } from '@app/auth/actions';
+import { SignInPageActions } from '@app/auth/actions/sign-in-page.actions';
+
 import { selectQueryParam } from '@app/root-store/reducers';
 
 import { SignoutConfirmationDialogComponent } from '../components/signout-confirmation-dialog/signout-confirmation-dialog.component';
