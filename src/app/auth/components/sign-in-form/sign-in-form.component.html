@@ -39,7 +39,8 @@
               required
             />
             <mat-error
-              *ngIf="viewForm.controls['username'].hasError('required')"
+              data-test="username-error"
+              *ngIf="username.errors?.['required']"
             >
               User Name is required
             </mat-error>
@@ -60,7 +61,8 @@
               required
             />
             <mat-error
-              *ngIf="viewForm.controls['password'].hasError('required')"
+              data-test="password-error"
+              *ngIf="password.errors?.['required']"
             >
               Password is required
             </mat-error>
@@ -68,7 +70,7 @@
         </div>
       </div>
       <div class="row" *ngIf="!!errorMessage">
-        <mat-error>
+        <mat-error data-test="message-error">
           {{ errorMessage }}
         </mat-error>
       </div>

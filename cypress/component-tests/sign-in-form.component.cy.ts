@@ -75,6 +75,26 @@ describe('SignInFormComponent', () => {
     );
   });
 
+  it('pending true', () => {
+    cy.mount(`<app-sign-in-form [pending]="true"></app-sign-in-form>`, {
+      imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        CommonModule,
+        MatCardModule,
+        MatInputModule,
+        MatButtonModule,
+        ReactiveFormsModule,
+      ],
+      declarations: [SignInFormComponent],
+    });
+
+    cy.getBySel('sign-in-button').should('be.visible').should('be.disabled');
+    cy.getBySel('sign-up-button').should('be.visible').should('be.disabled');
+    cy.getBySel('username-field').should('be.visible').should('be.disabled');
+    cy.getBySel('password-field').should('be.visible').should('be.disabled');
+  });
+
   it('submitted output', () => {
     cy.mount(
       `<app-sign-in-form [pending]="false" (submitted)="submitted.emit($event)"></app-sign-in-form>`,
@@ -95,23 +115,23 @@ describe('SignInFormComponent', () => {
       }
     );
 
-    const expectedSubmiitedResponse: Credentials = {
+    const expectedSubmitedResponse: Credentials = {
       username: 'Fred',
       password: 'passwordAA',
     };
 
     cy.getBySel('username-field')
       .should('be.visible')
-      .type(expectedSubmiitedResponse.username);
+      .type(expectedSubmitedResponse.username);
     cy.getBySel('password-field')
       .should('be.visible')
-      .type(expectedSubmiitedResponse.password);
+      .type(expectedSubmitedResponse.password);
     cy.getBySel('sign-in-button').click();
 
     cy.get('@submittedSpy').should('have.been.called');
     cy.get('@submittedSpy').should(
       'have.been.calledWith',
-      expectedSubmiitedResponse
+      expectedSubmitedResponse
     );
   });
 
@@ -134,5 +154,52 @@ describe('SignInFormComponent', () => {
     cy.getBySel('sign-up-button').click();
 
     cy.get('@SignUpClickedSpy').should('have.been.called');
+  });
+
+  it('should show required errors', () => {
+    cy.mount(`<app-sign-in-form></app-sign-in-form>`, {
+      imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        CommonModule,
+        MatCardModule,
+        MatInputModule,
+        MatButtonModule,
+        ReactiveFormsModule,
+      ],
+      declarations: [SignInFormComponent],
+    });
+
+    cy.getBySel('username-field').should('be.visible').click();
+    cy.getBySel('password-field').should('be.visible').click();
+    cy.getBySel('username-error')
+      .should('be.visible')
+      .should('have.text', ' User Name is required ');
+    cy.getBySel('username-field').should('be.visible').click();
+    cy.getBySel('password-error')
+      .should('be.visible')
+      .should('have.text', ' Password is required ');
+  });
+
+  it('should show error message', () => {
+    cy.mount(
+      `<app-sign-in-form errorMessage="aaaa bbbb cccc"></app-sign-in-form>`,
+      {
+        imports: [
+          BrowserModule,
+          BrowserAnimationsModule,
+          CommonModule,
+          MatCardModule,
+          MatInputModule,
+          MatButtonModule,
+          ReactiveFormsModule,
+        ],
+        declarations: [SignInFormComponent],
+      }
+    );
+
+    cy.getBySel('message-error')
+      .should('be.visible')
+      .should('have.text', ' aaaa bbbb cccc ');
   });
 });

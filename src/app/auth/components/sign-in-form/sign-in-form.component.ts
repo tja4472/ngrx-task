@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormControl, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { Credentials } from '@app/auth/models/credentials.model';
 
@@ -30,9 +29,12 @@ export class SignInFormComponent {
   @Output()
   readonly submitted = new EventEmitter<Credentials>();
 
-  get viewForm(): UntypedFormGroup {
+  get viewForm() {
     return this.presenter.form;
   }
+
+  get password() { return this.presenter.form.controls.password;}
+  get username() { return this.presenter.form.controls.username;}
 
   constructor(private presenter: SignInFormPresenter) {
     this.presenter.init();
@@ -43,7 +45,9 @@ export class SignInFormComponent {
   }
 
   viewOnSubmit() {
-    const value: Credentials = this.presenter.checkout();
+    const value: Credentials | null = this.presenter.checkout();
+
+    if (value === null) return;
 
     this.submitted.emit(value);
   }

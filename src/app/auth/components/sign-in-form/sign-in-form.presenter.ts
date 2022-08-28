@@ -1,23 +1,24 @@
 import { Injectable } from '@angular/core';
-import {
-  UntypedFormBuilder,
-  UntypedFormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 import { Credentials } from '@app/auth/models/credentials.model';
 
 @Injectable()
 export class SignInFormPresenter {
-  form: UntypedFormGroup;
+  form = this.fb.nonNullable.group({
+    username: ['', Validators.required],
+    password: ['', Validators.required],
+  });
 
-  constructor(private formBuilder: UntypedFormBuilder) {}
+  constructor(private fb: FormBuilder) {}
 
   init() {
-    this.form = this.formBuilder.group({
+    /*    
+    this.form = this.formBuilder.nonNullable.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
     });
+*/
   }
 
   disable() {
@@ -28,10 +29,19 @@ export class SignInFormPresenter {
     this.form.enable();
   }
 
-  checkout(): Credentials {
-    const todoData: Credentials = { ...this.form.value };
-    // this.form.reset();
+  checkout(): Credentials | null {
+    if (
+      this.form.value.password === undefined ||
+      this.form.value.username === undefined
+    ) {
+      return null;
+    }
 
-    return todoData;
+    const credentials: Credentials = {
+      password: this.form.value.password,
+      username: this.form.value.username,
+    };
+
+    return credentials;
   }
 }

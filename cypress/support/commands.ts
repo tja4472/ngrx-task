@@ -30,17 +30,29 @@
 declare global {
   namespace Cypress {
     interface Chainable {
+      /**
+       *
+       * Calls cy.get using [data-test=${dataTestAttribute}]
+       * @param dataTestAttribute
+       *
+       */
       getBySel(
         dataTestAttribute: string,
         args?: any
       ): Chainable<JQuery<HTMLElement>>;
+      /**
+       *
+       * Calls cy.get using [data-test=${dataTestAttribute}]
+       * @param dataTestAttribute
+       *
+       */
       getBySelLike(
-        dataTestPrefixAttribute: string,
+        dataTestAttribute: string,
         args?: any
       ): Chainable<JQuery<HTMLElement>>;
       /**
        *
-       * Calls cy.parent using [data-test=${dataTestAttribute}]
+       * Calls cy.parent using [data-test*=${dataTestAttribute}]
        * @param dataTestAttribute
        *
        */
