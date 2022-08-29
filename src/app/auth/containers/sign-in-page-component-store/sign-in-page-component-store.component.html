@@ -1,9 +1,9 @@
 <h2>Component-Store</h2>
 <div *ngIf="vm$ | async as vm">
-  <app-sign-in-form
+  <app-credentials-form
+    formMode="SignInForm"
     [errorMessage]="vm.error"
-    [pending]="vm.pending"
     (SignUpClicked)="onSignUp()"
     (submitted)="onSubmitted($event)"
-  ></app-sign-in-form>
+  ></app-credentials-form>
 </div>

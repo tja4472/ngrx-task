@@ -16,5 +16,5 @@ module.exports = {
     '^@app/(.*)$': '<rootDir>/src/app/$1',
   },
   resolver: '<rootDir>/jest-resolver.js',
-  testEnvironment: 'node',
+  testEnvironment: 'jsdom',
 };

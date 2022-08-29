@@ -1,5 +1,5 @@
-<app-sign-up-form
+<app-credentials-form
+  formMode="SignUpForm"
   [errorMessage]="error$ | async"
-  [pending]="pending$ | async"
   (submitted)="onSubmitted($event)"
-></app-sign-up-form>
+></app-credentials-form>

@@ -20,7 +20,7 @@
     "cypress:open-real": "cross-env GOOGLE_APPLICATION_CREDENTIALS=\"serviceAccount-real.json\" npm run cypress:open",
     "cypress:run": "cypress run --e2e --browser chrome --config video=false",
     "--- ---": "",
-    "cypress:run:component": "cypress run --component",      
+    "cypress:run:component": "cypress run --component --browser chrome",      
     "ng": "ng",
     "start": "ng serve",
     "start:development": "ng serve --configuration=development",    
