@@ -1,4 +1,5 @@
 import { clearDatabase, clearUserAccounts } from 'emulator/emulator-helpers';
+import * as AppActionsTestService from 'cypress/support/app-actions.service';
 import { currentTask1, currentTask2, newCurrentTask, user } from './util';
 
 describe('Current Tasks', () => {
@@ -6,15 +7,17 @@ describe('Current Tasks', () => {
     // Runs before every test block
     // Force sidenav to be shown.
     cy.viewport('ipad-2', 'landscape');
-    cy.wrap(clearDatabase('demo-1'));
-    cy.wrap(clearUserAccounts('demo-1'));
+    cy.wrap(clearDatabase('demo-1')).should('be.a', 'number').and('equal', 200);
+    cy.wrap(clearUserAccounts('demo-1'))
+      .should('be.a', 'number')
+      .and('equal', 200);
     cy.visit('/');
     cy.location('pathname').should('eq', '/home');
     cy.getBySel('sign-out-button').should('be.visible');
     cy.getBySel('user-name')
       .should('be.visible')
       .should('contain.text', 'Not Signed In');
-    cy.signUp(user.email, user.password);
+    AppActionsTestService.callSignUp(user.email, user.password);
     cy.getBySel('sidenav-current-tasks').should('be.visible').click();
     cy.location('pathname').should('eq', '/tasks/current');
     cy.getBySel('list-item').should('not.exist');
@@ -132,7 +135,10 @@ describe('Current Tasks', () => {
         .find('[type="checkbox"]')
         .should('be.checked');
       cy.getBySel('vert-menu-button').should('be.visible').click();
-      cy.getBySel('clear-completed-button').should('be.visible').contains('Clear Completed').click();
+      cy.getBySel('clear-completed-button')
+        .should('be.visible')
+        .contains('Clear Completed')
+        .click();
       cy.getBySel('list-item')
         .should('be.visible')
         .should('have.length', 1)

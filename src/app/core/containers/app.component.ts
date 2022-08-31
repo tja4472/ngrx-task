@@ -3,6 +3,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { SwUpdate } from '@angular/service-worker';
 
 // import { AngularFireAnalytics } from '@angular/fire/compat/analytics';
+import { AppActionsService } from '@app/services/app-actions.service';
 
 @Component({
   selector: 'app-root',
@@ -14,8 +15,13 @@ export class AppComponent implements OnInit {
   constructor(
     // analytics: AngularFireAnalytics,
     private swUpdate: SwUpdate,
-    private snackbar: MatSnackBar
+    private snackbar: MatSnackBar,
+    // For Cypress app actions
+    private appActionsService: AppActionsService
   ) {
+
+    // const dummy = appActionsService.property;
+
     // analytics.logEvent('start_game', { level: '10', difficulty: 'expert' });
   }
 

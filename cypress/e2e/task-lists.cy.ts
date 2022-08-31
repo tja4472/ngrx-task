@@ -1,4 +1,5 @@
 import { clearDatabase, clearUserAccounts } from 'emulator/emulator-helpers';
+import * as AppActionsTestService from 'cypress/support/app-actions.service';
 
 const user = {
   email: 'c.c@c.com',
@@ -10,15 +11,17 @@ describe('Task Lists', () => {
     // Runs before every test block
     // Force sidenav to be shown.
     cy.viewport('ipad-2', 'landscape');
-    cy.wrap(clearDatabase('demo-1'));
-    cy.wrap(clearUserAccounts('demo-1'));
+    cy.wrap(clearDatabase('demo-1')).should('be.a', 'number').and('equal', 200);
+    cy.wrap(clearUserAccounts('demo-1'))
+      .should('be.a', 'number')
+      .and('equal', 200);
     cy.visit('/');
     cy.location('pathname').should('eq', '/home');
     cy.getBySel('sign-out-button').should('be.visible');
     cy.getBySel('user-name')
       .should('be.visible')
       .should('contain.text', 'Not Signed In');
-    cy.signUp(user.email, user.password);
+    AppActionsTestService.callSignUp(user.email, user.password);
     cy.getBySel('sidenav-task-lists').should('be.visible').click();
     cy.location('pathname').should('eq', '/tasks/lists');
   });

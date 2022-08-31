@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ApplicationRef, DoBootstrap, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -32,6 +32,15 @@ const environmentService = new EnvironmentService();
       registrationStrategy: 'registerImmediately',
     }),
   ],
-  bootstrap: [AppComponent],
+  // bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule implements DoBootstrap {
+  ngDoBootstrap(appRef: ApplicationRef) {
+    //  // For Cypress app actions
+    appRef.bootstrap(AppComponent);
+    if (window.Cypress) {
+      // and save the application reference
+      window.appRef = appRef;
+    }
+  }
+}
