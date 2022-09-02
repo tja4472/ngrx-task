@@ -1,6 +1,10 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { MatCheckboxChange } from '@angular/material/checkbox';
+import {
+  MatCheckboxChange,
+  MatCheckboxDefaultOptions,
+  MAT_CHECKBOX_DEFAULT_OPTIONS,
+} from '@angular/material/checkbox';
 
 import { pathPrefix, routeNames } from '@app/app-route-names';
 import { CurrentTask } from '@app/root-store/tasks-store/models';
@@ -9,6 +13,13 @@ import { CurrentTask } from '@app/root-store/tasks-store/models';
   selector: 'app-current-task-list',
   templateUrl: './current-task-list.component.html',
   styleUrls: ['./current-task-list.component.css'],
+  providers: [
+    {
+      provide: MAT_CHECKBOX_DEFAULT_OPTIONS,
+      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions      
+      useValue: { clickAction: 'noop' } as MatCheckboxDefaultOptions,
+    },
+  ],
 })
 export class CurrentTaskListComponent {
   @Input()
@@ -68,4 +79,7 @@ export class CurrentTaskListComponent {
     });
   }
   */
+  onCheckboxClick(task: CurrentTask): void {
+    this.toggleCompleteItem.emit(task);
+  }
 }

@@ -8,7 +8,7 @@
       <mat-checkbox
         data-test="is-complete-checkbox"
         [checked]="task.isComplete"
-        (change)="toggleCompleteItem.emit(task)"
+        (click)="onCheckboxClick(task)"
       ></mat-checkbox>
 
       <a [routerLink]="[editPath(), task.id]">
