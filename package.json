@@ -6,6 +6,8 @@
     "url": "https://github.com/tja4472/ngrx-task"
   },
   "scripts": {
+    "--- webserver ---": "",    
+    "webserver": "npx http-server -p 8070 -c-1 dist/ng-task",
     "--- emulator ---": "",
     "emulator-demo-1": "firebase emulators:start --only firestore,auth --project demo-1",
     "emulator-exec-test": "firebase emulators:exec --only firestore,auth --project demo-1 'npm test -- --forceExit'",

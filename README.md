@@ -6,6 +6,14 @@ https://blog.nrwl.io/ngrx-patterns-and-techniques-f46126e2b1e5
 
 https://tja4472.github.io/ngrx-task/
 
+# Test service worker
+
+```bash
+npx http-server -p 8070 -c-1 dist/ng-task
+```
+
+http://localhost:8070
+
 ## Configure Firebase
 
 Requires a file, `firebase-config.ts`
