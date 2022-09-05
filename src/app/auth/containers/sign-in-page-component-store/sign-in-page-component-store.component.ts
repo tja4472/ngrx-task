@@ -1,3 +1,5 @@
+// https://github.com/albinhalitaj/conduitapp/blob/main/conduit/src/app/auth/login/login.store.ts
+
 import {
   ChangeDetectionStrategy,
   Component,
