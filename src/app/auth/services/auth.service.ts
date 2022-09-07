@@ -29,14 +29,18 @@ type Result<T> = ResultSuccess<T> | ResultError;
 export class AuthService {
   public redirectUrl = '';
 
-  appUser$: Observable<AppUser | null>;
+  get appUser$(): Observable<AppUser | null> {
+    return this.#appUser$;
+  }
+
+  #appUser$: Observable<AppUser | null>;
 
   constructor(
     private readonly auth: AngularFireAuth,
     private taskListDataService: TaskListDataService,
     private userInfoDataService: UserInfoDataService
   ) {
-    this.appUser$ = this.auth.user.pipe(
+    this.#appUser$ = this.auth.user.pipe(
       switchMap((user) => {
         if (user === null) {
           return of(null);
@@ -70,9 +74,6 @@ export class AuthService {
         })
       )
 */
-createAppUser$(): Observable<AppUser | null> {
-  return this.appUser$;
-}
 
   signIn() {
     this.auth

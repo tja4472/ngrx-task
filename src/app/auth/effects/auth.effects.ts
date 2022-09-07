@@ -81,7 +81,7 @@ export class AuthEffects implements OnInitEffects {
     return this.actions$.pipe(
       ofType(AuthApiActions.autoSignInCheck),
       switchMap(() =>
-        this.authService.createAppUser$().pipe(
+        this.authService.appUser$.pipe(
           first(),
           filter((appUser): appUser is AppUser => appUser !== null),
           map((appUser) => {
@@ -114,7 +114,7 @@ export class AuthEffects implements OnInitEffects {
     return this.actions$.pipe(
       ofType(AuthApiActions.autoSignInCheck),
       switchMap(() =>
-        this.authService.createAppUser$().pipe(
+        this.authService.appUser$.pipe(
           skip(1),
           filter((appUser): appUser is AppUser => appUser !== null),
           map((appUser) => {

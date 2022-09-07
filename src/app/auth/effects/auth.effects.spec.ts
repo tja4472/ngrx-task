@@ -28,6 +28,7 @@ import { TestScheduler } from 'rxjs/testing';
 
 import { EnvironmentService } from '@app/environment.service';
 import { Environment } from '../../../environments/environment-types';
+import { MockProvider } from 'ng-mocks';
 /*
   https://rxjs.dev/guide/testing/marble-testing#marble-syntax
 
@@ -38,9 +39,6 @@ import { Environment } from '../../../environments/environment-types';
 let actions$ = new Observable<Action>();
 
 function setup() {
-  const angularFireAuthMock = jest.fn();
-  const matDialogMock = jest.fn();
-
   const mockEnvironment: Environment = {
     appCode: '--mockEnvironment--',
     production: false,
@@ -61,29 +59,22 @@ function setup() {
     },
   };
 
-  const mockAuthService = {
-    createAppUser$: jest.fn(),
-  };
-
   TestBed.configureTestingModule({
     imports: [RouterTestingModule],
     providers: [
       AuthEffects,
       provideMockActions(() => actions$),
       provideMockStore(),
-      { provide: AngularFireAuth, useValue: angularFireAuthMock },
-      {
-        provide: AuthService,
-        useValue: mockAuthService,
-      },
-      { provide: EnvironmentService, useValue: mockEnvironment },
-      { provide: MatDialog, useValue: matDialogMock },
+      MockProvider(AngularFireAuth),
+      MockProvider(AuthService),
+      MockProvider(EnvironmentService, mockEnvironment, 'useValue'),
+      MockProvider(MatDialog),
     ],
   });
 
   const authService = TestBed.inject(AuthService);
   const effects = TestBed.inject(AuthEffects);
-  const matDialog = TestBed.inject(MatDialog);
+  // const matDialog = TestBed.inject(MatDialog);
 
   const testScheduler = new TestScheduler((actual, expected) => {
     expect(actual).toEqual(expected);
@@ -113,7 +104,7 @@ describe('AuthEffects', () => {
         actions$ = hot('-a---', { a: action });
         const response = cold('-a|', { a: appUser });
 
-        jest.spyOn(authService, 'createAppUser$').mockReturnValue(response);
+        jest.spyOn(authService, 'appUser$', 'get').mockReturnValue(response);
         expectObservable(effects.bbbautoSignInHaveUser$).toBe('--b', {
           b: expectedAction,
         });
@@ -134,7 +125,7 @@ describe('AuthEffects', () => {
         actions$ = hot('-a---', { a: action });
         const response = cold('-a|', { a: null });
 
-        jest.spyOn(authService, 'createAppUser$').mockReturnValue(response);
+        jest.spyOn(authService, 'appUser$', 'get').mockReturnValue(response);
         expectObservable(effects.bbbautoSignInHaveUser$).toBe('');
       });
     });
@@ -164,7 +155,7 @@ describe('AuthEffects', () => {
         actions$ = hot('-a---', { a: action });
         const response = cold('-a-b|', { a: null, b: appUser });
 
-        jest.spyOn(authService, 'createAppUser$').mockReturnValue(response);
+        jest.spyOn(authService, 'appUser$', 'get').mockReturnValue(response);
         expectObservable(effects.bbbsignInHaveUser$).toBe('----a', {
           a: expectedAction,
         });
@@ -185,7 +176,7 @@ describe('AuthEffects', () => {
         actions$ = hot('-a---', { a: action });
         const response = cold('-a-b|', { a: appUser, b: null });
 
-        jest.spyOn(authService, 'createAppUser$').mockReturnValue(response);
+        jest.spyOn(authService, 'appUser$', 'get').mockReturnValue(response);
         expectObservable(effects.bbbsignInHaveUser$).toBe('');
       });
     });
