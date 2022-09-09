@@ -5,53 +5,73 @@ import { TestBed } from '@angular/core/testing';
 import { Route } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { MemoizedSelector } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 
-import { TaskState } from '@app/root-store/tasks-store/reducers';
 import { TaskListSelectors } from '@app/root-store/tasks-store/selectors';
 
 import { TaskListsGuardActions } from '../actions';
 
 import { TaskListsGuard } from './task-lists.guard';
 
-import { getTestScheduler } from 'jasmine-marbles';
+import { TestScheduler } from 'rxjs/testing';
+/*
+  https://rxjs.dev/guide/testing/marble-testing#marble-syntax
 
+  '-' frame
+  '|' complete
+*/
 
-// src/environments/environment.ts:1:35 - error TS2307: Cannot find module '@app/firebase/firebase-config-dev' or its corresponding type declarations.
-// src/app/root-store/reducers/index.ts
+//  Kind represents the kind of notification, 'N' for next notification, 'E' for error and 'C' for completion
+function logFrames(label: string, frames: any) {
+  console.group(label);
+
+  frames.forEach((frame: any) => {
+    console.log(
+      'Frame:',
+      frame.frame,
+      'Kind',
+      frame.notification.kind,
+      'Value:',
+      frame.notification.value
+    );
+  });
+
+  console.groupEnd();
+}
 
 describe('TaskListsGuard', () => {
-  let guard: TaskListsGuard;
-  let mockStore: MockStore;
-  let selectTaskListSelectorsSelectLoaded: MemoizedSelector<TaskState, boolean>;
+  function setup() {
+    const testScheduler = new TestScheduler((actual, expected) => {
+      // logFrames('actual', actual);
+      // logFrames('expected', expected);
+      expect(actual).toEqual(expected);
+    });
 
-  let mockStoreDispatchSpy: jest.SpyInstance;
-
-  const dummyUrl = 'dummy/url';
-  const route: Route = { path: dummyUrl };
-
-  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule],
       providers: [TaskListsGuard, provideMockStore()],
     });
 
-    mockStore = TestBed.inject(MockStore);
-    mockStoreDispatchSpy = jest.spyOn(mockStore, 'dispatch');
+    const store = TestBed.inject(MockStore);
+    const guard = TestBed.inject(TaskListsGuard);
+    jest.spyOn(store, 'dispatch');
 
-    guard = TestBed.inject(TaskListsGuard);
-
-    selectTaskListSelectorsSelectLoaded = mockStore.overrideSelector(
+    const selectTaskListSelectorsSelectLoaded = store.overrideSelector(
       TaskListSelectors.selectLoaded,
       false
     );
-  });
+
+    return { guard, selectTaskListSelectorsSelectLoaded, store, testScheduler };
+  }
+
+  const dummyUrl = 'dummy/url';
+  const route: Route = { path: dummyUrl };
 
   describe('canLoad', () => {
     it('should return Observable<false> after 5000ms if task lists do not load', () => {
-      const scheduler = getTestScheduler();
-      scheduler.run(({ expectObservable }) => {
+      const { guard, store, testScheduler } = setup();
+
+      testScheduler.run(({ expectObservable }) => {
         expectObservable(guard.canLoad(route)).toBe('5000ms (a|)', {
           a: false,
         });
@@ -60,22 +80,18 @@ describe('TaskListsGuard', () => {
       const action = TaskListsGuardActions.timeout({
         requestedUrl: `/${dummyUrl}`,
       });
-      expect(mockStoreDispatchSpy).toHaveBeenCalledTimes(1);
-      expect(mockStoreDispatchSpy).toHaveBeenCalledWith(action);
-
-      // suppress 'has no expectations' warnings.
-      // expect().nothing();
+      expect(store.dispatch).toHaveBeenCalledTimes(1);
+      expect(store.dispatch).toHaveBeenCalledWith(action);
     });
 
     it('should return Observable<true> if url task list does exist in store', () => {
+      const { guard, selectTaskListSelectorsSelectLoaded, testScheduler } =
+        setup();
       selectTaskListSelectorsSelectLoaded.setResult(true);
-      const scheduler = getTestScheduler();
-      scheduler.run(({ expectObservable }) => {
+
+      testScheduler.run(({ expectObservable }) => {
         expectObservable(guard.canLoad(route)).toBe('(a|)', { a: true });
       });
-
-      // suppress 'has no expectations' warnings.
-      // expect().nothing();
     });
   });
 });

@@ -20,7 +20,13 @@ import {
   TaskState,
 } from '@app/root-store/tasks-store/reducers';
 
-import { cold } from 'jasmine-marbles';
+import { TestScheduler } from 'rxjs/testing';
+/*
+  https://rxjs.dev/guide/testing/marble-testing#marble-syntax
+
+  '-' frame
+  '|' complete
+*/
 
 describe('example01', () => {
   let component: CompletedTasksPageComponent;
@@ -58,8 +64,55 @@ describe('example01', () => {
 
     expect(store.dispatch).toHaveBeenCalledWith(action);
   });
+});
+
+//  Kind represents the kind of notification, 'N' for next notification, 'E' for error and 'C' for completion
+function logFrames(label: string, frames: any) {
+  console.group(label);
+
+  frames.forEach((frame: any) => {
+    console.log(
+      'Frame:',
+      frame.frame,
+      'Kind',
+      frame.notification.kind,
+      'Value:',
+      frame.notification.value
+    );
+  });
+
+  console.groupEnd();
+}
+
+describe('TestScheduler', () => {
+  function setup() {
+    const testScheduler = new TestScheduler((actual, expected) => {
+      // logFrames('actual', actual);
+      // logFrames('expected', expected);
+      expect(actual).toEqual(expected);
+    });
+
+    TestBed.configureTestingModule({
+      imports: [NoopAnimationsModule, MaterialModule, ReactiveFormsModule],
+      providers: [provideMockStore()],
+      declarations: [
+        CompletedTasksPageComponent,
+        SearchComponent,
+        CompletedTaskListComponent,
+      ],
+    });
+
+    const fixture = TestBed.createComponent(CompletedTasksPageComponent);
+    const store = TestBed.inject(MockStore);
+
+    jest.spyOn(store, 'dispatch');
+    const component = fixture.componentInstance;
+    return { component, store, testScheduler };
+  }
 
   it('should have query', () => {
+    const { component, store, testScheduler } = setup();
+
     const state: {
       [taskFeatureKey]: Partial<TaskState>;
     } = {
@@ -73,9 +126,20 @@ describe('example01', () => {
         },
       },
     };
+    /*
+      actual
+        Frame: 0 Kind N Value: query-text
+        Frame: 0 Kind C Value: undefined
 
-    store.setState(state);
-    const expected = cold('(a|)', { a: 'query-text' });
-    expect(component.viewSearchQuery$).toBeObservable(expected);
+      expected
+        Frame: 0 Kind N Value: query-text
+        Frame: 0 Kind C Value: undefined
+    */
+    testScheduler.run(({ expectObservable }) => {
+      store.setState(state);
+      expectObservable(component.viewSearchQuery$).toBe('(a|)', {
+        a: 'query-text',
+      });
+    });
   });
 });
