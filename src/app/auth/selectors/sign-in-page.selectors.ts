@@ -3,7 +3,7 @@ import { createSelector } from '@ngrx/store';
 import { AuthFeatureState, selectAuthFeatureState } from '@app/auth/reducers';
 import { SignInPageState } from '@app/auth/reducers/sign-in-page.reducer';
 
-const selectSignInPageState = createSelector(
+export const selectSignInPageState = createSelector(
   selectAuthFeatureState,
   (state: AuthFeatureState) => state.signInPage
 );
