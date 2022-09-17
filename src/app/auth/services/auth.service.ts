@@ -74,6 +74,10 @@ export class AuthService {
         })
       )
 */
+async bbbsignIn(email: string, password: string) {
+  console.log('bbbsignIn')
+  await this.auth.signInWithEmailAndPassword(email, password);
+}
 
   signIn() {
     this.auth
