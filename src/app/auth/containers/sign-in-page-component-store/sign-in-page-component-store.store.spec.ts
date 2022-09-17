@@ -5,6 +5,10 @@ import { until } from '@app/utils/until';
 
 import { MockService } from 'ng-mocks';
 
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/at#browser_compatibility
+// Array.prototype.at() requires Node.js 16.6.0+
+import 'core-js/features/array/at';
+
 function setup() {
   const authService = MockService(AuthService);
   const store = new SignInPageComponentStore(authService);
