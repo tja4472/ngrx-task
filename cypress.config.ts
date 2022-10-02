@@ -1,12 +1,12 @@
-import admin from "firebase-admin";
-import { defineConfig } from "cypress";
-import { plugin as cypressFirebasePlugin } from "cypress-firebase";
+import admin from 'firebase-admin';
+import { defineConfig } from 'cypress';
+import { plugin as cypressFirebasePlugin } from 'cypress-firebase';
 
 export default defineConfig({
   defaultCommandTimeout: 10000,
 
   e2e: {
-    supportFile: "cypress/support/e2e.ts",
+    supportFile: 'cypress/support/e2e.ts',
 
     setupNodeEvents(on, config) {
       cypressFirebasePlugin(on, config, admin);
@@ -20,7 +20,7 @@ export default defineConfig({
 
       return config;
     },
-    baseUrl: "http://localhost:4200",
+    baseUrl: 'http://localhost:4200',
   },
 
   retries: {
@@ -30,9 +30,35 @@ export default defineConfig({
 
   component: {
     devServer: {
-      framework: "angular",
-      bundler: "webpack",
+      framework: 'angular',
+      bundler: 'webpack',
+      options: {
+        projectConfig: {
+          root: '',
+          sourceRoot: 'src',
+          buildOptions: {
+            outputPath: 'dist/angular',
+            index: 'src/index.html',
+            main: 'src/main.ts',
+            polyfills: 'src/polyfills.ts',
+            tsConfig: 'tsconfig.cypress.json',
+            inlineStyleLanguage: 'css',
+            assets: ['src/favicon.ico', 'src/assets'],
+            styles: [
+              './node_modules/@angular/material/prebuilt-themes/indigo-pink.css',
+              'src/styles.css',
+            ],
+            scripts: [],
+            buildOptimizer: false,
+            optimization: false,
+            vendorChunk: true,
+            extractLicenses: false,
+            sourceMap: true,
+            namedChunks: true,
+          },
+        },
+      },
     },
-    specPattern: "**/*.cy.ts",
+    specPattern: '**/*.cy.ts',
   },
 });

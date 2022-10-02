@@ -1,0 +1,20 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./out-tsc/app",
+    "types": []
+  },
+  // ===
+  // https://github.com/cypress-io/cypress/issues/23940#issuecomment-1256390374
+  // "src/index.d.ts" --> "files"
+  // ===
+  "files": ["src/main.ts", "src/polyfills.ts", "src/index.d.ts"],
+  "exclude": [
+    "src/**/*.spec.ts",
+    "src/environments/**/*",
+    "src/app/+test-examples/**/*",
+    "src/app/firebase/firebase-config-dev.ts",
+    "src/app/firebase/firebase-config-emulator-demo.ts",
+    "src/app/firebase/firebase-config-prod.ts"
+  ]
+}
