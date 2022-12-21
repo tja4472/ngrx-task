@@ -75,7 +75,7 @@
     "@angular/cli": "14.2.10",
     "@angular/compiler-cli": "14.2.12",
     "@angular/language-service": "14.2.12",
-    "@ngneat/spectator": "11.3.0",
+    "@ngneat/spectator": "13.0.0",
     "@ngrx/eslint-plugin": "14.3.2",
     "@ngrx/schematics": "14.3.2",
     "@testing-library/angular": "12.3.0",
