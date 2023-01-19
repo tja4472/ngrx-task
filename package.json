@@ -57,7 +57,7 @@
     "@ngrx/router-store": "14.3.3",
     "@ngrx/store": "14.3.3",
     "@ngrx/store-devtools": "14.3.3",
-    "core-js": "3.26.1",
+    "core-js": "3.27.2",
     "date-fns": "2.29.3",
     "firebase": "9.15.0",
     "rxfire": "6.0.3",
