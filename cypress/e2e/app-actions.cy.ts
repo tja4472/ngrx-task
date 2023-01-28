@@ -26,6 +26,7 @@ describe('Sign Up tests', () => {
     // Runs before every test block
     // Force sidenav to be shown.
     cy.viewport('ipad-2', 'landscape');
+    cy.visit('/');    
     cy.wrap(clearDatabase('demo-1')).should('be.a', 'number').and('equal', 200);
     cy.wrap(clearUserAccounts('demo-1'))
       .should('be.a', 'number')

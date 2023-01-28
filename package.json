@@ -87,7 +87,7 @@
     "@typescript-eslint/parser": "5.48.2",
     "angular-cli-ghpages": "1.0.5",
     "cross-env": "7.0.3",
-    "cypress": "10.11.0",
+    "cypress": "12.4.1",
     "cypress-firebase": "2.2.5",
     "eslint": "8.32.0",
     "eslint-config-prettier": "8.6.0",

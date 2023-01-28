@@ -1,3 +1,5 @@
+import { APP_ID } from '@angular/core';
+
 const SERVICE_NAME = 'AppActionsService';
 
 export const getService = () =>
@@ -13,7 +15,14 @@ export const callMethod1 = (text: string) =>
   cy.window().its(SERVICE_NAME).invoke('method1', text);
 
 export const callPromise1 = (text: string) =>
-  cy.window().its(SERVICE_NAME).invoke('promise1', text);
+  cy
+    .window()
+    .its(SERVICE_NAME)
+    .then((api) => api.promise1(text));
 
 export const callSignUp = (email: string, password: string) =>
-  cy.window().its(SERVICE_NAME).invoke('signUp', email, password);
+  // cy.window().its(SERVICE_NAME).invoke('signUp', email, password);
+  cy
+    .window()
+    .its(SERVICE_NAME)
+    .then((api) => api.signUp(email, password));
