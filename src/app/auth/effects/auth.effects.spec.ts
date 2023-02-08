@@ -9,7 +9,6 @@ import { provideMockStore, MockStore } from '@ngrx/store/testing';
 
 import { Action } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 import { AuthEffects } from '@app/auth/effects/auth.effects';
 import { AuthService } from '../services/auth.service';
@@ -65,7 +64,6 @@ function setup() {
       AuthEffects,
       provideMockActions(() => actions$),
       provideMockStore(),
-      MockProvider(AngularFireAuth),
       MockProvider(AuthService),
       MockProvider(EnvironmentService, mockEnvironment, 'useValue'),
       MockProvider(MatDialog),

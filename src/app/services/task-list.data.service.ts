@@ -1,14 +1,32 @@
 import { Injectable } from '@angular/core';
 
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
+import {
+  collection,
+  collectionData,
+  CollectionReference,
+  deleteDoc,
+  doc,
+  Firestore,
+  query,
+  setDoc,
+} from '@angular/fire/firestore';
+
 import { TaskListListItem } from '../root-store/tasks-store/models';
+
+// https://firebase.google.com/docs/firestore
+// https://github.com/FirebaseExtended/rxfire
 
 const DATA_COLLECTION = 'todo-lists';
 const USERS_COLLECTION = 'users';
+
+export function getTaskListCollectionPath(userId: string): string {
+  const path = `/${USERS_COLLECTION}/${userId}/${DATA_COLLECTION}`;
+
+  return path;
+}
 
 interface FirestoreDoc {
   id: string;
@@ -19,11 +37,12 @@ interface FirestoreDoc {
   providedIn: 'root',
 })
 export class TaskListDataService {
-  constructor(public readonly afs: AngularFirestore) {}
+  constructor(private firestore: Firestore) {}
 
   public getData(userId: string): Observable<TaskListListItem[]> {
     //
-    return this.firestoreCollection(userId)
+    /*
+    return this.angularFirestoreCollection(userId)
       .valueChanges()
       .pipe(
         map((items) =>
@@ -32,41 +51,94 @@ export class TaskListDataService {
           })
         )
       );
+*/
+console.log('===getData>', userId);
+    const firestoreDocQuery = query(this.getfirestoreDocCollectionRef(userId));
+
+    const modular$ = collectionData(firestoreDocQuery).pipe(
+      map((items) =>
+        items.map((item) => {
+          console.log('item>', item)
+          return this.fromFirestoreDoc(item);
+        })
+      )
+    );
+
+    return modular$;
   }
 
-  public removeItem(id: string, userId: string): void {
-    this.firestoreCollection(userId).doc(id).delete();
+  public async removeItem(id: string, userId: string): Promise<void> {
+    // await this.angularFirestoreCollection(userId).doc(id).delete();
+    const documentReference = doc(
+      this.getfirestoreDocCollectionRef(userId),
+      id
+    );
+    await deleteDoc(documentReference);
   }
 
-  public save(item: TaskListListItem, userId: string): void {
-    const doc = this.toFirestoreDoc(item);
-
+  public async save(item: TaskListListItem, userId: string): Promise<void> {
+    const firestoreDoc = this.toFirestoreDoc(item);
+    /*
     if (item.id === '') {
-      doc.id = this.afs.createId();
+      firestoreDoc.id = this.afs.createId();
     }
 
-    this.firestoreCollection(userId).doc(doc.id).set(doc);
+    await this.angularFirestoreCollection(userId)
+      .doc(firestoreDoc.id)
+      .set(firestoreDoc);
+*/
+    if (item.id === '') {
+      firestoreDoc.id = this.createId();
+    }
+
+    await setDoc(
+      doc(this.getfirestoreDocCollectionRef(userId), firestoreDoc.id),
+      firestoreDoc
+    );
   }
 
+  /*
   public saveB(item: TaskListListItem, userId: string) {
-    const doc = this.toFirestoreDoc(item);
+    const firestoreDoc = this.toFirestoreDoc(item);
 
     if (item.id === '') {
-      doc.id = this.afs.createId();
+      firestoreDoc.id = this.afs.createId();
     }
 
-    return this.firestoreCollection(userId).doc(doc.id).set(doc);
+    return this.angularFirestoreCollection(userId)
+      .doc(firestoreDoc.id)
+      .set(firestoreDoc);
+  }
+*/
+
+  private createId(): string {
+    const id = doc(collection(this.firestore, 'id')).id;
+
+    return id;
   }
 
-  private firestoreCollection(userId: string) {
-    //
-    return this.afs
-      .collection(USERS_COLLECTION)
-      .doc(userId)
-      .collection<FirestoreDoc>(DATA_COLLECTION, (ref) =>
-        ref.orderBy('name', 'asc')
-      );
+  private getfirestoreDocCollectionRef(
+    userId: string
+  ): CollectionReference<FirestoreDoc> {
+    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+    const collectionReference = collection(
+      this.firestore,
+      getTaskListCollectionPath(userId)
+    ) as CollectionReference<FirestoreDoc>;
+
+    return collectionReference;
   }
+  /*
+  private angularFirestoreCollection(
+    userId: string
+  ): AngularFirestoreCollection<FirestoreDoc> {
+    //
+    return this.afs.collection<FirestoreDoc>(
+      getTaskListCollectionPath(userId),
+      (ref) => ref.orderBy('name', 'asc')
+    );
+  }
+*/
 
   private toFirestoreDoc(item: TaskListListItem): FirestoreDoc {
     //

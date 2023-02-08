@@ -31,14 +31,14 @@ describe('Auth', () => {
   it('auto-sign-in', () => {
     cy.signUp(user.email, user.password);
     cy.visit('/');
-    // Autologin??
+    // Autologin??  
     cy.location('pathname').should('eq', '/home');
     cy.getBySel('user-name')
       .should('be.visible')
-      .should('contain.text', user.email);
+      .should('contain.text', user.email); 
     cy.getBySel('task-list-name')
       .should('be.visible')
-      .should('contain.text', 'default-list name');
+      .should('contain.text', 'default-list name');    
   });
 
   it('sign-up', () => {

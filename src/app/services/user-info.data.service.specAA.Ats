@@ -12,6 +12,8 @@ import {
   UserInfoDataService,
 } from '@app/services/user-info.data.service';
 
+// https://betterprogramming.pub/using-jest-mocks-typescript-the-right-way-da025da7a284
+
 describe('Conversion functions', () => {
   /*
   it('#fromFirestoreDoc should return null', () => {

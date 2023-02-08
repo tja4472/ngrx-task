@@ -1,8 +1,13 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Optional } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 
-import { AngularFireAuth } from '@angular/fire/compat/auth';
+import {
+  Auth,
+  signInWithEmailAndPassword,
+  getAuth,
+  signOut,
+} from '@angular/fire/auth';
 
 import { Actions, createEffect, ofType, OnInitEffects } from '@ngrx/effects';
 import { Action, Store } from '@ngrx/store';
@@ -183,19 +188,21 @@ export class AuthEffects implements OnInitEffects {
         tap((action) => {
           // const password = 'aaaaa';
           const password = action.credentials.password;
-          this.afAuth
-            .signInWithEmailAndPassword(action.credentials.username, password)
-            .catch((error) =>
-              // eslint-disable-next-line @ngrx/no-dispatch-in-effects
-              this.store.dispatch(
-                AuthApiActions.signInFailure({
-                  error: {
-                    code: error.code,
-                    message: error.message,
-                  },
-                })
-              )
-            );
+          signInWithEmailAndPassword(
+            getAuth(),
+            action.credentials.username,
+            password
+          ).catch((error) =>
+            // eslint-disable-next-line @ngrx/no-dispatch-in-effects
+            this.store.dispatch(
+              AuthApiActions.signInFailure({
+                error: {
+                  code: error.code,
+                  message: error.message,
+                },
+              })
+            )
+          );
         })
       );
     },
@@ -264,7 +271,7 @@ export class AuthEffects implements OnInitEffects {
       return this.actions$.pipe(
         ofType(AuthActions.signOut),
         tap(() =>
-          this.afAuth.signOut().then(() => {
+          signOut(getAuth()).then(() => {
             this.router.navigate(['/sign-in']);
             // eslint-disable-next-line @ngrx/no-dispatch-in-effects
             this.store.dispatch(AuthActions.signOutComplete());
@@ -339,9 +346,12 @@ export class AuthEffects implements OnInitEffects {
     { dispatch: false }
   );
 
+  // private auth: Auth not being set
+  // authTemp = getAuth();
+
   constructor(
     private readonly actions$: Actions,
-    private afAuth: AngularFireAuth,
+    @Optional() private auth: Auth,
     private authService: AuthService,
     private router: Router,
     private dialog: MatDialog,

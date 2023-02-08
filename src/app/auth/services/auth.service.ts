@@ -1,6 +1,13 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Optional } from '@angular/core';
 
-import { AngularFireAuth } from '@angular/fire/compat/auth';
+import {
+  Auth,
+  authState,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  getAuth,
+  UserCredential,
+} from '@angular/fire/auth';
 
 import { from, Observable, of } from 'rxjs';
 import { first, map, switchMap } from 'rxjs/operators';
@@ -15,6 +22,9 @@ import {
   TaskListListItem,
 } from '@app/root-store/tasks-store/models';
 import { TaskListDataService } from '@app/services/task-list.data.service';
+
+// https://firebase.google.com/docs/web/modular-upgrade?authuser=0
+// https://github.com/angular/angularfire/blob/master/docs/version-7-upgrade.md
 
 // https://benjaminjohnson.me/blog/typesafe-errors-in-typescript
 type ResultSuccess<T> = { type: 'success'; value: T };
@@ -35,12 +45,15 @@ export class AuthService {
 
   #appUser$: Observable<AppUser | null>;
 
+  // private auth: Auth not being set
+  // authTemp = getAuth();
+
   constructor(
-    private readonly auth: AngularFireAuth,
+    @Optional() private auth: Auth,
     private taskListDataService: TaskListDataService,
     private userInfoDataService: UserInfoDataService
   ) {
-    this.#appUser$ = this.auth.user.pipe(
+    this.#appUser$ = authState(this.auth).pipe(
       switchMap((user) => {
         if (user === null) {
           return of(null);
@@ -57,6 +70,7 @@ export class AuthService {
                 uid: user.uid,
                 email: user.email,
               };
+              console.log('AAA>', result);
               return result;
             })
           );
@@ -74,14 +88,13 @@ export class AuthService {
         })
       )
 */
-async bbbsignIn(email: string, password: string) {
-  console.log('bbbsignIn')
-  await this.auth.signInWithEmailAndPassword(email, password);
-}
+  async bbbsignIn(email: string, password: string): Promise<UserCredential> {
+    console.log('bbbsignIn');
+    return await signInWithEmailAndPassword(this.auth, email, password);
+  }
 
   signIn() {
-    this.auth
-      .signInWithEmailAndPassword('email', 'password')
+    signInWithEmailAndPassword(this.auth, 'email', 'password')
       .then((cred) => {
         console.log('Signed in>', cred);
       })
@@ -99,8 +112,7 @@ async bbbsignIn(email: string, password: string) {
   }
 
   signInAAA() {
-    this.auth
-      .signInWithEmailAndPassword('email', 'password')
+    signInWithEmailAndPassword(this.auth, 'email', 'password')
       .then((cred) => {
         console.log('Signed in>', cred);
       })
@@ -109,15 +121,17 @@ async bbbsignIn(email: string, password: string) {
 
   // firebase.FirebaseError
   login(email: string, password: string) {
-    return from(this.auth.signInWithEmailAndPassword(email, password));
+    return from(signInWithEmailAndPassword(this.auth, email, password));
   }
 
   public async signUp(email: string, password: string) {
-    const userCredential = await this.auth.createUserWithEmailAndPassword(
+    console.log('KKKKKKKKKKKKKKKKKKKKKKKKK-signUp-A')    
+    const userCredential = await createUserWithEmailAndPassword(
+      this.auth,
       email,
       password
     );
-
+    console.log('KKKKKKKKKKKKKKKKKKKKKKKKK-signUp-B') 
     if (userCredential.user == null) {
       throw new Error('user is null');
     }
@@ -129,8 +143,8 @@ async bbbsignIn(email: string, password: string) {
       id: defaultValue.todoListId,
       name: defaultValue.todoListId + ' name',
     };
-
-    await this.taskListDataService.saveB(
+console.log('KKKKKKKKKKKKKKKKKKKKKKKKK')
+    await this.taskListDataService.save(
       taskListListItem,
       userCredential.user.uid
     );

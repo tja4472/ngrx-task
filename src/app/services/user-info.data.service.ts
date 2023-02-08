@@ -1,13 +1,31 @@
 // tslint:disable:max-classes-per-file
 import { Injectable } from '@angular/core';
 
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import {
+  collection,
+  collectionData,
+  CollectionReference,
+  deleteDoc,
+  doc,
+  docData,
+  Firestore,
+  orderBy,
+  query,
+  setDoc,
+  writeBatch,
+} from '@angular/fire/firestore';
 
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 
 import { EnvironmentService } from '@app/environment.service';
 import { newUserInfo, UserInfo } from '@app/models/user-info.model';
+
+export function getUsersCollectionPath(): string {
+  const path = `/users`;
+
+  return path;
+}
 
 /*
 const APP_KEY = 'apps/' + environment.appCode;
@@ -49,7 +67,8 @@ export class UserInfoDataService {
   }
 
   constructor(
-    public readonly afs: AngularFirestore,
+    private firestore: Firestore,
+    // public readonly afs: AngularFirestore,
     public readonly environmentService: EnvironmentService
   ) {
     console.log('UserInfoDataService:constructor');
@@ -63,6 +82,7 @@ export class UserInfoDataService {
     // console.log('USERS_COLLECTION>', USERS_COLLECTION);
   }
 
+  /*
   public async getUserData(userId: string): Promise<UserInfo> {
     const userData = await this.getItem$(userId).pipe(take(1)).toPromise();
 
@@ -77,7 +97,7 @@ export class UserInfoDataService {
     await this.save(defaultValue, userId);
     return defaultValue;
   }
-
+*/
   /*
   public getSingleItem$(userId: string) {
     const doc = this.getItem$(userId)
@@ -104,6 +124,7 @@ export class UserInfoDataService {
   // Need to throw error if doc is undefined.
   public getItem$(userId: string): Observable<UserInfo> {
     //
+    /*    
     return this.firestoreDocument(userId)
       .valueChanges()
       .pipe(
@@ -114,19 +135,32 @@ export class UserInfoDataService {
           return fromFirestoreDoc(item);
         })
       );
+*/
+    const docRef = doc(this.getfirestoreDocCollectionRef(), userId);
+    const result$ = docData(docRef).pipe(
+      map((item) => {
+        if (item === undefined) {
+          throw new Error('UserInfo undefined');
+        }
+        return fromFirestoreDoc(item);
+      })
+    );
+
+    return result$;
   }
 
-  public save(item: UserInfo, userId: string): Promise<void> {
-    const doc = toFirestoreDoc(item);
-    console.log('>> Save>', doc);
-    /*
-    this.firestoreDocument(userId).valueChanges().pipe(take(1)).subscribe((x) => {
-        console.log('KKKK>', x);
-    });
-    */
-    return this.firestoreDocument(userId).set(doc);
+  public async save(item: UserInfo, userId: string): Promise<void> {
+    const firestoreDoc = toFirestoreDoc(item);
+
+    // await this.firestoreDocument(userId).set(firestoreDoc);
+
+    console.log('NN Saving>', userId);
+    const docRef = doc(this.getfirestoreDocCollectionRef(), userId);
+    await setDoc(docRef, firestoreDoc);
+    console.log('NN Saved');
   }
 
+  /*
   private firestoreDocument(userId: string) {
     //
     return this.afs
@@ -134,7 +168,17 @@ export class UserInfoDataService {
       .doc<FirestoreDoc>(userId);
     // return this.afs.doc<FirestoreDoc>(this.usersCollectionPath + '/' + userId);
   }
+*/
 
+  private getfirestoreDocCollectionRef(): CollectionReference<FirestoreDoc> {
+    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+    const collectionReference = collection(
+      this.firestore,
+      getUsersCollectionPath()
+    ) as CollectionReference<FirestoreDoc>;
+
+    return collectionReference;
+  }
   /*
   private toFirestoreDoc(item: UserInfo): FirestoreDoc {
     //

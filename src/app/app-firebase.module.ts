@@ -1,39 +1,59 @@
 import { NgModule } from '@angular/core';
 
-import { AngularFireModule } from '@angular/fire/compat';
-/*
-import {
-  AngularFireAnalyticsModule,
-  ScreenTrackingService,
-  UserTrackingService,
-} from '@angular/fire/compat/analytics';
-*/
-import {
-  AngularFireAuthModule,
-  USE_EMULATOR as USE_AUTH_EMULATOR,
-} from '@angular/fire/compat/auth';
-import {
-  AngularFirestoreModule,
-  SETTINGS as FIRESTORE_SETTINGS,
-  USE_EMULATOR as USE_FIRESTORE_EMULATOR,
-} from '@angular/fire/compat/firestore';
-// import { AngularFirePerformanceModule } from '@angular/fire/compat/performance';
-
 import { EnvironmentService } from '@app/environment.service';
+
+import {
+  connectFirestoreEmulator,
+  getFirestore,
+  provideFirestore,
+  FirestoreSettings,
+  initializeFirestore,
+  enableIndexedDbPersistence,
+} from '@angular/fire/firestore';
+import { getApp, initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { connectAuthEmulator, getAuth, provideAuth } from '@angular/fire/auth';
 
 const environmentService = new EnvironmentService();
 
+// cypress requires experimentalAutoDetectLongPolling
+
 @NgModule({
   imports: [
-    AngularFireModule.initializeApp(environmentService.firebase.config),
-    AngularFirestoreModule.enablePersistence(),
-    // AngularFireAnalyticsModule,
-    AngularFireAuthModule,
-    AngularFirestoreModule,
-    // AngularFirePerformanceModule,
+    // AngularFireModule.initializeApp(environmentService.firebase.config),
+    // AngularFirestoreModule.enablePersistence(),
+    // AngularFireAuthModule,
+    // AngularFirestoreModule,
+
+    provideFirebaseApp(() => initializeApp(environmentService.firebase.config)),
+    provideAuth(() => {
+      let auth = getAuth();
+      if (environmentService.firebase.emulators) {
+        connectAuthEmulator(auth, 'http://localhost:9099', {
+          disableWarnings: false,
+        });
+      }
+      return auth;
+    }),
+    provideFirestore(() => {
+      let firestore;
+
+      if (environmentService.firebase.emulators) {
+        console.log('🔔 using firestore emulator...');
+        // bug: experimentalAutoDetectLongPolling not picked up via `getFirestore`
+        const app = getApp();
+        firestore = initializeFirestore(app, {
+          experimentalAutoDetectLongPolling: true,
+        });
+        connectFirestoreEmulator(firestore, 'localhost', 8080);
+      } else {
+        firestore = getFirestore();
+        enableIndexedDbPersistence(firestore);
+      }
+
+      return firestore;
+    }),
   ],
-  // exports: [AngularFireModule, AngularFireAuthModule],
-  // providers: [ScreenTrackingService, UserTrackingService],
+  /*
   providers: [
     {
       provide: FIRESTORE_SETTINGS,
@@ -48,5 +68,6 @@ const environmentService = new EnvironmentService();
       useValue: environmentService.firebase.emulators?.firestore,
     },
   ],
+*/
 })
 export class AppFirebaseModule {}
