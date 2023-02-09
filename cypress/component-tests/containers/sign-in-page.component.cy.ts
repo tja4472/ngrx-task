@@ -18,10 +18,12 @@ import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { CommonModule } from '@angular/common';
 import { CredentialsFormComponent } from '@app/auth/components/credentials-form/credentials-form.component';
 
-import { TestModule } from './test.module';
 import { Credentials } from '@app/auth/models/credentials.model';
 
 import { SignInPageActions } from '@app/auth/actions/sign-in-page.actions';
+
+const errorMessage = null;
+const pending = false;
 
 describe('CredentialsFormComponent - mounts', () => {
   it('mounts', () => {
@@ -32,9 +34,22 @@ describe('CredentialsFormComponent - mounts', () => {
         CommonModule,
         CredentialsFormComponent,
         BrowserAnimationsModule,
-        TestModule,
       ],
       declarations: [SignInPageComponent],
+      providers: [
+        provideMockStore({
+          selectors: [
+            {
+              selector: SignInPageSelectors.selectSignInPageError,
+              value: errorMessage,
+            },
+            {
+              selector: SignInPageSelectors.selectSignInPagePending,
+              value: pending,
+            },
+          ],
+        }),
+      ],
     }).then(() => {
       store = TestBed.inject(MockStore);
       expect(store).to.be.an('object');
@@ -51,9 +66,22 @@ describe('CredentialsFormComponent', () => {
         CommonModule,
         CredentialsFormComponent,
         BrowserAnimationsModule,
-        TestModule,
       ],
       declarations: [SignInPageComponent],
+      providers: [
+        provideMockStore({
+          selectors: [
+            {
+              selector: SignInPageSelectors.selectSignInPageError,
+              value: errorMessage,
+            },
+            {
+              selector: SignInPageSelectors.selectSignInPagePending,
+              value: pending,
+            },
+          ],
+        }),
+      ],
     }).then(() => {
       console.log('BBBB');
       store = TestBed.inject(MockStore);
