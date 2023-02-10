@@ -9,7 +9,7 @@ import {
 import { State } from './user-store.reducer';
 
 describe('selectors', () => {
-  const initialState: Partial<State> = {
+  const initialState: State = {
     taskListId: 'taskListId1',
     user: {
       id: 'id1',
@@ -55,6 +55,7 @@ describe('selectors', () => {
     it('should return user & taskListId if user is not null', () => {
       const result = selectUserAndTaskListId.projector(
         initialState.user,
+
         initialState.taskListId
       );
       expect(result).toEqual({

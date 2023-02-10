@@ -1,10 +1,10 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {
-  MatCheckboxChange,
-  MatCheckboxDefaultOptions,
-  MAT_CHECKBOX_DEFAULT_OPTIONS,
-} from '@angular/material/checkbox';
+  MatLegacyCheckboxChange as MatCheckboxChange,
+  MatLegacyCheckboxDefaultOptions as MatCheckboxDefaultOptions,
+  MAT_LEGACY_CHECKBOX_DEFAULT_OPTIONS as MAT_CHECKBOX_DEFAULT_OPTIONS,
+} from '@angular/material/legacy-checkbox';
 
 import { pathPrefix, routeNames } from '@app/app-route-names';
 import { CurrentTask } from '@app/root-store/tasks-store/models';

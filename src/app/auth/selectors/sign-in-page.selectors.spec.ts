@@ -8,9 +8,18 @@ import {
 
 describe('sign-in-page selectors', () => {
   const errorMessage = 'error1;';
-  const initialState: Partial<AuthFeatureState> = {
+  const initialState: AuthFeatureState = {
+    auth: {
+      hasChecked: false,
+      isAutoSignIn: true,
+      userId: null,
+    },
     signInPage: {
       error: errorMessage,
+      pending: false,
+    },
+    signUpPage: {
+      error: null,
       pending: false,
     },
   };
