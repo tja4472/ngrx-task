@@ -20,10 +20,6 @@ export class CompletedTaskDetailEditComponent implements OnInit {
     return this.presenter.form;
   }
 
-  get formControlNames() {
-    return this.presenter.formControlNames;
-  }
-
   get isSubmitButtonDisabled(): boolean {
     return this.presenter.isSubmitButtonDisabled;
   }
