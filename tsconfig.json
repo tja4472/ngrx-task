@@ -3,7 +3,9 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "@app/*": ["src/app/*"]
+      "@app/*": [
+        "src/app/*"
+      ]
     },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
@@ -13,8 +15,11 @@
     "module": "es2020",
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es2020",
-    "lib": ["es2020", "dom"],
+    "target": "ES2022",
+    "lib": [
+      "es2020",
+      "dom"
+    ],
     "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
@@ -24,11 +29,8 @@
     "strictBindCallApply": true,
     "strictNullChecks": true,
     "strictFunctionTypes": true,
-    "strictPropertyInitialization": false
-    // Required for angularfire to work with typescript 4.5.5
-    // "skipDefaultLibCheck": true,
-    // "skipLibCheck": true
-    // ^^^^
+    "strictPropertyInitialization": false,
+    "useDefineForClassFields": false
   },
   // Required for jest to work with cypress
   "include": ["src/**/*.ts"],
