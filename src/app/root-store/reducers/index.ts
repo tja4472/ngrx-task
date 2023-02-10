@@ -63,7 +63,7 @@ export const {
   selectRouteParam, // factory function to select a route param
   selectRouteData, // select the current route data
   selectUrl, // select the current url
-} = fromRouter.getSelectors(selectRouter);
+} = fromRouter.getRouterSelectors(selectRouter);
 
 export const selectRouteId = selectRouteParam('id');
 export const selectStatus = selectQueryParam('status');

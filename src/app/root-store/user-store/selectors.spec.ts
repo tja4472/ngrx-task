@@ -19,14 +19,16 @@ describe('selectors', () => {
 
   describe('selectTaskListId', () => {
     it('should return taskListId', () => {
-      const result = selectTaskListId.projector(initialState);
+      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      const result = selectTaskListId.projector(initialState as any);
       expect(result).toBe(initialState.taskListId);
     });
   });
 
   describe('selectUser', () => {
     it('should return taskListId', () => {
-      const result = selectUser.projector(initialState);
+      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      const result = selectUser.projector(initialState as any);
       expect(result).toEqual(initialState.user);
     });
   });
@@ -38,7 +40,8 @@ describe('selectors', () => {
     });
 
     it('should return true if user is not null', () => {
-      const result = selectIsLoggedIn.projector(initialState.user);
+      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      const result = selectIsLoggedIn.projector(initialState.user as any);
       expect(result).toBeTruthy();
     });
   });
@@ -47,15 +50,18 @@ describe('selectors', () => {
     it('should return null if user is null', () => {
       const result = selectUserAndTaskListId.projector(
         null,
-        initialState.taskListId
+        // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+        initialState.taskListId as any
       );
       expect(result).toBeNull();
     });
 
     it('should return user & taskListId if user is not null', () => {
       const result = selectUserAndTaskListId.projector(
-        initialState.user,
-        initialState.taskListId
+        // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+        initialState.user as any,
+        // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+        initialState.taskListId as any
       );
       expect(result).toEqual({
         user: initialState.user,

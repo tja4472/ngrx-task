@@ -17,21 +17,28 @@ describe('sign-in-page selectors', () => {
 
   describe('selectSignInPageState', () => {
     it('should return signInPageState', () => {
-      const result = selectSignInPageState.projector(initialState);
+      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      const result = selectSignInPageState.projector(initialState as any);
       expect(result).toEqual(initialState.signInPage);
     });
   });
 
   describe('selectSignInPageError', () => {
     it('should return error', () => {
-      const result = selectSignInPageError.projector(initialState.signInPage);
+      const result = selectSignInPageError.projector(
+        // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+        initialState.signInPage as any
+      );
       expect(result).toBe(errorMessage);
     });
   });
 
   describe('selectSignInPagePending', () => {
     it('should return pending', () => {
-      const result = selectSignInPagePending.projector(initialState.signInPage);
+      const result = selectSignInPagePending.projector(
+        // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+        initialState.signInPage as any
+      );
       expect(result).toBeFalsy();
     });
   });
