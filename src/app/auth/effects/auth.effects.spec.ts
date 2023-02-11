@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
 
 import { AuthEffects } from '@app/auth/effects/auth.effects';
 import { AuthService } from '../services/auth.service';
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
+import { MatDialog } from '@angular/material/dialog';
 import {
   AuthActions,
   AuthApiActions,
