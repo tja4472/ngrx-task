@@ -7,6 +7,7 @@ import {
   createUserWithEmailAndPassword,
   getAuth,
   UserCredential,
+  signOut,
 } from '@angular/fire/auth';
 
 import { from, Observable, of } from 'rxjs';
@@ -93,12 +94,48 @@ export class AuthService {
     return await signInWithEmailAndPassword(this.auth, email, password);
   }
 
-  signIn() {
+  /**
+   *
+   * @param email
+   * @param password
+   * @returns
+   */
+  async signIn(
+    email: string,
+    password: string
+  ): Promise<UserCredential | undefined> {
+    try {
+      return await signInWithEmailAndPassword(this.auth, email, password);
+    } catch (error: unknown) {
+      // Process error
+      throw error;
+    } finally {
+      console.log('We do cleanup here');
+    }
+  }
+
+  async signOut(): Promise<void> {
+    try {
+      return await signOut(this.auth);
+    } catch (error: unknown) {
+      // Process error
+      throw error;
+    } finally {
+      console.log('We do cleanup here');
+    }
+  }
+
+  ddddsignIn() {
     signInWithEmailAndPassword(this.auth, 'email', 'password')
+      /*    
       .then((cred) => {
         console.log('Signed in>', cred);
       })
+*/
       .catch((error: unknown) => {
+        // Process error
+        throw error;
+        /*        
         // this doesn't work
         // if (error instanceof FirebaseError) {
         if (error instanceof Error) {
@@ -108,6 +145,7 @@ export class AuthService {
         } else {
           console.error('🤷‍♂️'); // Who knows?
         }
+*/
       });
   }
 
@@ -125,13 +163,13 @@ export class AuthService {
   }
 
   public async signUp(email: string, password: string) {
-    console.log('KKKKKKKKKKKKKKKKKKKKKKKKK-signUp-A')    
+    console.log('KKKKKKKKKKKKKKKKKKKKKKKKK-signUp-A');
     const userCredential = await createUserWithEmailAndPassword(
       this.auth,
       email,
       password
     );
-    console.log('KKKKKKKKKKKKKKKKKKKKKKKKK-signUp-B') 
+    console.log('KKKKKKKKKKKKKKKKKKKKKKKKK-signUp-B');
     if (userCredential.user == null) {
       throw new Error('user is null');
     }
@@ -143,7 +181,7 @@ export class AuthService {
       id: defaultValue.todoListId,
       name: defaultValue.todoListId + ' name',
     };
-console.log('KKKKKKKKKKKKKKKKKKKKKKKKK')
+    console.log('KKKKKKKKKKKKKKKKKKKKKKKKK');
     await this.taskListDataService.save(
       taskListListItem,
       userCredential.user.uid

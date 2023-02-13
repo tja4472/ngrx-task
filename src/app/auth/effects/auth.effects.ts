@@ -2,17 +2,10 @@ import { Injectable, Optional } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 
-import {
-  Auth,
-  signInWithEmailAndPassword,
-  getAuth,
-  signOut,
-} from '@angular/fire/auth';
-
 import { Actions, createEffect, ofType, OnInitEffects } from '@ngrx/effects';
 import { Action, Store } from '@ngrx/store';
 
-import { from, of } from 'rxjs';
+import { of } from 'rxjs';
 import {
   concatMap,
   exhaustMap,
@@ -64,6 +57,10 @@ effectDispatchFalse$ = createEffect(
 
 @Injectable()
 export class AuthEffects implements OnInitEffects {
+  ngrxOnInitEffects(): Action {
+    return AuthApiActions.autoSignInCheck();
+  }
+
   // With enablePersistence the first result will be from
   // the autoSignIn.
   //#region Sign In
@@ -153,56 +150,25 @@ export class AuthEffects implements OnInitEffects {
     { dispatch: false }
   );
 
-  /*
-  manualSignIn$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(
-        AuthApiActions.autoSignInHaveFirebaseUser,
-        AuthApiActions.autoSignInNoFirebaseUser
-      ),
-      // tap(() => console.log('### manualSignIn$')),
-      switchMap(() =>
-        this.afAuth.authState.pipe(
-          skip(1),
-          map((firebaseUser) => {
-            if (firebaseUser === null) {
-              return AuthApiActions.manualSignInNoFirebaseUser();
-            } else {
-              return AuthApiActions.manualSignInHaveFirebaseUser({
-                uid: firebaseUser.uid,
-                email: firebaseUser.email,
-                displayName: firebaseUser.displayName,
-              });
-            }
-          })
-        )
-      )
-    );
-  });
-*/
-
   signIn$ = createEffect(
     () => {
       return this.actions$.pipe(
         ofType(SignInPageActions.signIn),
         tap((action) => {
-          // const password = 'aaaaa';
           const password = action.credentials.password;
-          signInWithEmailAndPassword(
-            getAuth(),
-            action.credentials.username,
-            password
-          ).catch((error) =>
-            // eslint-disable-next-line @ngrx/no-dispatch-in-effects
-            this.store.dispatch(
-              AuthApiActions.signInFailure({
-                error: {
-                  code: error.code,
-                  message: error.message,
-                },
-              })
-            )
-          );
+          this.authService
+            .signIn(action.credentials.username, password)
+            .catch((error) =>
+              // eslint-disable-next-line @ngrx/no-dispatch-in-effects
+              this.store.dispatch(
+                AuthApiActions.signInFailure({
+                  error: {
+                    code: error.code,
+                    message: error.message,
+                  },
+                })
+              )
+            );
         })
       );
     },
@@ -229,23 +195,6 @@ export class AuthEffects implements OnInitEffects {
                 })
               )
             );
-          /*
-          this.afAuth
-            .createUserWithEmailAndPassword(
-              action.credentials.username,
-              password
-            )
-            .catch((error) =>
-              this.store.dispatch(
-                AuthApiActions.signUpFailure({
-                  error: {
-                    code: error.code,
-                    message: error.message,
-                  },
-                })
-              )
-            );
-            */
         })
       );
     },
@@ -271,7 +220,7 @@ export class AuthEffects implements OnInitEffects {
       return this.actions$.pipe(
         ofType(AuthActions.signOut),
         tap(() =>
-          signOut(getAuth()).then(() => {
+          this.authService.signOut().then(() => {
             this.router.navigate(['/sign-in']);
             // eslint-disable-next-line @ngrx/no-dispatch-in-effects
             this.store.dispatch(AuthActions.signOutComplete());
@@ -346,19 +295,11 @@ export class AuthEffects implements OnInitEffects {
     { dispatch: false }
   );
 
-  // private auth: Auth not being set
-  // authTemp = getAuth();
-
   constructor(
     private readonly actions$: Actions,
-    @Optional() private auth: Auth,
     private authService: AuthService,
     private router: Router,
     private dialog: MatDialog,
     private readonly store: Store
   ) {}
-
-  ngrxOnInitEffects(): Action {
-    return AuthApiActions.autoSignInCheck();
-  }
 }

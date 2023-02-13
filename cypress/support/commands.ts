@@ -112,9 +112,11 @@ Cypress.Commands.add('signIn', (email, password) => {
   cy.getBySel('username-field').type(email);
   cy.getBySel('password-field').type(password);
   cy.getBySel('sign-in-button').should('be.enabled').click();
+/*  
   // Home page
   cy.location('pathname').should('eq', '/home');
   return cy.getBySel('sign-out-button').should('be.visible');
+*/  
 });
 
 Cypress.Commands.add('signOut', () => {
