@@ -5,7 +5,6 @@ import {
   authState,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
-  getAuth,
   UserCredential,
   signOut,
 } from '@angular/fire/auth';
@@ -18,21 +17,11 @@ import { UserInfoDataService } from '@app/services/user-info.data.service';
 import { AppUser } from '../models/app-user.model';
 import { newUserInfo } from '@app/models/user-info.model';
 
-import {
-  newTaskListListItemB,
-  TaskListListItem,
-} from '@app/root-store/tasks-store/models';
+import { TaskListListItem } from '@app/root-store/tasks-store/models';
 import { TaskListDataService } from '@app/services/task-list.data.service';
 
 // https://firebase.google.com/docs/web/modular-upgrade?authuser=0
 // https://github.com/angular/angularfire/blob/master/docs/version-7-upgrade.md
-
-// https://benjaminjohnson.me/blog/typesafe-errors-in-typescript
-type ResultSuccess<T> = { type: 'success'; value: T };
-
-type ResultError = { type: 'error'; error: Error; errorCode: string };
-
-type Result<T> = ResultSuccess<T> | ResultError;
 
 @Injectable({
   providedIn: 'root',
@@ -45,9 +34,6 @@ export class AuthService {
   }
 
   #appUser$: Observable<AppUser | null>;
-
-  // private auth: Auth not being set
-  // authTemp = getAuth();
 
   constructor(
     @Optional() private auth: Auth,
@@ -79,16 +65,7 @@ export class AuthService {
       })
     );
   }
-  /*
-      this.store.dispatch(
-        AuthApiActions.signInFailure({
-          error: {
-            code: error.code,
-            message: error.message,
-          },
-        })
-      )
-*/
+
   async bbbsignIn(email: string, password: string): Promise<UserCredential> {
     console.log('bbbsignIn');
     return await signInWithEmailAndPassword(this.auth, email, password);
@@ -107,8 +84,7 @@ export class AuthService {
     try {
       return await signInWithEmailAndPassword(this.auth, email, password);
     } catch (error: unknown) {
-      // Process error
-      throw error;
+      this.processError(error);
     } finally {
       console.log('We do cleanup here');
     }
@@ -118,11 +94,24 @@ export class AuthService {
     try {
       return await signOut(this.auth);
     } catch (error: unknown) {
-      // Process error
-      throw error;
+      this.processError(error);
     } finally {
       console.log('We do cleanup here');
     }
+  }
+
+  processError(error: unknown) {
+    let message = '';
+    // if (error instanceof FirebaseError) {
+    if (error instanceof Error) {
+      console.error(error.message); // It's an Error instance.
+      // console.error('error>>>>', error.code);
+      // return { success: true, errorCode: error.message };
+    } else {
+      console.error('🤷‍♂️'); // Who knows?
+    }
+
+    throw error;
   }
 
   ddddsignIn() {
