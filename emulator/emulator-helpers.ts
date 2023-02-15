@@ -1,57 +1,77 @@
-import * as http from 'http';
+// cypress requires version 2.
+// 👇️ only necessary if running in Node.js version < 17.5
+import fetch from 'node-fetch';
 
 import { EmulatorInfo } from './emulator-info';
+
+// https://bobbyhadz.com/blog/typescript-http-request#making-http-delete-requests-in-typescript
 
 /**
  * Returns the HTTP response status code.
  * @see: https://firebase.google.com/docs/emulator-suite/connect_firestore#clear_your_database_between_tests
  */
-export function clearDatabase(projectId: string) {
-  const options: http.RequestOptions = {
-    host: EmulatorInfo.host,
-    path: `/emulator/v1/projects/${projectId}/databases/(default)/documents`,
-    method: 'DELETE',
-    port: EmulatorInfo.firestore.port,
-  };
+export async function clearDatabase(
+  projectId: string
+): Promise<number | undefined> {
+  const url = `http://127.0.0.1:${EmulatorInfo.firestore.port}/emulator/v1/projects/${projectId}/databases/(default)/documents`;
 
-  return new Promise<number | undefined>((resolve, reject) => {
-    const req = http.request(options, (res) => {
-      const statusCode = res.statusCode;
-      res.destroy();
-      resolve(statusCode);
+  try {
+    const response = await fetch(url, {
+      method: 'DELETE',
     });
+    /*
+    if (!response.ok) {
+      // throw new Error(`Error! status: ${response.status}`);
+    }
 
-    req.on('error', (error) => {
-      reject(error);
-    });
-
-    req.end();
-  });
+    console.log('User deleted successfully');
+*/
+    return response.status;
+  } catch (error) {
+    /*    
+    console.log('vvvv catch');
+    if (error instanceof Error) {
+      console.log('error message: ', error.message);
+      return error.message;
+    } else {
+      console.log('unexpected error: ', error);
+      return 'An unexpected error occurred';
+    }
+*/
+  }
 }
 
 /**
  *  * Returns the HTTP response status code.
  * @see: https://firebase.google.com/docs/reference/rest/auth#section-auth-emulator-clearaccounts
  */
-export function clearUserAccounts(projectId: string) {
-  const options: http.RequestOptions = {
-    host: EmulatorInfo.host,
-    path: `/emulator/v1/projects/${projectId}/accounts`,
-    method: 'DELETE',
-    port: EmulatorInfo.auth.port,
-  };
+export async function clearUserAccounts(
+  projectId: string
+): Promise<number | undefined> {
+  const url = `http://127.0.0.1:${EmulatorInfo.auth.port}/emulator/v1/projects/${projectId}/accounts`;
 
-  return new Promise<number | undefined>((resolve, reject) => {
-    const req = http.request(options, (res) => {
-      const statusCode = res.statusCode;
-      res.destroy();
-      resolve(statusCode);
+  try {
+    const response = await fetch(url, {
+      method: 'DELETE',
     });
+    /*
+    if (!response.ok) {
+      // throw new Error(`Error! status: ${response.status}`);
+    }
 
-    req.on('error', (error) => {
-      reject(error);
-    });
-
-    req.end();
-  });
+    console.log('User deleted successfully');
+*/
+    return response.status;
+  } catch (error) {
+    /*    
+    console.log('vvvv catch');
+    if (error instanceof Error) {
+      console.log('error message: ', error.message);
+      return error.message;
+    } else {
+      console.log('unexpected error: ', error);
+      return 'An unexpected error occurred';
+    }
+*/
+  }
 }
