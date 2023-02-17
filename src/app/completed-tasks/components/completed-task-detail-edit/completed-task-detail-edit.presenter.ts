@@ -16,7 +16,7 @@ export class CompletedTaskDetailEditPresenter {
     return !(this.form.dirty && this.form.valid);
   }
 
-  initialData: CompletedTask;
+  initialData!: CompletedTask;
 
   constructor(private fb: FormBuilder) {}
 

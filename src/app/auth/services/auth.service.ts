@@ -77,14 +77,12 @@ export class AuthService {
    * @param password
    * @returns
    */
-  async signIn(
-    email: string,
-    password: string
-  ): Promise<UserCredential | undefined> {
+  async signIn(email: string, password: string): Promise<UserCredential> {
     try {
       return await signInWithEmailAndPassword(this.auth, email, password);
     } catch (error: unknown) {
-      this.processError(error);
+      const processedError = this.processError(error);
+      throw processedError;
     } finally {
       console.log('We do cleanup here');
     }
@@ -94,13 +92,14 @@ export class AuthService {
     try {
       return await signOut(this.auth);
     } catch (error: unknown) {
-      this.processError(error);
+      const processedError = this.processError(error);
+      throw processedError;
     } finally {
       console.log('We do cleanup here');
     }
   }
 
-  processError(error: unknown) {
+  processError(error: unknown): unknown {
     let message = '';
     // if (error instanceof FirebaseError) {
     if (error instanceof Error) {
@@ -111,7 +110,7 @@ export class AuthService {
       console.error('🤷‍♂️'); // Who knows?
     }
 
-    throw error;
+    return error;
   }
 
   ddddsignIn() {

@@ -36,7 +36,7 @@ export class CredentialsFormComponent {
   }
 
   @Input()
-  errorMessage: string | null;
+  errorMessage: string = '';
 
   @Output()
   readonly SignUpClicked = new EventEmitter();

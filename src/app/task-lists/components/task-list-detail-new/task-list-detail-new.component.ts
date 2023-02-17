@@ -12,7 +12,7 @@ import { TaskListDetailNewPresenter } from './task-list-detail-new.presenter';
   viewProviders: [TaskListDetailNewPresenter],
 })
 export class TaskListDetailNewComponent implements OnInit {
-  @Input() completedTask: TaskListListItem;
+  @Input() completedTask!: TaskListListItem;
   @Output() cancel = new EventEmitter<TaskListListItem>();
   @Output() checkout = new EventEmitter<TaskListListItem>();
 

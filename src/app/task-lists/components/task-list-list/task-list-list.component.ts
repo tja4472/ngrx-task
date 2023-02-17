@@ -10,7 +10,7 @@ import { TaskListListItem } from '@app/root-store/tasks-store/models';
 })
 export class TaskListListComponent {
   @Input()
-  currentTasks: TaskListListItem[];
+  currentTasks: TaskListListItem[] = [];
 
   @Output() newCurrentTask = new EventEmitter<void>();
 

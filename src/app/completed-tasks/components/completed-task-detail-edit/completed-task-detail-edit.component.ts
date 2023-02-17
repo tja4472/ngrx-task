@@ -11,7 +11,7 @@ import { CompletedTaskDetailEditPresenter } from './completed-task-detail-edit.p
   viewProviders: [CompletedTaskDetailEditPresenter],
 })
 export class CompletedTaskDetailEditComponent implements OnInit {
-  @Input() completedTask: CompletedTask;
+  @Input() completedTask!: CompletedTask;
   @Output() cancel = new EventEmitter<CompletedTask>();
   @Output() remove = new EventEmitter<CompletedTask>();
   @Output() checkout = new EventEmitter<CompletedTask>();

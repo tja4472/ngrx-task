@@ -31,7 +31,7 @@ type ViewNavigationItem = {
   styleUrls: ['./sidenav.component.css'],
 })
 export class SidenavComponent {
-  @ViewChild('drawer', { static: true }) drawer: MatSidenav;
+  @ViewChild('drawer', { static: true }) drawer!: MatSidenav;
 
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)

@@ -1,5 +1,5 @@
 <app-current-task-detail-edit
-  [todo]="task$ | async"
+  [todo]="(task$ | async)!"
   (cancel)="viewCancelled($event)"
   (remove)="viewRemoved($event)"
   (checkout)="viewSaved($event)"

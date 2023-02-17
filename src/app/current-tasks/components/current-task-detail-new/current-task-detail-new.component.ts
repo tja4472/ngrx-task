@@ -12,7 +12,7 @@ import { CurrentTaskDetailNewPresenter } from './current-task-detail-new.present
   viewProviders: [CurrentTaskDetailNewPresenter],
 })
 export class CurrentTaskDetailNewComponent implements OnInit {
-  @Input() todo: CurrentTask;
+  @Input() todo!: CurrentTask;
 
   @Output() cancel = new EventEmitter<CurrentTask>();
   @Output() checkout = new EventEmitter<CurrentTask>();

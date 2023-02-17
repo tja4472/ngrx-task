@@ -16,11 +16,11 @@ import { SignInPageSelectors } from '@app/auth/selectors';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignInPageComponent implements OnInit {
-  error$: Observable<string | null>;
+  error$: Observable<string>;
   pending$: Observable<boolean>;
 
   constructor(private readonly store: Store) {
-    this.error$ = store.select(SignInPageSelectors.selectSignInPageError);
+    this.error$ = store.pipe(SignInPageSelectors.selectFilteredSignInPageError);
     this.pending$ = store.select(SignInPageSelectors.selectSignInPagePending);
   }
   ngOnInit(): void {

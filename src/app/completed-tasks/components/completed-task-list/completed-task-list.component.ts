@@ -19,7 +19,7 @@ interface GroupTasksByDate {
   styleUrls: ['./completed-task-list.component.css'],
 })
 export class CompletedTaskListComponent {
-  private inputCurrentTasks: CompletedTask[];
+  private inputCurrentTasks!: CompletedTask[];
 
   @Input()
   set currentTasks(tasks: CompletedTask[]) {

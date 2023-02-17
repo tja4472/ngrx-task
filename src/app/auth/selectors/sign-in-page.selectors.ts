@@ -1,4 +1,7 @@
-import { createSelector } from '@ngrx/store';
+import { createSelector, select } from '@ngrx/store';
+
+import { pipe } from 'rxjs';
+import { filter } from 'rxjs/operators';
 
 import { AuthFeatureState, selectAuthFeatureState } from '@app/auth/reducers';
 import { SignInPageState } from '@app/auth/reducers/sign-in-page.reducer';
@@ -16,4 +19,9 @@ export const selectSignInPageError = createSelector(
 export const selectSignInPagePending = createSelector(
   selectSignInPageState,
   (state: SignInPageState) => state.pending
+);
+
+export const selectFilteredSignInPageError = pipe(
+  select(selectSignInPageError),
+  filter((val): val is string => val !== null)
 );

@@ -1,36 +1,40 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
-    "paths": {
-      "@app/*": [
-        "src/app/*"
-      ]
-    },
     "outDir": "./dist/out-tsc",
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "declaration": false,
     "downlevelIteration": true,
     "experimentalDecorators": true,
-    "module": "es2020",
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "ES2022",
-    "lib": [
-      "es2020",
-      "dom"
-    ],
-    "forceConsistentCasingInFileNames": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "noImplicitAny": true,
-    "noImplicitThis": true,
-    "alwaysStrict": true,
-    "strictBindCallApply": true,
+    "module": "ES2022",
+    "allowJs": true,
+    "esModuleInterop": true,
+    "useDefineForClassFields": false,
+    "lib": ["ES2022", "dom"],
+    // ====
+    "paths": {
+      "@app/*": ["src/app/*"]
+    },
+    // ====
+    // "allowSyntheticDefaultImports": true,
+    // "noImplicitThis": true,
+    // "alwaysStrict": true,
+    // "strictBindCallApply": true,
     "strictNullChecks": true,
-    "strictFunctionTypes": true,
-    "strictPropertyInitialization": false,
-    "useDefineForClassFields": false
+    // "strictFunctionTypes": true,
+    "noImplicitAny": true,
+    "suppressImplicitAnyIndexErrors": true,
   },
   // Required for jest to work with cypress
   "include": ["src/**/*.ts"],
@@ -38,8 +42,9 @@
   "exclude": ["node_modules", "cyprus", "cypress.config.ts"],
   // ^^^^
   "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
     "strictTemplates": true,
-    "strictNullInputTypes": false,
-    "strictInjectionParameters": true
   }
 }

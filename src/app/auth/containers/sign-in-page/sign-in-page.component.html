@@ -1,6 +1,6 @@
 <app-credentials-form
   formMode="SignInForm"
-  [errorMessage]="error$ | async"
+  [errorMessage]="(error$ | async)!"
   (SignUpClicked)="onSignUp()"
   (submitted)="onSubmitted($event)"
 ></app-credentials-form>

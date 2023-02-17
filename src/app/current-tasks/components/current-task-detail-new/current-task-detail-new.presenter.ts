@@ -15,9 +15,9 @@ import { takeUntil } from 'rxjs/operators';
 
 @Injectable()
 export class CurrentTaskDetailNewPresenter implements OnDestroy {
-  form: UntypedFormGroup;
+  form!: UntypedFormGroup;
 
-  initialData: CurrentTask;
+  initialData!: CurrentTask;
 
   get completedTimestampControl(): AbstractControl {
     const result = this.form.get('completedTimestamp');

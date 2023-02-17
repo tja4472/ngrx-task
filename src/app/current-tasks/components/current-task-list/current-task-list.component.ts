@@ -23,7 +23,7 @@ import { CurrentTask } from '@app/root-store/tasks-store/models';
 })
 export class CurrentTaskListComponent {
   @Input()
-  currentTasks: CurrentTask[];
+  currentTasks!: CurrentTask[];
 
   @Output() reorderItems = new EventEmitter<string[]>();
   @Output() newCurrentTask = new EventEmitter<void>();

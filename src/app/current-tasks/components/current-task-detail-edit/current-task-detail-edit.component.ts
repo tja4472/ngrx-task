@@ -27,7 +27,7 @@ export class CurrentTaskDetailEditComponent implements OnInit {
     return this._todo;
   }
   */
-  @Input() todo: CurrentTask;
+  @Input() todo!: CurrentTask;
   @Output() cancel = new EventEmitter<CurrentTask>();
   @Output() remove = new EventEmitter<CurrentTask>();
   @Output() checkout = new EventEmitter<CurrentTask>();

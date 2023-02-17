@@ -9,9 +9,9 @@ import { TaskListListItem } from '@app/root-store/tasks-store/models';
 
 @Injectable()
 export class TaskListDetailNewPresenter {
-  form: UntypedFormGroup;
+  form!: UntypedFormGroup;
 
-  initialData: TaskListListItem;
+  initialData!: TaskListListItem;
 
   constructor(private formBuilder: UntypedFormBuilder) {}
 

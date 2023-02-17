@@ -12,7 +12,7 @@ import { TaskListDetailEditPresenter } from './task-list-detail-edit.presenter';
   viewProviders: [TaskListDetailEditPresenter],
 })
 export class TaskListDetailEditComponent implements OnInit {
-  @Input() completedTask: TaskListListItem;
+  @Input() completedTask!: TaskListListItem;
   @Output() cancel = new EventEmitter<TaskListListItem>();
   @Output() remove = new EventEmitter<TaskListListItem>();
   @Output() checkout = new EventEmitter<TaskListListItem>();

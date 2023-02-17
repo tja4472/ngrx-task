@@ -1,5 +1,5 @@
 <app-current-task-list
-  [currentTasks]="currentTasks$ | async"
+  [currentTasks]="(currentTasks$ | async)!"
   (reorderItems)="reorderItems($event)"
   (newCurrentTask)="viewNewCurrentTask()"
   (toggleCompleteItem)="toggleCompleteItem($event)"
