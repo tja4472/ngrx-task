@@ -35,7 +35,11 @@
     <mat-card-content>
       <div class="row">
         <div class="col">
-          <mat-checkbox formControlName="isComplete">Is Complete</mat-checkbox>
+          <mat-checkbox
+            data-test="is-complete-checkbox"
+            formControlName="isComplete"
+            >Is Complete</mat-checkbox
+          >
         </div>
       </div>
       <div class="row">
@@ -49,6 +53,7 @@
               formControlName="name"
             />
             <mat-error
+            data-test="name-input-error"            
               *ngIf="checkoutForm.controls['name'].hasError('required')"
             >
               Name is <strong>required</strong>
