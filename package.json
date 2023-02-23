@@ -78,7 +78,7 @@
     "@angular/language-service": "15.2.0",
     "@ngrx/eslint-plugin": "15.3.0",
     "@ngrx/schematics": "15.3.0",
-    "@testing-library/angular": "13.2.1",
+    "@testing-library/angular": "13.3.0",
     "@testing-library/jest-dom": "5.16.5",
     "@testing-library/user-event": "14.4.3",
     "@types/jest": "29.4.0",
