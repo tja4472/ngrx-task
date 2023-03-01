@@ -1,4 +1,4 @@
-<form [formGroup]="checkoutForm" novalidate (ngSubmit)="onSubmit()">
+<form [formGroup]="checkoutForm">
   <mat-card class="shipping-card">
     <mat-card-actions>
       <button
@@ -7,6 +7,7 @@
         color="primary"
         type="submit"
         [disabled]="!(this.checkoutForm.dirty && this.checkoutForm.valid)"
+        (click)="onSubmit()"
       >
         Submit
       </button>
@@ -37,7 +38,7 @@
         <div class="col">
           <mat-checkbox
             data-test="is-complete-checkbox"
-            formControlName="isComplete"
+            [formControl]="checkoutForm.controls.isComplete"
             >Is Complete</mat-checkbox
           >
         </div>
@@ -50,11 +51,11 @@
               matInput
               id="name"
               placeholder="Name"
-              formControlName="name"
+              [formControl]="checkoutForm.controls.name"
             />
             <mat-error
-            data-test="name-input-error"            
-              *ngIf="checkoutForm.controls['name'].hasError('required')"
+              data-test="name-input-error"
+              *ngIf="checkoutForm.controls.name.hasError('required')"
             >
               Name is <strong>required</strong>
             </mat-error>
@@ -69,7 +70,7 @@
               matInput
               id="description"
               placeholder="Description"
-              formControlName="description"
+              [formControl]="checkoutForm.controls.description"
               cdkTextareaAutosize
               #autosize="cdkTextareaAutosize"
               cdkAutosizeMinRows="1"

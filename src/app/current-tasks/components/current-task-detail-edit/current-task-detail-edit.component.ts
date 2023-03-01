@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { UntypedFormGroup } from '@angular/forms';
 
 import { CurrentTask } from '@app/root-store/tasks-store/models';
 
@@ -12,27 +11,12 @@ import { CurrentTaskDetailEditPresenter } from './current-task-detail-edit.prese
   viewProviders: [CurrentTaskDetailEditPresenter],
 })
 export class CurrentTaskDetailEditComponent implements OnInit {
-  // tslint:disable-next-line: variable-name
-
-  /*
-  private _todo = null;
-
-  @Input()
-  set todo(todo: Todo) {
-    console.log('##########CurrentTaskDetailComponent');
-    this._todo = todo;
-    this.presenter.init(todo);
-  }
-  get todo(): Todo {
-    return this._todo;
-  }
-  */
   @Input() todo!: CurrentTask;
   @Output() cancel = new EventEmitter<CurrentTask>();
   @Output() remove = new EventEmitter<CurrentTask>();
   @Output() checkout = new EventEmitter<CurrentTask>();
 
-  get checkoutForm(): UntypedFormGroup {
+  get checkoutForm() {
     return this.presenter.form;
   }
 
