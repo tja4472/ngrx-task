@@ -20,5 +20,4 @@
   },
   "peacock.color": "#807592",
   "terminal.integrated.shellIntegration.enabled": true,
-  "terminal.integrated.enableFileLinks": true,
 }
