@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { UntypedFormGroup } from '@angular/forms';
 
 import { TaskListListItem } from '@app/root-store/tasks-store/models';
 
@@ -16,7 +15,7 @@ export class TaskListDetailNewComponent implements OnInit {
   @Output() cancel = new EventEmitter<TaskListListItem>();
   @Output() checkout = new EventEmitter<TaskListListItem>();
 
-  get checkoutForm(): UntypedFormGroup {
+  get checkoutForm() {
     return this.presenter.form;
   }
 

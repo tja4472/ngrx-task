@@ -1,17 +1,18 @@
-<form [formGroup]="checkoutForm" novalidate (ngSubmit)="onSubmit()">
+<form [formGroup]="checkoutForm">
   <mat-card class="shipping-card">
     <mat-card-actions>
       <button
-        data-test="submit-button"
+        data-test="submitButton"
         mat-raised-button
         color="primary"
         type="submit"
         [disabled]="!(this.checkoutForm.dirty && this.checkoutForm.valid)"
+        (click)="onSubmit()"
       >
         Submit
       </button>
       <button
-        data-test="cancel-button"
+        data-test="cancelButton"
         mat-raised-button
         color="accent"
         type="button"
@@ -28,14 +29,15 @@
         <div class="col">
           <mat-form-field class="full-width">
             <input
-              data-test="name-input"
+              data-test="nameInput"
               matInput
               id="name"
               placeholder="Name"
-              formControlName="name"
+              [formControl]="checkoutForm.controls.name"
             />
             <mat-error
-              *ngIf="checkoutForm.controls['name'].hasError('required')"
+              data-test="nameInputError"
+              *ngIf="checkoutForm.controls.name.hasError('required')"
             >
               Name is <strong>required</strong>
             </mat-error>

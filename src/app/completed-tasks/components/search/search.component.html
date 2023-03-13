@@ -2,13 +2,14 @@
   <mat-icon matPrefix>search</mat-icon>
   <mat-label>Search</mat-label>
   <input
-    data-test="search-field"
+    data-test="searchInput"
     type="text"
     matInput
     placeholder="Search"
     [formControl]="viewSearchControl"
   />
   <button
+    data-test="clearButton"
     matSuffix
     mat-icon-button
     aria-label="Clear"

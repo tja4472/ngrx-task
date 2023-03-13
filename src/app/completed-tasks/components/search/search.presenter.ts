@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { UntypedFormControl } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 
 import { Observable, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
 
 @Injectable()
 export class SearchPresenter {
-  public searchControl: UntypedFormControl = new UntypedFormControl('');
+  public searchControl = new FormControl('');
 
   private searchTerms: Subject<string> = new Subject();
 
@@ -22,7 +22,9 @@ export class SearchPresenter {
   );
 
   constructor() {
-    this.searchControl.valueChanges.forEach((value: string) => {
+    this.searchControl.valueChanges.forEach((value: string | null) => {
+      if (value === null) return;
+
       this.searchTerms.next(value);
     });
   }

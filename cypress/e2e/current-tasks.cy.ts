@@ -2,6 +2,27 @@ import { clearDatabase, clearUserAccounts } from 'emulator/emulator-helpers';
 import * as AppActionsTestService from 'cypress/support/app-actions.service';
 import { currentTask1, currentTask2, newCurrentTask, user } from './util';
 
+import { DataTestIds } from './types';
+
+type DataTestIdNames =
+  | 'cancelButton'
+  | 'descriptionTextarea'
+  | 'isCompleteCheckbox'
+  | 'nameInput'
+  | 'nameInputError'
+  | 'removeButton'
+  | 'submitButton';
+
+const dataTestIds: DataTestIds<DataTestIdNames> = {
+  cancelButton: 'cancelButton',
+  descriptionTextarea: 'descriptionTextarea',
+  isCompleteCheckbox: 'isCompleteCheckbox',
+  nameInput: 'nameInput',
+  nameInputError: 'nameInputError',
+  removeButton: 'removeButton',
+  submitButton: 'submitButton',
+} as const;
+
 describe('Current Tasks', () => {
   beforeEach(() => {
     // Runs before every test block
@@ -27,12 +48,14 @@ describe('Current Tasks', () => {
   describe('Create', () => {
     it('Cancel', () => {
       cy.getBySel('new-current-task-button').click();
-      cy.getBySel('submit-button').should('be.disabled');
-      cy.getBySel('cancel-button').should('be.enabled');
-      cy.getBySel('name-input').type(currentTask1.name);
-      cy.getBySel('description-textarea').type(currentTask1.description);
-      cy.getBySel('is-complete-checkbox').click();
-      cy.getBySel('cancel-button').should('be.enabled').click();
+      cy.getBySel(dataTestIds.submitButton).should('be.disabled');
+      cy.getBySel(dataTestIds.cancelButton).should('be.enabled');
+      cy.getBySel(dataTestIds.nameInput).type(currentTask1.name);
+      cy.getBySel(dataTestIds.descriptionTextarea).type(
+        currentTask1.description
+      );
+      cy.getBySel(dataTestIds.isCompleteCheckbox).click();
+      cy.getBySel(dataTestIds.cancelButton).should('be.enabled').click();
       cy.location('pathname').should('eq', '/tasks/current');
       cy.getBySel('list-item').should('not.exist');
       cy.getBySel('new-current-task-button').should('be.visible');
@@ -58,13 +81,13 @@ describe('Current Tasks', () => {
         .should('contain.text', currentTask1.name)
         .click();
       cy.location('pathname').should('match', /^\/tasks\/current\/edit/);
-      cy.getBySel('submit-button').should('be.disabled');
-      cy.getBySel('cancel-button').should('be.enabled');
-      cy.getBySel('remove-button').should('be.enabled');
-      cy.getBySel('name-input').type('AAAAA');
-      cy.getBySel('description-textarea').type('BBBBB');
-      cy.getBySel('submit-button').should('be.enabled');
-      cy.getBySel('cancel-button').should('be.enabled').click();
+      cy.getBySel(dataTestIds.submitButton).should('be.disabled');
+      cy.getBySel(dataTestIds.cancelButton).should('be.enabled');
+      cy.getBySel(dataTestIds.removeButton).should('be.enabled');
+      cy.getBySel(dataTestIds.nameInput).type('AAAAA');
+      cy.getBySel(dataTestIds.descriptionTextarea).type('BBBBB');
+      cy.getBySel(dataTestIds.submitButton).should('be.enabled');
+      cy.getBySel(dataTestIds.cancelButton).should('be.enabled').click();
       cy.location('pathname').should('match', /^\/tasks\/current;id=/);
       cy.getBySel('list-item')
         .should('be.visible')
@@ -84,12 +107,12 @@ describe('Current Tasks', () => {
         .should('contain.text', currentTask1.name)
         .click();
       cy.location('pathname').should('match', /^\/tasks\/current\/edit/);
-      cy.getBySel('submit-button').should('be.disabled');
-      cy.getBySel('cancel-button').should('be.enabled');
-      cy.getBySel('remove-button').should('be.enabled');
-      cy.getBySel('name-input').type(nameExtra);
-      cy.getBySel('description-textarea').type(descriptionExtra);
-      cy.getBySel('submit-button').should('be.enabled').click();
+      cy.getBySel(dataTestIds.submitButton).should('be.disabled');
+      cy.getBySel(dataTestIds.cancelButton).should('be.enabled');
+      cy.getBySel(dataTestIds.removeButton).should('be.enabled');
+      cy.getBySel(dataTestIds.nameInput).type(nameExtra);
+      cy.getBySel(dataTestIds.descriptionTextarea).type(descriptionExtra);
+      cy.getBySel(dataTestIds.submitButton).should('be.enabled').click();
       cy.location('pathname').should('match', /^\/tasks\/current;id=/);
       cy.getBySel('list-item')
         .should('be.visible')
@@ -108,9 +131,9 @@ describe('Current Tasks', () => {
         .should('contain.text', currentTask2.name);
       cy.contains('a', currentTask1.name).should('be.visible').click();
       cy.location('pathname').should('match', /^\/tasks\/current\/edit/);
-      cy.getBySel('submit-button').should('be.disabled');
-      cy.getBySel('cancel-button').should('be.enabled');
-      cy.getBySel('remove-button').should('be.enabled').click();
+      cy.getBySel(dataTestIds.submitButton).should('be.disabled');
+      cy.getBySel(dataTestIds.cancelButton).should('be.enabled');
+      cy.getBySel(dataTestIds.removeButton).should('be.enabled').click();
       cy.location('pathname').should('match', /^\/tasks\/current;id=/);
       cy.getBySel('list-item')
         .should('be.visible')

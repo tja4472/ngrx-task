@@ -2,7 +2,7 @@
   <mat-card class="shipping-card">
     <mat-card-actions>
       <button
-        data-test="submit-button"
+        data-test="submitButton"
         mat-raised-button
         color="primary"
         type="submit"
@@ -12,7 +12,7 @@
         Submit
       </button>
       <button
-        data-test="cancel-button"
+        data-test="cancelButton"
         mat-raised-button
         color="accent"
         type="button"
@@ -28,7 +28,7 @@
       <div class="row">
         <div class="col">
           <mat-checkbox
-            data-test="is-complete-checkbox"
+            data-test="isCompleteCheckbox"
             [formControl]="checkoutForm.controls.isComplete"
             >Is Complete</mat-checkbox
           >
@@ -38,14 +38,14 @@
         <div class="col">
           <mat-form-field class="full-width">
             <input
-              data-test="name-input"
+              data-test="nameInput"
               matInput
               id="name"
               placeholder="Name"
               [formControl]="checkoutForm.controls.name"
             />
             <mat-error
-              data-test="name-input-error"
+              data-test="nameInputError"
               *ngIf="checkoutForm.controls.name.hasError('required')"
             >
               Name is <strong>required</strong>
@@ -57,7 +57,7 @@
         <div class="col">
           <mat-form-field class="full-width">
             <textarea
-              data-test="description-textarea"
+              data-test="descriptionTextarea"
               matInput
               id="description"
               placeholder="Description"

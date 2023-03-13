@@ -16,6 +16,27 @@ import { CurrentTaskDetailEditPageActions } from '@app/root-store/tasks-store/ac
 import { CurrentTask } from '@app/root-store/tasks-store/models';
 import { TaskSelectors } from '@app/root-store/tasks-store/selectors';
 
+import { DataTestIds } from '../types';
+
+type DataTestIdNames =
+  | 'cancelButton'
+  | 'descriptionTextarea'
+  | 'isCompleteCheckbox'
+  | 'nameInput'
+  | 'nameInputError'
+  | 'removeButton'
+  | 'submitButton';
+
+const dataTestIds: DataTestIds<DataTestIdNames> = {
+  cancelButton: 'cancelButton',
+  descriptionTextarea: 'descriptionTextarea',
+  isCompleteCheckbox: 'isCompleteCheckbox',
+  nameInput: 'nameInput',
+  nameInputError: 'nameInputError',
+  removeButton: 'removeButton',
+  submitButton: 'submitButton',
+} as const;
+
 // https://docs.cypress.io/guides/component-testing/angular/overview
 
 const defaultTask: CurrentTask = {
@@ -70,9 +91,11 @@ describe('CurrentTaskDetailEditComponent', () => {
       const store = TestBed.inject(MockStore);
       cy.spy(store, 'dispatch');
 
-      cy.getBySel('name-input').should('be.visible').type('aa');
-      cy.getBySel('description-textarea').should('be.visible').type('bb');
-      cy.getBySel('cancel-button')
+      cy.getBySel(dataTestIds.nameInput).should('be.visible').type('aa');
+      cy.getBySel(dataTestIds.descriptionTextarea)
+        .should('be.visible')
+        .type('bb');
+      cy.getBySel(dataTestIds.cancelButton)
         .click()
         .then(() => {
           expect(store.dispatch).to.have.been.called;
@@ -90,9 +113,11 @@ describe('CurrentTaskDetailEditComponent', () => {
       const store = TestBed.inject(MockStore);
       cy.spy(store, 'dispatch');
 
-      cy.getBySel('name-input').should('be.visible').type('aa');
-      cy.getBySel('description-textarea').should('be.visible').type('bb');
-      cy.getBySel('remove-button')
+      cy.getBySel(dataTestIds.nameInput).should('be.visible').type('aa');
+      cy.getBySel(dataTestIds.descriptionTextarea)
+        .should('be.visible')
+        .type('bb');
+      cy.getBySel(dataTestIds.removeButton)
         .click()
         .then(() => {
           expect(store.dispatch).to.have.been.called;
@@ -110,10 +135,12 @@ describe('CurrentTaskDetailEditComponent', () => {
       const store = TestBed.inject(MockStore);
       cy.spy(store, 'dispatch');
 
-      cy.getBySel('name-input').should('be.visible').type('aa');
-      cy.getBySel('description-textarea').should('be.visible').type('bb');
+      cy.getBySel(dataTestIds.nameInput).should('be.visible').type('aa');
+      cy.getBySel(dataTestIds.descriptionTextarea)
+        .should('be.visible')
+        .type('bb');
 
-      cy.getBySel('submit-button')
+      cy.getBySel(dataTestIds.submitButton)
         .click()
         .then(() => {
           const expectedCompletedTask: CurrentTask = {

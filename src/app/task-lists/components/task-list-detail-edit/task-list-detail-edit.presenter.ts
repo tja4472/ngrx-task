@@ -1,28 +1,28 @@
 import { Injectable } from '@angular/core';
-import {
-  UntypedFormBuilder,
-  UntypedFormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 import { TaskListListItem } from '@app/root-store/tasks-store/models';
 
 @Injectable()
 export class TaskListDetailEditPresenter {
-  form!: UntypedFormGroup;
+  form = this.fb.group({
+    name: this.fb.nonNullable.control('', {
+      validators: [Validators.required],
+    }),
+  });
 
   initialData!: TaskListListItem;
   isNew!: boolean;
 
-  constructor(private formBuilder: UntypedFormBuilder) {}
+  constructor(private fb: FormBuilder) {}
 
   init(todo: TaskListListItem) {
     this.isNew = todo.id === '';
 
     this.initialData = { ...todo };
 
-    this.form = this.formBuilder.group({
-      name: [this.initialData.name, Validators.required],
+    this.form.setValue({
+      name: this.initialData.name,
     });
   }
 
@@ -32,8 +32,7 @@ export class TaskListDetailEditPresenter {
       ...this.form.value,
     };
     this.form.reset();
-    //    console.log('initialData>', this.initialData);
-    //    console.log('todoData>', todoData);
+
     return todoData;
   }
 }

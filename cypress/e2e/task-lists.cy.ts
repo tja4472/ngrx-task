@@ -1,6 +1,27 @@
 import { clearDatabase, clearUserAccounts } from 'emulator/emulator-helpers';
 import * as AppActionsTestService from 'cypress/support/app-actions.service';
 
+import { DataTestIds } from './types';
+
+type DataTestIdNames =
+  | 'cancelButton'
+  | 'descriptionTextarea'
+  | 'isCompleteCheckbox'
+  | 'nameInput'
+  | 'nameInputError'
+  | 'removeButton'
+  | 'submitButton';
+
+const dataTestIds: DataTestIds<DataTestIdNames> = {
+  cancelButton: 'cancelButton',
+  descriptionTextarea: 'descriptionTextarea',
+  isCompleteCheckbox: 'isCompleteCheckbox',
+  nameInput: 'nameInput',
+  nameInputError: 'nameInputError',
+  removeButton: 'removeButton',
+  submitButton: 'submitButton',
+} as const;
+
 const user = {
   email: 'c.c@c.com',
   password: 'password',
@@ -32,12 +53,12 @@ describe('Task Lists', () => {
       .should('contain.text', 'default-list name')
       .click();
     cy.location('pathname').should('eq', '/tasks/lists/edit/default-list');
-    cy.getBySel('submit-button').should('be.disabled');
-    cy.getBySel('cancel-button').should('be.enabled');
-    cy.getBySel('remove-button').should('be.enabled');
-    cy.getBySel('name-input').type('GGGG');
-    cy.getBySel('submit-button').should('be.enabled');
-    cy.getBySel('cancel-button').should('be.enabled').click();
+    cy.getBySel(dataTestIds.submitButton).should('be.disabled');
+    cy.getBySel(dataTestIds.cancelButton).should('be.enabled');
+    cy.getBySel(dataTestIds.removeButton).should('be.enabled');
+    cy.getBySel(dataTestIds.nameInput).type('GGGG');
+    cy.getBySel(dataTestIds.submitButton).should('be.enabled');
+    cy.getBySel(dataTestIds.cancelButton).should('be.enabled').click();
     cy.location('pathname').should('eq', '/tasks/lists;id=default-list');
     cy.getBySel('list-item')
       .should('have.length', 1)
@@ -50,11 +71,11 @@ describe('Task Lists', () => {
       .should('contain.text', 'default-list name')
       .click();
     cy.location('pathname').should('eq', '/tasks/lists/edit/default-list');
-    cy.getBySel('submit-button').should('be.disabled');
-    cy.getBySel('cancel-button').should('be.enabled');
-    cy.getBySel('remove-button').should('be.enabled');
-    cy.getBySel('name-input').type('GGGG');
-    cy.getBySel('submit-button').should('be.enabled').click();
+    cy.getBySel(dataTestIds.submitButton).should('be.disabled');
+    cy.getBySel(dataTestIds.cancelButton).should('be.enabled');
+    cy.getBySel(dataTestIds.removeButton).should('be.enabled');
+    cy.getBySel(dataTestIds.nameInput).type('GGGG');
+    cy.getBySel(dataTestIds.submitButton).should('be.enabled').click();
     cy.location('pathname').should('eq', '/tasks/lists;id=default-list');
     cy.getBySel('list-item')
       .should('have.length', 1)
@@ -67,16 +88,16 @@ describe('Task Lists', () => {
   it('detail-edit: Remove', () => {
     cy.getBySel('new-task-list-button').should('be.enabled').click();
     cy.location('pathname').should('eq', '/tasks/lists/new');
-    cy.getBySel('submit-button').should('be.disabled');
-    cy.getBySel('cancel-button').should('be.enabled');
-    cy.getBySel('name-input').type('BBBB');
-    cy.getBySel('submit-button').should('be.enabled').click();
+    cy.getBySel(dataTestIds.submitButton).should('be.disabled');
+    cy.getBySel(dataTestIds.cancelButton).should('be.enabled');
+    cy.getBySel(dataTestIds.nameInput).type('BBBB');
+    cy.getBySel(dataTestIds.submitButton).should('be.enabled').click();
     cy.getBySel('list-item')
       .should('have.length', 2)
       .should('contain.text', 'default-list name')
       .should('contain.text', 'BBBB');
     cy.contains('a', 'BBBB').should('be.visible').click();
-    cy.getBySel('remove-button').should('be.enabled').click();
+    cy.getBySel(dataTestIds.removeButton).should('be.enabled').click();
     cy.getBySel('list-item')
       .should('have.length', 1)
       .should('contain.text', 'default-list name');
@@ -85,10 +106,10 @@ describe('Task Lists', () => {
   it('detail-new: Cancel', () => {
     cy.getBySel('new-task-list-button').should('be.enabled').click();
     cy.location('pathname').should('eq', '/tasks/lists/new');
-    cy.getBySel('submit-button').should('be.disabled');
-    cy.getBySel('cancel-button').should('be.enabled');
-    cy.getBySel('name-input').type('BBBB');
-    cy.getBySel('cancel-button').should('be.enabled').click();
+    cy.getBySel(dataTestIds.submitButton).should('be.disabled');
+    cy.getBySel(dataTestIds.cancelButton).should('be.enabled');
+    cy.getBySel(dataTestIds.nameInput).type('BBBB');
+    cy.getBySel(dataTestIds.cancelButton).should('be.enabled').click();
     cy.getBySel('list-item')
       .should('have.length', 1)
       .should('contain.text', 'default-list name');
@@ -97,10 +118,10 @@ describe('Task Lists', () => {
   it('detail-new: Submit', () => {
     cy.getBySel('new-task-list-button').should('be.enabled').click();
     cy.location('pathname').should('eq', '/tasks/lists/new');
-    cy.getBySel('submit-button').should('be.disabled');
-    cy.getBySel('cancel-button').should('be.enabled');
-    cy.getBySel('name-input').type('BBBB');
-    cy.getBySel('submit-button').should('be.enabled').click();
+    cy.getBySel(dataTestIds.submitButton).should('be.disabled');
+    cy.getBySel(dataTestIds.cancelButton).should('be.enabled');
+    cy.getBySel(dataTestIds.nameInput).type('BBBB');
+    cy.getBySel(dataTestIds.submitButton).should('be.enabled').click();
     cy.getBySel('list-item')
       .should('have.length', 2)
       .should('contain.text', 'default-list name')

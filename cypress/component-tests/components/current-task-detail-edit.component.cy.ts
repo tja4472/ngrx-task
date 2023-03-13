@@ -6,6 +6,9 @@ import { MaterialModule } from '@app/material';
 
 import { createOutputSpy, MountConfig } from 'cypress/angular';
 
+import { DataTestIds, SpyAliases, SpyIds } from '../types';
+
+// Component to test.
 import { CurrentTaskDetailEditComponent } from '@app/current-tasks/components';
 
 import { CurrentTask } from '@app/root-store/tasks-store/models';
@@ -18,6 +21,39 @@ import { CurrentTask } from '@app/root-store/tasks-store/models';
   @Output() remove = new EventEmitter<CurrentTask>();
   @Output() checkout = new EventEmitter<CurrentTask>();
 */
+
+type EventEmitters = 'cancel' | 'checkout' | 'remove';
+
+type DataTestIdNames =
+  | 'cancelButton'
+  | 'descriptionTextarea'
+  | 'isCompleteCheckbox'
+  | 'nameInput'
+  | 'nameInputError'
+  | 'removeButton'
+  | 'submitButton';
+
+const spyAliases: SpyAliases<EventEmitters> = {
+  cancel: 'cancelSpy',
+  checkout: 'checkoutSpy',
+  remove: 'removeSpy',
+} as const;
+
+const spyIds: SpyIds<EventEmitters> = {
+  cancel: '@cancelSpy',
+  checkout: '@checkoutSpy',
+  remove: '@removeSpy',
+} as const;
+
+const dataTestIds: DataTestIds<DataTestIdNames> = {
+  cancelButton: 'cancelButton',
+  descriptionTextarea: 'descriptionTextarea',
+  isCompleteCheckbox: 'isCompleteCheckbox',
+  nameInput: 'nameInput',
+  nameInputError: 'nameInputError',
+  removeButton: 'removeButton',
+  submitButton: 'submitButton',
+} as const;
 
 const nowTimestamp = 1618354800000;
 
@@ -42,9 +78,9 @@ function getConfig(
     ],
     componentProperties: {
       todo: todoTask,
-      cancel: createOutputSpy('cancelSpy'),
-      remove: createOutputSpy('removeSpy'),
-      checkout: createOutputSpy('checkoutSpy'),
+      cancel: createOutputSpy<CurrentTask>(spyAliases.cancel),
+      remove: createOutputSpy<CurrentTask>(spyAliases.remove),
+      checkout: createOutputSpy<CurrentTask>(spyAliases.checkout),
     },
   };
 
@@ -70,18 +106,17 @@ describe('CurrentTaskDetailEditComponent', () => {
   });
 
   it('uncompleted task', () => {
-    // cy.mount(CurrentTaskDetailEditComponent, getConfig(defaultTask));
     mountComponent(defaultTask);
 
-    cy.getBySel('cancel-button').should('be.enabled');
-    cy.getBySel('remove-button').should('be.enabled');
-    cy.getBySel('submit-button').should('be.disabled');
+    cy.getBySel(dataTestIds.cancelButton).should('be.enabled');
+    cy.getBySel(dataTestIds.removeButton).should('be.enabled');
+    cy.getBySel(dataTestIds.submitButton).should('be.disabled');
 
-    cy.getBySel('is-complete-checkbox')
+    cy.getBySel(dataTestIds.isCompleteCheckbox)
       .find('[type="checkbox"]')
       .should('not.be.checked');
-    cy.getBySel('name-input').should('have.value', defaultTask.name);
-    cy.getBySel('description-textarea').should(
+    cy.getBySel(dataTestIds.nameInput).should('have.value', defaultTask.name);
+    cy.getBySel(dataTestIds.descriptionTextarea).should(
       'have.value',
       defaultTask.description
     );
@@ -97,45 +132,44 @@ describe('CurrentTaskDetailEditComponent', () => {
       name: 'Task1 name',
     };
 
-    cy.mount(CurrentTaskDetailEditComponent, getConfig(sourceTask));
+    mountComponent(sourceTask);
+    cy.getBySel(dataTestIds.cancelButton).should('be.enabled');
+    cy.getBySel(dataTestIds.removeButton).should('be.enabled');
+    cy.getBySel(dataTestIds.submitButton).should('be.disabled');
 
-    cy.getBySel('cancel-button').should('be.enabled');
-    cy.getBySel('remove-button').should('be.enabled');
-    cy.getBySel('submit-button').should('be.disabled');
-
-    cy.getBySel('is-complete-checkbox')
+    cy.getBySel(dataTestIds.isCompleteCheckbox)
       .find('[type="checkbox"]')
       .should('be.checked');
-    cy.getBySel('name-input').should('have.value', sourceTask.name);
-    cy.getBySel('description-textarea').should(
+    cy.getBySel(dataTestIds.nameInput).should('have.value', sourceTask.name);
+    cy.getBySel(dataTestIds.descriptionTextarea).should(
       'have.value',
       sourceTask.description
     );
   });
 
   it('edit task', () => {
-    cy.mount(CurrentTaskDetailEditComponent, getConfig(defaultTask));
+    mountComponent(defaultTask);
 
-    cy.getBySel('cancel-button').should('be.enabled');
-    cy.getBySel('remove-button').should('be.enabled');
-    cy.getBySel('submit-button').should('be.disabled');
+    cy.getBySel(dataTestIds.cancelButton).should('be.enabled');
+    cy.getBySel(dataTestIds.removeButton).should('be.enabled');
+    cy.getBySel(dataTestIds.submitButton).should('be.disabled');
 
-    cy.getBySel('is-complete-checkbox')
+    cy.getBySel(dataTestIds.isCompleteCheckbox)
       .find('[type="checkbox"]')
       .should('not.be.checked');
-    cy.getBySel('name-input').type('AAAA');
-    cy.getBySel('submit-button').should('be.enabled');
+    cy.getBySel(dataTestIds.nameInput).type('AAAA');
+    cy.getBySel(dataTestIds.submitButton).should('be.enabled');
   });
 
   it('submit button: name edited', () => {
-    cy.mount(CurrentTaskDetailEditComponent, getConfig(defaultTask));
+    mountComponent(defaultTask);
 
-    cy.getBySel('name-input').type('AAAA');
-    cy.getBySel('submit-button').should('be.enabled').click();
+    cy.getBySel(dataTestIds.nameInput).type('AAAA');
+    cy.getBySel(dataTestIds.submitButton).should('be.enabled').click();
 
     const expected = { ...defaultTask };
     expected.name = defaultTask.name + 'AAAA';
-    cy.get('@checkoutSpy').should('have.been.calledWith', expected);
+    cy.get(spyIds.checkout).should('have.been.calledWith', expected);
   });
 
   it('submit button: Toggled complete', () => {
@@ -144,15 +178,15 @@ describe('CurrentTaskDetailEditComponent', () => {
     expected.completedTimestamp = nowTimestamp;
 
     cy.clock(nowTimestamp);
-    cy.mount(CurrentTaskDetailEditComponent, getConfig(defaultTask));
+    mountComponent(defaultTask);
 
-    cy.getBySel('is-complete-checkbox').click();
-    cy.getBySel('is-complete-checkbox')
+    cy.getBySel(dataTestIds.isCompleteCheckbox).click();
+    cy.getBySel(dataTestIds.isCompleteCheckbox)
       .find('[type="checkbox"]')
       .should('be.checked');
-    cy.getBySel('submit-button').should('be.enabled').click();
+    cy.getBySel(dataTestIds.submitButton).should('be.enabled').click();
 
-    cy.get('@checkoutSpy').should('have.been.calledWith', expected);
+    cy.get(spyIds.checkout).should('have.been.calledWith', expected);
   });
 
   it('submit button: Toggled uncomplete', () => {
@@ -161,25 +195,25 @@ describe('CurrentTaskDetailEditComponent', () => {
     source.completedTimestamp = nowTimestamp;
 
     cy.clock(nowTimestamp);
-    cy.mount(CurrentTaskDetailEditComponent, getConfig(source));
+    mountComponent(source);
 
-    cy.getBySel('is-complete-checkbox').click();
-    cy.getBySel('is-complete-checkbox')
+    cy.getBySel(dataTestIds.isCompleteCheckbox).click();
+    cy.getBySel(dataTestIds.isCompleteCheckbox)
       .find('[type="checkbox"]')
       .should('not.be.checked');
-    cy.getBySel('submit-button').should('be.enabled').click();
+    cy.getBySel(dataTestIds.submitButton).should('be.enabled').click();
 
-    cy.get('@checkoutSpy').should('have.been.calledWith', defaultTask);
+    cy.get(spyIds.checkout).should('have.been.calledWith', defaultTask);
   });
 
   it('blank name error', () => {
-    cy.mount(CurrentTaskDetailEditComponent, getConfig(defaultTask));
+    mountComponent(defaultTask);
 
-    cy.getBySel('name-input-error').should('not.exist');
-    cy.getBySel('name-input').clear();
-    cy.getBySel('description-textarea').focus();
-    cy.getBySel('submit-button').should('not.be.enabled');
-    cy.getBySel('name-input-error')
+    cy.getBySel(dataTestIds.nameInputError).should('not.exist');
+    cy.getBySel(dataTestIds.nameInput).clear();
+    cy.getBySel(dataTestIds.descriptionTextarea).focus();
+    cy.getBySel(dataTestIds.submitButton).should('not.be.enabled');
+    cy.getBySel(dataTestIds.nameInputError)
       .should('exist')
       .should('be.visible')
       .should('have.text', ' Name is required');
@@ -188,20 +222,20 @@ describe('CurrentTaskDetailEditComponent', () => {
   it('cancel button', () => {
     mountComponent(defaultTask);
 
-    cy.getBySel('name-input').type('AAAA');
-    cy.getBySel('description-textarea').type('BBBB');
-    cy.getBySel('cancel-button').should('be.enabled').click();
+    cy.getBySel(dataTestIds.nameInput).type('AAAA');
+    cy.getBySel(dataTestIds.descriptionTextarea).type('BBBB');
+    cy.getBySel(dataTestIds.cancelButton).should('be.enabled').click();
 
-    cy.get('@cancelSpy').should('have.been.calledWith', defaultTask);
+    cy.get(spyIds.cancel).should('have.been.calledWith', defaultTask);
   });
 
   it('remove button', () => {
     mountComponent(defaultTask);
 
-    cy.getBySel('name-input').type('AAAA');
-    cy.getBySel('description-textarea').type('BBBB');
-    cy.getBySel('remove-button').should('be.enabled').click();
+    cy.getBySel(dataTestIds.nameInput).type('AAAA');
+    cy.getBySel(dataTestIds.descriptionTextarea).type('BBBB');
+    cy.getBySel(dataTestIds.removeButton).should('be.enabled').click();
 
-    cy.get('@removeSpy').should('have.been.calledWith', defaultTask);
+    cy.get(spyIds.remove).should('have.been.calledWith', defaultTask);
   });
 });

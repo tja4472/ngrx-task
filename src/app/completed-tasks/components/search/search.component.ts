@@ -6,7 +6,7 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { UntypedFormControl } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -25,8 +25,7 @@ export class SearchComponent implements OnDestroy, OnInit {
 
   private destroy: Subject<void> = new Subject();
 
-  // viewSearchControl: FormControl;
-  get viewSearchControl(): UntypedFormControl {
+  get viewSearchControl() {
     return this.presenter.searchControl;
   }
   constructor(private presenter: SearchPresenter) {}

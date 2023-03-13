@@ -6,6 +6,9 @@ import { MaterialModule } from '@app/material';
 
 import { createOutputSpy, MountConfig } from 'cypress/angular';
 
+import { DataTestIds, SpyAliases, SpyIds } from '../types';
+
+// Component to test.
 import { CurrentTaskDetailNewComponent } from '@app/current-tasks/components';
 
 import { CurrentTask } from '@app/root-store/tasks-store/models';
@@ -17,6 +20,35 @@ import { CurrentTask } from '@app/root-store/tasks-store/models';
   @Output() cancel = new EventEmitter<CurrentTask>();
   @Output() checkout = new EventEmitter<CurrentTask>();
 */
+
+type EventEmitters = 'cancel' | 'checkout';
+
+type DataTestIdNames =
+  | 'cancelButton'
+  | 'descriptionTextarea'
+  | 'isCompleteCheckbox'
+  | 'nameInput'
+  | 'nameInputError'
+  | 'submitButton';
+
+const spyAliases: SpyAliases<EventEmitters> = {
+  cancel: 'cancelSpy',
+  checkout: 'checkoutSpy',
+} as const;
+
+const spyIds: SpyIds<EventEmitters> = {
+  cancel: '@cancelSpy',
+  checkout: '@checkoutSpy',
+} as const;
+
+const dataTestIds: DataTestIds<DataTestIdNames> = {
+  cancelButton: 'cancelButton',
+  descriptionTextarea: 'descriptionTextarea',
+  isCompleteCheckbox: 'isCompleteCheckbox',
+  nameInput: 'nameInput',
+  nameInputError: 'nameInputError',
+  submitButton: 'submitButton',
+} as const;
 
 const nowTimestamp = 1618354800000;
 
@@ -41,8 +73,8 @@ function getConfig(
     ],
     componentProperties: {
       todo: todoTask,
-      cancel: createOutputSpy('cancelSpy'),
-      checkout: createOutputSpy('checkoutSpy'),
+      cancel: createOutputSpy<CurrentTask>(spyAliases.cancel),
+      checkout: createOutputSpy<CurrentTask>(spyAliases.checkout),
     },
   };
 
@@ -70,40 +102,40 @@ describe('CurrentTaskDetailEditComponent', () => {
   it('uncompleted task', () => {
     mountComponent(inputTask);
 
-    cy.getBySel('cancel-button').should('be.enabled');
-    cy.getBySel('submit-button').should('be.disabled');
+    cy.getBySel(dataTestIds.cancelButton).should('be.enabled');
+    cy.getBySel(dataTestIds.submitButton).should('be.disabled');
 
-    cy.getBySel('is-complete-checkbox')
+    cy.getBySel(dataTestIds.isCompleteCheckbox)
       .find('[type="checkbox"]')
       .should('not.be.checked');
-    cy.getBySel('name-input').should('have.value', '');
-    cy.getBySel('description-textarea').should('have.value', '');
+    cy.getBySel(dataTestIds.nameInput).should('have.value', '');
+    cy.getBySel(dataTestIds.descriptionTextarea).should('have.value', '');
   });
 
   it('edit task', () => {
     cy.mount(CurrentTaskDetailNewComponent, getConfig(inputTask));
 
-    cy.getBySel('cancel-button').should('be.enabled');
-    cy.getBySel('submit-button').should('be.disabled');
+    cy.getBySel(dataTestIds.cancelButton).should('be.enabled');
+    cy.getBySel(dataTestIds.submitButton).should('be.disabled');
 
-    cy.getBySel('is-complete-checkbox')
+    cy.getBySel(dataTestIds.isCompleteCheckbox)
       .find('[type="checkbox"]')
       .should('not.be.checked');
-    cy.getBySel('name-input').type('AAAA');
-    cy.getBySel('submit-button').should('be.enabled');
+    cy.getBySel(dataTestIds.nameInput).type('AAAA');
+    cy.getBySel(dataTestIds.submitButton).should('be.enabled');
   });
 
   it('submit button: name and description edited', () => {
     cy.mount(CurrentTaskDetailNewComponent, getConfig(inputTask));
 
-    cy.getBySel('name-input').type('AAAA');
-    cy.getBySel('description-textarea').type('BBBB');
-    cy.getBySel('submit-button').should('be.enabled').click();
+    cy.getBySel(dataTestIds.nameInput).type('AAAA');
+    cy.getBySel(dataTestIds.descriptionTextarea).type('BBBB');
+    cy.getBySel(dataTestIds.submitButton).should('be.enabled').click();
 
     const expected = { ...inputTask };
     expected.name = 'AAAA';
     expected.description = 'BBBB';
-    cy.get('@checkoutSpy').should('have.been.calledWith', expected);
+    cy.get(spyIds.checkout).should('have.been.calledWith', expected);
   });
 
   it('submit button: Toggled complete', () => {
@@ -116,25 +148,25 @@ describe('CurrentTaskDetailEditComponent', () => {
     cy.clock(nowTimestamp);
     cy.mount(CurrentTaskDetailNewComponent, getConfig(inputTask));
 
-    cy.getBySel('name-input').type('AAAA');
-    cy.getBySel('description-textarea').type('BBBB');
-    cy.getBySel('is-complete-checkbox').click();
-    cy.getBySel('is-complete-checkbox')
+    cy.getBySel(dataTestIds.nameInput).type('AAAA');
+    cy.getBySel(dataTestIds.descriptionTextarea).type('BBBB');
+    cy.getBySel(dataTestIds.isCompleteCheckbox).click();
+    cy.getBySel(dataTestIds.isCompleteCheckbox)
       .find('[type="checkbox"]')
       .should('be.checked');
-    cy.getBySel('submit-button').should('be.enabled').click();
+    cy.getBySel(dataTestIds.submitButton).should('be.enabled').click();
 
-    cy.get('@checkoutSpy').should('have.been.calledWith', expected);
+    cy.get(spyIds.checkout).should('have.been.calledWith', expected);
   });
 
   it('blank name error', () => {
     cy.mount(CurrentTaskDetailNewComponent, getConfig(inputTask));
 
-    cy.getBySel('name-input-error').should('not.exist');
-    cy.getBySel('name-input').focus();
-    cy.getBySel('description-textarea').type('BBBB');
-    cy.getBySel('submit-button').should('not.be.enabled');
-    cy.getBySel('name-input-error')
+    cy.getBySel(dataTestIds.nameInputError).should('not.exist');
+    cy.getBySel(dataTestIds.nameInput).focus();
+    cy.getBySel(dataTestIds.descriptionTextarea).type('BBBB');
+    cy.getBySel(dataTestIds.submitButton).should('not.be.enabled');
+    cy.getBySel(dataTestIds.nameInputError)
       .should('exist')
       .should('be.visible')
       .should('have.text', ' Name is required');
@@ -143,10 +175,10 @@ describe('CurrentTaskDetailEditComponent', () => {
   it('cancel button', () => {
     mountComponent(inputTask);
 
-    cy.getBySel('name-input').type('AAAA');
-    cy.getBySel('description-textarea').type('BBBB');
-    cy.getBySel('cancel-button').should('be.enabled').click();
+    cy.getBySel(dataTestIds.nameInput).type('AAAA');
+    cy.getBySel(dataTestIds.descriptionTextarea).type('BBBB');
+    cy.getBySel(dataTestIds.cancelButton).should('be.enabled').click();
 
-    cy.get('@cancelSpy').should('have.been.calledWith', inputTask);
+    cy.get(spyIds.cancel).should('have.been.calledWith', inputTask);
   });
 });

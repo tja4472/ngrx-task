@@ -1,3 +1,5 @@
+import { DataTestIds } from './types';
+
 export const user = {
   email: 'c.c@c.com',
   password: 'password',
@@ -23,18 +25,35 @@ export const currentTask3: Readonly<CurrentTask> = {
   description: 'Description3333',
 };
 
+type DataTestIdNames =
+  | 'cancelButton'
+  | 'descriptionTextarea'
+  | 'isCompleteCheckbox'
+  | 'nameInput'
+  | 'nameInputError'
+  | 'submitButton';
+
+const dataTestIds: DataTestIds<DataTestIdNames> = {
+  cancelButton: 'cancelButton',
+  descriptionTextarea: 'descriptionTextarea',
+  isCompleteCheckbox: 'isCompleteCheckbox',
+  nameInput: 'nameInput',
+  nameInputError: 'nameInputError',
+  submitButton: 'submitButton',
+} as const;
+
 export function newCurrentTask(task: CurrentTask, isComplete = false) {
   cy.getBySel('new-current-task-button').click();
   cy.location('pathname').should('eq', '/tasks/current/new');
-  cy.getBySel('submit-button').should('be.disabled');
-  cy.getBySel('cancel-button').should('be.enabled');
-  cy.getBySel('name-input').type(task.name);
-  cy.getBySel('description-textarea').type(task.description);
+  cy.getBySel(dataTestIds.submitButton).should('be.disabled');
+  cy.getBySel(dataTestIds.cancelButton).should('be.enabled');
+  cy.getBySel(dataTestIds.nameInput).type(task.name);
+  cy.getBySel(dataTestIds.descriptionTextarea).type(task.description);
 
   if (isComplete) {
-    cy.getBySel('is-complete-checkbox').click();
+    cy.getBySel(dataTestIds.isCompleteCheckbox).click();
   }
 
-  cy.getBySel('submit-button').should('be.enabled').click();
+  cy.getBySel(dataTestIds.submitButton).should('be.enabled').click();
   cy.location('pathname').should('eq', '/tasks/current');
 }

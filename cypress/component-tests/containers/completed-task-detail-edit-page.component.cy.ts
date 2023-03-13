@@ -92,7 +92,7 @@ describe('CompletedTaskDetailEditPageComponent - main', () => {
     });
   });
 
-  it('CompletedTaskDetailEditPageActions.cancelled action', () => {
+  it.only('CompletedTaskDetailEditPageActions.cancelled action', () => {
     cy.spy(store, 'dispatch');
 
     cy.getBySel('name-input').should('be.visible').type('aa');
