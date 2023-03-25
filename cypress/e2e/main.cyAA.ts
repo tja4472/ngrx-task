@@ -1,4 +1,7 @@
-import { clearDatabase, clearUserAccounts } from 'emulator/emulator-helpers';
+import {
+  clearDatabase,
+  clearUserAccounts,
+} from 'cypress/support/emulator-helpers';
 
 const user = {
   email: 'c.c@c.com',
@@ -19,10 +22,8 @@ describe('Main tests', () => {
   beforeEach(() => {
     // Runs before every test block
     cy.viewport('ipad-2', 'landscape');
-    cy.wrap(clearDatabase('demo-1')).should('be.a', 'number').and('equal', 200);
-    cy.wrap(clearUserAccounts('demo-1'))
-      .should('be.a', 'number')
-      .and('equal', 200);
+    clearDatabase('demo-1');
+    clearUserAccounts('demo-1');
 
     cy.signUp(user.email, user.password);
   });
