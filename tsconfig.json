@@ -33,8 +33,7 @@
     // "strictBindCallApply": true,
     "strictNullChecks": true,
     // "strictFunctionTypes": true,
-    "noImplicitAny": true,
-    "suppressImplicitAnyIndexErrors": true,
+    "noImplicitAny": true
   },
   // Required for jest to work with cypress
   "include": ["src/**/*.ts"],
@@ -45,6 +44,6 @@
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
-    "strictTemplates": true,
+    "strictTemplates": true
   }
 }
