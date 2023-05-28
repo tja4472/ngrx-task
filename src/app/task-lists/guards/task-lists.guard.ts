@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanLoad, Route } from '@angular/router';
+import { Route } from '@angular/router';
 
 import { Store } from '@ngrx/store';
 
@@ -14,7 +14,7 @@ import { TaskListsGuardActions } from '../actions';
 @Injectable({
   providedIn: 'root',
 })
-export class TaskListsGuard implements CanLoad {
+export class TaskListsGuard  {
   constructor(private readonly store: Store) {}
 
   canLoad(route: Route): Observable<boolean> {

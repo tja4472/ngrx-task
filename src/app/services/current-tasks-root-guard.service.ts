@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate } from '@angular/router';
+import { ActivatedRouteSnapshot } from '@angular/router';
 
 import { Store } from '@ngrx/store';
 
@@ -14,7 +14,7 @@ import { CurrentTasksRootGuardServiceActions } from '../root-store/tasks-store/a
 @Injectable({
   providedIn: 'root',
 })
-export class CurrentTasksRootGuardService implements CanActivate {
+export class CurrentTasksRootGuardService  {
   constructor(private readonly store: Store) {}
 
   // what happens if try to navigate to http://localhost:4200/tasks/current

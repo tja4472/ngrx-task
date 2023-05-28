@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 import { Store } from '@ngrx/store';
 
@@ -27,7 +27,7 @@ import { TaskListDetailEditPageComponentGuardActions } from '../actions';
 @Injectable({
   providedIn: 'root',
 })
-export class TaskListDetailEditPageComponentGuard implements CanActivate {
+export class TaskListDetailEditPageComponentGuard  {
   constructor(private readonly store: Store, private router: Router) {}
 
   canActivate(): Observable<boolean> {

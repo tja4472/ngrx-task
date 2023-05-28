@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router } from '@angular/router';
+import { ActivatedRouteSnapshot, Router } from '@angular/router';
 
 import { Store } from '@ngrx/store';
 
@@ -16,7 +16,7 @@ import { CompletedTaskDetailEditPageComponentGuardActions } from '../actions';
 @Injectable({
   providedIn: 'root',
 })
-export class CompletedTaskDetailEditPageComponentGuard implements CanActivate {
+export class CompletedTaskDetailEditPageComponentGuard  {
   constructor(private readonly store: Store, private router: Router) {}
 
   /*

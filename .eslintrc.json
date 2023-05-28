@@ -1,11 +1,17 @@
 {
   "root": true,
-  "ignorePatterns": ["projects/**/*"],
+  "ignorePatterns": [
+    "projects/**/*"
+  ],
   "overrides": [
     {
-      "files": ["*.ts"],
+      "files": [
+        "*.ts"
+      ],
       "parserOptions": {
-        "project": ["tsconfig.json"],
+        "project": [
+          "tsconfig.json"
+        ],
         "createDefaultProgram": true
       },
       "plugins": [
@@ -45,12 +51,18 @@
       }
     },
     {
-      "files": ["*.html"],
-      "extends": ["plugin:@angular-eslint/template/recommended"],
+      "files": [
+        "*.html"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended"
+      ],
       "rules": {}
     },
     {
-      "files": ["*.spec.ts"],
+      "files": [
+        "*.spec.ts"
+      ],
       "env": {
         "jest": true
       },
@@ -62,7 +74,9 @@
       ],
       "rules": {
         "testing-library/prefer-explicit-assert": "error",
-        "jest/consistent-test-it": ["error"],
+        "jest/consistent-test-it": [
+          "error"
+        ],
         "jest/expect-expect": "off"
       }
     }

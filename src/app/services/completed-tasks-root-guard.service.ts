@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate } from '@angular/router';
+import { ActivatedRouteSnapshot } from '@angular/router';
 
 import { Store } from '@ngrx/store';
 
@@ -13,7 +13,7 @@ import { CompletedTasksRootGuardServiceActions } from '../root-store/tasks-store
 @Injectable({
   providedIn: 'root',
 })
-export class CompletedTasksRootGuardService implements CanActivate {
+export class CompletedTasksRootGuardService  {
   constructor(private readonly store: Store) {}
 
   canActivate(): Observable<boolean> {
