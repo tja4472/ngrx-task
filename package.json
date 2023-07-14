@@ -90,7 +90,7 @@
     "cross-env": "7.0.3",
     "cypress": "12.17.1",
     "cypress-firebase": "2.2.5",
-    "eslint": "8.44.0",
+    "eslint": "8.45.0",
     "eslint-config-prettier": "8.8.0",
     "eslint-plugin-chai-friendly": "0.7.2",
     "eslint-plugin-cypress": "2.13.3",
