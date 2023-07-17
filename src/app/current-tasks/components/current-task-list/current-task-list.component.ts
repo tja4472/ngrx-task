@@ -16,7 +16,7 @@ import { CurrentTask } from '@app/root-store/tasks-store/models';
   providers: [
     {
       provide: MAT_CHECKBOX_DEFAULT_OPTIONS,
-      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions      
+      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
       useValue: { clickAction: 'noop' } as MatCheckboxDefaultOptions,
     },
   ],

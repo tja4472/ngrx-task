@@ -14,7 +14,7 @@ import { TaskListsGuardActions } from '../actions';
 @Injectable({
   providedIn: 'root',
 })
-export class TaskListsGuard  {
+export class TaskListsGuard {
   constructor(private readonly store: Store) {}
 
   canLoad(route: Route): Observable<boolean> {

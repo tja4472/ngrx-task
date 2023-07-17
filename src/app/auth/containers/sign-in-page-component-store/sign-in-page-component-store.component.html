@@ -2,7 +2,7 @@
 <div *ngIf="vm$ | async as vm">
   <app-credentials-form
     formMode="SignInForm"
-    [errorMessage]="(vm.error)!"
+    [errorMessage]="vm.error!"
     (SignUpClicked)="onSignUp()"
     (submitted)="onSubmitted($event)"
   ></app-credentials-form>

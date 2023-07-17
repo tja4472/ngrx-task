@@ -21,9 +21,8 @@ export class AppComponent implements OnInit {
     private swUpdate: SwUpdate,
     private snackBar: MatSnackBar,
     // For Cypress app actions
-    private appActionsService: AppActionsService
-  ) // logUpdateService: LogUpdateService
-  {
+    private appActionsService: AppActionsService // logUpdateService: LogUpdateService
+  ) {
     // const dummy = appActionsService.property;
     // analytics.logEvent('start_game', { level: '10', difficulty: 'expert' });
   }

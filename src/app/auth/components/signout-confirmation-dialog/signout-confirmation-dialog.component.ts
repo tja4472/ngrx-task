@@ -19,21 +19,21 @@ import { Component } from '@angular/core';
   `,
   styles: [
     `
-          :host {
-            display: block;
-            width: 100%;
-            max-width: 300px;
-          }
-    
-          mat-dialog-actions {
-            display: flex;
-            justify-content: flex-end;
-          }
-    
-          [mat-button] {
-            padding: 0;
-          }
-        `,
+      :host {
+        display: block;
+        width: 100%;
+        max-width: 300px;
+      }
+
+      mat-dialog-actions {
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      [mat-button] {
+        padding: 0;
+      }
+    `,
   ],
 })
 export class SignoutConfirmationDialogComponent {}

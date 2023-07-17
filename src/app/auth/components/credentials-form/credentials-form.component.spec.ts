@@ -9,9 +9,8 @@ describe('CredentialsFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ CredentialsFormComponent, BrowserAnimationsModule ]
-    })
-    .compileComponents();
+      imports: [CredentialsFormComponent, BrowserAnimationsModule],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(CredentialsFormComponent);
     component = fixture.componentInstance;

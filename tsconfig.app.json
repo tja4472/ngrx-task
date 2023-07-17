@@ -10,7 +10,7 @@
     "src/environments/**/*",
     "src/app/+test-examples/**/*",
     "src/app/firebase/firebase-config-dev.ts",
-    "src/app/firebase/firebase-config-emulator-demo.ts",    
+    "src/app/firebase/firebase-config-emulator-demo.ts",
     "src/app/firebase/firebase-config-prod.ts"
   ]
 }

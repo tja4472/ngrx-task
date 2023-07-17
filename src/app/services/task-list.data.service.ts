@@ -52,13 +52,13 @@ export class TaskListDataService {
         )
       );
 */
-console.log('===getData>', userId);
+    console.log('===getData>', userId);
     const firestoreDocQuery = query(this.getfirestoreDocCollectionRef(userId));
 
     const modular$ = collectionData(firestoreDocQuery).pipe(
       map((items) =>
         items.map((item) => {
-          console.log('item>', item)
+          console.log('item>', item);
           return this.fromFirestoreDoc(item);
         })
       )

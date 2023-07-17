@@ -9,7 +9,7 @@
       "request": "launch",
       "name": "Launch Chrome",
       "url": "http://localhost:4200",
-      "webRoot": "${workspaceFolder}",
+      "webRoot": "${workspaceFolder}"
 
       // Set port to avoid 'Cannot connect to runtime process, timeout after 10000 ms' error
       // "port": 4000

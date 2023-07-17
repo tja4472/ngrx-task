@@ -14,7 +14,7 @@ import { CurrentTasksRootGuardServiceActions } from '../root-store/tasks-store/a
 @Injectable({
   providedIn: 'root',
 })
-export class CurrentTasksRootGuardService  {
+export class CurrentTasksRootGuardService {
   constructor(private readonly store: Store) {}
 
   // what happens if try to navigate to http://localhost:4200/tasks/current

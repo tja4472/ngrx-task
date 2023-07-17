@@ -13,7 +13,7 @@ import { CompletedTasksRootGuardServiceActions } from '../root-store/tasks-store
 @Injectable({
   providedIn: 'root',
 })
-export class CompletedTasksRootGuardService  {
+export class CompletedTasksRootGuardService {
   constructor(private readonly store: Store) {}
 
   canActivate(): Observable<boolean> {

@@ -27,7 +27,7 @@ import { TaskListDetailEditPageComponentGuardActions } from '../actions';
 @Injectable({
   providedIn: 'root',
 })
-export class TaskListDetailEditPageComponentGuard  {
+export class TaskListDetailEditPageComponentGuard {
   constructor(private readonly store: Store, private router: Router) {}
 
   canActivate(): Observable<boolean> {

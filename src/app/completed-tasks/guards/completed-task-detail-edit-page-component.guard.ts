@@ -16,7 +16,7 @@ import { CompletedTaskDetailEditPageComponentGuardActions } from '../actions';
 @Injectable({
   providedIn: 'root',
 })
-export class CompletedTaskDetailEditPageComponentGuard  {
+export class CompletedTaskDetailEditPageComponentGuard {
   constructor(private readonly store: Store, private router: Router) {}
 
   /*

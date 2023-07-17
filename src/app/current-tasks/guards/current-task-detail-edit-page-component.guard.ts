@@ -16,7 +16,7 @@ import { CurrentTaskDetailEditPageComponentGuardActions } from '../actions';
 @Injectable({
   providedIn: 'root',
 })
-export class CurrentTaskDetailEditPageComponentGuard  {
+export class CurrentTaskDetailEditPageComponentGuard {
   constructor(private readonly store: Store, private router: Router) {}
 
   /*
