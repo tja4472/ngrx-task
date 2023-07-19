@@ -2,7 +2,7 @@
 # https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 # https://github.com/cypress-io/github-action
 
-name: tests
+name: CI
 
 on:
   push:
