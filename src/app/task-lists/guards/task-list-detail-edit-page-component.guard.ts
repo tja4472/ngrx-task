@@ -28,7 +28,10 @@ import { TaskListDetailEditPageComponentGuardActions } from '../actions';
   providedIn: 'root',
 })
 export class TaskListDetailEditPageComponentGuard {
-  constructor(private readonly store: Store, private router: Router) {}
+  constructor(
+    private readonly store: Store,
+    private router: Router
+  ) {}
 
   canActivate(): Observable<boolean> {
     return this.waitForTaskListsToLoad().pipe(

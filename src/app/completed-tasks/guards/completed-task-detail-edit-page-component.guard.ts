@@ -17,7 +17,10 @@ import { CompletedTaskDetailEditPageComponentGuardActions } from '../actions';
   providedIn: 'root',
 })
 export class CompletedTaskDetailEditPageComponentGuard {
-  constructor(private readonly store: Store, private router: Router) {}
+  constructor(
+    private readonly store: Store,
+    private router: Router
+  ) {}
 
   /*
   canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {
