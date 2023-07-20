@@ -95,16 +95,15 @@ describe('CurrentTaskDetailEditComponent', () => {
       cy.getBySel(dataTestIds.descriptionTextarea)
         .should('be.visible')
         .type('bb');
-      cy.getBySel(dataTestIds.cancelButton)
-        .click()
-        .then(() => {
-          expect(store.dispatch).to.have.been.called;
+      cy.getBySel(dataTestIds.cancelButton).click();
+      cy.getBySel(dataTestIds.cancelButton).then(() => {
+        expect(store.dispatch).to.have.been.called;
 
-          const action = CurrentTaskDetailEditPageActions.cancelled({
-            currentTask: defaultTask,
-          });
-          expect(store.dispatch).to.have.been.calledOnceWith(action);
+        const action = CurrentTaskDetailEditPageActions.cancelled({
+          currentTask: defaultTask,
         });
+        expect(store.dispatch).to.have.been.calledOnceWith(action);
+      });
     });
   });
 
@@ -117,16 +116,15 @@ describe('CurrentTaskDetailEditComponent', () => {
       cy.getBySel(dataTestIds.descriptionTextarea)
         .should('be.visible')
         .type('bb');
-      cy.getBySel(dataTestIds.removeButton)
-        .click()
-        .then(() => {
-          expect(store.dispatch).to.have.been.called;
+      cy.getBySel(dataTestIds.removeButton).click();
+      cy.getBySel(dataTestIds.removeButton).then(() => {
+        expect(store.dispatch).to.have.been.called;
 
-          const action = CurrentTaskDetailEditPageActions.removed({
-            currentTask: defaultTask,
-          });
-          expect(store.dispatch).to.have.been.calledOnceWith(action);
+        const action = CurrentTaskDetailEditPageActions.removed({
+          currentTask: defaultTask,
         });
+        expect(store.dispatch).to.have.been.calledOnceWith(action);
+      });
     });
   });
 
@@ -140,22 +138,21 @@ describe('CurrentTaskDetailEditComponent', () => {
         .should('be.visible')
         .type('bb');
 
-      cy.getBySel(dataTestIds.submitButton)
-        .click()
-        .then(() => {
-          const expectedCompletedTask: CurrentTask = {
-            ...defaultTask,
-            description: 'Task1 descriptionbb',
-            name: 'Task1 nameaa',
-          };
+      cy.getBySel(dataTestIds.submitButton).click();
+      cy.getBySel(dataTestIds.submitButton).then(() => {
+        const expectedCompletedTask: CurrentTask = {
+          ...defaultTask,
+          description: 'Task1 descriptionbb',
+          name: 'Task1 nameaa',
+        };
 
-          expect(store.dispatch).to.have.been.called;
+        expect(store.dispatch).to.have.been.called;
 
-          const action = CurrentTaskDetailEditPageActions.saved({
-            currentTask: expectedCompletedTask,
-          });
-          expect(store.dispatch).to.have.been.calledOnceWith(action);
+        const action = CurrentTaskDetailEditPageActions.saved({
+          currentTask: expectedCompletedTask,
         });
+        expect(store.dispatch).to.have.been.calledOnceWith(action);
+      });
     });
   });
 });

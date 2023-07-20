@@ -109,30 +109,28 @@ describe('CredentialsFormComponent', () => {
     cy.getBySel('password-field')
       .should('be.visible')
       .type(expectedSubmitedResponse.password);
-    cy.getBySel('sign-in-button')
-      .click()
-      .then(() => {
-        expect(store.dispatch).to.have.been.called;
+    cy.getBySel('sign-in-button').click();
+    cy.getBySel('sign-in-button').then(() => {
+      expect(store.dispatch).to.have.been.called;
 
-        const signInAction = SignInPageActions.signIn({
-          credentials: expectedSubmitedResponse,
-        });
-
-        expect(store.dispatch).to.have.been.calledOnceWith(signInAction);
+      const signInAction = SignInPageActions.signIn({
+        credentials: expectedSubmitedResponse,
       });
+
+      expect(store.dispatch).to.have.been.calledOnceWith(signInAction);
+    });
   });
 
   it('SignInPageActions.showSignUpPage action', () => {
     cy.spy(store, 'dispatch');
 
-    cy.getBySel('sign-up-button')
-      .click()
-      .then(() => {
-        //        expect(store.dispatch).to.have.been.called;
+    cy.getBySel('sign-up-button').click();
+    cy.getBySel('sign-up-button').then(() => {
+      //        expect(store.dispatch).to.have.been.called;
 
-        expect(store.dispatch).to.have.been.calledOnceWith(
-          SignInPageActions.showSignUpPage()
-        );
-      });
+      expect(store.dispatch).to.have.been.calledOnceWith(
+        SignInPageActions.showSignUpPage()
+      );
+    });
   });
 });

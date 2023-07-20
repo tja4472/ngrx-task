@@ -92,21 +92,20 @@ describe('CompletedTaskDetailEditPageComponent - main', () => {
     });
   });
 
-  it.only('CompletedTaskDetailEditPageActions.cancelled action', () => {
+  it('CompletedTaskDetailEditPageActions.cancelled action', () => {
     cy.spy(store, 'dispatch');
 
     cy.getBySel('name-input').should('be.visible').type('aa');
     cy.getBySel('description-textarea').should('be.visible').type('bb');
-    cy.getBySel('cancel-button')
-      .click()
-      .then(() => {
-        expect(store.dispatch).to.have.been.called;
+    cy.getBySel('cancel-button').click();
+    cy.getBySel('cancel-button').then(() => {
+      expect(store.dispatch).to.have.been.called;
 
-        const action = CompletedTaskDetailEditPageActions.cancelled({
-          completedTask: originalCompletedTask,
-        });
-        expect(store.dispatch).to.have.been.calledOnceWith(action);
+      const action = CompletedTaskDetailEditPageActions.cancelled({
+        completedTask: originalCompletedTask,
       });
+      expect(store.dispatch).to.have.been.calledOnceWith(action);
+    });
   });
 
   it('CompletedTaskDetailEditPageActions.removed action', () => {
@@ -114,16 +113,15 @@ describe('CompletedTaskDetailEditPageComponent - main', () => {
 
     cy.getBySel('name-input').should('be.visible').type('aa');
     cy.getBySel('description-textarea').should('be.visible').type('bb');
-    cy.getBySel('remove-button')
-      .click()
-      .then(() => {
-        expect(store.dispatch).to.have.been.called;
+    cy.getBySel('remove-button').click();
+    cy.getBySel('remove-button').then(() => {
+      expect(store.dispatch).to.have.been.called;
 
-        const action = CompletedTaskDetailEditPageActions.removed({
-          completedTask: originalCompletedTask,
-        });
-        expect(store.dispatch).to.have.been.calledOnceWith(action);
+      const action = CompletedTaskDetailEditPageActions.removed({
+        completedTask: originalCompletedTask,
       });
+      expect(store.dispatch).to.have.been.calledOnceWith(action);
+    });
   });
 
   it('CompletedTaskDetailEditPageActions.saved action', () => {
@@ -131,21 +129,20 @@ describe('CompletedTaskDetailEditPageComponent - main', () => {
 
     cy.getBySel('name-input').should('be.visible').type('aa');
     cy.getBySel('description-textarea').should('be.visible').type('bb');
-    cy.getBySel('submit-button')
-      .click()
-      .then(() => {
-        const expectedCompletedTask: CompletedTask = {
-          ...originalCompletedTask,
-          description: 'Task1 descriptionbb',
-          name: 'Task1 nameaa',
-        };
+    cy.getBySel('submit-button').click();
+    cy.getBySel('submit-button').then(() => {
+      const expectedCompletedTask: CompletedTask = {
+        ...originalCompletedTask,
+        description: 'Task1 descriptionbb',
+        name: 'Task1 nameaa',
+      };
 
-        expect(store.dispatch).to.have.been.called;
+      expect(store.dispatch).to.have.been.called;
 
-        const action = CompletedTaskDetailEditPageActions.saved({
-          completedTask: expectedCompletedTask,
-        });
-        expect(store.dispatch).to.have.been.calledOnceWith(action);
+      const action = CompletedTaskDetailEditPageActions.saved({
+        completedTask: expectedCompletedTask,
       });
+      expect(store.dispatch).to.have.been.calledOnceWith(action);
+    });
   });
 });
