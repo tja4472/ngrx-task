@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/unbound-method */
 import { Injectable } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 

@@ -2,7 +2,7 @@
 // CREATE src/app/root-store/user-store/user-store.reducer.spec.ts (337 bytes)
 // CREATE src/app/root-store/user-store/user-store.reducer.ts
 //
-import { Action, createReducer, on } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
 
 import { AuthApiActions } from '@app/auth/actions';
 import { SidenavActions } from '@app/core/components/sidenav/actions';

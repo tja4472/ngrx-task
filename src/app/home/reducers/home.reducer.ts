@@ -1,8 +1,8 @@
-import { Action, createReducer, on } from '@ngrx/store';
+/* eslint-disable @typescript-eslint/no-empty-interface */
+import { createReducer } from '@ngrx/store';
 
 export const homeFeatureKey = 'home';
 
-// tslint:disable-next-line: no-empty-interface
 export interface State {}
 
 export const initialState: State = {};

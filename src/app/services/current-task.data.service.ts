@@ -1,4 +1,5 @@
-import { inject, Injectable } from '@angular/core';
+/* eslint-disable @typescript-eslint/no-unnecessary-condition */
+import { Injectable } from '@angular/core';
 
 import {
   collection,

@@ -50,4 +50,3 @@ import 'zone.js'; // Included with Angular CLI.
 /***************************************************************************************************
  * APPLICATION IMPORTS
  */
-// tslint:disable-next-line: ordered-imports

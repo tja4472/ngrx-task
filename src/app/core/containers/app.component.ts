@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-extraneous-class */
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import {
   ChangeDetectionStrategy,
   Component,

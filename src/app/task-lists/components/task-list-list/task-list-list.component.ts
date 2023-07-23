@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
+/* eslint-disable @typescript-eslint/no-useless-constructor */
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { pathPrefix, routeNames } from '@app/app-route-names';

@@ -1,3 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-misused-promises */
+/* eslint-disable @typescript-eslint/consistent-type-definitions */
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
@@ -12,10 +18,7 @@ import { pathPrefix, routeNames } from '@app/app-route-names';
 import { User } from '@app/models';
 import { TaskListListItem } from '@app/root-store/tasks-store/models';
 import { TaskListSelectors } from '@app/root-store/tasks-store/selectors';
-import {
-  UserStoreActions,
-  UserStoreSelectors,
-} from '@app/root-store/user-store';
+import { UserStoreSelectors } from '@app/root-store/user-store';
 
 import { SidenavActions } from './actions';
 

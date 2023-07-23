@@ -1,3 +1,5 @@
+/* eslint-disable no-prototype-builtins */
+/* eslint-disable @typescript-eslint/consistent-indexed-object-style */
 import { AbstractControl } from '@angular/forms';
 
 /**

@@ -1,4 +1,3 @@
-import { User } from '@app/models';
 import {
   selectIsLoggedIn,
   selectTaskListId,

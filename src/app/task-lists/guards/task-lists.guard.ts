@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Injectable } from '@angular/core';
 import { Route } from '@angular/router';
 
@@ -6,7 +7,6 @@ import { Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { catchError, filter, take, timeout } from 'rxjs/operators';
 
-import { RootState } from '@app/root-store/reducers';
 import { TaskListSelectors } from '@app/root-store/tasks-store/selectors';
 
 import { TaskListsGuardActions } from '../actions';

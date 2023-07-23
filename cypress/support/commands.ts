@@ -1,3 +1,9 @@
+/* eslint-disable prefer-const */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-unnecessary-type-arguments */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-namespace */
 // ***********************************************
 // This example commands.js shows you how to
 // create various custom commands and overwrite
@@ -172,7 +178,7 @@ import 'firebase/compat/firestore';
 const cypressUseDemoProject = Cypress.env('USE_DEMO_PROJECT');
 console.log('cypressUseDemoProject: ', cypressUseDemoProject);
 
-var firebaseConfig: FirebaseConfig;
+let firebaseConfig: FirebaseConfig;
 
 /*
   if (cypressUseDemoProject) {

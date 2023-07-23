@@ -1,12 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
 
 import { SignUpPageActions } from '@app/auth/actions';
 import { Credentials } from '@app/auth/models/credentials.model';
-import { AuthRootState } from '@app/auth/reducers';
 import { SignUpPageSelectors } from '@app/auth/selectors';
 
 @Component({

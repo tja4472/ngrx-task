@@ -1,4 +1,4 @@
-import { Action, ActionReducerMap, combineReducers } from '@ngrx/store';
+import { ActionReducerMap } from '@ngrx/store';
 
 import * as fromRoot from '@app/root-store/reducers';
 

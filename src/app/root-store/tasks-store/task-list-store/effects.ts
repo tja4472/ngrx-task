@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Injectable } from '@angular/core';
 
 import { Actions, createEffect, ofType } from '@ngrx/effects';
@@ -14,10 +15,7 @@ import {
 } from 'rxjs/operators';
 
 import { AuthActions, AuthApiActions } from '@app/auth/actions';
-import {
-  UserStoreActions,
-  UserStoreSelectors,
-} from '@app/root-store/user-store';
+import { UserStoreSelectors } from '@app/root-store/user-store';
 import { TaskListDataService } from '@app/services/task-list.data.service';
 
 import * as featureActions from './actions';

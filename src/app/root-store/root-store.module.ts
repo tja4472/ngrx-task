@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-extraneous-class */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unnecessary-type-arguments */
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 

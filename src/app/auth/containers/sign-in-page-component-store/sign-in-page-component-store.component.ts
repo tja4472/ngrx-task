@@ -6,15 +6,11 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 
-import { select, Store } from '@ngrx/store';
-
-import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
 
 import { SignInPageActions } from '@app/auth/actions/sign-in-page.actions';
 
 import { Credentials } from '@app/auth/models/credentials.model';
-import { AuthRootState } from '@app/auth/reducers';
-import { SignInPageSelectors } from '@app/auth/selectors';
 
 import { SignInPageComponentStore } from './sign-in-page-component-store.store';
 

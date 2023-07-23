@@ -2,10 +2,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 
-import { Observable, pipe } from 'rxjs';
+import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
-import { RootState } from '@app/root-store/reducers';
 import { CurrentTaskDetailEditPageActions } from '@app/root-store/tasks-store/actions';
 import { CurrentTask } from '@app/root-store/tasks-store/models';
 import { TaskSelectors } from '@app/root-store/tasks-store/selectors';

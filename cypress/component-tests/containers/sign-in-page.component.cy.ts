@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/unbound-method */
 /*
 This is a test of Cypress component testing.
 
@@ -11,7 +13,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TestBed } from '@angular/core/testing';
 
 import { SignInPageComponent } from '@app/auth/containers/sign-in-page/sign-in-page.component';
-import { SignInPageComponentModule } from '@app/auth/containers/sign-in-page/sign-in-page.module';
 import { SignInPageSelectors } from '@app/auth/selectors';
 
 import { MockStore, provideMockStore } from '@ngrx/store/testing';

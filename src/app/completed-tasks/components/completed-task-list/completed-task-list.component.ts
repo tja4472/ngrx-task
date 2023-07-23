@@ -1,7 +1,6 @@
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+/* eslint-disable @typescript-eslint/no-empty-function */
+/* eslint-disable @typescript-eslint/no-useless-constructor */
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { MatCheckboxChange } from '@angular/material/checkbox';
 
 import { pathPrefix, routeNames } from '@app/app-route-names';
 import { CompletedTask } from '@app/root-store/tasks-store/models';

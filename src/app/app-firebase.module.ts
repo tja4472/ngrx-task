@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-extraneous-class */
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import { NgModule } from '@angular/core';
 
 import { EnvironmentService } from '@app/environment.service';
@@ -6,7 +8,6 @@ import {
   connectFirestoreEmulator,
   getFirestore,
   provideFirestore,
-  FirestoreSettings,
   initializeFirestore,
   enableIndexedDbPersistence,
 } from '@angular/fire/firestore';
@@ -26,7 +27,7 @@ const environmentService = new EnvironmentService();
 
     provideFirebaseApp(() => initializeApp(environmentService.firebase.config)),
     provideAuth(() => {
-      let auth = getAuth();
+      const auth = getAuth();
       if (environmentService.firebase.emulators) {
         connectAuthEmulator(auth, 'http://localhost:9099', {
           disableWarnings: false,

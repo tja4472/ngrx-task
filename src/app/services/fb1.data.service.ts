@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unnecessary-condition */
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import { Injectable } from '@angular/core';
 
 import {
@@ -51,8 +53,7 @@ export class Fb1DataService {
     const todo: CurrentTask = {
       ...newCurrentTask(),
       description: item.description,
-      // tslint:disable-next-line: no-non-null-assertion
-      id: item.id!,
+      id: item.id,
       name: item.name,
     };
 

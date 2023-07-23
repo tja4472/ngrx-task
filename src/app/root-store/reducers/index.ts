@@ -1,11 +1,12 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as fromRouter from '@ngrx/router-store';
 import {
   Action,
   ActionReducer,
   ActionReducerMap,
   createFeatureSelector,
-  createSelector,
-  MetaReducer,
 } from '@ngrx/store';
 
 import { AuthActions } from '@app/auth/actions';
@@ -37,7 +38,6 @@ export function logger(
 
 // reset whole state except for authFeature and router
 export function flush(reducer: any) {
-  // tslint:disable-next-line: only-arrow-functions
   return function (state: fromAuth.AuthRootState | undefined, action: Action) {
     if (state === undefined) {
       return reducer(state, action);

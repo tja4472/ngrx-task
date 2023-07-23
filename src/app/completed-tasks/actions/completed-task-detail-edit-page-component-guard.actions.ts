@@ -1,4 +1,4 @@
-import { createAction, props } from '@ngrx/store';
+import { createAction } from '@ngrx/store';
 
 const title = 'Completed Task Detail Edit Page Component Guard';
 

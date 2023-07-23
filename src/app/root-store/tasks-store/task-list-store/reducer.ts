@@ -1,6 +1,4 @@
-import { Action, createReducer, on } from '@ngrx/store';
-
-import { AuthApiActions } from '@app/auth/actions';
+import { createReducer, on } from '@ngrx/store';
 
 import * as featureActions from './actions';
 import { featureAdapter, initialState, State } from './state';

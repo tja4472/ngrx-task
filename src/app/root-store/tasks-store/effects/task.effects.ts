@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-floating-promises */
+/* eslint-disable @typescript-eslint/prefer-optional-chain */
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 

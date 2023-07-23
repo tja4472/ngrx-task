@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/consistent-type-definitions */
 import { DataTestIds } from './types';
 
 export const user = {

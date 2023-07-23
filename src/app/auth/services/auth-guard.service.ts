@@ -12,7 +12,6 @@ import { exhaustMap, filter, map, take } from 'rxjs/operators';
 
 import { selectHasChecked, selectHasUser } from '..//selectors/auth.selectors';
 import { AuthGuardServiceActions } from '../actions';
-import { AuthRootState } from '../reducers';
 import { AuthService } from '../services/auth.service';
 
 @Injectable({

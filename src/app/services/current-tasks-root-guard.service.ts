@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot } from '@angular/router';
 
 import { Store } from '@ngrx/store';
 
@@ -23,7 +22,9 @@ export class CurrentTasksRootGuardService {
   canActivate(): Observable<boolean> {
     // console.log('### CurrentTasksRootGuardService:canActivate');
     return this.waitForAuth().pipe(
-      tap((user) => console.log('waitForAuth - complete>', user)),
+      tap((user) => {
+        console.log('waitForAuth - complete>', user);
+      }),
       switchMap(() =>
         this.waitForCurrentTasksToLoad().pipe(
           // tap(() => console.log('waitForCompletedTasksToLoad - complete')),

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { firebaseConfigDev } from '@app/firebase/firebase-config-dev';
 
 import { Environment } from './environment-types';

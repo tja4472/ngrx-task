@@ -1,12 +1,14 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
+/* eslint-disable @typescript-eslint/no-unnecessary-boolean-literal-compare */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Router } from '@angular/router';
 
 import { Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
-import { filter, map, switchMap, take, tap } from 'rxjs/operators';
+import { filter, map, take, tap } from 'rxjs/operators';
 
-import { RootState } from '@app/root-store/reducers';
 import { TaskSelectors } from '@app/root-store/tasks-store/selectors';
 
 import { CurrentTaskDetailEditPageComponentGuardActions } from '../actions';

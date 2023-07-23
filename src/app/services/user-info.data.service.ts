@@ -1,25 +1,21 @@
-// tslint:disable:max-classes-per-file
+/* eslint-disable @typescript-eslint/no-unnecessary-condition */
+/* eslint-disable @typescript-eslint/class-literal-property-style */
 import { Injectable } from '@angular/core';
 
 import {
   collection,
-  collectionData,
   CollectionReference,
-  deleteDoc,
   doc,
   docData,
   Firestore,
-  orderBy,
-  query,
   setDoc,
-  writeBatch,
 } from '@angular/fire/firestore';
 
 import { Observable } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 import { EnvironmentService } from '@app/environment.service';
-import { newUserInfo, UserInfo } from '@app/models/user-info.model';
+import { UserInfo } from '@app/models/user-info.model';
 
 export function getUsersCollectionPath(): string {
   const path = `/users`;

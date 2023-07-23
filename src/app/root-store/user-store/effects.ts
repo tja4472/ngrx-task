@@ -1,16 +1,15 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import { Injectable } from '@angular/core';
 
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 
-import { from, of } from 'rxjs';
-import { concatMap, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { concatMap, tap, withLatestFrom } from 'rxjs/operators';
 
-import { AuthApiActions } from '@app/auth/actions';
 import { SidenavActions } from '@app/core/components/sidenav/actions';
 import { UserInfoDataService } from '@app/services/user-info.data.service';
 
-import * as featureActions from './actions';
 import * as featureSelectors from './selectors';
 
 /* =======================================

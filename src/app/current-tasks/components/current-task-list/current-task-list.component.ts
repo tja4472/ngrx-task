@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
+/* eslint-disable @typescript-eslint/no-useless-constructor */
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {
-  MatCheckboxChange,
   MatCheckboxDefaultOptions,
   MAT_CHECKBOX_DEFAULT_OPTIONS,
 } from '@angular/material/checkbox';

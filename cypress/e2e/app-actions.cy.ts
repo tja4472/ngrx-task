@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/require-await */
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import { tick } from 'cypress/support/app-actions.util';
 import {
   clearDatabase,

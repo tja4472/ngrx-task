@@ -1,4 +1,10 @@
-import { Injectable, Optional } from '@angular/core';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-misused-promises */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-confusing-void-expression */
+/* eslint-disable @typescript-eslint/no-floating-promises */
+import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 
@@ -71,7 +77,7 @@ export class AuthEffects implements OnInitEffects {
         this.authService.appUser$.pipe(
           first(),
           filter((appUser) => appUser === null),
-          map((appUser) => {
+          map(() => {
             return AuthApiActions.signInNoUser({ isAutoSignIn: true });
           })
         )
@@ -104,7 +110,7 @@ export class AuthEffects implements OnInitEffects {
         this.authService.appUser$.pipe(
           skip(1),
           filter((appUser) => appUser === null),
-          map((appUser) => {
+          map(() => {
             return AuthApiActions.signInNoUser({ isAutoSignIn: false });
           })
         )

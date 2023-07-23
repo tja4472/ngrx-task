@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unnecessary-condition */
+/* eslint-disable @typescript-eslint/no-empty-function */
 import { Injectable, Optional } from '@angular/core';
 
 import {
@@ -90,7 +92,8 @@ export class AuthService {
 
   async signOut(): Promise<void> {
     try {
-      return await signOut(this.auth);
+      await signOut(this.auth);
+      return;
     } catch (error: unknown) {
       const processedError = this.processError(error);
       throw processedError;
@@ -100,7 +103,6 @@ export class AuthService {
   }
 
   processError(error: unknown): unknown {
-    let message = '';
     // if (error instanceof FirebaseError) {
     if (error instanceof Error) {
       console.error(error.message); // It's an Error instance.
@@ -142,7 +144,7 @@ export class AuthService {
       .then((cred) => {
         console.log('Signed in>', cred);
       })
-      .catch((error) => {});
+      .catch(() => {});
   }
 
   // firebase.FirebaseError

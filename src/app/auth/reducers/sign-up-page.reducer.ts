@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { createReducer, on } from '@ngrx/store';
 
 import { AuthApiActions, SignUpPageActions } from '@app/auth/actions';

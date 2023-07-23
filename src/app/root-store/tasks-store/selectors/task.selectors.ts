@@ -1,26 +1,10 @@
-import {
-  createFeatureSelector,
-  createSelector,
-  MemoizedSelector,
-} from '@ngrx/store';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 import { routeNames } from '@app/app-route-names';
-import {
-  RootState,
-  selectRouteId,
-  selectRouteParam,
-} from '@app/root-store/reducers';
+import { selectRouteParam } from '@app/root-store/reducers';
 
-import {
-  CompletedTask,
-  CurrentTask,
-  newCurrentTask,
-  newTaskListListItem,
-  TaskListListItem,
-} from '../models';
 import * as fromTask from '../reducers';
 // import * as TodoListsSelectors from '../task-list-store/selectors';
-import { TaskListSelectors } from '../task-list-store';
 
 import { selectEntities } from './task-list';
 import * as TodoCompletedSelectors from './todo-completed.selectors';

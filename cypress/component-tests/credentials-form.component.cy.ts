@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { CredentialsFormComponent } from '@app/auth/components/credentials-form/credentials-form.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';

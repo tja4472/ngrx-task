@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -14,7 +16,6 @@ import {
   timeout,
 } from 'rxjs/operators';
 
-import { RootState } from '@app/root-store/reducers';
 import {
   TaskListSelectors,
   TaskSelectors,
@@ -48,7 +49,7 @@ export class TaskListDetailEditPageComponentGuard {
       // eslint-disable-next-line @ngrx/avoid-mapping-selectors
       map((todo) => todo !== undefined),
       tap((x) => {
-        if (x === false) {
+        if (!x) {
           this.store.dispatch(
             TaskListDetailEditPageComponentGuardActions.taskListNotFound()
           );

@@ -4,7 +4,6 @@ import { Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
 
-import { RootState } from '@app/root-store/reducers';
 import { TaskListDetailEditPageActions } from '@app/root-store/tasks-store/actions';
 import { TaskListListItem } from '@app/root-store/tasks-store/models';
 import { TaskSelectors } from '@app/root-store/tasks-store/selectors';

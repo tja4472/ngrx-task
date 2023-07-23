@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
+/* eslint-disable @typescript-eslint/consistent-generic-constructors */
 import { Injectable } from '@angular/core';
 import { FormControl } from '@angular/forms';
 

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /**
  * @jest-environment jsdom
  */
@@ -5,7 +6,7 @@ import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { provideMockActions } from '@ngrx/effects/testing';
-import { provideMockStore, MockStore } from '@ngrx/store/testing';
+import { provideMockStore } from '@ngrx/store/testing';
 
 import { Action } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -13,15 +14,8 @@ import { Observable } from 'rxjs';
 import { AuthEffects } from '@app/auth/effects/auth.effects';
 import { AuthService } from '../services/auth.service';
 import { MatDialog } from '@angular/material/dialog';
-import {
-  AuthActions,
-  AuthApiActions,
-  AuthGuardServiceActions,
-  SignUpPageActions,
-} from '@app/auth/actions';
-import { SignInPageActions } from '@app/auth/actions/sign-in-page.actions';
+import { AuthApiActions } from '@app/auth/actions';
 
-import { of } from 'rxjs';
 import { AppUser } from '../models/app-user.model';
 import { TestScheduler } from 'rxjs/testing';
 
