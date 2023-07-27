@@ -57,7 +57,7 @@
     "@ngrx/router-store": "16.1.0",
     "@ngrx/store": "16.1.0",
     "@ngrx/store-devtools": "16.1.0",
-    "core-js": "3.31.1",
+    "core-js": "3.32.0",
     "date-fns": "2.30.0",
     "firebase": "9.23.0",
     "node-fetch": "2.6.12",
