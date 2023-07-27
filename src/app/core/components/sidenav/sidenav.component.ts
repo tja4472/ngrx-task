@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-misused-promises */
-/* eslint-disable @typescript-eslint/consistent-type-definitions */
+
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
@@ -22,11 +22,11 @@ import { UserStoreSelectors } from '@app/root-store/user-store';
 
 import { SidenavActions } from './actions';
 
-type ViewNavigationItem = {
+interface ViewNavigationItem {
   label: string;
   link: string;
   testId: string;
-};
+}
 
 @Component({
   selector: 'app-sidenav',

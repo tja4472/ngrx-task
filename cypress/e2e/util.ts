@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/consistent-type-definitions */
 import { DataTestIds } from './types';
 
 export const user = {
@@ -6,10 +5,10 @@ export const user = {
   password: 'password',
 } as const;
 
-export type CurrentTask = {
+export interface CurrentTask {
   name: string;
   description: string;
-};
+}
 
 export const currentTask1: Readonly<CurrentTask> = {
   name: 'Name1111',

@@ -1,18 +1,17 @@
-/* eslint-disable @typescript-eslint/consistent-type-definitions */
 import { FirebaseConfig } from '@app/firebase/firebase-config-interface';
 
 type UseEmulatorArguments = [string, number];
 
-type Firebase = {
+interface Firebase {
   config: FirebaseConfig;
   emulators?: {
     auth: [string];
     firestore: UseEmulatorArguments;
   };
-};
+}
 
-export type Environment = {
+export interface Environment {
   appCode: string;
   production: boolean;
   firebase: Firebase;
-};
+}
