@@ -1,7 +1,7 @@
 module.exports = {
   preset: 'jest-preset-angular',
   setupFilesAfterEnv: ['<rootDir>/setup-jest.ts'],
-  globalSetup: 'jest-preset-angular/global-setup',
+  // globalSetup: 'jest-preset-angular/global-setup',
   testPathIgnorePatterns: ['<rootDir>/cypress/'],
   /*
     https://kulshekhar.github.io/ts-jest/docs/getting-started/paths-mapping/

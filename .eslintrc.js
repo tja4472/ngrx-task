@@ -18,10 +18,10 @@ module.exports = {
         'plugin:@angular-eslint/recommended',
         'plugin:@angular-eslint/template/process-inline-templates',
         'plugin:@ngrx/all-requiring-type-checking',
-        'prettier',
         'eslint:recommended',
         'plugin:@typescript-eslint/strict-type-checked',
         'plugin:@typescript-eslint/stylistic-type-checked',
+        'prettier',
       ],
       rules: {
         '@angular-eslint/directive-selector': [
@@ -56,8 +56,9 @@ module.exports = {
     {
       files: ['*.spec.ts'],
       env: {
-        jest: true,
+        'jest/globals': true,
       },
+      plugins: ['jest', 'jest-dom', 'testing-library'],
       extends: [
         'plugin:testing-library/angular',
         'plugin:jest/recommended',
