@@ -91,7 +91,7 @@
     "cypress": "12.17.3",
     "cypress-firebase": "2.2.5",
     "eslint": "8.46.0",
-    "eslint-config-prettier": "8.9.0",
+    "eslint-config-prettier": "8.10.0",
     "eslint-plugin-chai-friendly": "0.7.2",
     "eslint-plugin-cypress": "2.13.3",
     "eslint-plugin-import": "2.28.0",
