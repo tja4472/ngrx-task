@@ -9,7 +9,7 @@ import { takeUntil } from 'rxjs/operators';
 import {
   CurrentTask,
   getCompletedTimestamp,
-} from '@app/root-store/tasks-store/models';
+} from '@app/root-store/tasks-store/models/current-task.model';
 
 @Injectable()
 export class CurrentTaskDetailEditPresenter implements OnDestroy {

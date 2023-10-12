@@ -4,9 +4,9 @@ import { Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
 
-import { SignUpPageActions } from '@app/auth/actions';
+import * as SignUpPageActions from '@app/auth/actions/sign-up-page.actions';
 import { Credentials } from '@app/auth/models/credentials.model';
-import { SignUpPageSelectors } from '@app/auth/selectors';
+import * as SignUpPageSelectors from '@app/auth//selectors/sign-up-page.selectors';
 
 @Component({
   selector: 'app-sign-up-page',

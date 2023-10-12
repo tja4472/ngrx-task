@@ -3,7 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { MaterialModule } from '@app/material';
+import { MaterialModule } from '@app/material/material.module';
 
 import { createOutputSpy, MountConfig } from 'cypress/angular';
 import Sinon from 'cypress/types/sinon';

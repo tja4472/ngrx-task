@@ -9,7 +9,8 @@ import {
   createFeatureSelector,
 } from '@ngrx/store';
 
-import { AuthActions } from '@app/auth/actions';
+import * as AuthActions from '@app/auth/actions/auth.actions';
+
 import * as fromAuth from '@app/auth/reducers';
 
 export interface RootState {

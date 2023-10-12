@@ -5,16 +5,17 @@ import { TestBed } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { MaterialModule } from '@app/material';
+import { MaterialModule } from '@app/material/material.module';
 
-import { CompletedTaskDetailEditComponent } from '@app/completed-tasks/components';
-import { CompletedTaskDetailEditPageComponent } from '@app/completed-tasks/containers';
+import { CompletedTaskDetailEditComponent } from '@app/completed-tasks/components/completed-task-detail-edit/completed-task-detail-edit.component';
+import { CompletedTaskDetailEditPageComponent } from '@app/completed-tasks/containers/completed-task-detail-edit-page/completed-task-detail-edit-page.component';
 
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 
-import { CompletedTaskDetailEditPageActions } from '@app/root-store/tasks-store/actions';
-import { CompletedTask } from '@app/root-store/tasks-store/models';
-import { TaskSelectors } from '@app/root-store/tasks-store/selectors';
+import * as CompletedTaskDetailEditPageActions from '@app/root-store/tasks-store/actions/completed-task-detail-edit-page.actions';
+
+import { CompletedTask } from '@app/root-store/tasks-store/models/completed-task.model';
+import * as TaskSelectors from '@app/root-store/tasks-store/selectors/task.selectors';
 
 const originalCompletedTask: CompletedTask = {
   description: 'Task1 description',

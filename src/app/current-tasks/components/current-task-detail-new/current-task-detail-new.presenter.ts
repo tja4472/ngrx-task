@@ -6,7 +6,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import {
   CurrentTask,
   getCompletedTimestamp,
-} from '@app/root-store/tasks-store/models';
+} from '@app/root-store/tasks-store/models/current-task.model';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 

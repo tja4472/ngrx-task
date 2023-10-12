@@ -5,10 +5,11 @@ import { Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { filter, first, switchMap, take, tap } from 'rxjs/operators';
 
-import { TaskSelectors } from '@app/root-store/tasks-store/selectors';
-import { UserStoreSelectors } from '@app/root-store/user-store';
+import * as TaskSelectors from '@app/root-store/tasks-store/selectors/task.selectors';
 
-import { CurrentTasksRootGuardServiceActions } from '../root-store/tasks-store/actions';
+import * as UserStoreSelectors from '@app/root-store/user-store/selectors';
+
+import * as CurrentTasksRootGuardServiceActions from '@app/root-store/tasks-store/actions/current-tasks-root-guard-service.actions';
 
 @Injectable({
   providedIn: 'root',

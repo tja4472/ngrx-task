@@ -3,11 +3,14 @@
 import { Injectable } from '@angular/core';
 
 import {
-  CompletedTask,
   CurrentTask,
-  newCompletedTask,
   newCurrentTask,
-} from '../root-store/tasks-store/models';
+} from '../root-store/tasks-store/models/current-task.model';
+
+import {
+  CompletedTask,
+  newCompletedTask,
+} from '../root-store/tasks-store/models/completed-task.model';
 
 import { CompletedTaskDataService } from './completed-task.data.service';
 import { CurrentTaskDataService } from './current-task.data.service';

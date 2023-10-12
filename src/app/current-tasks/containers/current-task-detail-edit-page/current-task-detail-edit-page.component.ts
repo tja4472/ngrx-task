@@ -5,9 +5,9 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
-import { CurrentTaskDetailEditPageActions } from '@app/root-store/tasks-store/actions';
-import { CurrentTask } from '@app/root-store/tasks-store/models';
-import { TaskSelectors } from '@app/root-store/tasks-store/selectors';
+import * as CurrentTaskDetailEditPageActions from '@app/root-store/tasks-store/actions/current-task-detail-edit-page.actions';
+import { CurrentTask } from '@app/root-store/tasks-store/models/current-task.model';
+import * as TaskSelectors from '@app/root-store/tasks-store/selectors/task.selectors';
 
 @Component({
   selector: 'app-current-task-detail-edit-page',

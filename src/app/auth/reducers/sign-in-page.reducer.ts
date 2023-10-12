@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 
-import { AuthApiActions } from '../actions';
+import * as AuthApiActions from '@app/auth/actions/auth-api.actions';
 
 import { SignInPageActions } from '@app/auth/actions/sign-in-page.actions';
 

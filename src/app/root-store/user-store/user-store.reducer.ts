@@ -4,10 +4,10 @@
 //
 import { createReducer, on } from '@ngrx/store';
 
-import { AuthApiActions } from '@app/auth/actions';
-import { SidenavActions } from '@app/core/components/sidenav/actions';
+import * as AuthApiActions from '@app/auth/actions/auth-api.actions';
+import * as SidenavActions from '@app/core/components/sidenav/actions/sidenav.actions';
 
-import { User } from '@app/models';
+import { User } from '@app/models/user';
 
 export const userStoreFeatureKey = 'userStore';
 

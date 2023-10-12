@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-import { CompletedTask } from '@app/root-store/tasks-store/models';
+import { CompletedTask } from '@app/root-store/tasks-store/models/completed-task.model';
 
 import { CompletedTaskDetailEditPresenter } from './completed-task-detail-edit.presenter';
 

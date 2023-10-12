@@ -7,7 +7,7 @@ import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 import { concatMap, tap, withLatestFrom } from 'rxjs/operators';
 
-import { SidenavActions } from '@app/core/components/sidenav/actions';
+import * as SidenavActions from '@app/core/components/sidenav/actions/sidenav.actions';
 import { UserInfoDataService } from '@app/services/user-info.data.service';
 
 import * as featureSelectors from './selectors';

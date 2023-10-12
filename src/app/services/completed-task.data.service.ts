@@ -18,7 +18,7 @@ import {
 import {
   CompletedTask,
   newCompletedTask,
-} from '../root-store/tasks-store/models';
+} from '../root-store/tasks-store/models/completed-task.model';
 
 // https://firebase.google.com/docs/firestore
 // https://github.com/FirebaseExtended/rxfire

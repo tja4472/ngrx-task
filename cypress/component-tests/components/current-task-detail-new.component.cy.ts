@@ -4,16 +4,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { MaterialModule } from '@app/material';
+import { MaterialModule } from '@app/material/material.module';
 
 import { createOutputSpy, MountConfig } from 'cypress/angular';
 
 import { DataTestIds, SpyAliases, SpyIds } from '../types';
 
 // Component to test.
-import { CurrentTaskDetailNewComponent } from '@app/current-tasks/components';
+import { CurrentTaskDetailNewComponent } from '@app/current-tasks/components/current-task-detail-new/current-task-detail-new.component';
 
-import { CurrentTask } from '@app/root-store/tasks-store/models';
+import { CurrentTask } from '@app/root-store/tasks-store/models/current-task.model';
 
 // https://docs.cypress.io/guides/component-testing/angular/overview
 

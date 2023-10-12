@@ -4,9 +4,10 @@ import { Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
 
-import { CompletedTaskDetailEditPageActions } from '@app/root-store/tasks-store/actions';
-import { CompletedTask } from '@app/root-store/tasks-store/models';
-import { TaskSelectors } from '@app/root-store/tasks-store/selectors';
+import * as CompletedTaskDetailEditPageActions from '@app/root-store/tasks-store/actions/completed-task-detail-edit-page.actions';
+
+import { CompletedTask } from '@app/root-store/tasks-store/models/completed-task.model';
+import * as TaskSelectors from '@app/root-store/tasks-store/selectors/task.selectors';
 
 @Component({
   selector: 'app-completed-task-detail-edit-page',

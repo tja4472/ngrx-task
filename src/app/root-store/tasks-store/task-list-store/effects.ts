@@ -14,8 +14,11 @@ import {
   withLatestFrom,
 } from 'rxjs/operators';
 
-import { AuthActions, AuthApiActions } from '@app/auth/actions';
-import { UserStoreSelectors } from '@app/root-store/user-store';
+import * as AuthActions from '@app/auth/actions/auth.actions';
+import * as AuthApiActions from '@app/auth/actions/auth-api.actions';
+
+import * as UserStoreSelectors from '@app/root-store/user-store/selectors';
+
 import { TaskListDataService } from '@app/services/task-list.data.service';
 
 import * as featureActions from './actions';

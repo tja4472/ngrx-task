@@ -3,7 +3,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { pathPrefix, routeNames } from '@app/app-route-names';
-import { CompletedTask } from '@app/root-store/tasks-store/models';
+import { CompletedTask } from '@app/root-store/tasks-store/models/completed-task.model';
 
 import { format } from 'date-fns';
 

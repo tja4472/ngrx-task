@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
-import { TaskListListItem } from '@app/root-store/tasks-store/models';
+import { TaskListListItem } from '@app/root-store/tasks-store/models/task-list-list-item.model';
 
 @Injectable()
 export class TaskListDetailNewPresenter {

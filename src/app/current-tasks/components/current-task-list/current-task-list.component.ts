@@ -8,7 +8,7 @@ import {
 } from '@angular/material/checkbox';
 
 import { pathPrefix, routeNames } from '@app/app-route-names';
-import { CurrentTask } from '@app/root-store/tasks-store/models';
+import { CurrentTask } from '@app/root-store/tasks-store/models/current-task.model';
 
 @Component({
   selector: 'app-current-task-list',

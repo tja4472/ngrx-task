@@ -4,16 +4,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { MaterialModule } from '@app/material';
+import { MaterialModule } from '@app/material/material.module';
 
 import { createOutputSpy, MountConfig } from 'cypress/angular';
 
 import { DataTestIds, SpyAliases, SpyIds } from '../types';
 
 // Component to test.
-import { TaskListDetailEditComponent } from '@app/task-lists/components';
+import { TaskListDetailEditComponent } from '@app/task-lists/components/task-list-detail-edit/task-list-detail-edit.component';
 
-import { TaskListListItem } from '@app/root-store/tasks-store/models';
+import { TaskListListItem } from '@app/root-store/tasks-store/models/task-list-list-item.model';
 
 // https://docs.cypress.io/guides/component-testing/angular/overview
 

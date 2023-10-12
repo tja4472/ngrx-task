@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-import { CurrentTask } from '@app/root-store/tasks-store/models';
+import { CurrentTask } from '@app/root-store/tasks-store/models/current-task.model';
 
 import { CurrentTaskDetailEditPresenter } from './current-task-detail-edit.presenter';
 

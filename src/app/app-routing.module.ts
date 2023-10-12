@@ -6,24 +6,29 @@ import { pathPrefix, routeNames } from '@app/app-route-names';
 import { TaskListsGuard } from '@app/task-lists/guards/task-lists.guard';
 
 import { AuthGuardService } from './auth/services/auth-guard.service';
-import { NotFoundPageComponent } from './core/containers';
+import { NotFoundPageComponent } from './core/containers/not-found-page.component';
 
 const routes: Routes = [
   {
     path: routeNames.completedTasks.path,
     loadChildren: () =>
-      import('./completed-tasks').then((m) => m.CompletedTasksModule),
+      import('./completed-tasks/completed-tasks.module').then(
+        (m) => m.CompletedTasksModule
+      ),
     canLoad: [AuthGuardService],
   },
   {
     path: routeNames.currentTasks.path,
     loadChildren: () =>
-      import('./current-tasks').then((m) => m.CurrentTasksModule),
+      import('./current-tasks/current-tasks.module').then(
+        (m) => m.CurrentTasksModule
+      ),
     canLoad: [AuthGuardService],
   },
   {
     path: routeNames.taskLists.path,
-    loadChildren: () => import('./task-lists').then((m) => m.TaskListsModule),
+    loadChildren: () =>
+      import('./task-lists/task-lists.module').then((m) => m.TaskListsModule),
     canLoad: [AuthGuardService, TaskListsGuard],
   },
   {

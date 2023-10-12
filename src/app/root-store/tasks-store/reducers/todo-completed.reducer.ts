@@ -1,12 +1,11 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
 
-import {
-  CompletedTasksPageActions,
-  CompletedTasksRootActions,
-  TodoCompletedActions,
-} from '../actions';
-import { CompletedTask } from '../models';
+import * as CompletedTasksPageActions from '@app/root-store/tasks-store/actions/completed-tasks-page.actions';
+import * as CompletedTasksRootActions from '@app/root-store/tasks-store/actions/completed-tasks-root.actions';
+import * as TodoCompletedActions from '@app/root-store/tasks-store/actions/todo-completed.action';
+
+import { CompletedTask } from '../models/completed-task.model';
 
 export const todoCompletedFeatureKey = 'todo-completed';
 

@@ -7,15 +7,15 @@ import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 import { map, switchMap, takeUntil } from 'rxjs/operators';
 
-import { UserStoreSelectors } from '@app/root-store/user-store';
+import * as UserStoreSelectors from '@app/root-store/user-store/selectors';
 
 import { CompletedTaskDataService } from '../../../services/completed-task.data.service';
-import {
-  CompletedTasksRootActions,
-  CompletedTasksRootGuardServiceActions,
-  TodoCompletedActions,
-} from '../actions';
-import { CompletedTask } from '../models';
+
+import * as CompletedTasksRootGuardServiceActions from '@app/root-store/tasks-store/actions/completed-tasks-root-guard-service.actions';
+import * as CompletedTasksRootActions from '@app/root-store/tasks-store/actions/completed-tasks-root.actions';
+import * as TodoCompletedActions from '@app/root-store/tasks-store/actions/todo-completed.action';
+
+import { CompletedTask } from '../models/completed-task.model';
 
 /* =======================================
 Improve typings of createEffect, help debugging

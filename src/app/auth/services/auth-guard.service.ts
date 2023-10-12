@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 import { exhaustMap, filter, map, take } from 'rxjs/operators';
 
 import { selectHasChecked, selectHasUser } from '..//selectors/auth.selectors';
-import { AuthGuardServiceActions } from '../actions';
+import * as AuthGuardServiceActions from '@app/auth/actions/auth-guard-service.actions';
 import { AuthService } from '../services/auth.service';
 
 @Injectable({

@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 
-import { CurrentTasksRootActions } from '@app/root-store/tasks-store/actions';
+import * as CurrentTasksRootActions from '@app/root-store/tasks-store/actions/current-tasks-root.actions';
 
 @Component({
   selector: 'app-current-tasks-root',

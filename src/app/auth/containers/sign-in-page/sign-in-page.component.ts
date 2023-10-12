@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 import { SignInPageActions } from '@app/auth/actions/sign-in-page.actions';
 
 import { Credentials } from '@app/auth/models/credentials.model';
-import { SignInPageSelectors } from '@app/auth/selectors';
+import * as SignInPageSelectors from '@app/auth//selectors/sign-in-page.selectors';
 
 @Component({
   selector: 'app-sign-in-page',

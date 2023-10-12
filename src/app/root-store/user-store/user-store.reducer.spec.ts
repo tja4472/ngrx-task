@@ -2,8 +2,8 @@
  * @jest-environment jsdom
  */
 import { reducer, initialState, State } from './user-store.reducer';
-import { AuthApiActions } from '@app/auth/actions';
-import { SidenavActions } from '@app/core/components/sidenav/actions';
+import * as AuthApiActions from '@app/auth/actions/auth-api.actions';
+import * as SidenavActions from '@app/core/components/sidenav/actions/sidenav.actions';
 import { AppUser } from '@app/auth/models/app-user.model';
 
 describe('UserStore Reducer', () => {

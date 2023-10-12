@@ -1,6 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 
-import { AuthActions, AuthApiActions } from '../actions';
+import * as AuthApiActions from '@app/auth/actions/auth-api.actions';
+import * as AuthActions from '@app/auth/actions/auth.actions';
 
 export const authReducerKey = 'auth';
 

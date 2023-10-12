@@ -4,9 +4,10 @@ import { Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
 
-import { TaskListDetailEditPageActions } from '@app/root-store/tasks-store/actions';
-import { TaskListListItem } from '@app/root-store/tasks-store/models';
-import { TaskSelectors } from '@app/root-store/tasks-store/selectors';
+import * as TaskListDetailEditPageActions from '@app/root-store/tasks-store/actions/task-list-detail-edit-page.actions';
+
+import { TaskListListItem } from '@app/root-store/tasks-store/models/task-list-list-item.model';
+import * as TaskSelectors from '@app/root-store/tasks-store/selectors/task.selectors';
 
 @Component({
   selector: 'app-task-list-detail-edit-page',

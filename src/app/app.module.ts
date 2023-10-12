@@ -3,14 +3,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
-import { AuthModule } from '@app/auth';
-import { CoreModule } from '@app/core';
-import { AppComponent } from '@app/core/containers';
-import { HomeModule } from '@app/home';
+import { AuthModule } from '@app/auth/auth.module';
+import { CoreModule } from '@app/core/core.module';
+import { AppComponent } from '@app/core/containers/app.component';
+import { HomeModule } from '@app/home/home.module';
 
 import { AppFirebaseModule } from './app-firebase.module';
 import { AppRoutingModule } from './app-routing.module';
-import { RootStoreModule } from './root-store';
+import { RootStoreModule } from './root-store/root-store.module';
 
 import { EnvironmentService } from '@app/environment.service';
 

@@ -4,9 +4,9 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 
 import { map } from 'rxjs/operators';
 
-import { AuthActions } from '@app/auth/actions';
+import * as AuthActions from '@app/auth/actions/auth.actions';
 
-import { HomePageActions } from '../actions';
+import * as HomePageActions from '../actions/home-page.actions';
 
 /* =======================================
 Improve typings of createEffect, help debugging

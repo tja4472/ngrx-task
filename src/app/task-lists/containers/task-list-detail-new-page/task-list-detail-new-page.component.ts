@@ -3,11 +3,12 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 
-import { TaskListDetailNewPageActions } from '@app/root-store/tasks-store/actions';
+import * as TaskListDetailNewPageActions from '@app/root-store/tasks-store/actions/task-list-detail-new-page.actions';
+
 import {
   newTaskListListItem,
   TaskListListItem,
-} from '@app/root-store/tasks-store/models';
+} from '@app/root-store/tasks-store/models/task-list-list-item.model';
 
 @Component({
   selector: 'app-task-list-detail-new-page',

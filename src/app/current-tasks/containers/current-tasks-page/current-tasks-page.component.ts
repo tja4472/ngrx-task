@@ -4,15 +4,14 @@ import { Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
 
-import {
-  CurrentTasksPageActions,
-  TodoActions,
-} from '@app/root-store/tasks-store/actions';
+import * as CurrentTasksPageActions from '@app/root-store/tasks-store/actions/current-tasks-page.actions';
+import * as TodoActions from '@app/root-store/tasks-store/actions/todo.action';
+
 import {
   CurrentTask,
   toggleIsComplete,
-} from '@app/root-store/tasks-store/models';
-import { TaskSelectors } from '@app/root-store/tasks-store/selectors';
+} from '@app/root-store/tasks-store/models/current-task.model';
+import * as TaskSelectors from '@app/root-store/tasks-store/selectors/task.selectors';
 
 @Component({
   selector: 'app-current-tasks-page',

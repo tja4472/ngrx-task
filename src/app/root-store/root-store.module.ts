@@ -10,9 +10,9 @@ import { MetaReducer, StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { flush, logger, rootReducers } from '@app/root-store/reducers';
-import { TasksStoreModule } from '@app/root-store/tasks-store';
+import { TasksStoreModule } from '@app/root-store/tasks-store/tasks-store.module';
 
-import { UserStoreModule } from './user-store';
+import { UserStoreModule } from './user-store/user-store.module';
 
 import { EnvironmentService } from '@app/environment.service';
 

@@ -1,6 +1,8 @@
 https://blog.nrwl.io/ngrx-patterns-and-techniques-f46126e2b1e5
 
 - [ngx-forms-typed](https://github.com/gparlakov/forms-typed/tree/master/projects/forms)
+- Remove barrel files.
+  - [Speeding up the JavaScript ecosystem - The barrel file debacle](https://marvinh.dev/blog/speeding-up-javascript-ecosystem-part-7/)
 
 # NgrxTask
 

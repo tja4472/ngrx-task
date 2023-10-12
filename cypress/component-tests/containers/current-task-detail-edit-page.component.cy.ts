@@ -4,18 +4,18 @@ import { TestBed } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { MaterialModule } from '@app/material';
+import { MaterialModule } from '@app/material/material.module';
 
 import { MountConfig } from 'cypress/angular';
 
-import { CurrentTaskDetailEditComponent } from '@app/current-tasks/components';
-import { CurrentTaskDetailEditPageComponent } from '@app/current-tasks/containers';
-
+import { CurrentTaskDetailEditComponent } from '@app/current-tasks/components/current-task-detail-edit/current-task-detail-edit.component';
+import { CurrentTaskDetailEditPageComponent } from '@app/current-tasks/containers/current-task-detail-edit-page/current-task-detail-edit-page.component';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 
-import { CurrentTaskDetailEditPageActions } from '@app/root-store/tasks-store/actions';
-import { CurrentTask } from '@app/root-store/tasks-store/models';
-import { TaskSelectors } from '@app/root-store/tasks-store/selectors';
+import * as CurrentTaskDetailEditPageActions from '@app/root-store/tasks-store/actions/current-task-detail-edit-page.actions';
+
+import { CurrentTask } from '@app/root-store/tasks-store/models/current-task.model';
+import * as TaskSelectors from '@app/root-store/tasks-store/selectors/task.selectors';
 
 import { DataTestIds } from '../types';
 

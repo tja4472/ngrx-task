@@ -3,11 +3,12 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 
-import { CurrentTaskDetailNewPageActions } from '@app/root-store/tasks-store/actions';
+import * as CurrentTaskDetailNewPageActions from '@app/root-store/tasks-store/actions/current-task-detail-new-page.actions';
+
 import {
   CurrentTask,
   newCurrentTask,
-} from '@app/root-store/tasks-store/models';
+} from '@app/root-store/tasks-store/models/current-task.model';
 
 @Component({
   selector: 'app-current-task-detail-new-page',

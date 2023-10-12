@@ -2,7 +2,8 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { createReducer, on } from '@ngrx/store';
 
-import { AuthApiActions, SignUpPageActions } from '@app/auth/actions';
+import * as AuthApiActions from '@app/auth/actions/auth-api.actions';
+import * as SignUpPageActions from '@app/auth/actions/sign-up-page.actions';
 
 export const signUpPageReducerKey = 'signUpPage';
 

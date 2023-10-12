@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
-import { CompletedTask } from '@app/root-store/tasks-store/models';
+import { CompletedTask } from '@app/root-store/tasks-store/models/completed-task.model';
 
 @Injectable()
 export class CompletedTaskDetailEditPresenter {

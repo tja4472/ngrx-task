@@ -1,7 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 import { taskFeatureKey, TaskState } from '../reducers';
-import { TaskListSelectors } from '../task-list-store';
+import * as TaskListSelectors from '../task-list-store/selectors';
 
 const selectTaskState = createFeatureSelector<TaskState>(taskFeatureKey);
 

@@ -15,15 +15,15 @@ import {
   withLatestFrom,
 } from 'rxjs/operators';
 
-import { UserStoreSelectors } from '@app/root-store/user-store';
+import * as UserStoreSelectors from '@app/root-store/user-store/selectors';
 
 import { CurrentTaskDataService } from '../../../services/current-task.data.service';
-import {
-  CurrentTasksRootActions,
-  CurrentTasksRootGuardServiceActions,
-  TodoActions,
-} from '../actions';
-import { CurrentTask } from '../models';
+
+import * as CurrentTasksRootActions from '@app/root-store/tasks-store/actions/current-tasks-root.actions';
+import * as CurrentTasksRootGuardServiceActions from '@app/root-store/tasks-store/actions/current-tasks-root-guard-service.actions';
+import * as TodoActions from '@app/root-store/tasks-store/actions/todo.action';
+
+import { CurrentTask } from '../models/current-task.model';
 
 /* =======================================
 Improve typings of createEffect, help debugging

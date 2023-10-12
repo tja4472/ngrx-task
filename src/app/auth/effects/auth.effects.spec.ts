@@ -14,7 +14,7 @@ import { Observable } from 'rxjs';
 import { AuthEffects } from '@app/auth/effects/auth.effects';
 import { AuthService } from '../services/auth.service';
 import { MatDialog } from '@angular/material/dialog';
-import { AuthApiActions } from '@app/auth/actions';
+import * as AuthApiActions from '@app/auth/actions/auth-api.actions';
 
 import { AppUser } from '../models/app-user.model';
 import { TestScheduler } from 'rxjs/testing';

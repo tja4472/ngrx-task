@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 
-import { HomePageActions } from '../actions';
+import * as HomePageActions from '../actions/home-page.actions';
 
 @Component({
   selector: 'app-home-page',

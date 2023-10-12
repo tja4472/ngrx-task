@@ -17,7 +17,7 @@ import {
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { CurrentTask } from '../root-store/tasks-store/models';
+import { CurrentTask } from '../root-store/tasks-store/models/current-task.model';
 
 // https://firebase.google.com/docs/firestore
 // https://github.com/FirebaseExtended/rxfire

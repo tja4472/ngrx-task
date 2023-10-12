@@ -11,23 +11,22 @@ import { of } from 'rxjs';
 import { concatMap, tap, withLatestFrom } from 'rxjs/operators';
 
 import { pathPrefix, routeNames } from '@app/app-route-names';
-import { TaskSelectors } from '@app/root-store/tasks-store/selectors';
-import { UserStoreSelectors } from '@app/root-store/user-store';
+import * as TaskSelectors from '@app/root-store/tasks-store/selectors/task.selectors';
+import * as UserStoreSelectors from '@app/root-store/user-store/selectors';
 
 import { CompletedTaskDataService } from '../../../services/completed-task.data.service';
 import { CurrentTaskDataService } from '../../../services/current-task.data.service';
 import { Fb1DataService } from '../../../services/fb1.data.service';
 import { TaskListDataService } from '../../../services/task-list.data.service';
-import {
-  CompletedTaskDetailEditPageActions,
-  CompletedTasksPageActions,
-  CurrentTaskDetailEditPageActions,
-  CurrentTaskDetailNewPageActions,
-  CurrentTasksPageActions,
-  TaskListDetailEditPageActions,
-  TaskListDetailNewPageActions,
-  TaskListsPageActions,
-} from '../actions';
+
+import * as CompletedTaskDetailEditPageActions from '@app/root-store/tasks-store/actions/completed-task-detail-edit-page.actions';
+import * as CompletedTasksPageActions from '@app/root-store/tasks-store/actions/completed-tasks-page.actions';
+import * as CurrentTaskDetailEditPageActions from '@app/root-store/tasks-store/actions/current-task-detail-edit-page.actions';
+import * as CurrentTaskDetailNewPageActions from '@app/root-store/tasks-store/actions/current-task-detail-new-page.actions';
+import * as CurrentTasksPageActions from '@app/root-store/tasks-store/actions/current-tasks-page.actions';
+import * as TaskListDetailEditPageActions from '@app/root-store/tasks-store/actions/task-list-detail-edit-page.actions';
+import * as TaskListDetailNewPageActions from '@app/root-store/tasks-store/actions/task-list-detail-new-page.actions';
+import * as TaskListsPageActions from '@app/root-store/tasks-store/actions/task-lists-page.actions';
 
 /* =======================================
 Improve typings of createEffect, help debugging

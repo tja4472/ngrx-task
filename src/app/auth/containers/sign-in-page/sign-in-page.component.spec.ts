@@ -9,7 +9,7 @@ import { MockStore, provideMockStore } from '@ngrx/store/testing';
 
 import { SignInPageActions } from '@app/auth/actions/sign-in-page.actions';
 
-import { SignInPageSelectors } from '../../selectors';
+import * as SignInPageSelectors from '@app/auth/selectors/sign-in-page.selectors';
 
 import { SignInPageComponent } from './sign-in-page.component';
 import { SignInPageComponentModule } from './sign-in-page.module';

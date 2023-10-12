@@ -14,13 +14,12 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 
-import {
-  CompletedTaskListComponent,
-  SearchComponent,
-} from '@app/completed-tasks/components';
-import { CompletedTasksPageComponent } from '@app/completed-tasks/containers';
-import { MaterialModule } from '@app/material';
-import { CompletedTasksPageActions } from '@app/root-store/tasks-store/actions';
+import { CompletedTaskListComponent } from '@app/completed-tasks/components/completed-task-list/completed-task-list.component';
+import { SearchComponent } from '@app/completed-tasks/components/search/search.component';
+import { CompletedTasksPageComponent } from '@app/completed-tasks/containers/completed-tasks-page/completed-tasks-page.component';
+import { MaterialModule } from '@app/material/material.module';
+import * as CompletedTasksPageActions from '@app/root-store/tasks-store/actions/completed-tasks-page.actions';
+
 import {
   taskFeatureKey,
   TaskState,

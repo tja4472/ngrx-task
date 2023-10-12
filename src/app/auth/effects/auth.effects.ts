@@ -25,12 +25,10 @@ import {
 } from 'rxjs/operators';
 
 import { pathPrefix, routeNames } from '@app/app-route-names';
-import {
-  AuthActions,
-  AuthApiActions,
-  AuthGuardServiceActions,
-  SignUpPageActions,
-} from '@app/auth/actions';
+import * as AuthApiActions from '@app/auth/actions/auth-api.actions';
+import * as AuthGuardServiceActions from '@app/auth/actions/auth-guard-service.actions';
+import * as AuthActions from '@app/auth/actions/auth.actions';
+import * as SignUpPageActions from '@app/auth/actions/sign-up-page.actions';
 import { SignInPageActions } from '@app/auth/actions/sign-in-page.actions';
 
 import { selectQueryParam } from '@app/root-store/reducers';

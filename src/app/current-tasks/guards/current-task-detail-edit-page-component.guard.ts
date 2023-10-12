@@ -9,9 +9,9 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { filter, map, take, tap } from 'rxjs/operators';
 
-import { TaskSelectors } from '@app/root-store/tasks-store/selectors';
+import * as TaskSelectors from '@app/root-store/tasks-store/selectors/task.selectors';
 
-import { CurrentTaskDetailEditPageComponentGuardActions } from '../actions';
+import * as CurrentTaskDetailEditPageComponentGuardActions from '../actions/current-task-detail-edit-page-component-guard.actions';
 
 // We don't want load component unless the task exists
 // in the Store.

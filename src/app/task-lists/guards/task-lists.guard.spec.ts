@@ -12,9 +12,9 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 
-import { TaskListSelectors } from '@app/root-store/tasks-store/selectors';
+import * as TaskListSelectors from '@app/root-store/tasks-store/selectors/task-list';
 
-import { TaskListsGuardActions } from '../actions';
+import * as TaskListsGuardActions from '../actions/task-lists-guard.actions';
 
 import { TaskListsGuard } from './task-lists.guard';
 

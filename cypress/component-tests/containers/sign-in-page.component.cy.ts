@@ -13,7 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TestBed } from '@angular/core/testing';
 
 import { SignInPageComponent } from '@app/auth/containers/sign-in-page/sign-in-page.component';
-import { SignInPageSelectors } from '@app/auth/selectors';
+import * as SignInPageSelectors from '@app/auth/selectors/sign-in-page.selectors';
 
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { CommonModule } from '@angular/common';

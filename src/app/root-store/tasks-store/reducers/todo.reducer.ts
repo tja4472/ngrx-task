@@ -1,8 +1,10 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
 
-import { CurrentTasksRootActions, TodoActions } from '../actions';
-import { CurrentTask } from '../models';
+import * as CurrentTasksRootActions from '@app/root-store/tasks-store/actions/current-tasks-root.actions';
+import * as TodoActions from '@app/root-store/tasks-store/actions/todo.action';
+
+import { CurrentTask } from '../models/current-task.model';
 
 export const todoFeatureKey = 'todo';
 

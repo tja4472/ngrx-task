@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 
-import { CompletedTask } from '../models';
+import { CompletedTask } from '../models/completed-task.model';
 
 export const databaseListenForDataStart = createAction(
   '[TodoCompleted] (Database) Listen For Data - Start',

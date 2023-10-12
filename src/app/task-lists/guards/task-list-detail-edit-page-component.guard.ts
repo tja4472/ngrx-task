@@ -16,12 +16,10 @@ import {
   timeout,
 } from 'rxjs/operators';
 
-import {
-  TaskListSelectors,
-  TaskSelectors,
-} from '@app/root-store/tasks-store/selectors';
+import * as TaskListSelectors from '@app/root-store/tasks-store/selectors/task-list';
+import * as TaskSelectors from '@app/root-store/tasks-store/selectors/task.selectors';
 
-import { TaskListDetailEditPageComponentGuardActions } from '../actions';
+import * as TaskListDetailEditPageComponentGuardActions from '../actions/task-list-detail-edit-page-component-guard.actions';
 
 // We don't want load component unless the task list exists
 // in the Store.

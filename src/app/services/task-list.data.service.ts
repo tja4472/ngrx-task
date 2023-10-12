@@ -14,7 +14,7 @@ import {
   setDoc,
 } from '@angular/fire/firestore';
 
-import { TaskListListItem } from '../root-store/tasks-store/models';
+import { TaskListListItem } from '../root-store/tasks-store/models/task-list-list-item.model';
 
 // https://firebase.google.com/docs/firestore
 // https://github.com/FirebaseExtended/rxfire

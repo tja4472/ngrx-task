@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 
-import { CurrentTask } from '@app/root-store/tasks-store/models';
+import { CurrentTask } from '@app/root-store/tasks-store/models/current-task.model';
 
 const title = 'Current Tasks Page';
 
