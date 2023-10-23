@@ -27,12 +27,14 @@ const dataTestIds: DataTestIds<DataTestIdNames> = {
 } as const;
 
 describe('Current Tasks', () => {
+  // Runs before every test block
   beforeEach(() => {
-    // Runs before every test block
-    // Force sidenav to be shown.
-    cy.viewport('ipad-2', 'landscape');
     clearDatabase('demo-1');
     clearUserAccounts('demo-1');
+
+    // Force sidenav to be shown.
+    cy.viewport('ipad-2', 'landscape');
+
     cy.visit('/');
     cy.location('pathname').should('eq', '/home');
     cy.getBySel('sign-out-button').should('be.visible');

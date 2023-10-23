@@ -2,18 +2,22 @@ import {
   clearDatabase,
   clearUserAccounts,
 } from 'cypress/support/emulator-helpers';
+import * as AppActionsTestService from 'cypress/support/app-actions.service';
+
 const user = {
   email: 'c.c@c.com',
   password: 'password',
 } as const;
 
-describe('Auth', () => {
+describe('Auth commands', () => {
+  // Runs before every test block
   beforeEach(() => {
-    // Runs before every test block
-    // Force sidenav to be shown.
-    cy.viewport('ipad-2', 'landscape');
     clearDatabase('demo-1');
     clearUserAccounts('demo-1');
+
+    // Force sidenav to be shown.
+    cy.viewport('ipad-2', 'landscape');
+
     cy.visit('/');
     cy.location('pathname').should('eq', '/home');
     cy.getBySel('sign-out-button').should('be.visible');
@@ -22,8 +26,39 @@ describe('Auth', () => {
       .should('contain.text', 'Not Signed In');
   });
 
-  it('sign-in', () => {
+  it('sign-up', () => {
     cy.signUp(user.email, user.password);
+  });
+
+  it('sign-out', () => {
+    cy.signUp(user.email, user.password);
+    cy.signOut();
+  });
+});
+
+describe('Auth', () => {
+  // Runs before every test block
+  beforeEach(() => {
+    clearDatabase('demo-1');
+    clearUserAccounts('demo-1');
+
+    // Force sidenav to be shown.
+    cy.viewport('ipad-2', 'landscape');
+
+    cy.visit('/');
+    cy.location('pathname').should('eq', '/home');
+    cy.getBySel('sign-out-button').should('be.visible');
+    cy.getBySel('user-name')
+      .should('be.visible')
+      .should('contain.text', 'Not Signed In');
+    AppActionsTestService.callSignUp(user.email, user.password);
+    cy.location('pathname').should('eq', '/home');
+    cy.getBySel('user-name')
+      .should('be.visible')
+      .should('contain.text', user.email);
+  });
+
+  it('sign-in', () => {
     cy.signOut();
     cy.signIn(user.email, user.password);
     cy.location('pathname').should('eq', '/home');
@@ -37,7 +72,6 @@ describe('Auth', () => {
   });
 
   it('sign-in: invalid email', () => {
-    cy.signUp(user.email, user.password);
     cy.signOut();
     cy.signIn('invalid-email', user.password);
     cy.getBySel('message-error')
@@ -46,7 +80,6 @@ describe('Auth', () => {
   });
 
   it('sign-in: wrong password', () => {
-    cy.signUp(user.email, user.password);
     cy.signOut();
     cy.signIn(user.email, 'incorrect-password');
     cy.getBySel('message-error')
@@ -55,8 +88,7 @@ describe('Auth', () => {
   });
 
   it('auto-sign-in', () => {
-    cy.signUp(user.email, user.password);
-    cy.visit('/');
+    cy.reload(true);
     // Autologin??
     cy.location('pathname').should('eq', '/home');
     cy.getBySel('user-name')
@@ -65,14 +97,5 @@ describe('Auth', () => {
     cy.getBySel('task-list-name')
       .should('be.visible')
       .should('contain.text', 'default-list name');
-  });
-
-  it('sign-up', () => {
-    cy.signUp(user.email, user.password);
-  });
-
-  it('sign-out', () => {
-    cy.signUp(user.email, user.password);
-    cy.signOut();
   });
 });

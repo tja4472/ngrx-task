@@ -9,8 +9,12 @@ import * as AppActionsTestService from 'cypress/support/app-actions.service';
 
 describe('App Actions', () => {
   before(() => {
+    // Force sidenav to be shown.
     cy.viewport('ipad-2', 'landscape');
+
     cy.visit('/');
+
+    // Has to be after cy.visit
     AppActionsTestService.getService();
   });
 
@@ -27,19 +31,24 @@ describe('App Actions', () => {
 });
 
 describe('Sign Up tests', () => {
+  // Runs before every test block
   beforeEach(() => {
-    // Runs before every test block
-    // Force sidenav to be shown.
-    cy.viewport('ipad-2', 'landscape');
-    cy.visit('/');
     clearDatabase('demo-1');
     clearUserAccounts('demo-1');
+
+    // Force sidenav to be shown.
+    cy.viewport('ipad-2', 'landscape');
+
+    cy.visit('/');
+    cy.location('pathname').should('eq', '/home');
+    cy.getBySel('user-name')
+      .should('be.visible')
+      .should('contain.text', 'Not Signed In');
   });
 
   it('1 - Sign Up', () => {
     (async () => {
       AppActionsTestService.callSignUp('aa.aa@a.com', 'password');
-
       cy.location('pathname').should('eq', '/home');
       cy.getBySel('user-name')
         .should('be.visible')
@@ -47,7 +56,6 @@ describe('Sign Up tests', () => {
       cy.getBySel('task-list-name')
         .should('be.visible')
         .should('contain.text', 'default-list name');
-      // expect(user).to.deep.equal({ ... });
     })();
   });
 
