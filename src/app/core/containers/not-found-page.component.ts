@@ -5,7 +5,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   selector: 'app-not-found-page',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <mat-card>
+    <mat-card appearance="outlined">
       <mat-card-title>404: Not Found</mat-card-title>
       <mat-card-content>
         <p>Hey! It looks like this page doesn't exist yet.</p>

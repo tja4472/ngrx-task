@@ -26,6 +26,7 @@ import { Component } from '@angular/core';
         max-width: 300px;
       }
 
+      /* TODO(mdc-migration): The following rule targets internal classes of dialog that may no longer apply for the MDC version. */
       mat-dialog-actions {
         display: flex;
         justify-content: flex-end;
