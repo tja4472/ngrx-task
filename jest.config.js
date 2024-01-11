@@ -1,5 +1,6 @@
 module.exports = {
   preset: 'jest-preset-angular',
+  setupFiles: ['./jest.polyfills.js'],
   setupFilesAfterEnv: ['<rootDir>/setup-jest.ts'],
   // globalSetup: 'jest-preset-angular/global-setup',
   testPathIgnorePatterns: ['<rootDir>/cypress/'],

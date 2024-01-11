@@ -87,17 +87,17 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ng-task:build"
+            "buildTarget": "ng-task:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ng-task:build:production"
+              "buildTarget": "ng-task:build:production"
             },
             "development": {
-              "browserTarget": "ng-task:build:development"
+              "buildTarget": "ng-task:build:development"
             },
             "emulator-demo": {
-              "browserTarget": "ng-task:build:emulator-demo"
+              "buildTarget": "ng-task:build:emulator-demo"
             }
           },
           "defaultConfiguration": "emulator-demo"
@@ -105,7 +105,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ng-task:build"
+            "buildTarget": "ng-task:build"
           }
         },
         "lint": {
