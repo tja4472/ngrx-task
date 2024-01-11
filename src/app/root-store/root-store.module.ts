@@ -43,7 +43,7 @@ const metaReducers: MetaReducer<any>[] = !environmentService.production
     StoreDevtoolsModule.instrument({
       name: 'Ng Task App',
       maxAge: 25, // Retains last 25 states
-    }),
+    , connectInZone: true}),
   ],
   declarations: [],
 })
