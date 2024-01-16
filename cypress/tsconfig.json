@@ -4,7 +4,7 @@
     "noEmit": true,
     "sourceMap": false,
     // Explicit about types included to avoid clashing with Jest global types
-    "types": ["cypress", "node", "cypress-firebase"]
+    "types": ["cypress", "node"]
   },
   "files": [],
   "include": ["**/*.ts"],

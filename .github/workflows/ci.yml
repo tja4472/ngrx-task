@@ -47,7 +47,7 @@ jobs:
           browser: chrome
           start: npm run emulator-demo-1, npm run start:emulator-demo
           wait-on: 'http://localhost:4400, http://localhost:4200'
-          command: npm run cypress:run:emulate-demo
+          command: npm run cypress:run:e2e
 
       - name: Run Component tests
         uses: cypress-io/github-action@v6
