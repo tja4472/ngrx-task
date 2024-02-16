@@ -4,9 +4,9 @@
     "noEmit": true,
     "sourceMap": false,
     // Explicit about types included to avoid clashing with Jest global types
-    "types": ["cypress", "node"],
+    "types": ["cypress", "node"]
   },
   "files": [],
   "include": ["**/*.ts"],
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules"]
 }
