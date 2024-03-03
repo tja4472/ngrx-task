@@ -40,13 +40,66 @@ export function getCurrentTasksCollectionPath(
   return path;
 }
 
-interface FirestoreDoc {
+export const randomCode = () => {
+  let code = '';
+  const alpha =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  const codeLength = 20;
+
+  for (let i = 0; i < codeLength; i++) {
+    code += alpha.charAt(Math.floor(Math.random() * alpha.length));
+  }
+
+  return code;
+};
+
+export function fromFirestoreDoc(x: FirestoreDoc): CurrentTask {
+  //
+  // Temp fix till all records in database updated.
+  let completedTimestamp = x.completedTimestamp;
+
+  if (completedTimestamp === undefined) {
+    completedTimestamp = null;
+  }
+  //
+  const result: CurrentTask = {
+    description: x.description,
+    id: x.id,
+    index: x.index,
+    isComplete: x.isComplete,
+    completedTimestamp,
+    name: x.name,
+  };
+
+  return result;
+}
+
+export function toFirestoreDoc(item: CurrentTask): FirestoreDoc {
+  //
+  const result: FirestoreDoc = {
+    description: item.description,
+    id: item.id,
+    index: item.index,
+    isComplete: item.isComplete,
+    completedTimestamp: item.completedTimestamp,
+    name: item.name,
+  };
+
+  if (item.id === '') {
+    // firestoreDoc.id = this.createId();
+    result.id = randomCode();
+  }
+
+  return result;
+}
+
+export interface FirestoreDoc {
   id: string;
   description: string | null;
   index: number;
   name: string;
   isComplete: boolean;
-  completedTimestamp: number | null;
+  completedTimestamp: number | null | undefined;
 }
 
 @Injectable({
@@ -100,7 +153,8 @@ export class CurrentTaskDataService {
     const modular$ = collectionData(firestoreDocQuery).pipe(
       map((items) =>
         items.map((item) => {
-          return this.fromFirestoreDoc(item);
+          // console.log('XXXXXX>', item)
+          return fromFirestoreDoc(item);
         })
       )
     );
@@ -175,19 +229,12 @@ export class CurrentTaskDataService {
     taskListId: string,
     userId: string
   ): Promise<void> {
-    const firestoreDoc = this.toFirestoreDoc(item);
+    const firestoreDoc = toFirestoreDoc(item);
     /*
-    if (item.id === '') {
-      firestoreDoc.id = this.afs.createId();
-    }
-
-    await this.angularFirestoreCollection(taskListId, userId)
-      .doc(firestoreDoc.id)
-      .set(firestoreDoc);
-*/
     if (item.id === '') {
       firestoreDoc.id = this.createId();
     }
+*/
 
     await setDoc(
       doc(
@@ -206,6 +253,8 @@ export class CurrentTaskDataService {
 */
   }
 
+  // AkhRcCkUgG7FU31GDJau
+  // length 21
   private createId(): string {
     const id = doc(collection(this.firestore, 'id')).id;
 
@@ -238,37 +287,4 @@ export class CurrentTaskDataService {
     );
   }
 */
-  private toFirestoreDoc(item: CurrentTask): FirestoreDoc {
-    //
-    const result: FirestoreDoc = {
-      description: item.description,
-      id: item.id,
-      index: item.index,
-      isComplete: item.isComplete,
-      completedTimestamp: item.completedTimestamp,
-      name: item.name,
-    };
-
-    return result;
-  }
-
-  private fromFirestoreDoc(x: FirestoreDoc): CurrentTask {
-    // Temp fix till all records in database updated.
-    let completedTimestamp = x.completedTimestamp;
-
-    if (completedTimestamp === undefined) {
-      completedTimestamp = null;
-    }
-    //
-    const result: CurrentTask = {
-      description: x.description,
-      id: x.id,
-      index: x.index,
-      isComplete: x.isComplete,
-      completedTimestamp,
-      name: x.name,
-    };
-
-    return result;
-  }
 }
