@@ -1,5 +1,4 @@
-// jest.polyfills.js
-// https://mswjs.io/docs/migrations/1.x-to-2.x#requestresponsetextencoder-is-not-defined-jest
+// https://medium.com/@thochguertel/jest-react-msw-webpack-error-referenceerror-clearimmediate-is-not-defined-eeb16c504c8c
 /**
  * @note The block below contains polyfills for Node.js globals
  * required for Jest to function when running JSDOM tests.
@@ -10,12 +9,16 @@
  * you don't want to deal with this.
  */
 
-const { ReadableStream, TextDecoder, TextEncoder } = require('node:util');
+const { TextDecoder, TextEncoder, ReadableStream } = require('node:util');
+
+const { clearImmediate, setImmediate } = require('node:timers');
 
 Object.defineProperties(globalThis, {
   TextDecoder: { value: TextDecoder },
   TextEncoder: { value: TextEncoder },
   ReadableStream: { value: ReadableStream },
+  clearImmediate: { value: clearImmediate },
+  setImmediate: { value: setImmediate },
 });
 
 const { Blob, File } = require('node:buffer');

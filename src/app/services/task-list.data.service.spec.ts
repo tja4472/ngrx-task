@@ -1,3 +1,6 @@
+/**
+ * @jest-environment node
+ */
 import { getTaskListCollectionPath } from './task-list.data.service';
 
 describe('task-list.data.service', () => {

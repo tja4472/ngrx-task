@@ -1,3 +1,6 @@
+/**
+ * @jest-environment node
+ */
 import { getCompletedTasksCollectionPath } from './completed-task.data.service';
 
 describe('completed-task.data.service', () => {
