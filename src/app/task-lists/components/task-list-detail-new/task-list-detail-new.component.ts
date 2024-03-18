@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-import { TaskListListItem } from '@app/root-store/tasks-store/models/task-list-list-item.model';
+import { TaskListListItem } from '@app/models/task-list-list-item.model';
 
 import { TaskListDetailNewPresenter } from './task-list-detail-new.presenter';
 

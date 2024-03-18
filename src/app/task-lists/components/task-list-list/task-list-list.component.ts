@@ -3,7 +3,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { pathPrefix, routeNames } from '@app/app-route-names';
-import { TaskListListItem } from '@app/root-store/tasks-store/models/task-list-list-item.model';
+import { TaskListListItem } from '@app/models/task-list-list-item.model';
 
 @Component({
   selector: 'app-task-list-list',

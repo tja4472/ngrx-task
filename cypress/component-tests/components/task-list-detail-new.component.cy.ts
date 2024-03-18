@@ -12,7 +12,7 @@ import { DataTestIds, SpyAliases, SpyIds } from '../types';
 // Component to test.
 import { TaskListDetailNewComponent } from '@app/task-lists/components/task-list-detail-new/task-list-detail-new.component';
 
-import { TaskListListItem } from '@app/root-store/tasks-store/models/task-list-list-item.model';
+import { TaskListListItem } from '@app/models/task-list-list-item.model';
 
 // https://docs.cypress.io/guides/component-testing/angular/overview
 

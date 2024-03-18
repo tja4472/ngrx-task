@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 
 import * as TaskListsPageActions from '@app/root-store/tasks-store/actions/task-lists-page.actions';
 
-import { TaskListListItem } from '@app/root-store/tasks-store/models/task-list-list-item.model';
+import { TaskListListItem } from '@app/models/task-list-list-item.model';
 import * as TaskListSelectors from '@app/root-store/tasks-store/selectors/task-list';
 
 @Component({

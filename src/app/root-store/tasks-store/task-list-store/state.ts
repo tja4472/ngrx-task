@@ -1,6 +1,6 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 
-import { TaskListListItem } from '../models/task-list-list-item.model';
+import { TaskListListItem } from '../../../models/task-list-list-item.model';
 
 export const featureAdapter: EntityAdapter<TaskListListItem> =
   createEntityAdapter<TaskListListItem>();

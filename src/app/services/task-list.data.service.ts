@@ -14,7 +14,7 @@ import {
   setDoc,
 } from '@angular/fire/firestore';
 
-import { TaskListListItem } from '../root-store/tasks-store/models/task-list-list-item.model';
+import { TaskListListItem } from '../models/task-list-list-item.model';
 
 // https://firebase.google.com/docs/firestore
 // https://github.com/FirebaseExtended/rxfire
@@ -22,6 +22,9 @@ import { TaskListListItem } from '../root-store/tasks-store/models/task-list-lis
 const DATA_COLLECTION = 'todo-lists';
 const USERS_COLLECTION = 'users';
 
+// collectionPath?
+// makeCollectionPath?
+// move into class so Jasmine can spyOn
 export function getTaskListCollectionPath(userId: string): string {
   const path = `/${USERS_COLLECTION}/${userId}/${DATA_COLLECTION}`;
 

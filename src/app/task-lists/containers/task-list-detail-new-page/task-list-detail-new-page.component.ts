@@ -8,7 +8,7 @@ import * as TaskListDetailNewPageActions from '@app/root-store/tasks-store/actio
 import {
   newTaskListListItem,
   TaskListListItem,
-} from '@app/root-store/tasks-store/models/task-list-list-item.model';
+} from '@app/models/task-list-list-item.model';
 
 @Component({
   selector: 'app-task-list-detail-new-page',
