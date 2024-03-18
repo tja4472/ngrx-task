@@ -19,7 +19,7 @@ import { UserInfoDataService } from '@app/services/user-info.data.service';
 import { AppUser } from '../models/app-user.model';
 import { newUserInfo } from '@app/models/user-info.model';
 
-import { TaskListListItem } from '@app/root-store/tasks-store/models/task-list-list-item.model';
+import { TaskListListItem } from '@app/models/task-list-list-item.model';
 import { TaskListDataService } from '@app/services/task-list.data.service';
 
 // https://firebase.google.com/docs/web/modular-upgrade?authuser=0

@@ -16,7 +16,7 @@ import { filter, map, shareReplay, withLatestFrom } from 'rxjs/operators';
 
 import { pathPrefix, routeNames } from '@app/app-route-names';
 import { User } from '@app/models/user';
-import { TaskListListItem } from '@app/root-store/tasks-store/models/task-list-list-item.model';
+import { TaskListListItem } from '@app/models/task-list-list-item.model';
 import * as TaskListSelectors from '@app/root-store/tasks-store/selectors/task-list';
 import * as UserStoreSelectors from '@app/root-store/user-store/selectors';
 
