@@ -7,7 +7,7 @@ import {
 
 import { Store } from '@ngrx/store';
 
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { exhaustMap, filter, map, take } from 'rxjs/operators';
 
 import { selectHasChecked, selectHasUser } from '..//selectors/auth.selectors';
@@ -32,6 +32,11 @@ export class AuthGuardService {
   }
 
   canLoad(route: Route): Observable<boolean> {
+    //
+    if (route.path == undefined) {
+      return of(false);
+    }
+
     const url = `/${route.path}`;
     return this.checkAuth(url);
   }

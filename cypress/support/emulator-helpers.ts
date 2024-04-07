@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 import { EmulatorInfo } from 'emulator/emulator-info';
 
 export function clearDatabase(projectId: string) {

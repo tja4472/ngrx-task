@@ -18,6 +18,11 @@ export class TaskListsGuard {
   constructor(private readonly store: Store) {}
 
   canLoad(route: Route): Observable<boolean> {
+    //
+    if (route.path == undefined) {
+      return of(false);
+    }
+
     const url = `/${route.path}`;
     // console.log('#### canLoad>', url);
 
