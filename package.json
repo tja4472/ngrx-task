@@ -54,7 +54,7 @@
     "@ngrx/store-devtools": "17.2.0",
     "core-js": "3.37.1",
     "date-fns": "3.6.0",
-    "firebase": "10.12.1",
+    "firebase": "10.12.2",
     "node-fetch": "2.7.0",
     "rxfire": "6.0.5",
     "rxjs": "7.8.1",
