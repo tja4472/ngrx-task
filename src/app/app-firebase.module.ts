@@ -19,12 +19,7 @@ const environmentService = new EnvironmentService();
 // cypress requires experimentalAutoDetectLongPolling
 
 @NgModule({
-  imports: [
-    // AngularFireModule.initializeApp(environmentService.firebase.config),
-    // AngularFirestoreModule.enablePersistence(),
-    // AngularFireAuthModule,
-    // AngularFirestoreModule,
-
+  providers: [
     provideFirebaseApp(() => initializeApp(environmentService.firebase.config)),
     provideAuth(() => {
       const auth = getAuth();
