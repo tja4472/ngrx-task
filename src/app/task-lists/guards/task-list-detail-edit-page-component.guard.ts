@@ -44,7 +44,7 @@ export class TaskListDetailEditPageComponentGuard {
 
   private hasTaskListInStore(): Observable<boolean> {
     return this.store.select(TaskSelectors.selectTaskListFromRoute).pipe(
-      // eslint-disable-next-line @ngrx/avoid-mapping-selectors
+      // // eslint-disable-next-line @ngrx/avoid-mapping-selectors
       map((todo) => todo !== undefined),
       tap((x) => {
         if (!x) {

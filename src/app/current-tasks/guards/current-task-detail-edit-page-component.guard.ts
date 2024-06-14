@@ -37,7 +37,7 @@ export class CurrentTaskDetailEditPageComponentGuard {
 
   private hasCurrentTask(): Observable<boolean> {
     return this.store.select(TaskSelectors.selectCurrentTaskFromRoute).pipe(
-      // eslint-disable-next-line @ngrx/avoid-mapping-selectors
+      // // eslint-disable-next-line @ngrx/avoid-mapping-selectors
       map((todo) => todo !== undefined),
       tap((x) => {
         if (x === false) {

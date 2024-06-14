@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Injectable } from '@angular/core';
 
-import { ComponentStore, tapResponse } from '@ngrx/component-store';
+import { ComponentStore } from '@ngrx/component-store';
+import { tapResponse } from '@ngrx/operators';
 
 import { EMPTY, from, Observable } from 'rxjs';
 import { catchError, concatMap, tap } from 'rxjs/operators';

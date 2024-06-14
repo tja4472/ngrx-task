@@ -164,7 +164,7 @@ export class AuthEffects implements OnInitEffects {
           this.authService
             .signIn(action.credentials.username, password)
             .catch((error) =>
-              // eslint-disable-next-line @ngrx/no-dispatch-in-effects
+              // // eslint-disable-next-line @ngrx/no-dispatch-in-effects
               this.store.dispatch(
                 AuthApiActions.signInFailure({
                   error: {
@@ -190,7 +190,7 @@ export class AuthEffects implements OnInitEffects {
           this.authService
             .signUp(action.credentials.username, password)
             .catch((error) =>
-              // eslint-disable-next-line @ngrx/no-dispatch-in-effects
+              // // eslint-disable-next-line @ngrx/no-dispatch-in-effects
               this.store.dispatch(
                 AuthApiActions.signUpFailure({
                   error: {
@@ -227,7 +227,7 @@ export class AuthEffects implements OnInitEffects {
         tap(() =>
           this.authService.signOut().then(() => {
             this.router.navigate(['/sign-in']);
-            // eslint-disable-next-line @ngrx/no-dispatch-in-effects
+            // // eslint-disable-next-line @ngrx/no-dispatch-in-effects
             this.store.dispatch(AuthActions.signOutComplete());
           })
         )
@@ -273,7 +273,10 @@ export class AuthEffects implements OnInitEffects {
                 isAutoSignIn
               );
               if (returnUrl) {
-                this.router.navigateByUrl(returnUrl);
+                // Argument of type 'string | string[]' is not assignable to parameter of type 'string | UrlTree'.
+                // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+                const x = returnUrl as string;
+                this.router.navigateByUrl(x);
               } else {
                 if (!isAutoSignIn) {
                   // Manual sign in with no return url.
