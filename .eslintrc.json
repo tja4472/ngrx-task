@@ -22,7 +22,7 @@
         "eslint:recommended",
         "plugin:@angular-eslint/recommended",
         "plugin:@angular-eslint/template/process-inline-templates",
-        // "plugin:@ngrx/all-requiring-type-checking",
+        "plugin:@ngrx/all",
         "plugin:@typescript-eslint/strict-type-checked",
         "plugin:@typescript-eslint/stylistic-type-checked",
         "prettier"

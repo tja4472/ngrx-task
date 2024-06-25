@@ -164,7 +164,7 @@ export class AuthEffects implements OnInitEffects {
           this.authService
             .signIn(action.credentials.username, password)
             .catch((error) =>
-              // // eslint-disable-next-line @ngrx/no-dispatch-in-effects
+              // eslint-disable-next-line @ngrx/no-dispatch-in-effects
               this.store.dispatch(
                 AuthApiActions.signInFailure({
                   error: {
@@ -190,7 +190,7 @@ export class AuthEffects implements OnInitEffects {
           this.authService
             .signUp(action.credentials.username, password)
             .catch((error) =>
-              // // eslint-disable-next-line @ngrx/no-dispatch-in-effects
+              // eslint-disable-next-line @ngrx/no-dispatch-in-effects
               this.store.dispatch(
                 AuthApiActions.signUpFailure({
                   error: {
@@ -227,7 +227,7 @@ export class AuthEffects implements OnInitEffects {
         tap(() =>
           this.authService.signOut().then(() => {
             this.router.navigate(['/sign-in']);
-            // // eslint-disable-next-line @ngrx/no-dispatch-in-effects
+            // eslint-disable-next-line @ngrx/no-dispatch-in-effects
             this.store.dispatch(AuthActions.signOutComplete());
           })
         )
