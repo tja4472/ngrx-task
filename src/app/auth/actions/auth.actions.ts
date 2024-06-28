@@ -6,6 +6,8 @@ export const signOut = createAction(`[${title}]  Sign Out`);
 
 export const signOutComplete = createAction(`[${title}]  Sign Out - Complete`);
 
+export const signOutFailure = createAction(`[${title}]  Sign Out - Failure`);
+
 export const signOutConfirmation = createAction(
   `[${title}]  Sign Out Confirmation`
 );

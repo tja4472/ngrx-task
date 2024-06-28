@@ -12,10 +12,14 @@ export const signInFailure = createAction(
   props<{ error: { code: string; message: string } }>()
 );
 
+export const signInSuccess = createAction(`[${title}] Sign In - Success`);
+
 export const signUpFailure = createAction(
   `[${title}] Sign Up - Failure`,
   props<{ error: any }>()
 );
+
+export const signUpSuccess = createAction(`[${title}] Sign Up - Success`);
 
 export const signInHaveUser = createAction(
   `[${title}] Sign In - Have User`,

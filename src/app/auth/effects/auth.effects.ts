@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 import { Actions, createEffect, ofType, OnInitEffects } from '@ngrx/effects';
 import { Action, Store } from '@ngrx/store';
 
-import { of } from 'rxjs';
+import { EMPTY, from, of } from 'rxjs';
 import {
   concatMap,
   exhaustMap,
@@ -39,6 +39,7 @@ import { selectIsAutoSignIn, selectUserId } from '../selectors/auth.selectors';
 import { AuthService } from '../services/auth.service';
 
 import { AppUser } from '../models/app-user.model';
+import { mapResponse, tapResponse } from '@ngrx/operators';
 
 /* =======================================
 Improve typings of createEffect, help debugging
@@ -155,6 +156,31 @@ export class AuthEffects implements OnInitEffects {
     { dispatch: false }
   );
 
+  signIn$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(SignInPageActions.signIn),
+      exhaustMap((action) =>
+        from(
+          this.authService.signIn(
+            action.credentials.username,
+            action.credentials.password
+          )
+        ).pipe(
+          mapResponse({
+            next: () => AuthApiActions.signInSuccess(),
+            error: (error: { code: string; message: string }) =>
+              AuthApiActions.signInFailure({
+                error: {
+                  code: error.code,
+                  message: error.message,
+                },
+              }),
+          })
+        )
+      )
+    );
+  });
+  /*
   signIn$ = createEffect(
     () => {
       return this.actions$.pipe(
@@ -179,7 +205,9 @@ export class AuthEffects implements OnInitEffects {
     },
     { dispatch: false }
   );
+*/
 
+  /*
   signUp$ = createEffect(
     () => {
       return this.actions$.pipe(
@@ -205,6 +233,32 @@ export class AuthEffects implements OnInitEffects {
     },
     { dispatch: false }
   );
+*/
+
+  signUp$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(SignUpPageActions.signUp),
+      exhaustMap((action) =>
+        from(
+          this.authService.signUp(
+            action.credentials.username,
+            action.credentials.password
+          )
+        ).pipe(
+          mapResponse({
+            next: () => AuthApiActions.signUpSuccess(),
+            error: (error: { code: string; message: string }) =>
+              AuthApiActions.signUpFailure({
+                error: {
+                  code: error.code,
+                  message: error.message,
+                },
+              }),
+          })
+        )
+      )
+    );
+  });
 
   navigateToSignIn$ = createEffect(
     () => {
@@ -220,6 +274,7 @@ export class AuthEffects implements OnInitEffects {
     { dispatch: false }
   );
 
+  /*
   signOut$ = createEffect(
     () => {
       return this.actions$.pipe(
@@ -235,6 +290,24 @@ export class AuthEffects implements OnInitEffects {
     },
     { dispatch: false }
   );
+*/
+
+  xxsignOut$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(AuthActions.signOut),
+      exhaustMap(() =>
+        from(this.authService.signOut()).pipe(
+          mapResponse({
+            next: () => {
+              this.router.navigate(['/sign-in']);
+              return AuthActions.signOutComplete();
+            },
+            error: () => AuthActions.signOutFailure(),
+          })
+        )
+      )
+    );
+  });
 
   signOutConfirmation$ = createEffect(() => {
     return this.actions$.pipe(
