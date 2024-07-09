@@ -6,7 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { MaterialModule } from '@app/material/material.module';
 
-import { MountConfig } from 'cypress/angular';
+import { MountConfig } from 'cypress/angular-signals';
 
 import { CurrentTaskDetailEditComponent } from '@app/current-tasks/components/current-task-detail-edit/current-task-detail-edit.component';
 import { CurrentTaskDetailEditPageComponent } from '@app/current-tasks/containers/current-task-detail-edit-page/current-task-detail-edit-page.component';

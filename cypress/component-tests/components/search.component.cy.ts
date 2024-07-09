@@ -5,7 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { MaterialModule } from '@app/material/material.module';
 
-import { createOutputSpy, MountConfig } from 'cypress/angular';
+import { createOutputSpy, MountConfig } from 'cypress/angular-signals';
 import Sinon from 'cypress/types/sinon';
 
 import { DataTestIds, SpyAliases, SpyIds } from '../types';
