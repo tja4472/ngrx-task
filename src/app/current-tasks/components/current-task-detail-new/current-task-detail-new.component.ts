@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, input } from '@angular/core';
+import { Component, OnInit, input, output } from '@angular/core';
 
 import { CurrentTask } from '@app/root-store/tasks-store/models/current-task.model';
 
@@ -13,8 +13,8 @@ import { CurrentTaskDetailNewPresenter } from './current-task-detail-new.present
 export class CurrentTaskDetailNewComponent implements OnInit {
   todo = input.required<CurrentTask>();
 
-  @Output() cancel = new EventEmitter<CurrentTask>();
-  @Output() checkout = new EventEmitter<CurrentTask>();
+  cancel = output<CurrentTask>();
+  checkout = output<CurrentTask>();
 
   get checkoutForm() {
     return this.presenter.form;

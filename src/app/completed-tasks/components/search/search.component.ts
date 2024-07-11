@@ -1,14 +1,7 @@
 /* eslint-disable @typescript-eslint/no-confusing-void-expression */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/consistent-generic-constructors */
-import {
-  Component,
-  EventEmitter,
-  OnDestroy,
-  OnInit,
-  Output,
-  input,
-} from '@angular/core';
+import { Component, OnDestroy, OnInit, input, output } from '@angular/core';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -23,7 +16,7 @@ import { SearchPresenter } from './search.presenter';
 })
 export class SearchComponent implements OnDestroy, OnInit {
   searchText = input.required<string>();
-  @Output() search: EventEmitter<string> = new EventEmitter();
+  search = output<string>();
 
   private destroy: Subject<void> = new Subject();
 

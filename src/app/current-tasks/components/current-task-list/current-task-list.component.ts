@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/no-useless-constructor */
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Component, EventEmitter, Output, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import {
   MatCheckboxDefaultOptions,
   MAT_CHECKBOX_DEFAULT_OPTIONS,
@@ -25,9 +25,9 @@ import { CurrentTask } from '@app/root-store/tasks-store/models/current-task.mod
 export class CurrentTaskListComponent {
   currentTasks = input.required<CurrentTask[]>();
 
-  @Output() reorderItems = new EventEmitter<string[]>();
-  @Output() newCurrentTask = new EventEmitter<void>();
-  @Output() toggleCompleteItem = new EventEmitter<CurrentTask>();
+  reorderItems = output<string[]>();
+  newCurrentTask = output();
+  toggleCompleteItem = output<CurrentTask>();
 
   constructor() {}
 

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/no-useless-constructor */
-import { Component, EventEmitter, Output, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 
 import { pathPrefix, routeNames } from '@app/app-route-names';
 import { TaskListListItem } from '@app/models/task-list-list-item.model';
@@ -13,7 +13,7 @@ import { TaskListListItem } from '@app/models/task-list-list-item.model';
 export class TaskListListComponent {
   currentTasks = input<TaskListListItem[]>([]);
 
-  @Output() newCurrentTask = new EventEmitter<void>();
+  newCurrentTask = output();
 
   constructor() {}
 

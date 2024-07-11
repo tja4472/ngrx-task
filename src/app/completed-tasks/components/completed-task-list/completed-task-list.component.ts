@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/no-useless-constructor */
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input, output } from '@angular/core';
 
 import { pathPrefix, routeNames } from '@app/app-route-names';
 import { CompletedTask } from '@app/root-store/tasks-store/models/completed-task.model';
@@ -31,7 +31,7 @@ export class CompletedTaskListComponent {
     return this.inputCurrentTasks;
   }
 
-  @Output() toggleCompleteItem = new EventEmitter<CompletedTask>();
+  toggleCompleteItem = output<CompletedTask>();
 
   viewGroupByDateArray: GroupTasksByDate[] = [];
 

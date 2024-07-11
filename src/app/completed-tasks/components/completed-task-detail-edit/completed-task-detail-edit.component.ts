@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, input } from '@angular/core';
+import { Component, OnInit, input, output } from '@angular/core';
 
 import { CompletedTask } from '@app/root-store/tasks-store/models/completed-task.model';
 
@@ -12,9 +12,9 @@ import { CompletedTaskDetailEditPresenter } from './completed-task-detail-edit.p
 })
 export class CompletedTaskDetailEditComponent implements OnInit {
   completedTask = input.required<CompletedTask>();
-  @Output() cancel = new EventEmitter<CompletedTask>();
-  @Output() remove = new EventEmitter<CompletedTask>();
-  @Output() checkout = new EventEmitter<CompletedTask>();
+  cancel = output<CompletedTask>();
+  remove = output<CompletedTask>();
+  checkout = output<CompletedTask>();
 
   get checkoutForm() {
     return this.presenter.form;

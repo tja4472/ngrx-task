@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, input } from '@angular/core';
+import { Component, OnInit, input, output } from '@angular/core';
 
 import { TaskListListItem } from '@app/models/task-list-list-item.model';
 
@@ -12,9 +12,9 @@ import { TaskListDetailEditPresenter } from './task-list-detail-edit.presenter';
 })
 export class TaskListDetailEditComponent implements OnInit {
   completedTask = input.required<TaskListListItem>();
-  @Output() cancel = new EventEmitter<TaskListListItem>();
-  @Output() remove = new EventEmitter<TaskListListItem>();
-  @Output() checkout = new EventEmitter<TaskListListItem>();
+  cancel = output<TaskListListItem>();
+  remove = output<TaskListListItem>();
+  checkout = output<TaskListListItem>();
 
   get checkoutForm() {
     return this.presenter.form;

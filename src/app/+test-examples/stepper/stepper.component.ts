@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, effect, input } from '@angular/core';
+import { Component, effect, input, output } from '@angular/core';
 
 @Component({
   selector: 'app-stepper',
@@ -13,8 +13,8 @@ import { Component, EventEmitter, Output, effect, input } from '@angular/core';
 })
 export class StepperComponent {
   initalCount = input(0);
-  // eslint-disable-next-line @angular-eslint/no-output-native
-  @Output() change = new EventEmitter();
+
+  change = output<number>();
 
   count = 0;
 
