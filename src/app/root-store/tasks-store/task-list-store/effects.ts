@@ -65,9 +65,6 @@ export class TaskListEffects {
       map(([_, user]) => user),
       filter((user) => user !== null),
       switchMap((user) => {
-        if (user == null) {
-          return of([]);
-        }
         return this.dataService
           .getData(user.id)
           .pipe(
