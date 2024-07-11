@@ -2,7 +2,7 @@
   <div
     cdkDrag
     cdkDragLockAxis="y"
-    *ngFor="let task of currentTasks; trackBy: viewTrackBy"
+    *ngFor="let task of currentTasks(); trackBy: viewTrackBy"
   >
     <div class="list-item" data-test="list-item">
       <mat-checkbox

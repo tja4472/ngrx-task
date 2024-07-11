@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, input } from '@angular/core';
 
 import { TaskListListItem } from '@app/models/task-list-list-item.model';
 
@@ -11,7 +11,7 @@ import { TaskListDetailEditPresenter } from './task-list-detail-edit.presenter';
   viewProviders: [TaskListDetailEditPresenter],
 })
 export class TaskListDetailEditComponent implements OnInit {
-  @Input() completedTask!: TaskListListItem;
+  completedTask = input.required<TaskListListItem>();
   @Output() cancel = new EventEmitter<TaskListListItem>();
   @Output() remove = new EventEmitter<TaskListListItem>();
   @Output() checkout = new EventEmitter<TaskListListItem>();
@@ -27,21 +27,21 @@ export class TaskListDetailEditComponent implements OnInit {
   constructor(private presenter: TaskListDetailEditPresenter) {}
 
   ngOnInit() {
-    console.log('ngOnInit>', this.completedTask);
-    this.presenter.init(this.completedTask);
+    console.log('ngOnInit>', this.completedTask());
+    this.presenter.init(this.completedTask());
   }
 
   cancelClick() {
-    this.cancel.emit(this.completedTask);
+    this.cancel.emit(this.completedTask());
   }
 
   removeClick() {
-    console.log('removeClick>', this.completedTask);
-    this.remove.emit(this.completedTask);
+    console.log('removeClick>', this.completedTask());
+    this.remove.emit(this.completedTask());
   }
 
   onSubmit() {
-    console.log('onSubmit>', this.completedTask);
+    console.log('onSubmit>', this.completedTask());
     const todoData = this.presenter.checkout();
     this.checkout.emit(todoData);
   }

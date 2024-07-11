@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/no-useless-constructor */
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Output, input } from '@angular/core';
 import {
   MatCheckboxDefaultOptions,
   MAT_CHECKBOX_DEFAULT_OPTIONS,
@@ -23,8 +23,7 @@ import { CurrentTask } from '@app/root-store/tasks-store/models/current-task.mod
   ],
 })
 export class CurrentTaskListComponent {
-  @Input()
-  currentTasks!: CurrentTask[];
+  currentTasks = input.required<CurrentTask[]>();
 
   @Output() reorderItems = new EventEmitter<string[]>();
   @Output() newCurrentTask = new EventEmitter<void>();
@@ -47,7 +46,7 @@ export class CurrentTaskListComponent {
     console.log('previousIndex', event.previousIndex);
 
     // const aaa = this.currentTasks.map((book) => book);
-    const aaa = [...this.currentTasks];
+    const aaa = [...this.currentTasks()];
     moveItemInArray(aaa, event.previousIndex, event.currentIndex);
 
     const bbb = aaa.map((book) => book.id);

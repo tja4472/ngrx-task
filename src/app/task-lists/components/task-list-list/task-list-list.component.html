@@ -1,5 +1,5 @@
 <div class="list">
-  <div *ngFor="let task of currentTasks">
+  <div *ngFor="let task of currentTasks()">
     <div class="list-item" data-test="list-item">
       <a [routerLink]="[editPath(), task.id]">
         <div class="middle">

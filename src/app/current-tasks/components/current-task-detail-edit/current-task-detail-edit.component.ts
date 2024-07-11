@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, input } from '@angular/core';
 
 import { CurrentTask } from '@app/root-store/tasks-store/models/current-task.model';
 
@@ -11,7 +11,7 @@ import { CurrentTaskDetailEditPresenter } from './current-task-detail-edit.prese
   viewProviders: [CurrentTaskDetailEditPresenter],
 })
 export class CurrentTaskDetailEditComponent implements OnInit {
-  @Input() todo!: CurrentTask;
+  todo = input.required<CurrentTask>();
   @Output() cancel = new EventEmitter<CurrentTask>();
   @Output() remove = new EventEmitter<CurrentTask>();
   @Output() checkout = new EventEmitter<CurrentTask>();
@@ -23,15 +23,15 @@ export class CurrentTaskDetailEditComponent implements OnInit {
   constructor(private presenter: CurrentTaskDetailEditPresenter) {}
 
   ngOnInit() {
-    this.presenter.init(this.todo);
+    this.presenter.init(this.todo());
   }
 
   cancelClick() {
-    this.cancel.emit(this.todo);
+    this.cancel.emit(this.todo());
   }
 
   removeClick() {
-    this.remove.emit(this.todo);
+    this.remove.emit(this.todo());
   }
 
   onSubmit() {

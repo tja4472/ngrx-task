@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, input } from '@angular/core';
 
 import { CompletedTask } from '@app/root-store/tasks-store/models/completed-task.model';
 
@@ -11,7 +11,7 @@ import { CompletedTaskDetailEditPresenter } from './completed-task-detail-edit.p
   viewProviders: [CompletedTaskDetailEditPresenter],
 })
 export class CompletedTaskDetailEditComponent implements OnInit {
-  @Input() completedTask!: CompletedTask;
+  completedTask = input.required<CompletedTask>();
   @Output() cancel = new EventEmitter<CompletedTask>();
   @Output() remove = new EventEmitter<CompletedTask>();
   @Output() checkout = new EventEmitter<CompletedTask>();
@@ -27,15 +27,15 @@ export class CompletedTaskDetailEditComponent implements OnInit {
   constructor(private presenter: CompletedTaskDetailEditPresenter) {}
 
   ngOnInit() {
-    this.presenter.init(this.completedTask);
+    this.presenter.init(this.completedTask());
   }
 
   cancelClick() {
-    this.cancel.emit(this.completedTask);
+    this.cancel.emit(this.completedTask());
   }
 
   removeClick() {
-    this.remove.emit(this.completedTask);
+    this.remove.emit(this.completedTask());
   }
 
   onSubmit() {

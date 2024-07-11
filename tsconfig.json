@@ -1,4 +1,3 @@
-/* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
   "compileOnSave": false,
   "compilerOptions": {
@@ -20,25 +19,16 @@
     "esModuleInterop": true,
     "useDefineForClassFields": false,
     "lib": ["ES2022", "dom"],
-    // ====
     "paths": {
       "@app/*": ["src/app/*"]
     },
-    // ====
-    // "allowSyntheticDefaultImports": true,
-    // "noImplicitThis": true,
-    // "alwaysStrict": true,
-    // "strictBindCallApply": true,
     "strictNullChecks": true,
-    // "strictFunctionTypes": true,
     "noImplicitAny": true,
     "skipLibCheck": true
   },
-  // Required for jest to work with cypress
   "include": ["src/**/*.ts"],
   "files": ["./setup-jest.ts"],
   "exclude": ["node_modules", "cyprus", "cypress.config.ts"],
-  // ^^^^
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,

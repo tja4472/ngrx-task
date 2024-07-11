@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Output, effect, input } from '@angular/core';
 
 @Component({
   selector: 'app-stepper',
+
   template: `
     <div>
       <button aria-label="decrement" (click)="decrement()">-</button>
@@ -11,9 +12,17 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   `,
 })
 export class StepperComponent {
-  @Input() count = 0;
+  initalCount = input(0);
   // eslint-disable-next-line @angular-eslint/no-output-native
   @Output() change = new EventEmitter();
+
+  count = 0;
+
+  constructor() {
+    effect(() => {
+      this.count = this.initalCount();
+    });
+  }
 
   increment(): void {
     this.count++;

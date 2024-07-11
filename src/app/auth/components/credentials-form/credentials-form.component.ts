@@ -6,7 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, input } from '@angular/core';
 
 import { Credentials } from '@app/auth/models/credentials.model';
 
@@ -37,8 +37,8 @@ export class CredentialsFormComponent {
     }
   }
 
-  @Input()
-  errorMessage: string = '';
+  // ====
+  errorMessage = input<string>('');
 
   @Output()
   readonly SignUpClicked = new EventEmitter();

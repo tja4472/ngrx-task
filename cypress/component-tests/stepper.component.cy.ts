@@ -26,7 +26,7 @@ describe('StepperComponent', () => {
 
   it('supports an "Input()" count that sets the value', () => {
     // Arrange
-    cy.mount('<app-stepper [count]="100"></app-stepper>', {
+    cy.mount('<app-stepper [initalCount]="100"></app-stepper>', {
       declarations: [StepperComponent],
     });
     // Assert
@@ -56,7 +56,7 @@ describe('StepperComponent', () => {
   });
 
   it('when clicking increment and decrement buttons, the counter is changed as expected', () => {
-    cy.mount('<app-stepper [count]="100"></app-stepper>', {
+    cy.mount('<app-stepper [initalCount]="100"></app-stepper>', {
       declarations: [StepperComponent],
     });
     cy.get(counterSelector).should('have.text', '100');
@@ -85,7 +85,7 @@ describe('StepperComponent', () => {
 
   it('1-clicking + fires a change event with the incremented value', () => {
     cy.mount(
-      '<app-stepper count="100" (change)="change.emit($event)"></app-stepper>',
+      '<app-stepper initalCount="100" (change)="change.emit($event)"></app-stepper>',
       {
         componentProperties: { change: new EventEmitter() },
         declarations: [StepperComponent],

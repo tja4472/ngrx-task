@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, input } from '@angular/core';
 
 import { TaskListListItem } from '@app/models/task-list-list-item.model';
 
@@ -11,7 +11,7 @@ import { TaskListDetailNewPresenter } from './task-list-detail-new.presenter';
   viewProviders: [TaskListDetailNewPresenter],
 })
 export class TaskListDetailNewComponent implements OnInit {
-  @Input() completedTask!: TaskListListItem;
+  completedTask = input.required<TaskListListItem>();
   @Output() cancel = new EventEmitter<TaskListListItem>();
   @Output() checkout = new EventEmitter<TaskListListItem>();
 
@@ -22,11 +22,11 @@ export class TaskListDetailNewComponent implements OnInit {
   constructor(private presenter: TaskListDetailNewPresenter) {}
 
   ngOnInit() {
-    this.presenter.init(this.completedTask);
+    this.presenter.init(this.completedTask());
   }
 
   cancelClick() {
-    this.cancel.emit(this.completedTask);
+    this.cancel.emit(this.completedTask());
   }
 
   onSubmit() {

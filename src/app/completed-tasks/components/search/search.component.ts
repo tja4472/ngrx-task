@@ -4,10 +4,10 @@
 import {
   Component,
   EventEmitter,
-  Input,
   OnDestroy,
   OnInit,
   Output,
+  input,
 } from '@angular/core';
 
 import { Subject } from 'rxjs';
@@ -22,7 +22,7 @@ import { SearchPresenter } from './search.presenter';
   providers: [SearchPresenter],
 })
 export class SearchComponent implements OnDestroy, OnInit {
-  @Input() searchText!: string;
+  searchText = input.required<string>();
   @Output() search: EventEmitter<string> = new EventEmitter();
 
   private destroy: Subject<void> = new Subject();
@@ -40,7 +40,7 @@ export class SearchComponent implements OnDestroy, OnInit {
       )
       .subscribe((term) => this.search.emit(term));
     // this.viewSearchControl = new FormControl(this.searchText);
-    this.presenter.initialSearchTerm(this.searchText);
+    this.presenter.initialSearchTerm(this.searchText());
   }
 
   ngOnDestroy(): void {
