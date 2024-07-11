@@ -31,7 +31,8 @@
     // "strictBindCallApply": true,
     "strictNullChecks": true,
     // "strictFunctionTypes": true,
-    "noImplicitAny": true
+    "noImplicitAny": true,
+    "skipLibCheck": true
   },
   // Required for jest to work with cypress
   "include": ["src/**/*.ts"],
