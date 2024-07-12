@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/no-useless-constructor */
-import { Component, Input, output } from '@angular/core';
+import { Component, effect, input, output } from '@angular/core';
 
 import { pathPrefix, routeNames } from '@app/app-route-names';
 import { CompletedTask } from '@app/root-store/tasks-store/models/completed-task.model';
@@ -20,6 +20,8 @@ interface GroupTasksByDate {
 export class CompletedTaskListComponent {
   private inputCurrentTasks!: CompletedTask[];
 
+  currentTasks = input.required<CompletedTask[]>();
+  /*  
   @Input()
   set currentTasks(tasks: CompletedTask[]) {
     this.inputCurrentTasks = tasks;
@@ -27,15 +29,24 @@ export class CompletedTaskListComponent {
     this.viewGroupByDateArray = this.convertToGroupByDateArray(tasks);
   }
 
+
   get currentTasks(): CompletedTask[] {
     return this.inputCurrentTasks;
   }
+*/
 
   toggleCompleteItem = output<CompletedTask>();
 
   viewGroupByDateArray: GroupTasksByDate[] = [];
 
-  constructor() {}
+  constructor() {
+    effect(() => {
+      this.inputCurrentTasks = this.currentTasks();
+      this.viewGroupByDateArray = this.convertToGroupByDateArray(
+        this.inputCurrentTasks
+      );
+    });
+  }
 
   private convertToGroupByDateArray(
     tasks: CompletedTask[]

@@ -18,9 +18,9 @@ import { CurrentTask } from '@app/root-store/tasks-store/models/current-task.mod
 // https://docs.cypress.io/guides/component-testing/angular/overview
 
 /* CurrentTaskDetailEditComponent
-  @Input() todo!: CurrentTask;
-  @Output() cancel = new EventEmitter<CurrentTask>();
-  @Output() checkout = new EventEmitter<CurrentTask>();
+  todo = input.required<CurrentTask>();
+  cancel = output<CurrentTask>();
+  checkout = output<CurrentTask>();
 */
 
 type EventEmitters = 'cancel' | 'checkout';

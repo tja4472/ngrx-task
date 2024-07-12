@@ -54,5 +54,6 @@ src/app/firebase-config.ts
 **/serviceAccount*.json
 
 # Cypress
+/cypress/downloads
 /cypress/screenshots
 /cypress/videos

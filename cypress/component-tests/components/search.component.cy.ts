@@ -16,8 +16,8 @@ import { SearchComponent } from '@app/completed-tasks/components/search/search.c
 // https://docs.cypress.io/guides/component-testing/angular/overview
 
 /* SearchComponent
-  @Input() searchText!: string;
-  @Output() search: EventEmitter<string> = new EventEmitter();
+  searchText = input.required<string>();
+  search = output<string>();
 */
 
 type EventEmitters = 'search';

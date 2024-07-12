@@ -17,10 +17,9 @@ import { TaskListListItem } from '@app/models/task-list-list-item.model';
 // https://docs.cypress.io/guides/component-testing/angular/overview
 
 /* TaskListDetailNewComponent
-  @Input() completedTask!: TaskListListItem;
-  @Output() cancel = new EventEmitter<TaskListListItem>();
-  @Output() remove = new EventEmitter<TaskListListItem>();
-  @Output() checkout = new EventEmitter<TaskListListItem>();
+  completedTask = input.required<TaskListListItem>();
+  cancel = output<TaskListListItem>();
+  checkout = output<TaskListListItem>();
 */
 
 type EventEmitters = 'cancel' | 'checkout';
