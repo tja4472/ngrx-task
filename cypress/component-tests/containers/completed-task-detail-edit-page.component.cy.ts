@@ -102,6 +102,7 @@ describe('CompletedTaskDetailEditPageComponent - main', () => {
     cy.getBySel('description-textarea').should('be.visible').type('bb');
     cy.getBySel('cancel-button').click();
     cy.getBySel('cancel-button').then(() => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
       expect(store.dispatch).to.have.been.called;
 
       const action = CompletedTaskDetailEditPageActions.cancelled({
@@ -118,6 +119,7 @@ describe('CompletedTaskDetailEditPageComponent - main', () => {
     cy.getBySel('description-textarea').should('be.visible').type('bb');
     cy.getBySel('remove-button').click();
     cy.getBySel('remove-button').then(() => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
       expect(store.dispatch).to.have.been.called;
 
       const action = CompletedTaskDetailEditPageActions.removed({
@@ -140,6 +142,7 @@ describe('CompletedTaskDetailEditPageComponent - main', () => {
         name: 'Task1 nameaa',
       };
 
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
       expect(store.dispatch).to.have.been.called;
 
       const action = CompletedTaskDetailEditPageActions.saved({
