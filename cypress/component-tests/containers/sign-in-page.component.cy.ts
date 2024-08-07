@@ -112,6 +112,7 @@ describe('CredentialsFormComponent', () => {
       .type(expectedSubmitedResponse.password);
     cy.getBySel('sign-in-button').click();
     cy.getBySel('sign-in-button').then(() => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
       expect(store.dispatch).to.have.been.called;
 
       const signInAction = SignInPageActions.signIn({

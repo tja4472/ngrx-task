@@ -98,6 +98,7 @@ describe('CurrentTaskDetailEditComponent', () => {
         .type('bb');
       cy.getBySel(dataTestIds.cancelButton).click();
       cy.getBySel(dataTestIds.cancelButton).then(() => {
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
         expect(store.dispatch).to.have.been.called;
 
         const action = CurrentTaskDetailEditPageActions.cancelled({
@@ -119,6 +120,7 @@ describe('CurrentTaskDetailEditComponent', () => {
         .type('bb');
       cy.getBySel(dataTestIds.removeButton).click();
       cy.getBySel(dataTestIds.removeButton).then(() => {
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
         expect(store.dispatch).to.have.been.called;
 
         const action = CurrentTaskDetailEditPageActions.removed({
@@ -147,6 +149,7 @@ describe('CurrentTaskDetailEditComponent', () => {
           name: 'Task1 nameaa',
         };
 
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
         expect(store.dispatch).to.have.been.called;
 
         const action = CurrentTaskDetailEditPageActions.saved({

@@ -3,6 +3,7 @@ import { createReducer } from '@ngrx/store';
 
 export const homeFeatureKey = 'home';
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface State {}
 
 export const initialState: State = {};
