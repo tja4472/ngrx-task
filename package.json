@@ -87,7 +87,7 @@
     "angular-cli-ghpages": "2.0.1",
     "cross-env": "7.0.3",
     "cypress": "13.14.1",
-    "eslint": "8.57.0",
+    "eslint": "9.9.1",
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-chai-friendly": "1.0.1",
     "eslint-plugin-cypress": "3.5.0",
