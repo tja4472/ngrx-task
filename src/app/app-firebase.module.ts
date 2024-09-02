@@ -6,10 +6,9 @@ import { EnvironmentService } from '@app/environment.service';
 
 import {
   connectFirestoreEmulator,
-  getFirestore,
   provideFirestore,
   initializeFirestore,
-  enableIndexedDbPersistence,
+  persistentLocalCache,
 } from '@angular/fire/firestore';
 import { getApp, initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { connectAuthEmulator, getAuth, provideAuth } from '@angular/fire/auth';
@@ -42,8 +41,10 @@ const environmentService = new EnvironmentService();
         });
         connectFirestoreEmulator(firestore, 'localhost', 8080);
       } else {
-        firestore = getFirestore();
-        enableIndexedDbPersistence(firestore);
+        const app = getApp();
+        firestore = initializeFirestore(app, {
+          localCache: persistentLocalCache(),
+        });
       }
 
       return firestore;
