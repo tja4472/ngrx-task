@@ -1,4 +1,6 @@
 {
+  "eslint.debug": false,
+  "eslint.useFlatConfig": false,
   "workbench.colorCustomizations": {
     "activityBar.background": "#9a91a8",
     "activityBar.activeBackground": "#9a91a8",
