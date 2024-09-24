@@ -8,7 +8,6 @@
  */
 import { TestBed } from '@angular/core/testing';
 import { Route } from '@angular/router';
-import { RouterTestingModule } from '@angular/router/testing';
 
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 
@@ -53,7 +52,6 @@ describe('TaskListsGuard', () => {
     });
 
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
       providers: [TaskListsGuard, provideMockStore()],
     });
 
