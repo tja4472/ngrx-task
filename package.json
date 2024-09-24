@@ -26,6 +26,11 @@
     "build": "ng build",
     "build:prod": "ng build --configuration production",
     "deploy": "ng deploy --base-href /ngrx-task/",
+    "--- firebase deploy ---": "",
+    "deploy:prod": "npm run build:prod && firebase deploy --only hosting:main",    
+    "deploy:dev": "ng build && firebase deploy --only hosting:other",    
+    "deploy:preview:main": "npm run build:prod && firebase hosting:channel:deploy preview --only main", 
+        
     "test": "jest",
     "lint": "ng lint",
     "lint:fix": "ng lint --fix",

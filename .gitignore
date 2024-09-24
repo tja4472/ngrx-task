@@ -49,7 +49,8 @@ Thumbs.db
 
 src/app/firebase-config.ts
 
-.firebaserc
+# Firebase
+.firebase
 *.log
 **/serviceAccount*.json
 
