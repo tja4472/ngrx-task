@@ -1,5 +1,13 @@
 /* eslint-disable @typescript-eslint/no-extraneous-class */
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {
+  MatCard,
+  MatCardTitle,
+  MatCardContent,
+  MatCardActions,
+} from '@angular/material/card';
+import { MatButton } from '@angular/material/button';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-not-found-page',
@@ -23,6 +31,15 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
         text-align: center;
       }
     `,
+  ],
+  standalone: true,
+  imports: [
+    MatCard,
+    MatCardTitle,
+    MatCardContent,
+    MatCardActions,
+    MatButton,
+    RouterLink,
   ],
 })
 export class NotFoundPageComponent {}

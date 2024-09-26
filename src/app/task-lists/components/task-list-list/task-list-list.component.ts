@@ -4,11 +4,17 @@ import { Component, input, output } from '@angular/core';
 
 import { pathPrefix, routeNames } from '@app/app-route-names';
 import { TaskListListItem } from '@app/models/task-list-list-item.model';
+import { NgFor } from '@angular/common';
+import { RouterLink } from '@angular/router';
+import { MatFabButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-task-list-list',
   templateUrl: './task-list-list.component.html',
   styleUrls: ['./task-list-list.component.css'],
+  standalone: true,
+  imports: [NgFor, RouterLink, MatFabButton, MatIcon],
 })
 export class TaskListListComponent {
   currentTasks = input<TaskListListItem[]>([]);

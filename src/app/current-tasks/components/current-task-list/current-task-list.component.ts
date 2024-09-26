@@ -1,14 +1,25 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/no-useless-constructor */
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import {
+  CdkDragDrop,
+  moveItemInArray,
+  CdkDropList,
+  CdkDrag,
+  CdkDragHandle,
+} from '@angular/cdk/drag-drop';
 import { Component, input, output } from '@angular/core';
 import {
   MatCheckboxDefaultOptions,
   MAT_CHECKBOX_DEFAULT_OPTIONS,
+  MatCheckbox,
 } from '@angular/material/checkbox';
 
 import { pathPrefix, routeNames } from '@app/app-route-names';
 import { CurrentTask } from '@app/root-store/tasks-store/models/current-task.model';
+import { NgFor, NgClass } from '@angular/common';
+import { RouterLink } from '@angular/router';
+import { MatIcon } from '@angular/material/icon';
+import { MatFabButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-current-task-list',
@@ -20,6 +31,18 @@ import { CurrentTask } from '@app/root-store/tasks-store/models/current-task.mod
       // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
       useValue: { clickAction: 'noop' } as MatCheckboxDefaultOptions,
     },
+  ],
+  standalone: true,
+  imports: [
+    CdkDropList,
+    NgFor,
+    CdkDrag,
+    MatCheckbox,
+    RouterLink,
+    NgClass,
+    CdkDragHandle,
+    MatIcon,
+    MatFabButton,
   ],
 })
 export class CurrentTaskListComponent {

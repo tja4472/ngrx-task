@@ -8,12 +8,16 @@ import { SignInPageActions } from '@app/auth/actions/sign-in-page.actions';
 
 import { Credentials } from '@app/auth/models/credentials.model';
 import * as SignInPageSelectors from '@app/auth//selectors/sign-in-page.selectors';
+import { CredentialsFormComponent } from '../../components/credentials-form/credentials-form.component';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-sign-in-page',
   templateUrl: './sign-in-page.component.html',
   styleUrls: ['./sign-in-page.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [CredentialsFormComponent, AsyncPipe],
 })
 export class SignInPageComponent implements OnInit {
   error$: Observable<string>;

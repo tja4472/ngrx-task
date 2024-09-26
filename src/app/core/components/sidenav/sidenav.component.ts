@@ -6,8 +6,17 @@
 
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, ViewChild } from '@angular/core';
-import { MatSidenav } from '@angular/material/sidenav';
-import { NavigationEnd, Router } from '@angular/router';
+import {
+  MatSidenav,
+  MatSidenavContainer,
+  MatSidenavContent,
+} from '@angular/material/sidenav';
+import {
+  NavigationEnd,
+  Router,
+  RouterLink,
+  RouterOutlet,
+} from '@angular/router';
 
 import { Store } from '@ngrx/store';
 
@@ -21,6 +30,13 @@ import * as TaskListSelectors from '@app/root-store/tasks-store/selectors/task-l
 import * as UserStoreSelectors from '@app/root-store/user-store/selectors';
 
 import * as SidenavActions from './actions/sidenav.actions';
+import { MatToolbar } from '@angular/material/toolbar';
+import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { MatSelect } from '@angular/material/select';
+import { MatOption } from '@angular/material/core';
+import { MatNavList, MatListItem } from '@angular/material/list';
+import { MatIconButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
 
 interface ViewNavigationItem {
   label: string;
@@ -32,6 +48,24 @@ interface ViewNavigationItem {
   selector: 'app-sidenav',
   templateUrl: './sidenav.component.html',
   styleUrls: ['./sidenav.component.css'],
+  standalone: true,
+  imports: [
+    MatSidenavContainer,
+    MatSidenav,
+    MatToolbar,
+    NgIf,
+    MatSelect,
+    NgFor,
+    MatOption,
+    MatNavList,
+    MatListItem,
+    RouterLink,
+    MatSidenavContent,
+    MatIconButton,
+    MatIcon,
+    RouterOutlet,
+    AsyncPipe,
+  ],
 })
 export class SidenavComponent {
   @ViewChild('drawer', { static: true }) drawer!: MatSidenav;

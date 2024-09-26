@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { MaterialModule } from '@app/material/material.module';
-
 import { CurrentTaskDetailEditComponent } from './components/current-task-detail-edit/current-task-detail-edit.component';
 import { CurrentTaskDetailNewComponent } from './components/current-task-detail-new/current-task-detail-new.component';
 import { CurrentTaskListComponent } from './components/current-task-list/current-task-list.component';
@@ -30,12 +28,12 @@ export const CONTAINERS = [
 ];
 
 @NgModule({
-  declarations: [COMPONENTS, CONTAINERS],
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    MaterialModule,
     CurrentTasksRoutingModule,
+    COMPONENTS,
+    CONTAINERS,
   ],
 })
 export class CurrentTasksModule {}

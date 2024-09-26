@@ -14,6 +14,7 @@ import * as HomePageActions from '../actions/home-page.actions';
     </button>
   `,
   styles: [],
+  standalone: true,
 })
 export class HomePageComponent {
   constructor(private readonly store: Store) {}

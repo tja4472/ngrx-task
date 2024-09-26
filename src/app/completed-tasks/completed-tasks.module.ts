@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { MaterialModule } from '@app/material/material.module';
-
 import { CompletedTasksRoutingModule } from './completed-tasks-routing.module';
 
 import { CompletedTaskDetailEditComponent } from './components/completed-task-detail-edit/completed-task-detail-edit.component';
@@ -28,12 +26,12 @@ export const CONTAINERS = [
 ];
 
 @NgModule({
-  declarations: [COMPONENTS, CONTAINERS],
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    MaterialModule,
     CompletedTasksRoutingModule,
+    COMPONENTS,
+    CONTAINERS,
   ],
 })
 export class CompletedTasksModule {}

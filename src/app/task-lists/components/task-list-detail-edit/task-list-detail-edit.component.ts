@@ -3,12 +3,38 @@ import { Component, OnInit, input, output } from '@angular/core';
 import { TaskListListItem } from '@app/models/task-list-list-item.model';
 
 import { TaskListDetailEditPresenter } from './task-list-detail-edit.presenter';
+import { ReactiveFormsModule } from '@angular/forms';
+import {
+  MatCard,
+  MatCardHeader,
+  MatCardTitle,
+  MatCardContent,
+  MatCardActions,
+} from '@angular/material/card';
+import { MatFormField, MatError } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import { NgIf } from '@angular/common';
+import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-task-list-detail-edit',
   templateUrl: './task-list-detail-edit.component.html',
   styleUrls: ['./task-list-detail-edit.component.css'],
   viewProviders: [TaskListDetailEditPresenter],
+  standalone: true,
+  imports: [
+    ReactiveFormsModule,
+    MatCard,
+    MatCardHeader,
+    MatCardTitle,
+    MatCardContent,
+    MatFormField,
+    MatInput,
+    NgIf,
+    MatError,
+    MatCardActions,
+    MatButton,
+  ],
 })
 export class TaskListDetailEditComponent implements OnInit {
   completedTask = input.required<TaskListListItem>();

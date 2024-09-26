@@ -10,12 +10,15 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { SwUpdate } from '@angular/service-worker';
 
 import { AppActionsService } from '@app/services/app-actions.service';
+import { SidenavComponent } from '../components/sidenav/sidenav.component';
 
 @Component({
   selector: 'app-root',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: ` <app-sidenav></app-sidenav> `,
   styleUrls: ['./app.component.css'],
+  standalone: true,
+  imports: [SidenavComponent],
 })
 export class AppComponent implements OnInit {
   constructor(

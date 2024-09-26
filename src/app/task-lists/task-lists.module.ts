@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { MaterialModule } from '@app/material/material.module';
-
 import { TaskListDetailEditComponent } from './components/task-list-detail-edit/task-list-detail-edit.component';
 import { TaskListDetailNewComponent } from './components/task-list-detail-new/task-list-detail-new.component';
 import { TaskListListComponent } from './components/task-list-list/task-list-list.component';
@@ -30,12 +28,12 @@ export const CONTAINERS = [
 ];
 
 @NgModule({
-  declarations: [COMPONENTS, CONTAINERS],
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    MaterialModule,
     TaskListsRoutingModule,
+    COMPONENTS,
+    CONTAINERS,
   ],
 })
 export class TaskListsModule {}

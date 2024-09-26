@@ -8,12 +8,16 @@ import * as CompletedTaskDetailEditPageActions from '@app/root-store/tasks-store
 
 import { CompletedTask } from '@app/root-store/tasks-store/models/completed-task.model';
 import * as TaskSelectors from '@app/root-store/tasks-store/selectors/task.selectors';
+import { CompletedTaskDetailEditComponent } from '../../components/completed-task-detail-edit/completed-task-detail-edit.component';
+import { AsyncPipe, JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-completed-task-detail-edit-page',
   templateUrl: './completed-task-detail-edit-page.component.html',
   styleUrls: ['./completed-task-detail-edit-page.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [CompletedTaskDetailEditComponent, AsyncPipe, JsonPipe],
 })
 export class CompletedTaskDetailEditPageComponent {
   task$: Observable<CompletedTask | undefined>;

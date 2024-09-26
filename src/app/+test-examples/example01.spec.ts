@@ -19,7 +19,6 @@ import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { CompletedTaskListComponent } from '@app/completed-tasks/components/completed-task-list/completed-task-list.component';
 import { SearchComponent } from '@app/completed-tasks/components/search/search.component';
 import { CompletedTasksPageComponent } from '@app/completed-tasks/containers/completed-tasks-page/completed-tasks-page.component';
-import { MaterialModule } from '@app/material/material.module';
 import * as CompletedTasksPageActions from '@app/root-store/tasks-store/actions/completed-tasks-page.actions';
 
 import {
@@ -44,16 +43,14 @@ describe('example01', () => {
     TestBed.configureTestingModule({
       imports: [
         NoopAnimationsModule,
-        MaterialModule,
         ReactiveFormsModule,
         // RouterTestingModule,
-      ],
-      providers: [provideMockStore()],
-      declarations: [
         CompletedTasksPageComponent,
         SearchComponent,
         CompletedTaskListComponent,
       ],
+      providers: [provideMockStore()],
+      declarations: [],
     });
 
     fixture = TestBed.createComponent(CompletedTasksPageComponent);
@@ -100,13 +97,15 @@ describe('TestScheduler', () => {
     });
 
     TestBed.configureTestingModule({
-      imports: [NoopAnimationsModule, MaterialModule, ReactiveFormsModule],
-      providers: [provideMockStore()],
-      declarations: [
+      imports: [
+        NoopAnimationsModule,
+        ReactiveFormsModule,
         CompletedTasksPageComponent,
         SearchComponent,
         CompletedTaskListComponent,
       ],
+      providers: [provideMockStore()],
+      declarations: [],
     });
 
     const fixture = TestBed.createComponent(CompletedTasksPageComponent);

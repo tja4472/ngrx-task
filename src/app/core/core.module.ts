@@ -6,7 +6,6 @@ import { RouterModule } from '@angular/router';
 import { SidenavComponent } from '@app/core/components/sidenav/sidenav.component';
 import { AppComponent } from '@app/core/containers/app.component';
 import { NotFoundPageComponent } from '@app/core/containers/not-found-page.component';
-import { MaterialModule } from '@app/material/material.module';
 
 export const COMPONENTS = [
   AppComponent,
@@ -15,8 +14,7 @@ export const COMPONENTS = [
 ];
 
 @NgModule({
-  imports: [CommonModule, RouterModule, MaterialModule],
-  declarations: COMPONENTS,
+  imports: [CommonModule, RouterModule, ...COMPONENTS],
   exports: COMPONENTS,
 })
 export class CoreModule {}

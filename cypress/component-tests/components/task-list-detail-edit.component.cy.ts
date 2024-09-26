@@ -4,8 +4,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { MaterialModule } from '@app/material/material.module';
-
 import { createOutputSpy, MountConfig } from 'cypress/angular-signals';
 
 import { DataTestIds, SpyAliases, SpyIds } from '../types';
@@ -62,12 +60,7 @@ function getConfig(
   completedTask: TaskListListItem
 ): MountConfig<TaskListDetailEditComponent> {
   const config: MountConfig<TaskListDetailEditComponent> = {
-    imports: [
-      BrowserAnimationsModule,
-      CommonModule,
-      ReactiveFormsModule,
-      MaterialModule,
-    ],
+    imports: [BrowserAnimationsModule, CommonModule, ReactiveFormsModule],
     componentProperties: {
       completedTask: completedTask,
       cancel: createOutputSpy<TaskListListItem>(spyAliases.cancel),
@@ -85,12 +78,7 @@ function mountComponent(todoTask: TaskListListItem) {
 
 describe('CurrentTaskDetailEditComponent', () => {
   const baseConfig: MountConfig<TaskListDetailEditComponent> = {
-    imports: [
-      BrowserAnimationsModule,
-      CommonModule,
-      ReactiveFormsModule,
-      MaterialModule,
-    ],
+    imports: [BrowserAnimationsModule, CommonModule, ReactiveFormsModule],
   };
 
   it('mounts', () => {

@@ -8,12 +8,17 @@ import { take } from 'rxjs/operators';
 import * as CompletedTasksPageActions from '@app/root-store/tasks-store/actions/completed-tasks-page.actions';
 import { CompletedTask } from '@app/root-store/tasks-store/models/completed-task.model';
 import * as TaskSelectors from '@app/root-store/tasks-store/selectors/task.selectors';
+import { SearchComponent } from '../../components/search/search.component';
+import { CompletedTaskListComponent } from '../../components/completed-task-list/completed-task-list.component';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-completed-tasks-page',
   templateUrl: './completed-tasks-page.component.html',
   styleUrls: ['./completed-tasks-page.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [SearchComponent, CompletedTaskListComponent, AsyncPipe],
 })
 export class CompletedTasksPageComponent {
   completedTasks$: Observable<CompletedTask[]>;

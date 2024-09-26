@@ -4,8 +4,6 @@ import { TestBed } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { MaterialModule } from '@app/material/material.module';
-
 import { MountConfig } from 'cypress/angular-signals';
 
 import { CurrentTaskDetailEditComponent } from '@app/current-tasks/components/current-task-detail-edit/current-task-detail-edit.component';
@@ -57,9 +55,9 @@ function getConfig(
       BrowserAnimationsModule,
       CommonModule,
       ReactiveFormsModule,
-      MaterialModule,
+      CurrentTaskDetailEditComponent,
     ],
-    declarations: [CurrentTaskDetailEditComponent],
+    declarations: [],
     providers: [
       provideMockStore({
         selectors: [

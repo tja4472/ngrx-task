@@ -24,8 +24,12 @@ function setup({
   pending?: boolean;
 }) {
   TestBed.configureTestingModule({
-    imports: [NoopAnimationsModule, SignInPageComponentModule],
-    declarations: [SignInPageComponent],
+    imports: [
+      NoopAnimationsModule,
+      SignInPageComponentModule,
+      SignInPageComponent,
+    ],
+    declarations: [],
     providers: [
       provideMockStore({
         selectors: [

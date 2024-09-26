@@ -1,5 +1,13 @@
 /* eslint-disable @typescript-eslint/no-extraneous-class */
 import { Component } from '@angular/core';
+import {
+  MatDialogTitle,
+  MatDialogContent,
+  MatDialogActions,
+  MatDialogClose,
+} from '@angular/material/dialog';
+import { CdkScrollable } from '@angular/cdk/scrolling';
+import { MatButton } from '@angular/material/button';
 
 /**
  * The dialog will close with true if user clicks the ok button,
@@ -36,6 +44,15 @@ import { Component } from '@angular/core';
         padding: 0;
       }
     `,
+  ],
+  standalone: true,
+  imports: [
+    MatDialogTitle,
+    CdkScrollable,
+    MatDialogContent,
+    MatDialogActions,
+    MatButton,
+    MatDialogClose,
   ],
 })
 export class SignoutConfirmationDialogComponent {}

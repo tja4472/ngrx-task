@@ -9,7 +9,6 @@ import { StoreModule } from '@ngrx/store';
 import { AuthRoutingModule } from '@app/auth/auth-routing.module';
 import { AuthEffects } from '@app/auth/effects/auth.effects';
 import { authFeatureKey, authReducers } from '@app/auth/reducers';
-import { MaterialModule } from '@app/material/material.module';
 
 import { SignoutConfirmationDialogComponent } from './components/signout-confirmation-dialog/signout-confirmation-dialog.component';
 
@@ -18,11 +17,10 @@ export const COMPONENTS = [SignoutConfirmationDialogComponent];
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    MaterialModule,
     AuthRoutingModule,
     StoreModule.forFeature(authFeatureKey, authReducers),
     EffectsModule.forFeature([AuthEffects]),
+    ...COMPONENTS,
   ],
-  declarations: COMPONENTS,
 })
 export class AuthModule {}

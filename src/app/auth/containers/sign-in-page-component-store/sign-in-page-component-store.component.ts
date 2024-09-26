@@ -13,6 +13,8 @@ import { SignInPageActions } from '@app/auth/actions/sign-in-page.actions';
 import { Credentials } from '@app/auth/models/credentials.model';
 
 import { SignInPageComponentStore } from './sign-in-page-component-store.store';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { CredentialsFormComponent } from '../../components/credentials-form/credentials-form.component';
 
 @Component({
   selector: 'app-sign-in-page-component-store',
@@ -21,6 +23,8 @@ import { SignInPageComponentStore } from './sign-in-page-component-store.store';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [SignInPageComponentStore],
+  standalone: true,
+  imports: [NgIf, CredentialsFormComponent, AsyncPipe],
 })
 export class SignInPageComponentStoreComponent {
   // error$: Observable<string | null>;

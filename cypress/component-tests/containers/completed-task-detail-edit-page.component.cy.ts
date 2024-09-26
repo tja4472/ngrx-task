@@ -5,8 +5,6 @@ import { TestBed } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { MaterialModule } from '@app/material/material.module';
-
 import { CompletedTaskDetailEditComponent } from '@app/completed-tasks/components/completed-task-detail-edit/completed-task-detail-edit.component';
 import { CompletedTaskDetailEditPageComponent } from '@app/completed-tasks/containers/completed-task-detail-edit-page/completed-task-detail-edit-page.component';
 
@@ -37,12 +35,11 @@ describe('CompletedTaskDetailEditPageComponent - mounts', () => {
           BrowserAnimationsModule,
           CommonModule,
           ReactiveFormsModule,
-          MaterialModule,
-        ],
-        declarations: [
+
           CompletedTaskDetailEditComponent,
           CompletedTaskDetailEditPageComponent,
         ],
+        declarations: [],
         providers: [
           provideMockStore({
             selectors: [
@@ -72,12 +69,10 @@ describe('CompletedTaskDetailEditPageComponent - main', () => {
           BrowserAnimationsModule,
           CommonModule,
           ReactiveFormsModule,
-          MaterialModule,
-        ],
-        declarations: [
           CompletedTaskDetailEditComponent,
           CompletedTaskDetailEditPageComponent,
         ],
+        declarations: [],
         providers: [
           provideMockStore({
             selectors: [

@@ -3,12 +3,38 @@ import { Component, OnInit, input, output } from '@angular/core';
 import { TaskListListItem } from '@app/models/task-list-list-item.model';
 
 import { TaskListDetailNewPresenter } from './task-list-detail-new.presenter';
+import { ReactiveFormsModule } from '@angular/forms';
+import {
+  MatCard,
+  MatCardActions,
+  MatCardHeader,
+  MatCardTitle,
+  MatCardContent,
+} from '@angular/material/card';
+import { MatButton } from '@angular/material/button';
+import { MatFormField, MatError } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-task-list-detail-new',
   templateUrl: './task-list-detail-new.component.html',
   styleUrls: ['./task-list-detail-new.component.css'],
   viewProviders: [TaskListDetailNewPresenter],
+  standalone: true,
+  imports: [
+    ReactiveFormsModule,
+    MatCard,
+    MatCardActions,
+    MatButton,
+    MatCardHeader,
+    MatCardTitle,
+    MatCardContent,
+    MatFormField,
+    MatInput,
+    NgIf,
+    MatError,
+  ],
 })
 export class TaskListDetailNewComponent implements OnInit {
   completedTask = input.required<TaskListListItem>();

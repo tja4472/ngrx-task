@@ -12,7 +12,7 @@ import { CredentialsFormComponent } from '@app/auth/components/credentials-form/
     CommonModule,
     CredentialsFormComponent,
     SignInPageComponentStoreRoutingModule,
+    SignInPageComponentStoreComponent,
   ],
-  declarations: [SignInPageComponentStoreComponent],
 })
 export class SignInPageComponentStoreComponentModule {}

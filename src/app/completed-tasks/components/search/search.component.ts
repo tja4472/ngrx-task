@@ -7,12 +7,33 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { SearchPresenter } from './search.presenter';
+import {
+  MatFormField,
+  MatPrefix,
+  MatLabel,
+  MatSuffix,
+} from '@angular/material/form-field';
+import { MatIcon } from '@angular/material/icon';
+import { MatInput } from '@angular/material/input';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatIconButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css'],
   providers: [SearchPresenter],
+  standalone: true,
+  imports: [
+    MatFormField,
+    MatIcon,
+    MatPrefix,
+    MatLabel,
+    MatInput,
+    ReactiveFormsModule,
+    MatIconButton,
+    MatSuffix,
+  ],
 })
 export class SearchComponent implements OnDestroy, OnInit {
   searchText = input.required<string>();

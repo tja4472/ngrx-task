@@ -9,12 +9,16 @@ import {
   newTaskListListItem,
   TaskListListItem,
 } from '@app/models/task-list-list-item.model';
+import { TaskListDetailNewComponent } from '../../components/task-list-detail-new/task-list-detail-new.component';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-task-list-detail-new-page',
   templateUrl: './task-list-detail-new-page.component.html',
   styleUrls: ['./task-list-detail-new-page.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [TaskListDetailNewComponent, JsonPipe],
 })
 export class TaskListDetailNewPageComponent {
   task$ = newTaskListListItem();

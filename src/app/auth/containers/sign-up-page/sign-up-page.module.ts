@@ -8,7 +8,11 @@ import { SignUpPageComponent } from './sign-up-page.component';
 import { CredentialsFormComponent } from '@app/auth/components/credentials-form/credentials-form.component';
 
 @NgModule({
-  imports: [CommonModule, CredentialsFormComponent, SignUpPageRoutingModule],
-  declarations: [SignUpPageComponent],
+  imports: [
+    CommonModule,
+    CredentialsFormComponent,
+    SignUpPageRoutingModule,
+    SignUpPageComponent,
+  ],
 })
 export class SignUpPageComponentModule {}

@@ -8,12 +8,16 @@ import { filter } from 'rxjs/operators';
 import * as CurrentTaskDetailEditPageActions from '@app/root-store/tasks-store/actions/current-task-detail-edit-page.actions';
 import { CurrentTask } from '@app/root-store/tasks-store/models/current-task.model';
 import * as TaskSelectors from '@app/root-store/tasks-store/selectors/task.selectors';
+import { CurrentTaskDetailEditComponent } from '../../components/current-task-detail-edit/current-task-detail-edit.component';
+import { AsyncPipe, JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-current-task-detail-edit-page',
   templateUrl: './current-task-detail-edit-page.component.html',
   styleUrls: ['./current-task-detail-edit-page.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [CurrentTaskDetailEditComponent, AsyncPipe, JsonPipe],
 })
 export class CurrentTaskDetailEditPageComponent {
   task$: Observable<CurrentTask>;

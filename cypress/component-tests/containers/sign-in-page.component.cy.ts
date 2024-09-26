@@ -35,8 +35,9 @@ describe('CredentialsFormComponent - mounts', () => {
         CommonModule,
         CredentialsFormComponent,
         BrowserAnimationsModule,
+        SignInPageComponent,
       ],
-      declarations: [SignInPageComponent],
+      declarations: [],
       providers: [
         provideMockStore({
           selectors: [
@@ -67,8 +68,9 @@ describe('CredentialsFormComponent', () => {
         CommonModule,
         CredentialsFormComponent,
         BrowserAnimationsModule,
+        SignInPageComponent,
       ],
-      declarations: [SignInPageComponent],
+      declarations: [],
       providers: [
         provideMockStore({
           selectors: [

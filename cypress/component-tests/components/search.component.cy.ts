@@ -3,8 +3,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { MaterialModule } from '@app/material/material.module';
-
 import { createOutputSpy, MountConfig } from 'cypress/angular-signals';
 import Sinon from 'cypress/types/sinon';
 
@@ -39,12 +37,7 @@ const dataTestIds: DataTestIds<DataTestIdNames> = {
 
 function getConfig(searchText: string): MountConfig<SearchComponent> {
   const config: MountConfig<SearchComponent> = {
-    imports: [
-      BrowserAnimationsModule,
-      CommonModule,
-      ReactiveFormsModule,
-      MaterialModule,
-    ],
+    imports: [BrowserAnimationsModule, CommonModule, ReactiveFormsModule],
     componentProperties: {
       searchText,
       search: createOutputSpy<string>(spyAliases.search),

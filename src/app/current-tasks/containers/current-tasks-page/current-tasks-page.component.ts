@@ -12,12 +12,27 @@ import {
   toggleIsComplete,
 } from '@app/root-store/tasks-store/models/current-task.model';
 import * as TaskSelectors from '@app/root-store/tasks-store/selectors/task.selectors';
+import { CurrentTaskListComponent } from '../../components/current-task-list/current-task-list.component';
+import { MatIconButton } from '@angular/material/button';
+import { MatMenuTrigger, MatMenu, MatMenuItem } from '@angular/material/menu';
+import { MatIcon } from '@angular/material/icon';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-current-tasks-page',
   templateUrl: './current-tasks-page.component.html',
   styleUrls: ['./current-tasks-page.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    CurrentTaskListComponent,
+    MatIconButton,
+    MatMenuTrigger,
+    MatIcon,
+    MatMenu,
+    MatMenuItem,
+    AsyncPipe,
+  ],
 })
 export class CurrentTasksPageComponent implements OnInit {
   currentTasks$: Observable<CurrentTask[]>;
