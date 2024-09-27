@@ -52,6 +52,13 @@
           {
             "assertionStyle": "never"
           }
+        ],
+        // TODO: Remove eslint-disable - no-extraneous-class comments
+        "@typescript-eslint/no-extraneous-class": [
+          "error",
+          {
+            "allowWithDecorator": true
+          }
         ]
       }
     },
