@@ -2,9 +2,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { SignInPageComponent } from './sign-in-page.component';
-
-const routes: Routes = [{ path: '', component: SignInPageComponent }];
+const routes: Routes = [
+  {
+    path: '',
+    loadComponent: () =>
+      import('./sign-in-page.component').then((m) => m.SignInPageComponent),
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

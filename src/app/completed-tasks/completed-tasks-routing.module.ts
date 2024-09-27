@@ -6,16 +6,15 @@ import { routeNames } from '@app/app-route-names';
 import { AuthGuardService } from '@app/auth/services/auth-guard.service';
 import { CompletedTasksRootGuardService } from '@app/services/completed-tasks-root-guard.service';
 
-import { CompletedTaskDetailEditPageComponent } from './containers/completed-task-detail-edit-page/completed-task-detail-edit-page.component';
-import { CompletedTasksPageComponent } from './containers/completed-tasks-page/completed-tasks-page.component';
-import { CompletedTasksRootComponent } from './containers/completed-tasks-root/completed-tasks-root.component';
-
 import { CompletedTaskDetailEditPageComponentGuard } from './guards/completed-task-detail-edit-page-component.guard';
 
 const routes: Routes = [
   {
     path: '',
-    component: CompletedTasksRootComponent,
+    loadComponent: () =>
+      import(
+        './containers/completed-tasks-root/completed-tasks-root.component'
+      ).then((m) => m.CompletedTasksRootComponent),
     canActivate: [AuthGuardService, CompletedTasksRootGuardService],
     children: [
       {
@@ -23,12 +22,18 @@ const routes: Routes = [
           routeNames.completedTasks.edit.path +
           '/:' +
           routeNames.completedTasks.edit.idParam,
-        component: CompletedTaskDetailEditPageComponent,
+        loadComponent: () =>
+          import(
+            './containers/completed-task-detail-edit-page/completed-task-detail-edit-page.component'
+          ).then((m) => m.CompletedTaskDetailEditPageComponent),
         canActivate: [CompletedTaskDetailEditPageComponentGuard],
       },
       {
         path: '',
-        component: CompletedTasksPageComponent,
+        loadComponent: () =>
+          import(
+            './containers/completed-tasks-page/completed-tasks-page.component'
+          ).then((m) => m.CompletedTasksPageComponent),
       },
     ],
   },

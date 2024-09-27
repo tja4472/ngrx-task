@@ -5,17 +5,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { routeNames } from '@app/app-route-names';
 import { AuthGuardService } from '@app/auth/services/auth-guard.service';
 
-import { TaskListDetailEditPageComponent } from './containers/task-list-detail-edit-page/task-list-detail-edit-page.component';
-import { TaskListDetailNewPageComponent } from './containers/task-list-detail-new-page/task-list-detail-new-page.component';
-import { TaskListsPageComponent } from './containers/task-lists-page/task-lists-page.component';
-import { TaskListsRootComponent } from './containers/task-lists-root/task-lists-root.component';
-
 import { TaskListDetailEditPageComponentGuard } from './guards/task-list-detail-edit-page-component.guard';
 
 const routes: Routes = [
   {
     path: '',
-    component: TaskListsRootComponent,
+    loadComponent: () =>
+      import('./containers/task-lists-root/task-lists-root.component').then(
+        (m) => m.TaskListsRootComponent
+      ),
     canActivate: [AuthGuardService],
     children: [
       {
@@ -23,16 +21,25 @@ const routes: Routes = [
           routeNames.taskLists.edit.path +
           '/:' +
           routeNames.taskLists.edit.idParam,
-        component: TaskListDetailEditPageComponent,
+        loadComponent: () =>
+          import(
+            './containers/task-list-detail-edit-page/task-list-detail-edit-page.component'
+          ).then((m) => m.TaskListDetailEditPageComponent),
         canActivate: [TaskListDetailEditPageComponentGuard],
       },
       {
         path: routeNames.taskLists.new.path,
-        component: TaskListDetailNewPageComponent,
+        loadComponent: () =>
+          import(
+            './containers/task-list-detail-new-page/task-list-detail-new-page.component'
+          ).then((m) => m.TaskListDetailNewPageComponent),
       },
       {
         path: '',
-        component: TaskListsPageComponent,
+        loadComponent: () =>
+          import('./containers/task-lists-page/task-lists-page.component').then(
+            (m) => m.TaskListsPageComponent
+          ),
       },
     ],
   },

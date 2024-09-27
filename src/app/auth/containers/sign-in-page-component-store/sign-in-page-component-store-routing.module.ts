@@ -2,10 +2,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { SignInPageComponentStoreComponent } from './sign-in-page-component-store.component';
-
 const routes: Routes = [
-  { path: '', component: SignInPageComponentStoreComponent },
+  {
+    path: '',
+    loadComponent: () =>
+      import('./sign-in-page-component-store.component').then(
+        (m) => m.SignInPageComponentStoreComponent
+      ),
+  },
 ];
 
 @NgModule({

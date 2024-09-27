@@ -6,7 +6,6 @@ import { pathPrefix, routeNames } from '@app/app-route-names';
 import { TaskListsGuard } from '@app/task-lists/guards/task-lists.guard';
 
 import { AuthGuardService } from './auth/services/auth-guard.service';
-import { NotFoundPageComponent } from './core/containers/not-found-page.component';
 
 const routes: Routes = [
   {
@@ -43,7 +42,10 @@ const routes: Routes = [
   },
   {
     path: '**',
-    component: NotFoundPageComponent,
+    loadComponent: () =>
+      import('./core/containers/not-found-page.component').then(
+        (m) => m.NotFoundPageComponent
+      ),
     data: { title: 'Not found' },
   },
 ];

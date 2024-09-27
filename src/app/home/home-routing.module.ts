@@ -4,10 +4,14 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { routeNames } from '@app/app-route-names';
 
-import { HomePageComponent } from './containers/home-page.component';
-
 const routes: Routes = [
-  { path: routeNames.home.path, component: HomePageComponent },
+  {
+    path: routeNames.home.path,
+    loadComponent: () =>
+      import('./containers/home-page.component').then(
+        (m) => m.HomePageComponent
+      ),
+  },
 ];
 
 @NgModule({
