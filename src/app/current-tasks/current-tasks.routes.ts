@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/no-extraneous-class */
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 
 import { routeNames } from '@app/app-route-names';
 import { AuthGuardService } from '@app/auth/services/auth-guard.service';
@@ -8,7 +6,7 @@ import { CurrentTasksRootGuardService } from '@app/services/current-tasks-root-g
 
 import { CurrentTaskDetailEditPageComponentGuard } from './guards/current-task-detail-edit-page-component.guard';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '',
     loadComponent: () =>
@@ -45,9 +43,3 @@ const routes: Routes = [
     ],
   },
 ];
-
-@NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
-})
-export class CurrentTasksRoutingModule {}

@@ -12,7 +12,6 @@ import { SignInPageActions } from '@app/auth/actions/sign-in-page.actions';
 import * as SignInPageSelectors from '@app/auth/selectors/sign-in-page.selectors';
 
 import { SignInPageComponent } from './sign-in-page.component';
-import { SignInPageComponentModule } from './sign-in-page.module';
 
 import { Credentials } from '@app/auth/models/credentials.model';
 
@@ -24,11 +23,7 @@ function setup({
   pending?: boolean;
 }) {
   TestBed.configureTestingModule({
-    imports: [
-      NoopAnimationsModule,
-      SignInPageComponentModule,
-      SignInPageComponent,
-    ],
+    imports: [NoopAnimationsModule, SignInPageComponent],
     declarations: [],
     providers: [
       provideMockStore({
