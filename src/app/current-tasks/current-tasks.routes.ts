@@ -16,6 +16,13 @@ export const routes: Routes = [
     canActivate: [AuthGuardService, CurrentTasksRootGuardService],
     children: [
       {
+        path: '',
+        loadComponent: () =>
+          import(
+            './containers/current-tasks-page/current-tasks-page.component'
+          ).then((m) => m.CurrentTasksPageComponent),
+      },
+      {
         path:
           routeNames.currentTasks.edit.path +
           '/:' +
@@ -33,6 +40,7 @@ export const routes: Routes = [
             './containers/current-task-detail-new-page/current-task-detail-new-page.component'
           ).then((m) => m.CurrentTaskDetailNewPageComponent),
       },
+      /*      
       {
         path: '',
         loadComponent: () =>
@@ -40,6 +48,7 @@ export const routes: Routes = [
             './containers/current-tasks-page/current-tasks-page.component'
           ).then((m) => m.CurrentTasksPageComponent),
       },
+*/
     ],
   },
 ];

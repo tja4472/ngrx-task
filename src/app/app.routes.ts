@@ -1,13 +1,11 @@
-/* eslint-disable @typescript-eslint/no-extraneous-class */
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 
 import { pathPrefix, routeNames } from '@app/app-route-names';
 import { TaskListsGuard } from '@app/task-lists/guards/task-lists.guard';
 
 import { AuthGuardService } from './auth/services/auth-guard.service';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '',
     redirectTo: pathPrefix + routeNames.home.path,
@@ -70,9 +68,3 @@ const routes: Routes = [
     data: { title: 'Not found' },
   },
 ];
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes, {})],
-  exports: [RouterModule],
-})
-export class AppRoutingModule {}

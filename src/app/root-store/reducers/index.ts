@@ -2,12 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as fromRouter from '@ngrx/router-store';
-import {
-  Action,
-  ActionReducer,
-  ActionReducerMap,
-  createFeatureSelector,
-} from '@ngrx/store';
+import { Action, ActionReducer, createFeatureSelector } from '@ngrx/store';
 
 import * as AuthActions from '@app/auth/actions/auth.actions';
 
@@ -16,10 +11,11 @@ import * as fromAuth from '@app/auth/reducers';
 export interface RootState {
   router: fromRouter.RouterReducerState<any>;
 }
-
+/*
 export const rootReducers: ActionReducerMap<RootState> = {
   router: fromRouter.routerReducer,
 };
+*/
 
 // console.log all actions
 export function logger(

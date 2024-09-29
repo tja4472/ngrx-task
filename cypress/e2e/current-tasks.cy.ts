@@ -98,7 +98,7 @@ describe('Current Tasks', () => {
         .should('contain.text', currentTask1.name);
     });
 
-    it('Submit', () => {
+    it.only('Submit', () => {
       const nameExtra = 'AAAAA';
       const descriptionExtra = 'BBBBBB';
 
