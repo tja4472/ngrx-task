@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { createOutputSpy, MountConfig } from 'cypress/angular-signals';
+// eslint-disable-next-line import/no-unresolved
 import Sinon from 'cypress/types/sinon';
 
 import { DataTestIds, SpyAliases, SpyIds } from '../types';

@@ -1,4 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
+// The below is required for CI but not needed locally
+/* eslint-disable import/no-unresolved */
 import { firebaseConfigDev } from '@app/firebase/firebase-config-dev';
 
 import { Environment } from './environment-types';
