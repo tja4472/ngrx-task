@@ -107,6 +107,7 @@
     "jest-preset-angular": "14.4.1",
     "ng-mocks": "14.13.1",
     "prettier": "3.4.1",
+    "ts-node": "10.9.2",    
     "typescript": "5.5.4"
   }
 }

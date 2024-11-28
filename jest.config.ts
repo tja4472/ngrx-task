@@ -1,5 +1,14 @@
-module.exports = {
-  preset: 'jest-preset-angular',
+// https://thymikee.github.io/jest-preset-angular/docs/getting-started/installation
+// https://thymikee.github.io/jest-preset-angular/docs/getting-started/presets/#createcjspresetoptions
+import presets from 'jest-preset-angular/presets';
+import type { Config } from 'jest';
+
+const presetConfig = presets.createCjsPreset({
+  //...options
+});
+
+const jestConfig: Config = {
+  ...presetConfig,
   setupFiles: ['./jest.polyfills.js'],
   setupFilesAfterEnv: ['<rootDir>/setup-jest.ts'],
   // globalSetup: 'jest-preset-angular/global-setup',
@@ -19,3 +28,5 @@ module.exports = {
   resolver: '<rootDir>/jest-resolver.js',
   testEnvironment: 'jsdom',
 };
+
+export default jestConfig;
