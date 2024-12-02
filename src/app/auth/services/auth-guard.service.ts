@@ -1,19 +1,27 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
-  Route,
+  CanMatchFn,
   RouterStateSnapshot,
 } from '@angular/router';
 
 import { Store } from '@ngrx/store';
 
-import { Observable, of } from 'rxjs';
-import { exhaustMap, filter, map, take } from 'rxjs/operators';
+import { exhaustMap, filter, Observable, map, take } from 'rxjs';
 
 import { selectHasChecked, selectHasUser } from '..//selectors/auth.selectors';
 import * as AuthGuardServiceActions from '@app/auth/actions/auth-guard-service.actions';
 import { AuthService } from '../services/auth.service';
 
+export const authCanMatchGuard: CanMatchFn = (route) => {
+  //
+  const authGuardService = inject(AuthGuardService);
+  const url = route.path ?? '';
+
+  return authGuardService.checkAuth(url);
+};
+
+// TODO: Add tests
 @Injectable({
   providedIn: 'root',
 })
@@ -23,6 +31,7 @@ export class AuthGuardService {
     private readonly store: Store
   ) {}
 
+  // TODO: Move to functional guard
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -31,18 +40,9 @@ export class AuthGuardService {
     return this.checkAuth(state.url);
   }
 
-  canLoad(route: Route): Observable<boolean> {
+  checkAuth(url: string) {
     //
-    if (route.path == undefined) {
-      return of(false);
-    }
-
-    const url = `/${route.path}`;
-    return this.checkAuth(url);
-  }
-
-  private checkAuth(url: string) {
-    //
+    // TODO: Remove authService?
     this.authService.redirectUrl = url;
 
     return this.checkStoreAuthentication().pipe(

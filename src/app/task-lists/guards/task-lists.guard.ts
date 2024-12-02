@@ -1,43 +1,34 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Injectable } from '@angular/core';
-import { Route } from '@angular/router';
+import { inject } from '@angular/core';
+import { CanMatchFn } from '@angular/router';
 
 import { Store } from '@ngrx/store';
 
-import { Observable, of } from 'rxjs';
-import { catchError, filter, take, timeout } from 'rxjs/operators';
+import { catchError, filter, Observable, of, take, tap, timeout } from 'rxjs';
 
 import * as TaskListSelectors from '@app/root-store/tasks-store/selectors/task-list';
 
 import * as TaskListsGuardActions from '../actions/task-lists-guard.actions';
 
-@Injectable({
-  providedIn: 'root',
-})
-export class TaskListsGuard {
-  constructor(private readonly store: Store) {}
+export const taskListsCanMatchGuard: CanMatchFn = (route) => {
+  //
+  const store = inject(Store);
+  const url = `/${route.path ?? ''}`;
 
-  canLoad(route: Route): Observable<boolean> {
-    //
-    if (route.path == undefined) {
+  const result = store.select(TaskListSelectors.selectLoaded).pipe(
+    timeout(5000),
+    /*
+    tap((loaded) => {
+      console.log('loaded>', loaded);
+    }),
+    */
+    filter((loaded) => loaded),
+    take(1),
+    catchError((err) => {
+      store.dispatch(TaskListsGuardActions.timeout({ requestedUrl: url }));
       return of(false);
-    }
+    })
+  );
 
-    const url = `/${route.path}`;
-    // console.log('#### canLoad>', url);
-
-    return this.store.select(TaskListSelectors.selectLoaded).pipe(
-      timeout(5000),
-
-      filter((loaded) => loaded),
-
-      take(1),
-      catchError((err) => {
-        this.store.dispatch(
-          TaskListsGuardActions.timeout({ requestedUrl: url })
-        );
-        return of(false);
-      })
-    );
-  }
-}
+  return result;
+};

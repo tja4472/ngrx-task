@@ -1,10 +1,12 @@
 import { Routes } from '@angular/router';
 
 import { pathPrefix, routeNames } from '@app/app-route-names';
-import { TaskListsGuard } from '@app/task-lists/guards/task-lists.guard';
+import { taskListsCanMatchGuard } from '@app/task-lists/guards/task-lists.guard';
 
-import { AuthGuardService } from './auth/services/auth-guard.service';
+import { authCanMatchGuard } from './auth/services/auth-guard.service';
 
+// TODO: Use functional guards
+// TODO:  Replace 'rxjs/operators' with 'rxjs'
 export const routes: Routes = [
   {
     path: '',
@@ -40,19 +42,19 @@ export const routes: Routes = [
     path: routeNames.completedTasks.path,
     loadChildren: () =>
       import('./completed-tasks/completed-tasks.routes').then((m) => m.routes),
-    canLoad: [AuthGuardService],
+    canMatch: [authCanMatchGuard],
   },
   {
     path: routeNames.currentTasks.path,
     loadChildren: () =>
       import('./current-tasks/current-tasks.routes').then((m) => m.routes),
-    canLoad: [AuthGuardService],
+    canMatch: [authCanMatchGuard],
   },
   {
     path: routeNames.taskLists.path,
     loadChildren: () =>
       import('./task-lists/task-lists.routes').then((m) => m.routes),
-    canLoad: [AuthGuardService, TaskListsGuard],
+    canMatch: [authCanMatchGuard, taskListsCanMatchGuard],
   },
   {
     path: routeNames.tasks.path,
