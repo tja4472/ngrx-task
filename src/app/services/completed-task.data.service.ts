@@ -1,8 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
-import { Injectable } from '@angular/core';
-
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { inject, Injectable } from '@angular/core';
 
 import {
   collection,
@@ -12,8 +9,12 @@ import {
   doc,
   Firestore,
   query,
-  setDoc,
 } from '@angular/fire/firestore';
+
+import { map, Observable } from 'rxjs';
+
+import { AngularfireFirestoreService } from './angularfire-firestore.service';
+import { createId } from './services-util';
 
 import {
   CompletedTask,
@@ -35,7 +36,7 @@ export function getCompletedTasksCollectionPath(
   return path;
 }
 
-interface FirestoreDoc {
+export interface FirestoreDoc {
   id: string;
   description: string | null;
   name: string;
@@ -49,6 +50,8 @@ interface FirestoreDoc {
 })
 export class CompletedTaskDataService {
   //
+  private firestoreService = inject(AngularfireFirestoreService);
+
   constructor(private firestore: Firestore) {}
 
   public getData(
@@ -102,33 +105,19 @@ export class CompletedTaskDataService {
   ): Promise<void> {
     const firestoreDoc = this.toFirestoreDoc(item);
 
-    /*
-    if (item.id === '') {
-      firestoreDoc.id = this.afs.createId();
-    }
-
-    await this.angularFirestoreCollection(taskListId, userId)
-      .doc(firestoreDoc.id)
-      .set(firestoreDoc);
-*/
-    if (item.id === '') {
-      firestoreDoc.id = this.createId();
-    }
-
-    await setDoc(
-      doc(
-        this.getfirestoreDocCollectionRef(taskListId, userId),
-        firestoreDoc.id
-      ),
-      firestoreDoc
+    await this.firestoreService.setDoc(
+      firestoreDoc,
+      firestoreDoc.id,
+      getCompletedTasksCollectionPath(taskListId, userId)
     );
   }
-
+  /*
   private createId(): string {
     const id = doc(collection(this.firestore, 'id')).id;
 
     return id;
   }
+*/
 
   private getfirestoreDocCollectionRef(
     taskListId: string,
@@ -163,6 +152,10 @@ export class CompletedTaskDataService {
       name: item.name,
       updatedTimestamp: Date.now(),
     };
+
+    if (item.id === '') {
+      result.id = createId();
+    }
 
     return result;
   }

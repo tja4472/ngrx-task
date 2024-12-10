@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
 /* eslint-disable @typescript-eslint/class-literal-property-style */
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 
 import {
   collection,
@@ -8,13 +8,13 @@ import {
   doc,
   docData,
   Firestore,
-  setDoc,
 } from '@angular/fire/firestore';
 
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, Observable } from 'rxjs';
 
-import { EnvironmentService } from '@app/environment.service';
+import { AngularfireFirestoreService } from './angularfire-firestore.service';
+
+// import { EnvironmentService } from '@app/environment.service';
 import { UserInfo } from '@app/models/user-info.model';
 
 export function getUsersCollectionPath(): string {
@@ -55,6 +55,9 @@ export const toFirestoreDoc = (item: UserInfo): FirestoreDoc => {
   providedIn: 'root',
 })
 export class UserInfoDataService {
+  //
+  private firestoreService = inject(AngularfireFirestoreService);
+
   public get usersCollectionPath(): string {
     // original
     // return 'apps/' + this.environmentService.appCode + '/users';
@@ -62,19 +65,20 @@ export class UserInfoDataService {
     return 'users';
   }
 
+  // TODO Remove EnvironmentService
   constructor(
-    private firestore: Firestore,
+    private firestore: Firestore
     // public readonly afs: AngularFirestore,
-    public readonly environmentService: EnvironmentService
+    // public readonly environmentService: EnvironmentService
   ) {
-    console.log('UserInfoDataService:constructor');
+    // console.log('UserInfoDataService:constructor');
     /*
     console.log(
       'environmentService.settings.appCode>',
       environmentService.settings.appCode
     );
     */
-    console.log('environmentService.appCode>', environmentService.appCode);
+    // console.log('environmentService.appCode>', environmentService.appCode);
     // console.log('USERS_COLLECTION>', USERS_COLLECTION);
   }
 
@@ -148,23 +152,12 @@ export class UserInfoDataService {
   public async save(item: UserInfo, userId: string): Promise<void> {
     const firestoreDoc = toFirestoreDoc(item);
 
-    // await this.firestoreDocument(userId).set(firestoreDoc);
-
-    console.log('NN Saving>', userId);
-    const docRef = doc(this.getfirestoreDocCollectionRef(), userId);
-    await setDoc(docRef, firestoreDoc);
-    console.log('NN Saved');
+    await this.firestoreService.setDoc(
+      firestoreDoc,
+      userId,
+      getUsersCollectionPath()
+    );
   }
-
-  /*
-  private firestoreDocument(userId: string) {
-    //
-    return this.afs
-      .collection(this.usersCollectionPath)
-      .doc<FirestoreDoc>(userId);
-    // return this.afs.doc<FirestoreDoc>(this.usersCollectionPath + '/' + userId);
-  }
-*/
 
   private getfirestoreDocCollectionRef(): CollectionReference<FirestoreDoc> {
     // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
@@ -175,30 +168,4 @@ export class UserInfoDataService {
 
     return collectionReference;
   }
-  /*
-  private toFirestoreDoc(item: UserInfo): FirestoreDoc {
-    //
-    const result: FirestoreDoc = {
-      todoListId: item.todoListId,
-    };
-
-    return result;
-  }
-  */
-  /*
-  private fromFirestoreDoc(x: FirestoreDoc | null): UserInfo | null {
-    //
-    console.log('ZZZZZZZZZZZZZZZZZ>', x);
-
-    if (x == null) {
-      return null;
-    }
-
-    const result: UserInfo = {
-      todoListId: x.todoListId,
-    };
-
-    return result;
-  }
-  */
 }

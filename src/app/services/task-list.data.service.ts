@@ -1,7 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unnecessary-condition */
 import { inject, Injectable } from '@angular/core';
-
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 import {
   collection,
@@ -11,13 +9,14 @@ import {
   doc,
   Firestore,
   query,
-  setDoc,
 } from '@angular/fire/firestore';
 
-import { TaskListFirestoreDoc } from '../firestore-docs/task-list.doc';
+import { map, Observable } from 'rxjs';
+
+import { AngularfireFirestoreService } from './angularfire-firestore.service';
+import { createId } from './services-util';
 
 import { TaskListListItem } from '../models/task-list-list-item.model';
-import { FirestoreUtils } from '../utils/firestore-utils';
 
 // https://firebase.google.com/docs/firestore
 // https://github.com/FirebaseExtended/rxfire
@@ -25,11 +24,17 @@ import { FirestoreUtils } from '../utils/firestore-utils';
 const DATA_COLLECTION = 'todo-lists';
 const USERS_COLLECTION = 'users';
 
+export interface FirestoreDoc {
+  id: string;
+  name: string;
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class TaskListDataService {
-  firestoreUtils = inject(FirestoreUtils);
+  //
+  private firestoreService = inject(AngularfireFirestoreService);
 
   constructor(private firestore: Firestore) {
     // console.log('==== TaskListDataService:constructor');
@@ -45,7 +50,7 @@ export class TaskListDataService {
     return path;
   }
 
-  fromFirestoreDoc(x: TaskListFirestoreDoc): TaskListListItem {
+  fromFirestoreDoc(x: FirestoreDoc): TaskListListItem {
     //
     const result: TaskListListItem = {
       id: x.id,
@@ -55,12 +60,16 @@ export class TaskListDataService {
     return result;
   }
 
-  toFirestoreDoc(item: TaskListListItem): TaskListFirestoreDoc {
+  toFirestoreDoc(item: TaskListListItem): FirestoreDoc {
     //
-    const result: TaskListFirestoreDoc = {
+    const result: FirestoreDoc = {
       id: item.id,
       name: item.name,
     };
+
+    if (item.id === '') {
+      result.id = createId();
+    }
 
     return result;
   }
@@ -96,33 +105,31 @@ export class TaskListDataService {
     //
     const firestoreDoc = this.toFirestoreDoc(item);
 
-    if (item.id === '') {
-      firestoreDoc.id = this.createId();
-    }
-
-    await setDoc(
-      doc(this.getfirestoreDocCollectionRef(userId), firestoreDoc.id),
-      firestoreDoc
+    await this.firestoreService.setDoc(
+      firestoreDoc,
+      firestoreDoc.id,
+      this.collectionPath(userId)
     );
 
     return firestoreDoc.id;
   }
-
+  /*
   private createId(): string {
     //
-    const result = this.firestoreUtils.createId();
+    const result = createId();
 
     return result;
   }
+*/
 
   private getfirestoreDocCollectionRef(
     userId: string
-  ): CollectionReference<TaskListFirestoreDoc> {
+  ): CollectionReference<FirestoreDoc> {
     // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
     const collectionReference = collection(
       this.firestore,
       this.collectionPath(userId)
-    ) as CollectionReference<TaskListFirestoreDoc>;
+    ) as CollectionReference<FirestoreDoc>;
 
     return collectionReference;
   }

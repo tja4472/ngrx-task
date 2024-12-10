@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 
 import {
   collection,
@@ -10,12 +10,13 @@ import {
   Firestore,
   orderBy,
   query,
-  setDoc,
   writeBatch,
 } from '@angular/fire/firestore';
 
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, Observable } from 'rxjs';
+
+import { AngularfireFirestoreService } from './angularfire-firestore.service';
+import { createId } from './services-util';
 
 import { CurrentTask } from '../root-store/tasks-store/models/current-task.model';
 
@@ -24,12 +25,6 @@ import { CurrentTask } from '../root-store/tasks-store/models/current-task.model
 
 const DATA_COLLECTION = 'current-todos';
 const USERS_COLLECTION = 'users';
-
-// https://github.com/angular/angularfire/blob/master/docs/version-7-upgrade.md
-// https://stackoverflow.com/questions/69859073/genrate-doc-id-in-firestore-v9-before-the-doc-is-created
-
-// https://github.com/angular/angularfire/blob/c8c8f4337e914bd6eb8f91f26cf5b04bac709e70/docs/firestore.md
-// https://dev.to/jdgamble555/angular-12-with-firebase-9-49a0
 
 export function getCurrentTasksCollectionPath(
   taskListId: string,
@@ -40,18 +35,14 @@ export function getCurrentTasksCollectionPath(
   return path;
 }
 
-export const randomCode = () => {
-  let code = '';
-  const alpha =
-    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  const codeLength = 20;
-
-  for (let i = 0; i < codeLength; i++) {
-    code += alpha.charAt(Math.floor(Math.random() * alpha.length));
-  }
-
-  return code;
-};
+export interface FirestoreDoc {
+  id: string;
+  description: string | null;
+  index: number;
+  name: string;
+  isComplete: boolean;
+  completedTimestamp: number | null | undefined;
+}
 
 export function fromFirestoreDoc(x: FirestoreDoc): CurrentTask {
   //
@@ -86,20 +77,10 @@ export function toFirestoreDoc(item: CurrentTask): FirestoreDoc {
   };
 
   if (item.id === '') {
-    // firestoreDoc.id = this.createId();
-    result.id = randomCode();
+    result.id = createId();
   }
 
   return result;
-}
-
-export interface FirestoreDoc {
-  id: string;
-  description: string | null;
-  index: number;
-  name: string;
-  isComplete: boolean;
-  completedTimestamp: number | null | undefined;
 }
 
 @Injectable({
@@ -114,6 +95,7 @@ export class CurrentTaskDataService {
   constructor(public readonly afs: AngularFirestore) {
   }
 */
+  private firestoreService = inject(AngularfireFirestoreService);
 
   constructor(private firestore: Firestore) {}
 
@@ -230,29 +212,14 @@ export class CurrentTaskDataService {
     userId: string
   ): Promise<void> {
     const firestoreDoc = toFirestoreDoc(item);
-    /*
-    if (item.id === '') {
-      firestoreDoc.id = this.createId();
-    }
-*/
 
-    await setDoc(
-      doc(
-        this.getfirestoreDocCollectionRef(taskListId, userId),
-        firestoreDoc.id
-      ),
-      firestoreDoc
+    await this.firestoreService.setDoc(
+      firestoreDoc,
+      firestoreDoc.id,
+      getCurrentTasksCollectionPath(taskListId, userId)
     );
-
-    /*
-    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-    const firestoreDocCollectionRef = collection(
-      this.firestore,
-      this.getPath(taskListId, userId)
-    ) as CollectionReference<FirestoreDoc>;
-*/
   }
-
+  /*
   // AkhRcCkUgG7FU31GDJau
   // length 21
   private createId(): string {
@@ -260,6 +227,7 @@ export class CurrentTaskDataService {
 
     return id;
   }
+*/
 
   private getfirestoreDocCollectionRef(
     taskListId: string,
