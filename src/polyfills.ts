@@ -45,6 +45,7 @@
 /***************************************************************************************************
  * Zone JS is required by default for Angular itself.
  */
+// TODO: Remove when no longer required by angularfire.
 import 'zone.js'; // Included with Angular CLI.
 
 /***************************************************************************************************

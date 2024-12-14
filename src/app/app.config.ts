@@ -2,7 +2,7 @@
 import {
   ApplicationConfig,
   isDevMode,
-  provideZoneChangeDetection,
+  provideExperimentalZonelessChangeDetection,
 } from '@angular/core';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideRouter } from '@angular/router';
@@ -49,7 +49,7 @@ const metaReducers: MetaReducer[] = !environmentService.production
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideExperimentalZonelessChangeDetection(),
     provideRouter(routes),
     provideServiceWorker('ngsw-worker.js', {
       enabled: !isDevMode(),
@@ -69,7 +69,7 @@ export const appConfig: ApplicationConfig = {
           // strictStateImmutability and strictActionImmutability are enabled by default
           strictStateSerializability: true,
           strictActionSerializability: true,
-          strictActionWithinNgZone: true,
+          // strictActionWithinNgZone: true,
           strictActionTypeUniqueness: true,
         },
       }
@@ -78,7 +78,6 @@ export const appConfig: ApplicationConfig = {
     provideStoreDevtools({
       name: 'Ng Task App',
       maxAge: 25, // Retains last 25 states
-      connectInZone: true,
     }),
     //
     provideState(authFeatureKey, authReducers),
@@ -102,28 +101,3 @@ export const appConfig: ApplicationConfig = {
     //
   ],
 };
-
-/*
-import {
-  ApplicationConfig,
-  provideZoneChangeDetection,
-  isDevMode,
-} from '@angular/core';
-import { provideRouter } from '@angular/router';
-
-import { routes } from './app.routes';
-import { provideServiceWorker } from '@angular/service-worker';
-
-export const appConfig: ApplicationConfig = {
-  providers: [
-    provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes),
-    provideServiceWorker('ngsw-worker.js', {
-      enabled: !isDevMode(),
-      registrationStrategy: 'registerWhenStable:30000',
-    }),
-  ],
-};
-
-
-*/
