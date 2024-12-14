@@ -1,6 +1,6 @@
 <app-task-list-detail-edit
   [completedTask]="(task$ | async)!"
-  (cancel)="viewCancelled($event)"
+  (cancelClicked)="viewCancelled($event)"
   (remove)="viewRemoved($event)"
   (checkout)="viewSaved($event)"
 >

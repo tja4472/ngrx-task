@@ -40,7 +40,7 @@ import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 })
 export class CompletedTaskDetailEditComponent implements OnInit {
   completedTask = input.required<CompletedTask>();
-  cancel = output<CompletedTask>();
+  cancelA = output<CompletedTask>();
   remove = output<CompletedTask>();
   checkout = output<CompletedTask>();
 
@@ -59,7 +59,7 @@ export class CompletedTaskDetailEditComponent implements OnInit {
   }
 
   cancelClick() {
-    this.cancel.emit(this.completedTask());
+    this.cancelA.emit(this.completedTask());
   }
 
   removeClick() {

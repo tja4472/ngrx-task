@@ -38,7 +38,7 @@ import { NgIf } from '@angular/common';
 })
 export class TaskListDetailNewComponent implements OnInit {
   completedTask = input.required<TaskListListItem>();
-  cancel = output<TaskListListItem>();
+  cancelClicked = output<TaskListListItem>();
   checkout = output<TaskListListItem>();
 
   get checkoutForm() {
@@ -52,7 +52,7 @@ export class TaskListDetailNewComponent implements OnInit {
   }
 
   cancelClick() {
-    this.cancel.emit(this.completedTask());
+    this.cancelClicked.emit(this.completedTask());
   }
 
   onSubmit() {

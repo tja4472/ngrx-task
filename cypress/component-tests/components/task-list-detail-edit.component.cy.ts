@@ -63,7 +63,7 @@ function getConfig(
     imports: [BrowserAnimationsModule, CommonModule, ReactiveFormsModule],
     componentProperties: {
       completedTask: completedTask,
-      cancel: createOutputSpy<TaskListListItem>(spyAliases.cancel),
+      cancelClicked: createOutputSpy<TaskListListItem>(spyAliases.cancel),
       remove: createOutputSpy<TaskListListItem>(spyAliases.remove),
       checkout: createOutputSpy<TaskListListItem>(spyAliases.checkout),
     },

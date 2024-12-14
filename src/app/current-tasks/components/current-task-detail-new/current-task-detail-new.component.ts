@@ -43,7 +43,7 @@ import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 export class CurrentTaskDetailNewComponent implements OnInit {
   todo = input.required<CurrentTask>();
 
-  cancel = output<CurrentTask>();
+  cancelClicked = output<CurrentTask>();
   checkout = output<CurrentTask>();
 
   get checkoutForm() {
@@ -57,7 +57,7 @@ export class CurrentTaskDetailNewComponent implements OnInit {
   }
 
   cancelClick() {
-    this.cancel.emit(this.todo());
+    this.cancelClicked.emit(this.todo());
   }
 
   onSubmit() {

@@ -69,14 +69,17 @@ describe('StepperComponent', () => {
 
   it('0-clicking + fires a change event with the incremented value', () => {
     // Arrange
-    cy.mount('<app-stepper (change)="change.emit($event)"></app-stepper>', {
-      componentProperties: {
-        change: {
-          emit: cy.spy().as('changeSpy'),
+    cy.mount(
+      '<app-stepper (countChanged)="change.emit($event)"></app-stepper>',
+      {
+        componentProperties: {
+          change: {
+            emit: cy.spy().as('changeSpy'),
+          },
         },
-      },
-      declarations: [StepperComponent],
-    });
+        declarations: [StepperComponent],
+      }
+    );
     // Act
     cy.get(incrementSelector).click();
     // Assert
@@ -85,7 +88,7 @@ describe('StepperComponent', () => {
 
   it('1-clicking + fires a change event with the incremented value', () => {
     cy.mount(
-      '<app-stepper initalCount="100" (change)="change.emit($event)"></app-stepper>',
+      '<app-stepper initalCount="100" (countChanged)="change.emit($event)"></app-stepper>',
       {
         componentProperties: { change: new EventEmitter() },
         declarations: [StepperComponent],
@@ -101,12 +104,15 @@ describe('StepperComponent', () => {
 
   it('2-clicking + fires a change event with the incremented value', () => {
     // Arrange
-    cy.mount('<app-stepper (change)="change.emit($event)"></app-stepper>', {
-      declarations: [StepperComponent],
-      componentProperties: {
-        change: createOutputSpy<boolean>('changeSpy'),
-      },
-    });
+    cy.mount(
+      '<app-stepper (countChanged)="change.emit($event)"></app-stepper>',
+      {
+        declarations: [StepperComponent],
+        componentProperties: {
+          change: createOutputSpy<boolean>('changeSpy'),
+        },
+      }
+    );
     cy.get(incrementSelector).click();
     cy.get('@changeSpy').should('have.been.called');
   });

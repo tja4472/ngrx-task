@@ -68,7 +68,7 @@ function getConfig(
     imports: [BrowserAnimationsModule, CommonModule, ReactiveFormsModule],
     componentProperties: {
       todo: todoTask,
-      cancel: createOutputSpy<CurrentTask>(spyAliases.cancel),
+      cancelClicked: createOutputSpy<CurrentTask>(spyAliases.cancel),
       checkout: createOutputSpy<CurrentTask>(spyAliases.checkout),
     },
   };

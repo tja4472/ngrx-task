@@ -14,7 +14,7 @@ import { Component, effect, input, output } from '@angular/core';
 export class StepperComponent {
   initalCount = input(0);
 
-  change = output<number>();
+  countChanged = output<number>();
 
   count = 0;
 
@@ -26,11 +26,11 @@ export class StepperComponent {
 
   increment(): void {
     this.count++;
-    this.change.emit(this.count);
+    this.countChanged.emit(this.count);
   }
 
   decrement(): void {
     this.count--;
-    this.change.emit(this.count);
+    this.countChanged.emit(this.count);
   }
 }

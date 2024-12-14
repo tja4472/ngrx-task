@@ -38,7 +38,7 @@ import { MatButton } from '@angular/material/button';
 })
 export class TaskListDetailEditComponent implements OnInit {
   completedTask = input.required<TaskListListItem>();
-  cancel = output<TaskListListItem>();
+  cancelClicked = output<TaskListListItem>();
   remove = output<TaskListListItem>();
   checkout = output<TaskListListItem>();
 
@@ -58,7 +58,7 @@ export class TaskListDetailEditComponent implements OnInit {
   }
 
   cancelClick() {
-    this.cancel.emit(this.completedTask());
+    this.cancelClicked.emit(this.completedTask());
   }
 
   removeClick() {
