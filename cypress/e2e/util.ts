@@ -25,6 +25,16 @@ export const currentTask3: Readonly<CurrentTask> = {
   description: 'Description3333',
 };
 
+export const currentTask4: Readonly<CurrentTask> = {
+  name: 'Na1111',
+  description: 'Description3333',
+};
+
+export const currentTask5: Readonly<CurrentTask> = {
+  name: 'Na2222',
+  description: 'Description3333',
+};
+
 type DataTestIdNames =
   | 'cancelButton'
   | 'descriptionTextarea'

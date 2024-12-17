@@ -7,7 +7,7 @@ import * as HomePageActions from '../actions/home-page.actions';
 @Component({
   selector: 'app-home-page',
   template: `
-    Home Page
+    Home Page - Latest
 
     <button data-test="sign-out-button" (click)="viewSignOutClicked()">
       Sign Out

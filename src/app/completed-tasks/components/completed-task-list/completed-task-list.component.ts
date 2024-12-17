@@ -1,6 +1,13 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/no-useless-constructor */
-import { Component, effect, input, output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  effect,
+  input,
+  output,
+} from '@angular/core';
 
 import { pathPrefix, routeNames } from '@app/app-route-names';
 import { CompletedTask } from '@app/root-store/tasks-store/models/completed-task.model';
@@ -21,6 +28,7 @@ interface GroupTasksByDate {
   selector: 'app-completed-task-list',
   templateUrl: './completed-task-list.component.html',
   styleUrls: ['./completed-task-list.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [MatList, NgFor, MatListItem, MatCheckbox, RouterLink, MatDivider],
 })
@@ -28,30 +36,18 @@ export class CompletedTaskListComponent {
   private inputCurrentTasks!: CompletedTask[];
 
   currentTasks = input.required<CompletedTask[]>();
-  /*  
-  @Input()
-  set currentTasks(tasks: CompletedTask[]) {
-    this.inputCurrentTasks = tasks;
-
-    this.viewGroupByDateArray = this.convertToGroupByDateArray(tasks);
-  }
-
-
-  get currentTasks(): CompletedTask[] {
-    return this.inputCurrentTasks;
-  }
-*/
 
   toggleCompleteItem = output<CompletedTask>();
 
   viewGroupByDateArray: GroupTasksByDate[] = [];
 
-  constructor() {
+  constructor(private cdr: ChangeDetectorRef) {
     effect(() => {
       this.inputCurrentTasks = this.currentTasks();
       this.viewGroupByDateArray = this.convertToGroupByDateArray(
         this.inputCurrentTasks
       );
+      this.cdr.markForCheck();
     });
   }
 
