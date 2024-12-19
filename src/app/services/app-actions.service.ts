@@ -10,10 +10,11 @@ export class AppActionsService {
 
   constructor(private authService: AuthService) {
     // For Cypress app actions
+    /*
     if (window.Cypress) {
       window.AppActionsService = this;
     }
-
+*/
     this.property = 'appActionsTestServiceProperty';
   }
 

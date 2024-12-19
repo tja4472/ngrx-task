@@ -8,7 +8,6 @@ import {
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SwUpdate } from '@angular/service-worker';
 
-import { AppActionsService } from '@app/services/app-actions.service';
 import { SidenavComponent } from '../components/sidenav/sidenav.component';
 
 @Component({
@@ -23,11 +22,8 @@ export class AppComponent implements OnInit {
   constructor(
     // analytics: AngularFireAnalytics,
     private swUpdate: SwUpdate,
-    private snackBar: MatSnackBar,
-    // For Cypress app actions
-    private appActionsService: AppActionsService // logUpdateService: LogUpdateService
+    private snackBar: MatSnackBar
   ) {
-    // const dummy = appActionsService.property;
     // analytics.logEvent('start_game', { level: '10', difficulty: 'expert' });
   }
 

@@ -32,6 +32,7 @@
           },
           "configurations": {
             "production": {
+              "define": { "DEBUG": "false" },
               "budgets": [
                 {
                   "type": "initial",
@@ -53,6 +54,7 @@
               "outputHashing": "all"
             },
             "development": {
+              "define": { "DEBUG": "true" },
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true,
@@ -65,6 +67,7 @@
               ]
             },
             "emulator-demo": {
+              "define": { "DEBUG": "true" },
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true,
