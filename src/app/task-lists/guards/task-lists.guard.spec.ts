@@ -7,9 +7,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 // TODO: Remove eslint-disable
 
-/**
- * @jest-environment jsdom
- */
 import { TestBed } from '@angular/core/testing';
 import { CanMatchFn, Route, UrlSegment } from '@angular/router';
 
