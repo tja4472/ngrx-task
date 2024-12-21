@@ -9,7 +9,7 @@ const presetConfig = presets.createCjsPreset({
 
 const jestConfig: Config = {
   ...presetConfig,
-  setupFiles: ['./jest.polyfills.js'],
+  // setupFiles: ['./jest.polyfills.js'],
   setupFilesAfterEnv: ['<rootDir>/setup-jest.ts'],
   // globalSetup: 'jest-preset-angular/global-setup',
   testPathIgnorePatterns: ['<rootDir>/cypress/'],
@@ -26,7 +26,8 @@ const jestConfig: Config = {
     '^@app/(.*)$': '<rootDir>/src/app/$1',
   },
   resolver: '<rootDir>/jest-resolver.js',
-  testEnvironment: 'jsdom',
+  // https://github.com/mswjs/jest-fixed-jsdom
+  testEnvironment: 'jest-fixed-jsdom',
 };
 
 export default jestConfig;
