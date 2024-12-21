@@ -21,6 +21,7 @@ import { newUserInfo } from '@app/models/user-info.model';
 
 import { TaskListListItem } from '@app/models/task-list-list-item.model';
 import { TaskListDataService } from '@app/services/task-list.data.service';
+import { injectAuth, user$ } from '@app/rxfire/auth';
 
 // https://firebase.google.com/docs/web/modular-upgrade?authuser=0
 // https://github.com/angular/angularfire/blob/master/docs/version-7-upgrade.md
@@ -29,6 +30,9 @@ import { TaskListDataService } from '@app/services/task-list.data.service';
   providedIn: 'root',
 })
 export class AuthService {
+  //
+  readonly #auth = injectAuth();
+    
   public redirectUrl = '';
 
   get appUser$(): Observable<AppUser | null> {
@@ -47,7 +51,7 @@ export class AuthService {
         if (user === null) {
           return of(null);
         } else {
-          return this.userInfoDataService.getItem$(user.uid).pipe(
+          return this.userInfoDataService.getData$(user.uid).pipe(
             // Stop listening for changes.
             first(),
             map((userInfo) => {
@@ -66,6 +70,12 @@ export class AuthService {
         }
       })
     );
+
+    // rxfire
+    user$(this.#auth).subscribe(x => {
+      //
+      console.log('>>>>>>>>>rxfire', x?.email)
+    })
   }
 
   async bbbsignIn(email: string, password: string): Promise<UserCredential> {

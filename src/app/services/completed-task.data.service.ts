@@ -1,16 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
 import { inject, Injectable } from '@angular/core';
 
-import {
-  collection,
-  collectionData,
-  CollectionReference,
-  deleteDoc,
-  doc,
-  Firestore,
-  query,
-} from '@angular/fire/firestore';
-
 import { map, Observable } from 'rxjs';
 
 import { AngularfireFirestoreService } from './angularfire-firestore.service';
@@ -21,20 +11,8 @@ import {
   newCompletedTask,
 } from '../root-store/tasks-store/models/completed-task.model';
 
-// https://firebase.google.com/docs/firestore
-// https://github.com/FirebaseExtended/rxfire
-
 const DATA_COLLECTION = 'completed-todos';
 const USERS_COLLECTION = 'users';
-
-export function getCompletedTasksCollectionPath(
-  taskListId: string,
-  userId: string
-): string {
-  const path = `/${USERS_COLLECTION}/${userId}/todo-lists/${taskListId}/${DATA_COLLECTION}`;
-
-  return path;
-}
 
 export interface FirestoreDoc {
   id: string;
@@ -50,117 +28,17 @@ export interface FirestoreDoc {
 })
 export class CompletedTaskDataService {
   //
-  private firestoreService = inject(AngularfireFirestoreService);
+  readonly #firestoreService = inject(AngularfireFirestoreService);
 
-  constructor(private firestore: Firestore) {}
-
-  public getData(
-    taskListId: string,
-    userId: string
-  ): Observable<CompletedTask[]> {
+  collectionPath(taskListId: string, userId: string): string {
     //
-    /*    
-    return this.angularFirestoreCollection(taskListId, userId)
-      .valueChanges()
-      .pipe(
-        map((items) =>
-          items.map((item) => {
-            return this.fromFirestoreDoc(item);
-          })
-        )
-      );
-*/
-    const firestoreDocQuery = query(
-      this.getfirestoreDocCollectionRef(taskListId, userId)
-    );
+    const path = `/${USERS_COLLECTION}/${userId}/todo-lists/${taskListId}/${DATA_COLLECTION}`;
 
-    const modular$ = collectionData(firestoreDocQuery).pipe(
-      map((items) =>
-        items.map((item) => {
-          return this.fromFirestoreDoc(item);
-        })
-      )
-    );
-
-    return modular$;
-  }
-
-  public async removeItem(
-    id: string,
-    taskListId: string,
-    userId: string
-  ): Promise<void> {
-    // await this.angularFirestoreCollection(taskListId, userId).doc(id).delete();
-    const documentReference = doc(
-      this.getfirestoreDocCollectionRef(taskListId, userId),
-      id
-    );
-    await deleteDoc(documentReference);
-  }
-
-  public async save(
-    item: CompletedTask,
-    taskListId: string,
-    userId: string
-  ): Promise<void> {
-    const firestoreDoc = this.toFirestoreDoc(item);
-
-    await this.firestoreService.setDoc(
-      firestoreDoc,
-      firestoreDoc.id,
-      getCompletedTasksCollectionPath(taskListId, userId)
-    );
-  }
-  /*
-  private createId(): string {
-    const id = doc(collection(this.firestore, 'id')).id;
-
-    return id;
-  }
-*/
-
-  private getfirestoreDocCollectionRef(
-    taskListId: string,
-    userId: string
-  ): CollectionReference<FirestoreDoc> {
-    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-    const collectionReference = collection(
-      this.firestore,
-      getCompletedTasksCollectionPath(taskListId, userId)
-    ) as CollectionReference<FirestoreDoc>;
-
-    return collectionReference;
-  }
-  /*
-  private angularFirestoreCollection(
-    taskListId: string,
-    userId: string
-  ): AngularFirestoreCollection<FirestoreDoc> {
-    //
-    return this.afs.collection<FirestoreDoc>(
-      getCompletedTasksCollectionPath(taskListId, userId)
-    );
-  }
-*/
-  private toFirestoreDoc(item: CompletedTask): FirestoreDoc {
-    //
-    const result: FirestoreDoc = {
-      description: item.description,
-      id: item.id,
-      isComplete: item.isComplete,
-      completedTimestamp: item.completedTimestamp,
-      name: item.name,
-      updatedTimestamp: Date.now(),
-    };
-
-    if (item.id === '') {
-      result.id = createId();
-    }
-
-    return result;
+    return path;
   }
 
   private fromFirestoreDoc(x: FirestoreDoc): CompletedTask {
+    //
     // Temp fix till all records in database updated.
     let completedTimestamp = x.completedTimestamp;
     let updatedTimestamp = x.updatedTimestamp;
@@ -183,5 +61,68 @@ export class CompletedTaskDataService {
     };
 
     return result;
+  }
+
+  private toFirestoreDoc(item: CompletedTask): FirestoreDoc {
+    //
+    const result: FirestoreDoc = {
+      description: item.description,
+      id: item.id,
+      isComplete: item.isComplete,
+      completedTimestamp: item.completedTimestamp,
+      name: item.name,
+      updatedTimestamp: Date.now(),
+    };
+
+    if (item.id === '') {
+      result.id = createId();
+    }
+
+    return result;
+  }
+
+  public getData$(
+    taskListId: string,
+    userId: string
+  ): Observable<CompletedTask[]> {
+    //
+    const modular$ = this.#firestoreService
+      .collectionData<FirestoreDoc>(this.collectionPath(taskListId, userId))
+      .pipe(
+        map((items) =>
+          items.map((item) => {
+            return this.fromFirestoreDoc(item);
+          })
+        )
+      );
+
+    return modular$;
+  }
+
+  public async removeItem(
+    id: string,
+    taskListId: string,
+    userId: string
+  ): Promise<void> {
+    //
+    await this.#firestoreService.deleteDoc(
+      id,
+      this.collectionPath(taskListId, userId)
+    );
+  }
+
+  public async save(
+    item: CompletedTask,
+    taskListId: string,
+    userId: string
+  ): Promise<void> {
+    //
+    const firestoreDoc = this.toFirestoreDoc(item);
+
+    await this.#firestoreService.setDoc(
+      firestoreDoc,
+      firestoreDoc.id,
+      this.collectionPath(taskListId, userId)
+    );
   }
 }

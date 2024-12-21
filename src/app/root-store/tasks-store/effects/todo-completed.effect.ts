@@ -49,7 +49,7 @@ export class TodoCompletedEffects {
               const result: CompletedTask[] = [];
               return of(result);
             }
-            return this.dataService.getData(a.taskListId, a.user.id);
+            return this.dataService.getData$(a.taskListId, a.user.id);
           }),
           takeUntil(
             this.actions$.pipe(ofType(CompletedTasksRootActions.destroyed))

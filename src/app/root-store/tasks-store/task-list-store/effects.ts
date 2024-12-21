@@ -66,7 +66,7 @@ export class TaskListEffects {
       filter((user) => user !== null),
       switchMap((user) => {
         return this.dataService
-          .getData(user.id)
+          .getData$(user.id)
           .pipe(
             takeUntil(this.actions$.pipe(ofType(AuthActions.signOutComplete)))
           );

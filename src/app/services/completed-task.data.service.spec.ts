@@ -3,18 +3,19 @@ import { TestBed } from '@angular/core/testing';
 
 import { Firestore } from '@angular/fire/firestore';
 
+import { of } from 'rxjs';
+
 import { AngularfireFirestoreService } from './angularfire-firestore.service';
 import * as ServicesUtil from './services-util';
 
 import {
   CompletedTaskDataService,
   FirestoreDoc,
-  getCompletedTasksCollectionPath,
 } from './completed-task.data.service';
 
 import { CompletedTask } from '../root-store/tasks-store/models/completed-task.model';
 
-describe('Using mocked Firestore', () => {
+describe('completed-task.data.service', () => {
   //
   function setup() {
     //
@@ -33,15 +34,84 @@ describe('Using mocked Firestore', () => {
     });
 
     const service = TestBed.inject(CompletedTaskDataService);
-
     const firestoreService = TestBed.inject(AngularfireFirestoreService);
+
+    const spy_firestoreCollectionData = jest.spyOn(
+      firestoreService,
+      'collectionData'
+    );
+    spy_firestoreCollectionData.mockReturnValue(of());
+
+    const spy_firestoreDeleteDoc = jest.spyOn(firestoreService, 'deleteDoc');
+    spy_firestoreDeleteDoc.mockResolvedValue(undefined);
+
     const spy_firestoreSetDoc = jest.spyOn(firestoreService, 'setDoc');
     spy_firestoreSetDoc.mockResolvedValue(undefined);
 
-    return { service, spy_firestoreSetDoc };
+    return {
+      service,
+      spy_firestoreCollectionData,
+      spy_firestoreDeleteDoc,
+      spy_firestoreSetDoc,
+    };
   }
 
-  it('insert', async () => {
+  it('Completed tasks collection path should be correct', () => {
+    //
+    const { service } = setup();
+
+    const expectedCollectionPath =
+      '/users/USER_ID/todo-lists/TASKLIST_ID/completed-todos';
+
+    const actualCollectionPath = service.collectionPath(
+      'TASKLIST_ID',
+      'USER_ID'
+    );
+
+    expect(actualCollectionPath).toBe(expectedCollectionPath);
+  });
+
+  it('getData$:collectionData', () => {
+    //
+    const { service, spy_firestoreCollectionData } = setup();
+
+    const expectedCollectionPath =
+      '/users/USER_ID/todo-lists/TASKLIST_ID/completed-todos';
+
+    const taskListId = 'TASKLIST_ID';
+    const userId = 'USER_ID';
+
+    service.getData$(taskListId, userId);
+
+    expect(spy_firestoreCollectionData).toHaveBeenCalledTimes(1);
+    expect(spy_firestoreCollectionData).toHaveBeenCalledWith(
+      expectedCollectionPath
+    );
+  });
+
+  it('removeItem:deleteDoc', async () => {
+    //
+    const { service, spy_firestoreDeleteDoc } = setup();
+
+    const expectedCollectionPath =
+      '/users/USER_ID/todo-lists/TASKLIST_ID/completed-todos';
+    const expectedDocumentPath = 'DOC_ID';
+
+    const taskListId = 'TASKLIST_ID';
+    const userId = 'USER_ID';
+
+    const itemId = 'DOC_ID';
+
+    await service.removeItem(itemId, taskListId, userId);
+
+    expect(spy_firestoreDeleteDoc).toHaveBeenCalledTimes(1);
+    expect(spy_firestoreDeleteDoc).toHaveBeenCalledWith(
+      expectedDocumentPath,
+      expectedCollectionPath
+    );
+  });
+
+  it('save:setDoc insert', async () => {
     //
     const { service, spy_firestoreSetDoc } = setup();
 
@@ -81,7 +151,7 @@ describe('Using mocked Firestore', () => {
     );
   });
 
-  it('update', async () => {
+  it('save:setDoc update', async () => {
     //
     const { service, spy_firestoreSetDoc } = setup();
 
@@ -116,18 +186,5 @@ describe('Using mocked Firestore', () => {
       expectedDocumentPath,
       expectedCollectionPath
     );
-  });
-});
-
-describe('completed-task.data.service', () => {
-  it('Completed tasks collection path should be correct', () => {
-    const collectionPath = getCompletedTasksCollectionPath(
-      'taskListId',
-      'userId'
-    );
-    const expectedCollectionPath =
-      '/users/userId/todo-lists/taskListId/completed-todos';
-
-    expect(collectionPath).toBe(expectedCollectionPath);
   });
 });
