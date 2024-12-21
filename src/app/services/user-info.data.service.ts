@@ -4,7 +4,7 @@ import { inject, Injectable } from '@angular/core';
 
 import { map, Observable } from 'rxjs';
 
-import { AngularfireFirestoreService } from './angularfire-firestore.service';
+import { FirestoreService } from './firestore.service';
 
 import { UserInfo } from '@app/models/user-info.model';
 
@@ -18,7 +18,7 @@ export interface FirestoreDoc {
 })
 export class UserInfoDataService {
   //
-  readonly #firestoreService = inject(AngularfireFirestoreService);
+  readonly #firestoreService = inject(FirestoreService);
 
   collectionPath(): string {
     //

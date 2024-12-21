@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { TestBed } from '@angular/core/testing';
 
-import { Firestore } from '@angular/fire/firestore';
+import { Firestore } from 'firebase/firestore';
 
 import { of } from 'rxjs';
 
-import { AngularfireFirestoreService } from './angularfire-firestore.service';
+import { FirestoreService } from './firestore.service';
 import * as ServicesUtil from './services-util';
 
 import {
@@ -24,13 +24,13 @@ describe('CurrentTaskDataService', () => {
     TestBed.configureTestingModule({
       providers: [
         CurrentTaskDataService,
-        AngularfireFirestoreService,
+        FirestoreService,
         { provide: Firestore, useValue: mockedFirestore },
       ],
     });
 
     const service = TestBed.inject(CurrentTaskDataService);
-    const firestoreService = TestBed.inject(AngularfireFirestoreService);
+    const firestoreService = TestBed.inject(FirestoreService);
 
     const spy_firestoreCollectionData = jest.spyOn(
       firestoreService,
@@ -59,7 +59,10 @@ describe('CurrentTaskDataService', () => {
     const expectedCollectionPath =
       '/users/USER_ID/todo-lists/TASKLIST_ID/current-todos';
 
-    const actualCollectionPath = service.collectionPath('TASKLIST_ID', 'USER_ID');
+    const actualCollectionPath = service.collectionPath(
+      'TASKLIST_ID',
+      'USER_ID'
+    );
 
     expect(actualCollectionPath).toBe(expectedCollectionPath);
   });

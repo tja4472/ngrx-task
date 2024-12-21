@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { TestBed } from '@angular/core/testing';
 
-import { Firestore } from '@angular/fire/firestore';
+import { Firestore } from 'firebase/firestore';
 
 import { of } from 'rxjs';
 
-import { AngularfireFirestoreService } from './angularfire-firestore.service';
+import { FirestoreService } from './firestore.service';
 import * as ServicesUtil from './services-util';
 
 import {
@@ -28,13 +28,13 @@ describe('completed-task.data.service', () => {
     TestBed.configureTestingModule({
       providers: [
         CompletedTaskDataService,
-        AngularfireFirestoreService,
+        FirestoreService,
         { provide: Firestore, useValue: mockedFirestore },
       ],
     });
 
     const service = TestBed.inject(CompletedTaskDataService);
-    const firestoreService = TestBed.inject(AngularfireFirestoreService);
+    const firestoreService = TestBed.inject(FirestoreService);
 
     const spy_firestoreCollectionData = jest.spyOn(
       firestoreService,

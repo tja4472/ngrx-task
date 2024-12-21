@@ -3,7 +3,7 @@ import { inject, Injectable } from '@angular/core';
 
 import { map, Observable } from 'rxjs';
 
-import { AngularfireFirestoreService } from './angularfire-firestore.service';
+import { FirestoreService } from './firestore.service';
 import { createId } from './services-util';
 
 import { CurrentTask } from '../root-store/tasks-store/models/current-task.model';
@@ -25,7 +25,7 @@ export interface FirestoreDoc {
 })
 export class CurrentTaskDataService {
   //
-  readonly #firestoreService = inject(AngularfireFirestoreService);
+  readonly #firestoreService = inject(FirestoreService);
 
   collectionPath(taskListId: string, userId: string): string {
     //

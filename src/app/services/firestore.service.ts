@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/consistent-type-assertions */
-import { inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 import {
   collection,
-  collectionData,
   CollectionReference,
   deleteDoc,
   doc,
@@ -11,16 +10,19 @@ import {
   setDoc,
   query,
   orderBy,
-  docData,
   writeBatch,
-} from '@angular/fire/firestore';
+} from 'firebase/firestore';
+
+import { collectionData, docData } from 'rxfire/firestore';
+
+import { injectFirestore } from '@app/rxfire/firestore';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AngularfireFirestoreService {
+export class FirestoreService {
   //
-  readonly #firestore: Firestore = inject(Firestore);
+  readonly #firestore: Firestore = injectFirestore();
 
   public collectionData<T>(collectionPath: string, orderbyField = '') {
     //

@@ -1,15 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
 /* eslint-disable @typescript-eslint/no-empty-function */
-import { Injectable, Optional } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 import {
-  Auth,
-  authState,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   UserCredential,
   signOut,
-} from '@angular/fire/auth';
+} from 'firebase/auth';
 
 import { from, Observable, of } from 'rxjs';
 import { first, map, switchMap } from 'rxjs/operators';
@@ -23,16 +21,13 @@ import { TaskListListItem } from '@app/models/task-list-list-item.model';
 import { TaskListDataService } from '@app/services/task-list.data.service';
 import { injectAuth, user$ } from '@app/rxfire/auth';
 
-// https://firebase.google.com/docs/web/modular-upgrade?authuser=0
-// https://github.com/angular/angularfire/blob/master/docs/version-7-upgrade.md
-
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   //
   readonly #auth = injectAuth();
-    
+
   public redirectUrl = '';
 
   get appUser$(): Observable<AppUser | null> {
@@ -42,11 +37,11 @@ export class AuthService {
   #appUser$: Observable<AppUser | null>;
 
   constructor(
-    @Optional() private auth: Auth,
+    // @Optional() private auth: Auth,
     private taskListDataService: TaskListDataService,
     private userInfoDataService: UserInfoDataService
   ) {
-    this.#appUser$ = authState(this.auth).pipe(
+    this.#appUser$ = user$(this.#auth).pipe(
       switchMap((user) => {
         if (user === null) {
           return of(null);
@@ -70,17 +65,11 @@ export class AuthService {
         }
       })
     );
-
-    // rxfire
-    user$(this.#auth).subscribe(x => {
-      //
-      console.log('>>>>>>>>>rxfire', x?.email)
-    })
   }
 
   async bbbsignIn(email: string, password: string): Promise<UserCredential> {
     console.log('bbbsignIn');
-    return await signInWithEmailAndPassword(this.auth, email, password);
+    return await signInWithEmailAndPassword(this.#auth, email, password);
   }
 
   /**
@@ -91,7 +80,7 @@ export class AuthService {
    */
   async signIn(email: string, password: string): Promise<UserCredential> {
     try {
-      return await signInWithEmailAndPassword(this.auth, email, password);
+      return await signInWithEmailAndPassword(this.#auth, email, password);
     } catch (error: unknown) {
       const processedError = this.processError(error);
       throw processedError;
@@ -102,7 +91,7 @@ export class AuthService {
 
   async signOut(): Promise<void> {
     try {
-      await signOut(this.auth);
+      await signOut(this.#auth);
       return;
     } catch (error: unknown) {
       const processedError = this.processError(error);
@@ -126,7 +115,7 @@ export class AuthService {
   }
 
   ddddsignIn() {
-    signInWithEmailAndPassword(this.auth, 'email', 'password')
+    signInWithEmailAndPassword(this.#auth, 'email', 'password')
       /*    
       .then((cred) => {
         console.log('Signed in>', cred);
@@ -150,7 +139,7 @@ export class AuthService {
   }
 
   signInAAA() {
-    signInWithEmailAndPassword(this.auth, 'email', 'password')
+    signInWithEmailAndPassword(this.#auth, 'email', 'password')
       .then((cred) => {
         console.log('Signed in>', cred);
       })
@@ -159,13 +148,13 @@ export class AuthService {
 
   // firebase.FirebaseError
   login(email: string, password: string) {
-    return from(signInWithEmailAndPassword(this.auth, email, password));
+    return from(signInWithEmailAndPassword(this.#auth, email, password));
   }
 
   public async signUp(email: string, password: string) {
     console.log('KKKKKKKKKKKKKKKKKKKKKKKKK-signUp-A');
     const userCredential = await createUserWithEmailAndPassword(
-      this.auth,
+      this.#auth,
       email,
       password
     );

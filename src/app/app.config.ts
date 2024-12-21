@@ -38,7 +38,6 @@ import {
   userStoreFeatureKey,
   reducer,
 } from '@app/root-store/user-store/user-store.reducer';
-import { appFirebaseProviders } from './app-firebase.providers';
 //
 
 const environmentService = new EnvironmentService();
@@ -96,8 +95,5 @@ export const appConfig: ApplicationConfig = {
     //
     provideState(userStoreFeatureKey, reducer),
     provideEffects(UserStoreEffects),
-    //
-    ...appFirebaseProviders,
-    //
   ],
 };

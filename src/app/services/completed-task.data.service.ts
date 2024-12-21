@@ -3,7 +3,7 @@ import { inject, Injectable } from '@angular/core';
 
 import { map, Observable } from 'rxjs';
 
-import { AngularfireFirestoreService } from './angularfire-firestore.service';
+import { FirestoreService } from './firestore.service';
 import { createId } from './services-util';
 
 import {
@@ -28,7 +28,7 @@ export interface FirestoreDoc {
 })
 export class CompletedTaskDataService {
   //
-  readonly #firestoreService = inject(AngularfireFirestoreService);
+  readonly #firestoreService = inject(FirestoreService);
 
   collectionPath(taskListId: string, userId: string): string {
     //

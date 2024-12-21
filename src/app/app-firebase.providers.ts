@@ -1,3 +1,4 @@
+/*
 import { EnvironmentService } from '@app/environment.service';
 
 import {
@@ -42,8 +43,5 @@ export const appFirebaseProviders = [
       firestore = initializeFirestore(app, {
         localCache: persistentLocalCache(),
       });
-    }
-
-    return firestore;
-  }),
-];
+    }    
+      */
