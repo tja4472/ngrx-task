@@ -9,19 +9,19 @@ import { filter, pipe, switchMap, tap } from 'rxjs';
 import { CurrentTask } from '@app/root-store/tasks-store/models/current-task.model';
 import { CurrentTaskDataService } from '@app/services/current-task.data.service';
 
-import { AuthStore } from './auth.store';
+import { AuthStatus, AuthStore } from './auth.store';
 import { UserInfoStore } from './user-info.store';
 
 interface CurrentTaskState {
   currentTasks: CurrentTask[];
   error: string | null;
-  isLoading: boolean;
+  isLoaded: boolean;
 }
 
 const initialState: CurrentTaskState = {
   currentTasks: [],
   error: null,
-  isLoading: false,
+  isLoaded: false,
 };
 
 interface SessionType {
@@ -42,15 +42,15 @@ export class CurrentTaskStore {
 
   readonly #dataService = inject(CurrentTaskDataService);
 
-  readonly currentTasks = this.#state.currentTasks;
-  readonly error = this.#state.error;
-  readonly isLoading = this.#state.isLoading;
+  readonly $currentTasks = this.#state.currentTasks;
+  readonly $error = this.#state.error;
+  readonly $isLoaded = this.#state.isLoaded;
 
   private readonly $session = computed(() => {
     //
     const result: SessionType = {
-      isSignedIn: !!untracked(this.#authStore.$userId),
-      userId: untracked(this.#authStore.$userId) ?? '',
+      isSignedIn: untracked(this.#authStore.$status) === 'SignedIn',
+      userId: untracked(this.#authStore.$userId),
       todoListId: this.#userInfoStore.$todoListId() ?? '',
     };
 
@@ -68,7 +68,7 @@ export class CurrentTaskStore {
               next: (items) => {
                 patchState(this.#state, {
                   currentTasks: items,
-                  isLoading: false,
+                  isLoaded: true,
                 });
               },
               error: console.error,
@@ -78,11 +78,11 @@ export class CurrentTaskStore {
     )
   );
 
-  private readonly $clearStore = rxMethod<string | null>(
+  private readonly $clearStore = rxMethod<AuthStatus>(
     pipe(
-      filter((userId) => !userId),
+      filter((status) => status === 'SignedOut'),
       tap(() => {
-        patchState(this.#state, { currentTasks: [], isLoading: false });
+        patchState(this.#state, { currentTasks: [], isLoaded: false });
       })
     )
   );
@@ -90,6 +90,6 @@ export class CurrentTaskStore {
   constructor() {
     //
     this.$updateStore(this.$session);
-    this.$clearStore(this.#authStore.$userId);
+    this.$clearStore(this.#authStore.$status);
   }
 }

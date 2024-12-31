@@ -12,14 +12,18 @@ import { injectAuth, user$ } from '@app/rxfire/auth';
 
 export type AuthUser = User | null | undefined;
 
+export type AuthStatus = 'Undefined' | 'SignedIn' | 'SignedOut';
+
 interface AuthState {
-  email: string | null;
-  userId: string | null;
+  email: string;
+  userId: string;
+  status: AuthStatus;
 }
 
 const initialState: AuthState = {
-  email: null,
-  userId: null,
+  email: '',
+  userId: '',
+  status: 'Undefined',
 };
 
 @Injectable({
@@ -30,7 +34,8 @@ export class AuthStore {
   readonly #state = signalState(initialState);
   readonly #auth = injectAuth();
 
-  readonly email = this.#state.email;
+  readonly $email = this.#state.email;
+  readonly $status = this.#state.status;
   readonly $userId = this.#state.userId;
 
   // TODO: Remove this
@@ -48,16 +53,18 @@ export class AuthStore {
     this.signIn$.pipe(takeUntilDestroyed()).subscribe((user) => {
       console.log('>>>> AuthStore:signIn$');
       patchState(this.#state, {
-        email: user.email,
+        email: user.email ?? '',
         userId: user.uid,
+        status: 'SignedIn',
       });
     });
 
     this.signOut$.pipe(takeUntilDestroyed()).subscribe(() => {
       console.log('>>>> AuthStore:signOut$');
       patchState(this.#state, {
-        email: null,
-        userId: null,
+        email: '',
+        userId: '',
+        status: 'SignedOut',
       });
     });
   }

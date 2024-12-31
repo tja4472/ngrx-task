@@ -16,14 +16,17 @@ import { JsonPipe } from '@angular/common';
     <button data-test="sign-out-button" (click)="viewSignOutClicked()">
       Sign Out
     </button>
-    <div>authStore.email> {{ authStore.email() }}</div>
+    <div>authStore.email> {{ authStore.$email() }}</div>
     <div>authStore.userId> {{ authStore.$userId() }}</div>
+    <div>authStore.status> {{ authStore.$status() }}</div>
     <div>userInfoStore.todoListId> {{ userInfoStore.$todoListId() }}</div>
+    <div>currentTaskStore.$isLoaded> {{ currentTaskStore.$isLoaded() }}</div>
     <div>
-      currentTaskStore.task count> {{ currentTaskStore.currentTasks().length }}
+      currentTaskStore.tasks count>
+      {{ currentTaskStore.$currentTasks().length }}
     </div>
     <div>
-      currentTaskStore.tasks> {{ currentTaskStore.currentTasks() | json }}
+      currentTaskStore.tasks> {{ currentTaskStore.$currentTasks() | json }}
     </div>
   `,
   styles: [],

@@ -40,9 +40,8 @@ export class UserInfoStore {
   );
 
   private YYYY$ = this.XXX_userId$.pipe(
-
     switchMap((userId) => {
-      console.log('Calling getDataForSignals$')
+      console.log('Calling getDataForSignals$');
       return this.#dataService.getDataForSignals$(userId).pipe(
         mapResponse({
           next: (userInfo) => userInfo,
@@ -53,7 +52,7 @@ export class UserInfoStore {
       );
     }),
     // See: https://github.com/FirebaseExtended/rxfire/issues/50
-    throttleTime(500),    
+    throttleTime(500),
     concatLatestFrom(() => this.XXX_userId$)
   ).subscribe(([userInfo, userId]) => {
     console.log('YYYY$:userId>', userId);
@@ -96,15 +95,15 @@ export class UserInfoStore {
 */
 
   // sources
-  private userInfo$ = toObservable(this.#authStore.$userId).pipe(
-    filter((userId): userId is string => !!userId),
-    switchMap((userId) => {
-      return this.#dataService.getData$(userId);
+  private userInfo$ = toObservable(this.#authStore.$status).pipe(
+    filter((status) => status === 'SignedIn'),
+    switchMap(() => {
+      return this.#dataService.getData$(this.#authStore.$userId());
     })
   );
 
-  private signOut$ = toObservable(this.#authStore.$userId).pipe(
-    filter((userId) => !userId)
+  private signOut$ = toObservable(this.#authStore.$status).pipe(
+    filter((status) => status === 'SignedOut')
   );
 
   /* This stops signin from working.
