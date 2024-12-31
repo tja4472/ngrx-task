@@ -47,6 +47,8 @@ export class UserInfoDataService {
 
   public getData$(userId: string): Observable<UserInfo> {
     //
+    console.log('UserInfoDataService:getData$');
+
     const result$ = this.#firestoreService
       .docData<FirestoreDoc>(userId, this.collectionPath())
       .pipe(
@@ -61,10 +63,30 @@ export class UserInfoDataService {
     return result$;
   }
 
+  public getDataForSignals$(userId: string): Observable<UserInfo> {
+    //
+    console.log('UserInfoDataService:getDataForSignals$');
+
+    const result$ = this.#firestoreService
+      .docData<FirestoreDoc>(userId, this.collectionPath())
+      .pipe(
+        map((item) => {
+          console.log('UserInfoDataService:getDataForSignals$:map');          
+          if (item === undefined) {
+            throw new Error('UserInfo undefined');
+          }
+          return this.fromFirestoreDoc(item);
+        })
+      );
+
+    return result$;
+  }
+
   public async save(item: UserInfo, userId: string): Promise<void> {
     //
     const firestoreDoc = this.toFirestoreDoc(item);
 
+    console.log('UserInfoDataService:save')
     await this.#firestoreService.setDoc(
       firestoreDoc,
       userId,

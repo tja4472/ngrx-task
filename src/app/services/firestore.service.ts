@@ -17,6 +17,11 @@ import { collectionData, docData } from 'rxfire/firestore';
 
 import { injectFirestore } from '@app/rxfire/firestore';
 
+/*
+Proposal (Firestore): better default behaviour for the collectionData and
+docData functions (for the underlying SDK's handling of optimistic updates) #84
+https://github.com/FirebaseExtended/rxfire/issues/84
+*/
 @Injectable({
   providedIn: 'root',
 })
