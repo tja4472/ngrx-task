@@ -8,6 +8,7 @@ import { CurrentTaskStore } from '@app/signals/current-task.store';
 import { AuthStore } from '@app/signals/auth.store';
 import { JsonPipe } from '@angular/common';
 import { CompletedTaskStore } from '@app/signals/completed-task.store';
+import { TaskListStore } from '@app/signals/task-list.store';
 
 @Component({
   selector: 'app-home-page',
@@ -40,6 +41,12 @@ import { CompletedTaskStore } from '@app/signals/completed-task.store';
     <div>
       currentTaskStore.tasks> {{ currentTaskStore.$currentTasks() | json }}
     </div>
+    <div>taskListStore.$isLoaded> {{ taskListStore.$isLoaded() }}</div>
+    <div>
+      taskListStore.tasks count>
+      {{ taskListStore.$taskLists().length }}
+    </div>
+    <div>taskListStore.tasks> {{ taskListStore.$taskLists() | json }}</div>
   `,
   styles: [],
   standalone: true,
@@ -50,6 +57,7 @@ export class HomePageComponent {
   readonly userInfoStore = inject(UserInfoStore);
   readonly completedTaskStore = inject(CompletedTaskStore);
   readonly currentTaskStore = inject(CurrentTaskStore);
+  readonly taskListStore = inject(TaskListStore);
 
   constructor(private readonly store: Store) {}
 
