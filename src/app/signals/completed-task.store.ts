@@ -4,7 +4,7 @@ import { tapResponse } from '@ngrx/operators';
 import { signalState, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 
-import { filter, pipe, switchMap, tap } from 'rxjs';
+import { filter, pipe, switchMap, tap, throttleTime } from 'rxjs';
 
 import { CompletedTask } from '@app/root-store/tasks-store/models/completed-task.model';
 import { CompletedTaskDataService } from '@app/services/completed-task.data.service';
@@ -64,6 +64,9 @@ export class CompletedTaskStore {
         return this.#dataService
           .getData$(session.todoListId, session.userId)
           .pipe(
+            // collectionData fires twice
+            // See: https://github.com/FirebaseExtended/rxfire/issues/50
+            throttleTime(500),
             tapResponse({
               next: (items) => {
                 patchState(this.#state, {

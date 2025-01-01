@@ -4,7 +4,7 @@ import { tapResponse } from '@ngrx/operators';
 import { signalState, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 
-import { filter, pipe, switchMap, tap } from 'rxjs';
+import { filter, pipe, switchMap, tap, throttleTime } from 'rxjs';
 
 import { TaskListListItem } from '@app/models/task-list-list-item.model';
 import { TaskListDataService } from '@app/services/task-list.data.service';
@@ -58,6 +58,9 @@ export class TaskListStore {
       filter((session) => session.isSignedIn),
       switchMap((session) => {
         return this.#dataService.getData$(session.userId).pipe(
+          // collectionData fires twice
+          // See: https://github.com/FirebaseExtended/rxfire/issues/50
+          throttleTime(500),
           tapResponse({
             next: (items) => {
               patchState(this.#state, {
