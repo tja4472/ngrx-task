@@ -71,7 +71,7 @@ export class UserInfoDataService {
       .docData<FirestoreDoc>(userId, this.collectionPath())
       .pipe(
         map((item) => {
-          console.log('UserInfoDataService:getDataForSignals$:map');          
+          console.log('UserInfoDataService:getDataForSignals$:map');
           if (item === undefined) {
             throw new Error('UserInfo undefined');
           }
@@ -86,7 +86,7 @@ export class UserInfoDataService {
     //
     const firestoreDoc = this.toFirestoreDoc(item);
 
-    console.log('UserInfoDataService:save')
+    console.log('UserInfoDataService:save');
     await this.#firestoreService.setDoc(
       firestoreDoc,
       userId,
