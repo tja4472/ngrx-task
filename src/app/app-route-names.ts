@@ -29,9 +29,6 @@ export const routeNames = {
   signIn: {
     path: 'sign-in',
   },
-  signInComponentStore: {
-    path: 'sign-in-component-store',
-  },
   signUp: {
     path: 'sign-up',
   },

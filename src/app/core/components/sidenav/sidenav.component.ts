@@ -89,11 +89,6 @@ export class SidenavComponent {
       testId: 'sidenav-sign-in',
     },
     {
-      link: pathPrefix + routeNames.signInComponentStore.path,
-      label: 'Sign In(ComponentStore)',
-      testId: 'sidenav-sign-in-component-store',
-    },
-    {
       link: pathPrefix + routeNames.currentTasks.path,
       label: 'Current Tasks Page',
       testId: 'sidenav-current-tasks',

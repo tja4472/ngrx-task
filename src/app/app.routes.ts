@@ -25,13 +25,6 @@ export const routes: Routes = [
       ),
   },
   {
-    path: routeNames.signInComponentStore.path,
-    loadChildren: () =>
-      import(
-        './auth/containers/sign-in-page-component-store/sign-in-page-component-store.routes'
-      ).then((m) => m.routes),
-  },
-  {
     path: routeNames.signUp.path,
     loadChildren: () =>
       import('./auth/containers/sign-up-page/sign-up-page.routes').then(
