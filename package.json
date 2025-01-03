@@ -107,6 +107,6 @@
     "ng-mocks": "14.13.1",
     "prettier": "3.4.2",
     "ts-node": "10.9.2",
-    "typescript": "5.5.4"
+    "typescript": "5.7.2"
   }
 }
