@@ -10,7 +10,6 @@ import { Observable } from 'rxjs';
 
 import { AuthEffects } from '@app/auth/effects/auth.effects';
 import { AuthService } from '../services/auth.service';
-import { MatDialog } from '@angular/material/dialog';
 import * as AuthApiActions from '@app/auth/actions/auth-api.actions';
 
 import { AppUser } from '../models/app-user.model';
@@ -18,7 +17,7 @@ import { TestScheduler } from 'rxjs/testing';
 
 import { EnvironmentService } from '@app/environment.service';
 import { Environment } from '../../../environments/environment-types';
-import { MockProvider } from 'ng-mocks';
+
 /*
   https://rxjs.dev/guide/testing/marble-testing#marble-syntax
 
@@ -29,7 +28,13 @@ import { MockProvider } from 'ng-mocks';
 let actions$ = new Observable<Action>();
 
 function setup() {
-  const mockEnvironment: Environment = {
+  const mockedAuthService = {
+    get appUser$() {
+      return jest.fn();
+    },
+  };
+
+  const mockedEnvironment: Environment = {
     appCode: '--mockEnvironment--',
     production: false,
     firebase: {
@@ -54,15 +59,13 @@ function setup() {
       AuthEffects,
       provideMockActions(() => actions$),
       provideMockStore(),
-      MockProvider(AuthService),
-      MockProvider(EnvironmentService, mockEnvironment, 'useValue'),
-      MockProvider(MatDialog),
+      { provide: AuthService, useValue: mockedAuthService },
+      { provide: EnvironmentService, useValue: mockedEnvironment },
     ],
   });
 
   const authService = TestBed.inject(AuthService);
   const effects = TestBed.inject(AuthEffects);
-  // const matDialog = TestBed.inject(MatDialog);
 
   const testScheduler = new TestScheduler((actual, expected) => {
     expect(actual).toEqual(expected);
