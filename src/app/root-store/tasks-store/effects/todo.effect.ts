@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable @typescript-eslint/prefer-optional-chain */
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
@@ -47,6 +47,10 @@ effectDispatchFalse$ = createEffect(
 
 @Injectable()
 export class TodoEffects {
+  private actions$ = inject(Actions);
+  private readonly store = inject(Store);
+  private dataService = inject(CurrentTaskDataService);
+
   listenForData$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(CurrentTasksRootGuardServiceActions.loadData),
@@ -91,10 +95,4 @@ export class TodoEffects {
     },
     { dispatch: false }
   );
-
-  constructor(
-    private actions$: Actions,
-    private readonly store: Store,
-    private dataService: CurrentTaskDataService
-  ) {}
 }

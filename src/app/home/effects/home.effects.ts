@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
@@ -30,12 +30,12 @@ effectDispatchFalse$ = createEffect(
 
 @Injectable()
 export class HomeEffects {
+  private actions$ = inject(Actions);
+
   signOut$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(HomePageActions.signOut),
       map(() => AuthActions.signOutConfirmation())
     );
   });
-
-  constructor(private actions$: Actions) {}
 }

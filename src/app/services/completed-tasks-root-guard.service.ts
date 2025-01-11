@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 
@@ -15,7 +15,7 @@ import * as CompletedTasksRootGuardServiceActions from '@app/root-store/tasks-st
   providedIn: 'root',
 })
 export class CompletedTasksRootGuardService {
-  constructor(private readonly store: Store) {}
+  private readonly store = inject(Store);
 
   canActivate(): Observable<boolean> {
     return this.waitForAuth().pipe(

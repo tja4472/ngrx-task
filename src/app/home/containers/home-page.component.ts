@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 
@@ -17,7 +17,7 @@ import * as HomePageActions from '../actions/home-page.actions';
   standalone: true,
 })
 export class HomePageComponent {
-  constructor(private readonly store: Store) {}
+  private readonly store = inject(Store);
 
   viewSignOutClicked() {
     this.store.dispatch(HomePageActions.signOut());

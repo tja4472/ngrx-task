@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
@@ -45,6 +45,10 @@ effectDispatchFalse$ = createEffect(
 
 @Injectable()
 export class TaskListEffects {
+  private actions$ = inject(Actions);
+  private dataService = inject(TaskListDataService);
+  private readonly store = inject(Store);
+
   authListenForAuthSuccess$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(AuthApiActions.signInHaveUser),
@@ -74,10 +78,4 @@ export class TaskListEffects {
       map((items) => featureActions.loadSuccess({ items }))
     );
   });
-
-  constructor(
-    private actions$: Actions,
-    private dataService: TaskListDataService,
-    private readonly store: Store
-  ) {}
 }

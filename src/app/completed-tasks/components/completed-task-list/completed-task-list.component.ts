@@ -7,6 +7,7 @@ import {
   effect,
   input,
   output,
+  inject,
 } from '@angular/core';
 
 import { pathPrefix, routeNames } from '@app/app-route-names';
@@ -33,6 +34,8 @@ interface GroupTasksByDate {
   imports: [MatList, MatListItem, MatCheckbox, RouterLink, MatDivider],
 })
 export class CompletedTaskListComponent {
+  private cdr = inject(ChangeDetectorRef);
+
   private inputCurrentTasks!: CompletedTask[];
 
   currentTasks = input.required<CompletedTask[]>();
@@ -41,7 +44,7 @@ export class CompletedTaskListComponent {
 
   viewGroupByDateArray: GroupTasksByDate[] = [];
 
-  constructor(private cdr: ChangeDetectorRef) {
+  constructor() {
     effect(() => {
       this.inputCurrentTasks = this.currentTasks();
       this.viewGroupByDateArray = this.convertToGroupByDateArray(

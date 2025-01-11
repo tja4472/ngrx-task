@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable @typescript-eslint/no-unnecessary-boolean-literal-compare */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { ActivatedRouteSnapshot, Router } from '@angular/router';
 
 import { Store } from '@ngrx/store';
@@ -19,10 +19,8 @@ import * as CompletedTaskDetailEditPageComponentGuardActions from '../actions/co
   providedIn: 'root',
 })
 export class CompletedTaskDetailEditPageComponentGuard {
-  constructor(
-    private readonly store: Store,
-    private router: Router
-  ) {}
+  private readonly store = inject(Store);
+  private router = inject(Router);
 
   /*
   canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {

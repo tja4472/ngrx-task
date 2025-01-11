@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 
@@ -20,9 +20,13 @@ import { AsyncPipe, JsonPipe } from '@angular/common';
   imports: [CurrentTaskDetailEditComponent, AsyncPipe, JsonPipe],
 })
 export class CurrentTaskDetailEditPageComponent {
+  private readonly store = inject(Store);
+
   task$: Observable<CurrentTask>;
 
-  constructor(private readonly store: Store) {
+  constructor() {
+    const store = this.store;
+
     // The undefined task is caught by route guard.
     this.task$ = store
       .select(TaskSelectors.selectCurrentTaskFromRoute)

@@ -1,4 +1,4 @@
-import { Component, OnInit, input, output } from '@angular/core';
+import { Component, OnInit, input, output, inject } from '@angular/core';
 
 import { TaskListListItem } from '@app/models/task-list-list-item.model';
 
@@ -35,6 +35,8 @@ import { MatInput } from '@angular/material/input';
   ],
 })
 export class TaskListDetailNewComponent implements OnInit {
+  private presenter = inject(TaskListDetailNewPresenter);
+
   completedTask = input.required<TaskListListItem>();
   cancelClicked = output<TaskListListItem>();
   checkout = output<TaskListListItem>();
@@ -42,8 +44,6 @@ export class TaskListDetailNewComponent implements OnInit {
   get checkoutForm() {
     return this.presenter.form;
   }
-
-  constructor(private presenter: TaskListDetailNewPresenter) {}
 
   ngOnInit() {
     this.presenter.init(this.completedTask());

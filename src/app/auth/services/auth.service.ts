@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
 /* eslint-disable @typescript-eslint/no-empty-function */
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 
 import {
   signInWithEmailAndPassword,
@@ -25,6 +25,9 @@ import { injectAuth, user$ } from '@app/rxfire/auth';
   providedIn: 'root',
 })
 export class AuthService {
+  private taskListDataService = inject(TaskListDataService);
+  private userInfoDataService = inject(UserInfoDataService);
+
   //
   readonly #auth = injectAuth();
 
@@ -36,11 +39,7 @@ export class AuthService {
 
   #appUser$: Observable<AppUser | null>;
 
-  constructor(
-    // @Optional() private auth: Auth,
-    private taskListDataService: TaskListDataService,
-    private userInfoDataService: UserInfoDataService
-  ) {
+  constructor() {
     this.#appUser$ = user$(this.#auth).pipe(
       switchMap((user) => {
         if (user === null) {

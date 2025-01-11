@@ -5,7 +5,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-confusing-void-expression */
 /* eslint-disable @typescript-eslint/no-floating-promises */
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 
@@ -63,6 +63,12 @@ effectDispatchFalse$ = createEffect(
 
 @Injectable()
 export class AuthEffects implements OnInitEffects {
+  private readonly actions$ = inject(Actions);
+  private authService = inject(AuthService);
+  private router = inject(Router);
+  private dialog = inject(MatDialog);
+  private readonly store = inject(Store);
+
   ngrxOnInitEffects(): Action {
     return AuthApiActions.autoSignInCheck();
   }
@@ -375,12 +381,4 @@ export class AuthEffects implements OnInitEffects {
     },
     { dispatch: false }
   );
-
-  constructor(
-    private readonly actions$: Actions,
-    private authService: AuthService,
-    private router: Router,
-    private dialog: MatDialog,
-    private readonly store: Store
-  ) {}
 }

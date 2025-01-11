@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  inject,
+} from '@angular/core';
 
 import { Store } from '@ngrx/store';
 
@@ -35,9 +40,13 @@ import { AsyncPipe } from '@angular/common';
   ],
 })
 export class CurrentTasksPageComponent implements OnInit {
+  private readonly store = inject(Store);
+
   currentTasks$: Observable<CurrentTask[]>;
 
-  constructor(private readonly store: Store) {
+  constructor() {
+    const store = this.store;
+
     this.currentTasks$ = store.select(TaskSelectors.selectCurrentTasksAll);
   }
 

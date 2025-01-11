@@ -1,11 +1,13 @@
 /* eslint-disable @typescript-eslint/unbound-method */
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
 import { CompletedTask } from '@app/root-store/tasks-store/models/completed-task.model';
 
 @Injectable()
 export class CompletedTaskDetailEditPresenter {
+  private fb = inject(FormBuilder);
+
   form = this.fb.group({
     name: this.fb.nonNullable.control('', {
       validators: [Validators.required],
@@ -18,8 +20,6 @@ export class CompletedTaskDetailEditPresenter {
   }
 
   initialData!: CompletedTask;
-
-  constructor(private fb: FormBuilder) {}
 
   init(todo: CompletedTask) {
     this.initialData = { ...todo };

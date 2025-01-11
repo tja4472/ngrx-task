@@ -4,6 +4,7 @@ import {
   Component,
   Injectable,
   OnInit,
+  inject,
 } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SwUpdate } from '@angular/service-worker';
@@ -19,13 +20,8 @@ import { SidenavComponent } from '../components/sidenav/sidenav.component';
   imports: [SidenavComponent],
 })
 export class AppComponent implements OnInit {
-  constructor(
-    // analytics: AngularFireAnalytics,
-    private swUpdate: SwUpdate,
-    private snackBar: MatSnackBar
-  ) {
-    // analytics.logEvent('start_game', { level: '10', difficulty: 'expert' });
-  }
+  private swUpdate = inject(SwUpdate);
+  private snackBar = inject(MatSnackBar);
 
   ngOnInit(): void {
     if (this.swUpdate.isEnabled) {
@@ -60,7 +56,9 @@ export class AppComponent implements OnInit {
   providedIn: 'root',
 })
 export class LogUpdateService {
-  constructor(updates: SwUpdate) {
+  constructor() {
+    const updates = inject(SwUpdate);
+
     updates.versionUpdates.subscribe((evt) => {
       console.log('LogUpdateService>', evt.type);
       switch (evt.type) {

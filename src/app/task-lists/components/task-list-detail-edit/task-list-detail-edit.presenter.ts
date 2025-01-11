@@ -1,11 +1,13 @@
 /* eslint-disable @typescript-eslint/unbound-method */
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
 import { TaskListListItem } from '@app/models/task-list-list-item.model';
 
 @Injectable()
 export class TaskListDetailEditPresenter {
+  private fb = inject(FormBuilder);
+
   form = this.fb.group({
     name: this.fb.nonNullable.control('', {
       validators: [Validators.required],
@@ -14,8 +16,6 @@ export class TaskListDetailEditPresenter {
 
   initialData!: TaskListListItem;
   isNew!: boolean;
-
-  constructor(private fb: FormBuilder) {}
 
   init(todo: TaskListListItem) {
     this.isNew = todo.id === '';

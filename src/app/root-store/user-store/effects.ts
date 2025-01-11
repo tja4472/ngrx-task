@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
@@ -34,6 +34,10 @@ effectDispatchFalse$ = createEffect(
 
 @Injectable()
 export class UserStoreEffects {
+  private actions$ = inject(Actions);
+  private readonly store = inject(Store);
+  private userInfoDataService = inject(UserInfoDataService);
+
   setUserListId$ = createEffect(
     () => {
       return this.actions$.pipe(
@@ -54,10 +58,4 @@ export class UserStoreEffects {
     },
     { dispatch: false }
   );
-
-  constructor(
-    private actions$: Actions,
-    private readonly store: Store,
-    private userInfoDataService: UserInfoDataService
-  ) {}
 }

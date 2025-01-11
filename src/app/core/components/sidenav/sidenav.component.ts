@@ -5,7 +5,7 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, inject } from '@angular/core';
 import {
   MatSidenav,
   MatSidenavContainer,
@@ -66,6 +66,9 @@ interface ViewNavigationItem {
   ],
 })
 export class SidenavComponent {
+  private breakpointObserver = inject(BreakpointObserver);
+  private readonly store = inject(Store);
+
   @ViewChild('drawer', { static: true }) drawer!: MatSidenav;
 
   isHandset$: Observable<boolean> = this.breakpointObserver
@@ -107,11 +110,10 @@ export class SidenavComponent {
   selected = 'Cn7vwq2PCR6uj2u5nw3d';
   taskLists$: Observable<TaskListListItem[]>;
 
-  constructor(
-    private breakpointObserver: BreakpointObserver,
-    router: Router,
-    private readonly store: Store
-  ) {
+  constructor() {
+    const router = inject(Router);
+    const store = this.store;
+
     this.view$ = this.store.select(UserStoreSelectors.selectUserAndTaskListId);
     /*
     this.view$ = this.store.select(UserStoreSelectors.selectUser).pipe(

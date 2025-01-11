@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  inject,
+} from '@angular/core';
 
 import { Store } from '@ngrx/store';
 
@@ -20,9 +25,13 @@ import { AsyncPipe } from '@angular/common';
   imports: [TaskListListComponent, AsyncPipe],
 })
 export class TaskListsPageComponent implements OnInit {
+  private readonly store = inject(Store);
+
   taskLists$: Observable<TaskListListItem[]>;
 
-  constructor(private readonly store: Store) {
+  constructor() {
+    const store = this.store;
+
     this.taskLists$ = store.select(TaskListSelectors.selectAll);
   }
 

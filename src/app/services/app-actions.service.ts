@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 
 import { AuthService } from '@app/auth/services/auth.service';
 
@@ -6,9 +6,11 @@ import { AuthService } from '@app/auth/services/auth.service';
   providedIn: 'root',
 })
 export class AppActionsService {
+  private authService = inject(AuthService);
+
   public property: string;
 
-  constructor(private authService: AuthService) {
+  constructor() {
     // For Cypress app actions
     /*
     if (window.Cypress) {

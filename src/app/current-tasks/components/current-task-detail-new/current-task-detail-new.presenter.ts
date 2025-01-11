@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/consistent-generic-constructors */
 /* eslint-disable @typescript-eslint/unbound-method */
-import { Injectable, OnDestroy } from '@angular/core';
+import { Injectable, OnDestroy, inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
 import {
@@ -12,6 +12,8 @@ import { takeUntil } from 'rxjs/operators';
 
 @Injectable()
 export class CurrentTaskDetailNewPresenter implements OnDestroy {
+  private fb = inject(FormBuilder);
+
   form = this.fb.group({
     name: this.fb.nonNullable.control('', {
       validators: [Validators.required],
@@ -24,8 +26,6 @@ export class CurrentTaskDetailNewPresenter implements OnDestroy {
   initialData!: CurrentTask;
 
   private unsubscribe: Subject<void> = new Subject();
-
-  constructor(private fb: FormBuilder) {}
 
   init(todo: CurrentTask) {
     this.initialData = { ...todo };

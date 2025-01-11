@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 
@@ -19,10 +19,14 @@ import { AsyncPipe } from '@angular/common';
   imports: [CredentialsFormComponent, AsyncPipe],
 })
 export class SignUpPageComponent {
+  private readonly store = inject(Store);
+
   error$: Observable<string | null>;
   pending$: Observable<boolean>;
 
-  constructor(private readonly store: Store) {
+  constructor() {
+    const store = this.store;
+
     this.error$ = store.select(SignUpPageSelectors.selectSignUpPageError);
     this.pending$ = store.select(SignUpPageSelectors.selectSignUpPagePending);
 
