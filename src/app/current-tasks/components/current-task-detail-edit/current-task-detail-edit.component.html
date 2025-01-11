@@ -53,12 +53,11 @@
               placeholder="Name"
               [formControl]="checkoutForm.controls.name"
             />
-            <mat-error
-              data-test="nameInputError"
-              *ngIf="checkoutForm.controls.name.hasError('required')"
-            >
-              Name is <strong>required</strong>
-            </mat-error>
+            @if (checkoutForm.controls.name.hasError('required')) {
+              <mat-error data-test="nameInputError">
+                Name is <strong>required</strong>
+              </mat-error>
+            }
           </mat-form-field>
         </div>
       </div>

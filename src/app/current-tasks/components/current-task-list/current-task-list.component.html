@@ -1,28 +1,24 @@
 <div class="list" cdkDropList (cdkDropListDropped)="drop($event)">
-  <div
-    cdkDrag
-    cdkDragLockAxis="y"
-    *ngFor="let task of currentTasks(); trackBy: viewTrackBy"
-  >
-    <div class="list-item" data-test="list-item">
-      <mat-checkbox
-        data-test="is-complete-checkbox"
-        [checked]="task.isComplete"
-        (click)="onCheckboxClick(task)"
-      ></mat-checkbox>
-
-      <a [routerLink]="[editPath(), task.id]">
-        <div class="middle" [ngClass]="{ 'line-through': task.isComplete }">
-          <div class="name" data-test="item-name">{{ task.name }}</div>
-          <div class="description">{{ task.description }}</div>
+  @for (task of currentTasks(); track viewTrackBy($index, task)) {
+    <div cdkDrag cdkDragLockAxis="y">
+      <div class="list-item" data-test="list-item">
+        <mat-checkbox
+          data-test="is-complete-checkbox"
+          [checked]="task.isComplete"
+          (click)="onCheckboxClick(task)"
+        ></mat-checkbox>
+        <a [routerLink]="[editPath(), task.id]">
+          <div class="middle" [ngClass]="{ 'line-through': task.isComplete }">
+            <div class="name" data-test="item-name">{{ task.name }}</div>
+            <div class="description">{{ task.description }}</div>
+          </div>
+        </a>
+        <div class="right" cdkDragHandle>
+          <mat-icon>drag_handle</mat-icon>
         </div>
-      </a>
-
-      <div class="right" cdkDragHandle>
-        <mat-icon>drag_handle</mat-icon>
       </div>
     </div>
-  </div>
+  }
 </div>
 
 <button

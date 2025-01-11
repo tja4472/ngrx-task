@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/unbound-method */
 /* eslint-disable @typescript-eslint/no-inferrable-types */
-import { CommonModule } from '@angular/common';
+
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -14,7 +14,6 @@ import { Credentials } from '@app/auth/models/credentials.model';
   selector: 'app-credentials-form',
   standalone: true,
   imports: [
-    CommonModule,
     MatCardModule,
     MatInputModule,
     MatButtonModule,

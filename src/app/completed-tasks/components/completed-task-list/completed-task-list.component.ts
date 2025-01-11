@@ -14,7 +14,7 @@ import { CompletedTask } from '@app/root-store/tasks-store/models/completed-task
 
 import { format } from 'date-fns';
 import { MatList, MatListItem } from '@angular/material/list';
-import { NgFor } from '@angular/common';
+
 import { MatCheckbox } from '@angular/material/checkbox';
 import { RouterLink } from '@angular/router';
 import { MatDivider } from '@angular/material/divider';
@@ -30,7 +30,7 @@ interface GroupTasksByDate {
   styleUrls: ['./completed-task-list.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [MatList, NgFor, MatListItem, MatCheckbox, RouterLink, MatDivider],
+  imports: [MatList, MatListItem, MatCheckbox, RouterLink, MatDivider],
 })
 export class CompletedTaskListComponent {
   private inputCurrentTasks!: CompletedTask[];

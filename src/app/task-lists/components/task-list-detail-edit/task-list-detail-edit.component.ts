@@ -13,7 +13,7 @@ import {
 } from '@angular/material/card';
 import { MatFormField, MatError } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
-import { NgIf } from '@angular/common';
+
 import { MatButton } from '@angular/material/button';
 
 @Component({
@@ -30,7 +30,6 @@ import { MatButton } from '@angular/material/button';
     MatCardContent,
     MatFormField,
     MatInput,
-    NgIf,
     MatError,
     MatCardActions,
     MatButton,

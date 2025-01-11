@@ -14,7 +14,7 @@ import {
 import { MatButton } from '@angular/material/button';
 import { MatFormField, MatError } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
-import { NgIf } from '@angular/common';
+
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 
 @Component({
@@ -33,7 +33,6 @@ import { CdkTextareaAutosize } from '@angular/cdk/text-field';
     MatCardContent,
     MatFormField,
     MatInput,
-    NgIf,
     MatError,
     CdkTextareaAutosize,
   ],

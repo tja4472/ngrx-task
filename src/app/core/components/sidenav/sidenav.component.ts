@@ -31,7 +31,7 @@ import * as UserStoreSelectors from '@app/root-store/user-store/selectors';
 
 import * as SidenavActions from './actions/sidenav.actions';
 import { MatToolbar } from '@angular/material/toolbar';
-import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { MatSelect } from '@angular/material/select';
 import { MatOption } from '@angular/material/core';
 import { MatNavList, MatListItem } from '@angular/material/list';
@@ -53,9 +53,7 @@ interface ViewNavigationItem {
     MatSidenavContainer,
     MatSidenav,
     MatToolbar,
-    NgIf,
     MatSelect,
-    NgFor,
     MatOption,
     MatNavList,
     MatListItem,

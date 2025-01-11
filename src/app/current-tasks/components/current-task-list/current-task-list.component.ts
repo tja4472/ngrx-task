@@ -16,7 +16,7 @@ import {
 
 import { pathPrefix, routeNames } from '@app/app-route-names';
 import { CurrentTask } from '@app/root-store/tasks-store/models/current-task.model';
-import { NgFor, NgClass } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { MatIcon } from '@angular/material/icon';
 import { MatFabButton } from '@angular/material/button';
@@ -35,7 +35,6 @@ import { MatFabButton } from '@angular/material/button';
   standalone: true,
   imports: [
     CdkDropList,
-    NgFor,
     CdkDrag,
     MatCheckbox,
     RouterLink,

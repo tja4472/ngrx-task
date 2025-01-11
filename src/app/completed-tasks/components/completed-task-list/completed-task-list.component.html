@@ -4,31 +4,34 @@
 </pre>
 -->
 <mat-list class="list app-class">
-  <div *ngFor="let group of viewGroupByDateArray">
-    <h3 matSubHeader>{{ group.header }}</h3>
-    <mat-list-item *ngFor="let item of group.tasks; trackBy: viewTrackBy">
-      <div class="list-item" data-test="list-item">
-        <mat-checkbox
-          [checked]="item.isComplete"
-          (change)="toggleCompleteItem.emit(item)"
-        ></mat-checkbox>
-        <a [routerLink]="[editPath(), item.id]">
-          <div class="middle">
-            <div class="name">{{ item.name }}</div>
-            <div class="description">{{ item.description }}</div>
+  @for (group of viewGroupByDateArray; track group) {
+    <div>
+      <h3 matSubHeader>{{ group.header }}</h3>
+      @for (item of group.tasks; track viewTrackBy($index, item)) {
+        <mat-list-item>
+          <div class="list-item" data-test="list-item">
+            <mat-checkbox
+              [checked]="item.isComplete"
+              (change)="toggleCompleteItem.emit(item)"
+            ></mat-checkbox>
+            <a [routerLink]="[editPath(), item.id]">
+              <div class="middle">
+                <div class="name">{{ item.name }}</div>
+                <div class="description">{{ item.description }}</div>
+              </div>
+            </a>
+            <!--
+            <div class="middle">
+              <div class="name">{{ item.name }}</div>
+              <div class="description">{{ item.description }}</div>
+            </div>
+            -->
+            <mat-divider [inset]="true"></mat-divider>
           </div>
-        </a>
-        <!-- 
-        <div class="middle">
-          <div class="name">{{ item.name }}</div>
-          <div class="description">{{ item.description }}</div>
-        </div>
--->
-
-        <mat-divider [inset]="true"></mat-divider>
-      </div>
-    </mat-list-item>
-  </div>
+        </mat-list-item>
+      }
+    </div>
+  }
 </mat-list>
 
 <!--
@@ -49,7 +52,7 @@
       <mat-divider [inset]="true"></mat-divider>
     </mat-list-item>
   </div>
-</mat-list>  
+</mat-list>
 -->
 
 <!--
