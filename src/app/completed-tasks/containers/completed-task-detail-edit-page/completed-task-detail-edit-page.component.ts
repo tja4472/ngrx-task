@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 
@@ -20,9 +20,13 @@ import { AsyncPipe, JsonPipe } from '@angular/common';
   imports: [CompletedTaskDetailEditComponent, AsyncPipe, JsonPipe],
 })
 export class CompletedTaskDetailEditPageComponent {
+  private readonly store = inject(Store);
+
   task$: Observable<CompletedTask | undefined>;
 
-  constructor(private readonly store: Store) {
+  constructor() {
+    const store = this.store;
+
     this.task$ = store.select(TaskSelectors.selectCompletedTaskFromRoute);
   }
 

@@ -1,7 +1,14 @@
 /* eslint-disable @typescript-eslint/no-confusing-void-expression */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/consistent-generic-constructors */
-import { Component, OnDestroy, OnInit, input, output } from '@angular/core';
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+  input,
+  output,
+  inject,
+} from '@angular/core';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -36,6 +43,8 @@ import { MatIconButton } from '@angular/material/button';
   ],
 })
 export class SearchComponent implements OnDestroy, OnInit {
+  private presenter = inject(SearchPresenter);
+
   searchText = input.required<string>();
   search = output<string>();
 
@@ -44,7 +53,6 @@ export class SearchComponent implements OnDestroy, OnInit {
   get viewSearchControl() {
     return this.presenter.searchControl;
   }
-  constructor(private presenter: SearchPresenter) {}
 
   ngOnInit(): void {
     this.presenter.searchTerms$

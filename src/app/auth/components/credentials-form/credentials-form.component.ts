@@ -6,7 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 
-import { Component, Input, input, output } from '@angular/core';
+import { Component, Input, input, output, inject } from '@angular/core';
 
 import { Credentials } from '@app/auth/models/credentials.model';
 
@@ -23,6 +23,8 @@ import { Credentials } from '@app/auth/models/credentials.model';
   styleUrls: ['./credentials-form.component.css'],
 })
 export class CredentialsFormComponent {
+  private fb = inject(FormBuilder);
+
   @Input()
   set formMode(mode: string) {
     if (mode === 'SignInForm') {
@@ -63,8 +65,6 @@ export class CredentialsFormComponent {
     username: ['', Validators.required],
     password: ['', Validators.required],
   });
-
-  constructor(private fb: FormBuilder) {}
 
   viewSignUpClick() {
     this.SignUpClicked.emit();

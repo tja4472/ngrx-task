@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 
@@ -21,10 +21,14 @@ import { AsyncPipe } from '@angular/common';
   imports: [SearchComponent, CompletedTaskListComponent, AsyncPipe],
 })
 export class CompletedTasksPageComponent {
+  private readonly store = inject(Store);
+
   completedTasks$: Observable<CompletedTask[]>;
   viewSearchQuery$: Observable<string>;
 
-  constructor(private readonly store: Store) {
+  constructor() {
+    const store = this.store;
+
     this.viewSearchQuery$ = store
       .select(TaskSelectors.selectCompletedTasksQuery)
       .pipe(take(1));

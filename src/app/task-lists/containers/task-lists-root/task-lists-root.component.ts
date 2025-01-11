@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 import { RouterOutlet } from '@angular/router';
@@ -14,5 +14,5 @@ import { RouterOutlet } from '@angular/router';
   imports: [RouterOutlet],
 })
 export class TaskListsRootComponent {
-  constructor(private readonly store: Store) {}
+  private readonly store = inject(Store);
 }

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
 /* eslint-disable @typescript-eslint/no-floating-promises */
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 
 import {
   CurrentTask,
@@ -19,10 +19,8 @@ import { CurrentTaskDataService } from './current-task.data.service';
   providedIn: 'root',
 })
 export class Fb1DataService {
-  constructor(
-    private todoCompletedDataService: CompletedTaskDataService,
-    private todoDataService: CurrentTaskDataService
-  ) {}
+  private todoCompletedDataService = inject(CompletedTaskDataService);
+  private todoDataService = inject(CurrentTaskDataService);
 
   clearCompletedTodos(
     items: CurrentTask[],

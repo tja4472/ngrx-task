@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  inject,
+} from '@angular/core';
 
 import { Store } from '@ngrx/store';
 
@@ -14,9 +19,9 @@ import { RouterOutlet } from '@angular/router';
   imports: [RouterOutlet],
 })
 export class CurrentTasksRootComponent implements OnDestroy {
+  private readonly store = inject(Store);
+
   ngOnDestroy(): void {
     this.store.dispatch(CurrentTasksRootActions.destroyed());
   }
-
-  constructor(private readonly store: Store) {}
 }

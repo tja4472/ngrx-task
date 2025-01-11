@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 
@@ -15,7 +15,7 @@ import * as CurrentTasksRootGuardServiceActions from '@app/root-store/tasks-stor
   providedIn: 'root',
 })
 export class CurrentTasksRootGuardService {
-  constructor(private readonly store: Store) {}
+  private readonly store = inject(Store);
 
   // what happens if try to navigate to http://localhost:4200/tasks/current
   // but are logged out?

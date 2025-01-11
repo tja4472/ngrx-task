@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 
@@ -21,9 +21,9 @@ import { JsonPipe } from '@angular/common';
   imports: [CurrentTaskDetailNewComponent, JsonPipe],
 })
 export class CurrentTaskDetailNewPageComponent {
-  task = newCurrentTask();
+  private readonly store = inject(Store);
 
-  constructor(private readonly store: Store) {}
+  task = newCurrentTask();
 
   viewCancelled(todo: CurrentTask): void {
     this.store.dispatch(CurrentTaskDetailNewPageActions.cancelled());

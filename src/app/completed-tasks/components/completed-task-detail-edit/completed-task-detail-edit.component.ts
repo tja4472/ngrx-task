@@ -1,4 +1,4 @@
-import { Component, OnInit, input, output } from '@angular/core';
+import { Component, OnInit, input, output, inject } from '@angular/core';
 
 import { CompletedTask } from '@app/root-store/tasks-store/models/completed-task.model';
 
@@ -38,6 +38,8 @@ import { CdkTextareaAutosize } from '@angular/cdk/text-field';
   ],
 })
 export class CompletedTaskDetailEditComponent implements OnInit {
+  private presenter = inject(CompletedTaskDetailEditPresenter);
+
   completedTask = input.required<CompletedTask>();
   cancelA = output<CompletedTask>();
   remove = output<CompletedTask>();
@@ -50,8 +52,6 @@ export class CompletedTaskDetailEditComponent implements OnInit {
   get isSubmitButtonDisabled(): boolean {
     return this.presenter.isSubmitButtonDisabled;
   }
-
-  constructor(private presenter: CompletedTaskDetailEditPresenter) {}
 
   ngOnInit() {
     this.presenter.init(this.completedTask());

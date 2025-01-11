@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Store } from '@ngrx/store';
@@ -27,10 +27,8 @@ import * as TaskListDetailEditPageComponentGuardActions from '../actions/task-li
   providedIn: 'root',
 })
 export class TaskListDetailEditPageComponentGuard {
-  constructor(
-    private readonly store: Store,
-    private router: Router
-  ) {}
+  private readonly store = inject(Store);
+  private router = inject(Router);
 
   canActivate(): Observable<boolean> {
     return this.waitForTaskListsToLoad().pipe(

@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  inject,
+} from '@angular/core';
 
 import { Store } from '@ngrx/store';
 
@@ -20,10 +25,14 @@ import { AsyncPipe } from '@angular/common';
   imports: [CredentialsFormComponent, AsyncPipe],
 })
 export class SignInPageComponent implements OnInit {
+  private readonly store = inject(Store);
+
   error$: Observable<string>;
   pending$: Observable<boolean>;
 
-  constructor(private readonly store: Store) {
+  constructor() {
+    const store = this.store;
+
     this.error$ = store.pipe(SignInPageSelectors.selectFilteredSignInPageError);
     this.pending$ = store.select(SignInPageSelectors.selectSignInPagePending);
   }

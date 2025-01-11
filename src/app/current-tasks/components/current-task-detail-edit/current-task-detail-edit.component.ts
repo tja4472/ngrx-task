@@ -1,4 +1,4 @@
-import { Component, OnInit, input, output } from '@angular/core';
+import { Component, OnInit, input, output, inject } from '@angular/core';
 
 import { CurrentTask } from '@app/root-store/tasks-store/models/current-task.model';
 
@@ -40,6 +40,8 @@ import { CdkTextareaAutosize } from '@angular/cdk/text-field';
   ],
 })
 export class CurrentTaskDetailEditComponent implements OnInit {
+  private presenter = inject(CurrentTaskDetailEditPresenter);
+
   todo = input.required<CurrentTask>();
   cancelClicked = output<CurrentTask>();
   remove = output<CurrentTask>();
@@ -48,8 +50,6 @@ export class CurrentTaskDetailEditComponent implements OnInit {
   get checkoutForm() {
     return this.presenter.form;
   }
-
-  constructor(private presenter: CurrentTaskDetailEditPresenter) {}
 
   ngOnInit() {
     this.presenter.init(this.todo());

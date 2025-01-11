@@ -26,10 +26,8 @@ export const authCanMatchGuard: CanMatchFn = (route) => {
   providedIn: 'root',
 })
 export class AuthGuardService {
-  constructor(
-    private authService: AuthService,
-    private readonly store: Store
-  ) {}
+  private authService = inject(AuthService);
+  private readonly store = inject(Store);
 
   // TODO: Move to functional guard
   canActivate(

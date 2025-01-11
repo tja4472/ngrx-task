@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/prefer-optional-chain */
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
@@ -39,6 +39,10 @@ effectDispatchFalse$ = createEffect(
 
 @Injectable()
 export class TodoCompletedEffects {
+  private actions$ = inject(Actions);
+  private dataService = inject(CompletedTaskDataService);
+  private readonly store = inject(Store);
+
   listenForData$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(CompletedTasksRootGuardServiceActions.loadData),
@@ -61,10 +65,4 @@ export class TodoCompletedEffects {
       )
     );
   });
-
-  constructor(
-    private actions$: Actions,
-    private dataService: CompletedTaskDataService,
-    private readonly store: Store
-  ) {}
 }

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable @typescript-eslint/prefer-optional-chain */
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Actions, createEffect, ofType } from '@ngrx/effects';
@@ -50,6 +50,14 @@ effectDispatchFalse$ = createEffect(
 
 @Injectable()
 export class TaskEffects {
+  private actions$ = inject(Actions);
+  private fb1DataService = inject(Fb1DataService);
+  private todoDataService = inject(CurrentTaskDataService);
+  private todoCompletedDataService = inject(CompletedTaskDataService);
+  private todoListsDataService = inject(TaskListDataService);
+  private readonly store = inject(Store);
+  private router = inject(Router);
+
   //#region Completed Tasks
   removeCompletedTask$ = createEffect(
     () => {
@@ -421,15 +429,4 @@ export class TaskEffects {
     },
     { dispatch: false }
   );
-
-  constructor(
-    private actions$: Actions,
-    // private analytics: AngularFireAnalytics,
-    private fb1DataService: Fb1DataService,
-    private todoDataService: CurrentTaskDataService,
-    private todoCompletedDataService: CompletedTaskDataService,
-    private todoListsDataService: TaskListDataService,
-    private readonly store: Store,
-    private router: Router
-  ) {}
 }
