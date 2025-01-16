@@ -59,7 +59,7 @@
     "core-js": "3.40.0",
     "date-fns": "4.1.0",
     "firebase": "11.1.0",
-    "ngxtension": "4.2.0",
+    "ngxtension": "4.2.1",
     "node-fetch": "2.7.0",
     "rxfire": "6.1.0",
     "rxjs": "7.8.1",
