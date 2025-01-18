@@ -5,7 +5,7 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Component, ViewChild, inject } from '@angular/core';
+import { Component, inject, viewChild } from '@angular/core';
 import {
   MatSidenav,
   MatSidenavContainer,
@@ -68,7 +68,7 @@ export class SidenavComponent {
   private breakpointObserver = inject(BreakpointObserver);
   private readonly store = inject(Store);
 
-  @ViewChild('drawer', { static: true }) drawer!: MatSidenav;
+  readonly drawer = viewChild.required<MatSidenav>('drawer');
 
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
@@ -134,7 +134,7 @@ export class SidenavComponent {
         withLatestFrom(this.isHandset$),
         filter(([a, b]) => b && a instanceof NavigationEnd)
       )
-      .subscribe((_) => this.drawer.close());
+      .subscribe((_) => this.drawer().close());
   }
 
   public viewtodoListsSelectChange(todoListId: any): void {
