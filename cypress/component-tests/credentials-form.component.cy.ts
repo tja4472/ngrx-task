@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { Credentials } from '@app/auth/models/credentials.model';
 
-import { createOutputSpy } from 'cypress/angular-signals';
+import { createOutputSpy } from 'cypress/angular';
 
 describe('CredentialsFormComponent - mounts', () => {
   it('mounts', () => {

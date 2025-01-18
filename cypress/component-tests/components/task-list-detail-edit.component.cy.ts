@@ -4,7 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { createOutputSpy, MountConfig } from 'cypress/angular-signals';
+import { createOutputSpy, MountConfig } from 'cypress/angular';
 
 import { DataTestIds, SpyAliases, SpyIds } from '../types';
 

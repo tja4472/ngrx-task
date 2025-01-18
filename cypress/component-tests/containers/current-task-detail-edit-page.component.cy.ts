@@ -4,7 +4,7 @@ import { TestBed } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { MountConfig } from 'cypress/angular-signals';
+import { MountConfig } from 'cypress/angular';
 
 import { CurrentTaskDetailEditComponent } from '@app/current-tasks/components/current-task-detail-edit/current-task-detail-edit.component';
 import { CurrentTaskDetailEditPageComponent } from '@app/current-tasks/containers/current-task-detail-edit-page/current-task-detail-edit-page.component';

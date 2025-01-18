@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { EventEmitter } from '@angular/core';
 import { StepperComponent } from '@app/+test-examples/stepper/stepper.component';
-import { createOutputSpy } from 'cypress/angular-signals';
+import { createOutputSpy } from 'cypress/angular';
 
 // Set up some constants for the selectors
 const counterSelector = '[data-cy=counter]';
