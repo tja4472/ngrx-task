@@ -22,7 +22,6 @@ import { CdkTextareaAutosize } from '@angular/cdk/text-field';
   templateUrl: './completed-task-detail-edit.component.html',
   styleUrls: ['./completed-task-detail-edit.component.css'],
   viewProviders: [CompletedTaskDetailEditPresenter],
-  standalone: true,
   imports: [
     ReactiveFormsModule,
     MatCard,

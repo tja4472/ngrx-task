@@ -16,7 +16,6 @@ import { AsyncPipe, JsonPipe } from '@angular/common';
   templateUrl: './current-task-detail-edit-page.component.html',
   styleUrls: ['./current-task-detail-edit-page.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [CurrentTaskDetailEditComponent, AsyncPipe, JsonPipe],
 })
 export class CurrentTaskDetailEditPageComponent {

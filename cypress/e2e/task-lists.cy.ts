@@ -99,7 +99,10 @@ describe('Task Lists', () => {
       .should('have.length', 2)
       .should('contain.text', 'default-list name')
       .should('contain.text', 'BBBB');
-    cy.contains('a', 'BBBB').should('be.visible').click();
+    // cy.contains('a', 'BBBB').should('be.visible').click();
+    cy.contains('a', 'BBBB').as('btn').should('be.visible');
+    cy.get('@btn').click();
+
     cy.getBySel(dataTestIds.removeButton).should('be.enabled').click();
     cy.getBySel('list-item')
       .should('have.length', 1)

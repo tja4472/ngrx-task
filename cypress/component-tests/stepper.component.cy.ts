@@ -11,14 +11,14 @@ const decrementSelector = '[aria-label=decrement]';
 describe('StepperComponent', () => {
   it('mounts', () => {
     cy.mount(`<app-stepper></app-stepper>`, {
-      declarations: [StepperComponent],
+      imports: [StepperComponent],
     });
   });
 
   it('stepper should default to 0', () => {
     // Arrange
     cy.mount('<app-stepper></app-stepper>', {
-      declarations: [StepperComponent],
+      imports: [StepperComponent],
     });
     // Assert
     cy.get(counterSelector).should('have.text', '0');
@@ -27,7 +27,7 @@ describe('StepperComponent', () => {
   it('supports an "Input()" count that sets the value', () => {
     // Arrange
     cy.mount('<app-stepper [initalCount]="100"></app-stepper>', {
-      declarations: [StepperComponent],
+      imports: [StepperComponent],
     });
     // Assert
     cy.get(counterSelector).should('have.text', '100');
@@ -36,7 +36,7 @@ describe('StepperComponent', () => {
   it('when the increment button is pressed, the counter is incremented', () => {
     // Arrange
     cy.mount('<app-stepper></app-stepper>', {
-      declarations: [StepperComponent],
+      imports: [StepperComponent],
     });
     // Act
     cy.get(incrementSelector).click();
@@ -47,7 +47,7 @@ describe('StepperComponent', () => {
   it('when the decrement button is pressed, the counter is decremented', () => {
     // Arrange
     cy.mount('<app-stepper></app-stepper>', {
-      declarations: [StepperComponent],
+      imports: [StepperComponent],
     });
     // Act
     cy.get(decrementSelector).click();
@@ -57,7 +57,7 @@ describe('StepperComponent', () => {
 
   it('when clicking increment and decrement buttons, the counter is changed as expected', () => {
     cy.mount('<app-stepper [initalCount]="100"></app-stepper>', {
-      declarations: [StepperComponent],
+      imports: [StepperComponent],
     });
     cy.get(counterSelector).should('have.text', '100');
     cy.get(incrementSelector).click();
@@ -77,7 +77,7 @@ describe('StepperComponent', () => {
             emit: cy.spy().as('changeSpy'),
           },
         },
-        declarations: [StepperComponent],
+        imports: [StepperComponent],
       }
     );
     // Act
@@ -91,7 +91,7 @@ describe('StepperComponent', () => {
       '<app-stepper initalCount="100" (countChanged)="change.emit($event)"></app-stepper>',
       {
         componentProperties: { change: new EventEmitter() },
-        declarations: [StepperComponent],
+        imports: [StepperComponent],
       }
     ).then((wrapper) => {
       console.log({ wrapper });
@@ -107,7 +107,7 @@ describe('StepperComponent', () => {
     cy.mount(
       '<app-stepper (countChanged)="change.emit($event)"></app-stepper>',
       {
-        declarations: [StepperComponent],
+        imports: [StepperComponent],
         componentProperties: {
           change: createOutputSpy<boolean>('changeSpy'),
         },

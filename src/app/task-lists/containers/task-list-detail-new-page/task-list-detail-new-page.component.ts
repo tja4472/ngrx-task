@@ -17,7 +17,6 @@ import { JsonPipe } from '@angular/common';
   templateUrl: './task-list-detail-new-page.component.html',
   styleUrls: ['./task-list-detail-new-page.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [TaskListDetailNewComponent, JsonPipe],
 })
 export class TaskListDetailNewPageComponent {

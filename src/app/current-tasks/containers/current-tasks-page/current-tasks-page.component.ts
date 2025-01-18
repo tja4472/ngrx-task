@@ -28,7 +28,6 @@ import { AsyncPipe } from '@angular/common';
   templateUrl: './current-tasks-page.component.html',
   styleUrls: ['./current-tasks-page.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
     CurrentTaskListComponent,
     MatIconButton,

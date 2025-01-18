@@ -16,7 +16,6 @@ import { SidenavComponent } from '../components/sidenav/sidenav.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: ` <app-sidenav></app-sidenav> `,
   styleUrls: ['./app.component.css'],
-  standalone: true,
   imports: [SidenavComponent],
 })
 export class AppComponent implements OnInit {

@@ -44,7 +44,6 @@ import { MatButton } from '@angular/material/button';
       }
     `,
   ],
-  standalone: true,
   imports: [
     MatDialogTitle,
     CdkScrollable,

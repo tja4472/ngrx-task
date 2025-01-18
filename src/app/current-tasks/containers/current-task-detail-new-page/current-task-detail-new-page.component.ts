@@ -17,7 +17,6 @@ import { JsonPipe } from '@angular/common';
   templateUrl: './current-task-detail-new-page.component.html',
   styleUrls: ['./current-task-detail-new-page.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [CurrentTaskDetailNewComponent, JsonPipe],
 })
 export class CurrentTaskDetailNewPageComponent {

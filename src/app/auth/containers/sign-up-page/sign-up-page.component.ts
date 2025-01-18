@@ -15,7 +15,6 @@ import { AsyncPipe } from '@angular/common';
   templateUrl: './sign-up-page.component.html',
   styleUrls: ['./sign-up-page.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [CredentialsFormComponent, AsyncPipe],
 })
 export class SignUpPageComponent {

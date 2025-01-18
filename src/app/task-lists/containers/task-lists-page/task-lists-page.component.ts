@@ -21,7 +21,6 @@ import { AsyncPipe } from '@angular/common';
   templateUrl: './task-lists-page.component.html',
   styleUrls: ['./task-lists-page.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [TaskListListComponent, AsyncPipe],
 })
 export class TaskListsPageComponent implements OnInit {

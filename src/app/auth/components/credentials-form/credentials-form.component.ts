@@ -12,7 +12,6 @@ import { Credentials } from '@app/auth/models/credentials.model';
 
 @Component({
   selector: 'app-credentials-form',
-  standalone: true,
   imports: [
     MatCardModule,
     MatInputModule,

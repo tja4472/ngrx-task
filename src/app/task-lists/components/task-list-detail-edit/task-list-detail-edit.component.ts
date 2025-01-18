@@ -21,7 +21,6 @@ import { MatButton } from '@angular/material/button';
   templateUrl: './task-list-detail-edit.component.html',
   styleUrls: ['./task-list-detail-edit.component.css'],
   viewProviders: [TaskListDetailEditPresenter],
-  standalone: true,
   imports: [
     ReactiveFormsModule,
     MatCard,

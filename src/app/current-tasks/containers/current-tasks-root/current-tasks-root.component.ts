@@ -15,7 +15,6 @@ import { RouterOutlet } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: ` <router-outlet></router-outlet> `,
   styleUrls: ['./current-tasks-root.component.css'],
-  standalone: true,
   imports: [RouterOutlet],
 })
 export class CurrentTasksRootComponent implements OnDestroy {

@@ -10,7 +10,6 @@ import { RouterOutlet } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: ` <router-outlet></router-outlet> `,
   styleUrls: ['./task-lists-root.component.css'],
-  standalone: true,
   imports: [RouterOutlet],
 })
 export class TaskListsRootComponent {

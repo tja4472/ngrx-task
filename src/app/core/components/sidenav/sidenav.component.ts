@@ -48,7 +48,6 @@ interface ViewNavigationItem {
   selector: 'app-sidenav',
   templateUrl: './sidenav.component.html',
   styleUrls: ['./sidenav.component.css'],
-  standalone: true,
   imports: [
     MatSidenavContainer,
     MatSidenav,

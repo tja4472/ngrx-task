@@ -31,7 +31,6 @@ import { RouterLink } from '@angular/router';
       }
     `,
   ],
-  standalone: true,
   imports: [
     MatCard,
     MatCardTitle,

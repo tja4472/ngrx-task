@@ -13,7 +13,6 @@ import { MatIcon } from '@angular/material/icon';
   selector: 'app-task-list-list',
   templateUrl: './task-list-list.component.html',
   styleUrls: ['./task-list-list.component.css'],
-  standalone: true,
   imports: [RouterLink, MatFabButton, MatIcon],
 })
 export class TaskListListComponent {

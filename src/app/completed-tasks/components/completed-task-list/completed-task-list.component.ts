@@ -30,7 +30,6 @@ interface GroupTasksByDate {
   templateUrl: './completed-task-list.component.html',
   styleUrls: ['./completed-task-list.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [MatList, MatListItem, MatCheckbox, RouterLink, MatDivider],
 })
 export class CompletedTaskListComponent {

@@ -17,7 +17,6 @@ import { AsyncPipe } from '@angular/common';
   templateUrl: './completed-tasks-page.component.html',
   styleUrls: ['./completed-tasks-page.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [SearchComponent, CompletedTaskListComponent, AsyncPipe],
 })
 export class CompletedTasksPageComponent {

@@ -30,7 +30,6 @@ import { MatIconButton } from '@angular/material/button';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css'],
   providers: [SearchPresenter],
-  standalone: true,
   imports: [
     MatFormField,
     MatIcon,

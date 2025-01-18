@@ -1,4 +1,5 @@
 - TODO: Convert cypress component tests to standalone
+- TODO: Added for use by cypress, @angular-devkit/build-angular. https://github.com/cypress-io/cypress/issues/30903. Use vite?
 
 https://blog.nrwl.io/ngrx-patterns-and-techniques-f46126e2b1e5
 

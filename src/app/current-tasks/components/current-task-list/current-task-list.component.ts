@@ -32,7 +32,6 @@ import { MatFabButton } from '@angular/material/button';
       useValue: { clickAction: 'noop' } as MatCheckboxDefaultOptions,
     },
   ],
-  standalone: true,
   imports: [
     CdkDropList,
     CdkDrag,

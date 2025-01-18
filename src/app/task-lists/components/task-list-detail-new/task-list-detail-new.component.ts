@@ -20,7 +20,6 @@ import { MatInput } from '@angular/material/input';
   templateUrl: './task-list-detail-new.component.html',
   styleUrls: ['./task-list-detail-new.component.css'],
   viewProviders: [TaskListDetailNewPresenter],
-  standalone: true,
   imports: [
     ReactiveFormsModule,
     MatCard,

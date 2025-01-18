@@ -21,7 +21,6 @@ import { AsyncPipe } from '@angular/common';
   templateUrl: './sign-in-page.component.html',
   styleUrls: ['./sign-in-page.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [CredentialsFormComponent, AsyncPipe],
 })
 export class SignInPageComponent implements OnInit {
