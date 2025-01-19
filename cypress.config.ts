@@ -1,8 +1,9 @@
 import { defineConfig } from 'cypress';
 
-// TODO: Set default browser
-// https://docs.cypress.io/app/references/configuration#Browser
+// https://docs.cypress.io/app/references/configuration
+
 export default defineConfig({
+  defaultBrowser: 'chrome',
   defaultCommandTimeout: 10000,
 
   e2e: {

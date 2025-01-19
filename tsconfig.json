@@ -27,8 +27,8 @@
     "skipLibCheck": true
   },
   "include": ["src/**/*.ts"],
-  "files": ["./setup-jest.ts", "jest.config.ts"],
-  "exclude": ["node_modules", "cyprus", "cypress.config.ts"],
+  "files": ["./setup-jest.ts", "cypress.config.ts", "jest.config.ts"],
+  "exclude": ["node_modules", "cyprus"],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,

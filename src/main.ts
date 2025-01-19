@@ -13,6 +13,7 @@ bootstrapApplication(AppComponent, appConfig)
     if (DEBUG) {
       console.log('Debug mode enabled');
       // For Cypress app actions
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
       if (window.Cypress) {
         // and save the application reference
         window.appRef = appRef;
