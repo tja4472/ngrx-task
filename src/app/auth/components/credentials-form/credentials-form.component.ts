@@ -6,7 +6,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 
-import { Component, Input, input, output, inject } from '@angular/core';
+import {
+  Component,
+  input,
+  output,
+  inject,
+  computed,
+  Signal,
+} from '@angular/core';
 
 import { Credentials } from '@app/auth/models/credentials.model';
 
@@ -24,18 +31,7 @@ import { Credentials } from '@app/auth/models/credentials.model';
 export class CredentialsFormComponent {
   private fb = inject(FormBuilder);
 
-  @Input()
-  set formMode(mode: string) {
-    if (mode === 'SignInForm') {
-      this.isSignInForm = true;
-      this.isSignUpForm = false;
-    }
-
-    if (mode === 'SignUpForm') {
-      this.isSignInForm = false;
-      this.isSignUpForm = true;
-    }
-  }
+  formMode = input<string>('SignInForm');
 
   // ====
   errorMessage = input<string>('');
@@ -46,12 +42,17 @@ export class CredentialsFormComponent {
   // ====
   readonly submitted = output<Credentials>();
 
+  $isSignInForm: Signal<boolean> = computed(
+    () => this.formMode() !== 'SignUpForm'
+  );
+
+  $isSignUpForm: Signal<boolean> = computed(
+    () => this.formMode() === 'SignUpForm'
+  );
+
   get viewForm() {
     return this.form;
   }
-
-  isSignInForm = true;
-  isSignUpForm = false;
 
   get password() {
     return this.form.controls.password;
