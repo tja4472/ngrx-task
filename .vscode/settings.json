@@ -21,5 +21,10 @@
     "statusBarItem.remoteForeground": "#e7e7e7"
   },
   "peacock.color": "#807592",
-  "terminal.integrated.shellIntegration.enabled": true
+  "terminal.integrated.shellIntegration.enabled": true,
+  "angular-schematics.schematicsDefaultOptions": {
+    "angular-*": {
+      "inlineStyle": true
+    }
+  }
 }

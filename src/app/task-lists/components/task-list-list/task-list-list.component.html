@@ -1,5 +1,5 @@
 <div class="list">
-  @for (task of currentTasks(); track task) {
+  @for (task of currentTasks(); track task.id) {
     <div>
       <div class="list-item" data-test="list-item">
         <a [routerLink]="[editPath(), task.id]">

@@ -26,6 +26,9 @@ export const routeNames = {
       path: 'new',
     },
   },
+  signals: {
+    path: 'signals',
+  },
   signIn: {
     path: 'sign-in',
   },

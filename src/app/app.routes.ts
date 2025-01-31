@@ -55,6 +55,11 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   {
+    path: routeNames.signals.path,
+    loadChildren: () =>
+      import('./signals-page/signals-page.routes').then((m) => m.routes),
+  },
+  {
     path: '**',
     loadComponent: () =>
       import('./core/containers/not-found-page.component').then(

@@ -103,6 +103,11 @@ export class SidenavComponent {
       label: 'Task Lists Page',
       testId: 'sidenav-task-lists',
     },
+    {
+      link: pathPrefix + routeNames.signals.path,
+      label: 'Signals Page',
+      testId: 'signals-page',
+    },
   ];
 
   view$: Observable<{ user: User; taskListId: string | null } | null>;
