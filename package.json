@@ -105,7 +105,7 @@
     "jest-environment-jsdom": "29.7.0",
     "jest-fixed-jsdom": "0.0.9",
     "jest-preset-angular": "14.5.1",
-    "prettier": "3.4.2",
+    "prettier": "3.5.0",
     "ts-node": "10.9.2",
     "typescript": "5.7.3"
   }
