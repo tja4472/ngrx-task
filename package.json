@@ -57,7 +57,7 @@
     "@ngrx/signals":"19.1.0",    
     "@ngrx/store": "19.1.0",
     "@ngrx/store-devtools": "19.1.0",
-    "core-js": "3.41.0",
+    "core-js": "3.42.0",
     "date-fns": "4.1.0",
     "firebase": "11.6.1",
     "ngxtension": "4.5.0",
